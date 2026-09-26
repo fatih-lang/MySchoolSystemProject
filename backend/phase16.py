@@ -105,7 +105,7 @@ def register_student(current_user):
     try:
 
         # ----------------------------------------------------------
-        # STEP 1: Create the student.
+        # Create the student.
         # ----------------------------------------------------------
         student_number = register_student_db(
             student_name,
@@ -127,7 +127,7 @@ def register_student(current_user):
         selected_subjects = select_multiple_student_subjects(grade_name)
 
         # ----------------------------------------------------------
-        # STEP 3: Save all selected subjects for this student.
+        # Save all selected subjects for this student.
         # ----------------------------------------------------------
         assign_multiple_student_subjects_db(
             student_number,
@@ -137,7 +137,7 @@ def register_student(current_user):
         print("\nSubjects successfully assigned to the student.")
 
         # ----------------------------------------------------------
-        # STEP 4: Log the admin action.
+        # Log the admin action.
         # ----------------------------------------------------------
         save_admin_log(
             admin_name=current_user["admin_name"],
@@ -149,7 +149,7 @@ def register_student(current_user):
         )
 
         # ----------------------------------------------------------
-        # STEP 5: Finish registration.
+        # Finish registration.
         # ----------------------------------------------------------
         print("Registration successful!\n")
         print(f"Your Student Number is: {student_number}\n")
@@ -2200,8 +2200,8 @@ def teacher_menu(current_user):
             # Teachers mark homework from:
             #
             # Enter Marks
-            #      |
-            #      +-- 2. Homework marks
+            # 
+            # 2. Homework marks
             #
             # This prevents having two different places where homework
             # can be marked.
@@ -2479,10 +2479,10 @@ def register_admin():
             print(f"Your Admin Number is: {admin_id}\n")
             
             
-            # 2. FETCH the full admin row/dictionary using the new ID
+            # FETCH the full admin row/dictionary using the new ID
             admin_data, error = login_admin(admin_id)
             
-            # 3. Pass the full data dictionary to the menu, NOT just the ID number!
+            # Pass the full data dictionary to the menu, NOT just the ID number!
             if admin_data:
                 admin_menu(admin_data)
 
