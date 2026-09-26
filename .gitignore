@@ -1,0 +1,8 @@
+__pycache__/
+*.db
+backups/
+*.pdf
+student_documents/
+homework_submissions/
+Git lessons/
+add into sqlite3
