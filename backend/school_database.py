@@ -34,10 +34,65 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS admins (
             admin_id INTEGER PRIMARY KEY AUTOINCREMENT,
             admin_name TEXT NOT NULL UNIQUE,
+            category TEXT NOT NULL,
+            failed_attempts INTEGER NOT NULL DEFAULT 0,
+            email_address TEXT,
+            status TEXT NOT NULL DEFAULT 'Active',
             password_hash TEXT NOT NULL,
             password_salt TEXT NOT NULL
         )
     """)
+    
+    # ----------------------------------------------------------
+    # Add category to the admins table if it does not already
+    # exist. This upgrades older databases safely.
+    # ----------------------------------------------------------
+    
+    cursor.execute("PRAGMA table_info(admins)")
+    admin_columns = cursor.fetchall()
+    
+    # Get the names of all columns currently in the admins table.
+    column_names = [column[1] for column in admin_columns]
+    
+    # Only add category if the database does not already have it.
+    if "category" not in column_names:
+        cursor.execute("""
+            ALTER TABLE admins
+            ADD COLUMN category TEXT NOT NULL DEFAULT 'Reception'
+        """)
+    
+    
+    # ----------------------------------------------------------
+    # Add missing administrator login columns to older databases.
+    # ----------------------------------------------------------
+    
+    cursor.execute("PRAGMA table_info(admins)")
+    admin_columns = cursor.fetchall()
+    
+    # Get all existing column names.
+    column_names = [column[1] for column in admin_columns]
+    
+    # Add failed_attempts if it does not exist.
+    if "failed_attempts" not in column_names:
+        cursor.execute("""
+            ALTER TABLE admins
+            ADD COLUMN failed_attempts INTEGER NOT NULL DEFAULT 0
+        """)
+    
+    # Add email_address if it does not exist.
+    if "email_address" not in column_names:
+        cursor.execute("""
+            ALTER TABLE admins
+            ADD COLUMN email_address TEXT
+        """)
+    
+    # Add status if it does not exist.
+    if "status" not in column_names:
+        cursor.execute("""
+            ALTER TABLE admins
+            ADD COLUMN status TEXT NOT NULL DEFAULT 'Active'
+        """)
+    
     
     
     # Admin audit log table
@@ -89,6 +144,7 @@ def create_tables():
             gender TEXT NOT NULL,
             nationality TEXT NOT NULL,
             classroom TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT 'Active',
             login_locked TEXT,
 
             grade_id INTEGER NOT NULL,
@@ -97,11 +153,36 @@ def create_tables():
 
             password_hash TEXT NOT NULL,
             password_salt TEXT NOT NULL,
+            failed_attempts INTEGER NOT NULL DEFAULT 0,
 
             FOREIGN KEY (grade_id)
              REFERENCES grades(grade_id)
         )
     """)
+    
+    # I had forgot to add a surname so IAM adding it to the table since we alrdy had students in the table without surname we won't use null.
+    
+    # ----------------------------------------------------------
+    # Add student_surname to the existing students table
+    # if the column does not already exist.
+    # ----------------------------------------------------------
+    
+    # Check the columns that currently exist in the students table.
+    cursor.execute("PRAGMA table_info(students)")
+    
+    # Get all existing columns.
+    student_columns = cursor.fetchall()
+    
+    # Create a list containing the names of the existing columns.
+    column_names = [column[1] for column in student_columns]
+    
+    # Add the surname column only if it does not already exist.
+    if "student_surname" not in column_names:
+    
+        cursor.execute("""
+            ALTER TABLE students
+            ADD COLUMN student_surname TEXT
+        """)
 
 
     # ==========================================================
@@ -156,12 +237,19 @@ def create_tables():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS teachers (
             teacher_number INTEGER PRIMARY KEY AUTOINCREMENT,
+    
             teacher_name TEXT NOT NULL,
             id_number TEXT NOT NULL UNIQUE,
-
+    
             gender TEXT NOT NULL,
             nationality TEXT NOT NULL,
-
+    
+            email_address TEXT NOT NULL,
+    
+            failed_attempts INTEGER NOT NULL DEFAULT 0,
+    
+            status TEXT NOT NULL DEFAULT 'Active',
+    
             password_hash TEXT NOT NULL,
             password_salt TEXT NOT NULL
         )
@@ -446,6 +534,8 @@ def create_tables():
             fees_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
             grade_id INTEGER NOT NULL,
+            
+            amount REAL NOT NULL,
 
             FOREIGN KEY (grade_id)
                 REFERENCES grades(grade_id)
@@ -832,6 +922,7 @@ def create_tables():
 
 def register_student_db(
     student_name,
+    student_surname,
     id_number,
     age,
     gender,
@@ -888,6 +979,7 @@ def register_student_db(
         INSERT INTO students (
             student_number,
             student_name,
+            student_surname,
             id_number,
             age,
             gender,
@@ -898,10 +990,11 @@ def register_student_db(
             password_hash,
             password_salt
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         student_number,
         student_name,
+        student_surname,
         id_number,
         age,
         gender,
