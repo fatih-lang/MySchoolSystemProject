@@ -1,0 +1,614 @@
+
+/* ----------------------------------------------------------
+   Registration Message
+   ---------------------------------------------------------- */
+
+/*
+   Preserve line breaks (\n) from JavaScript validation
+   messages so each error appears on its own line.
+*/
+#registration-message {
+    white-space: pre-line;
+}
+
+
+
+
+
+/* =========================================
+   GLOBAL STYLES
+   ========================================= */
+
+/* Make width and height calculations easier to control */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Give the entire platform a soft background */
+body {
+    margin: 0;
+    background-color: #e8eef7;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+/* Style the top section of the platform */
+.main-header {
+    background-color: navy;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* =========================================
+   DASHBOARD INTRODUCTION
+   ========================================= */
+
+/* Style the main Dashboard heading */
+.main-content > h2 {
+    /* Remove the default top spacing */
+    margin-top: 0;
+
+    /* Give the heading a little space underneath */
+    margin-bottom: 5px;
+
+    /* Make the page title stand out */
+    color: #222;
+}
+
+
+/* Style the welcome message */
+.main-content > p {
+    /* Remove the default top spacing */
+    margin-top: 0;
+
+    /* Use a softer colour than the heading */
+    color: #555;
+
+    /* Make the message comfortable to read */
+    font-size: 15px;
+}
+
+
+/* =========================================
+   DASHBOARD LAYOUT
+   ========================================= */
+
+/* Put the sidebar and main content beside each other */
+.dashboard-layout {
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+/* Give the sidebar its basic appearance */
+.sidebar {
+    width: 220px;
+    background-color: white;
+    padding: 20px;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+
+/* Give the main working area some space */
+.main-content {
+    padding: 20px;
+}
+
+/* Style the navigation links inside the sidebar */
+.sidebar nav a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 5px;
+
+    /* Remove the browser's default underline */
+    text-decoration: none;
+
+    /* Make the text easy to read */
+    color: navy;
+}
+
+/* Give the sidebar a small visual separation
+   from the main content */
+.sidebar {
+    border-right: 1px solid #d0d7e2;
+}
+
+
+/* Make the Menu heading stand out */
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+
+/* Add a small visual effect when
+   the user points at a navigation link */
+.sidebar nav a:hover {
+    background-color: #e8eef7;
+}
+
+
+
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    /* Make the sidebar narrower on small screens */
+    .sidebar {
+        width: 150px;
+    }
+    
+    /* Make dashboard cards easier to
+       read on a phone */
+    .dashboard-card {
+        min-width: 100%;
+    }
+
+    /* Stack the dashboard cards vertically
+       on small screens */
+    .dashboard-cards {
+        flex-direction: column;
+    }
+
+}
+
+
+/* =========================================
+   DASHBOARD SUMMARY CARDS
+   ========================================= */
+
+/* Put the dashboard cards in a row */
+.dashboard-cards {
+    display: flex;
+
+    /* Allow cards to move to another row
+       when there is not enough space */
+    flex-wrap: wrap;
+
+    /* Space between the cards */
+    gap: 20px;
+
+    /* Add space above the cards */
+    margin-top: 25px;
+}
+
+
+/* Style each individual dashboard card */
+.dashboard-card {
+    background-color: white;
+
+    /* Give each card some internal space */
+    padding: 20px;
+
+    /* Allow four cards to fit across
+       the available space */
+    flex: 1;
+
+    /* Prevent cards from becoming too narrow
+       on medium-sized screens */
+    min-width: 200px;
+
+    /* Give the cards slightly rounded corners */
+    border-radius: 8px;
+
+    /* Add a subtle border */
+    border: 1px solid #d0d7e2;
+    
+    /* Make changes happen smoothly */
+    transition: 0.2s ease;
+}
+
+/* =========================================
+   DASHBOARD CARD HOVER EFFECT
+   Gives the card a small visual response
+   ========================================= */
+
+.dashboard-card:hover {
+
+    /* Make the card move slightly upward */
+    transform: translateY(-3px);
+
+    /* Add a soft shadow around the card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+
+}
+
+/* Give the card a small response
+   while the user is pressing it */
+.dashboard-card:active {
+    /* Slightly reduce the card size while pressing */
+    scale: 0.99;
+}
+
+
+/* Style the card heading */
+.dashboard-card h3 {
+    margin-top: 0;
+
+    /* Keep the heading dark and easy to read */
+    color: #222;
+}
+
+
+/* Make the dashboard number stand out clearly */
+.dashboard-card p {
+    font-size: 32px;
+    font-weight: bold;
+    color: navy;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Style the small description
+   underneath the main number */
+.dashboard-card small {
+    display: block;
+    margin-top: 8px;
+    color: #666;
+    font-size: 13px;
+}
+
+/* =========================================
+   RECENT SCHOOL NEWS
+   ========================================= */
+
+/* Create a separate area for dashboard sections */
+.dashboard-section {
+    background-color: white;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid #d0d7e2;
+    border-radius: 8px;
+}
+
+
+/* Style the section heading */
+.dashboard-section > h2 {
+    margin-top: 0;
+    color: #222;
+}
+
+
+/* =========================================
+   RECENT SCHOOL NEWS
+   ========================================= */
+
+/* Style each individual news item */
+.news-item {
+    /* Add space inside each news item */
+    padding: 15px 0 15px 12px;
+
+    /* Separate news items with a horizontal line */
+    border-bottom: 1px solid #e0e0e0;
+
+    /* Add a small indicator on the left */
+    border-left: 3px solid navy;
+
+    /* Make movement happen smoothly */
+    transition: 0.2s ease;
+}
+
+
+/* Remove the bottom line from the final news item */
+.news-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Style the news title */
+.news-item h3 {
+    /* Remove default heading spacing */
+    margin: 0 0 5px 0;
+
+    /* Make the title easy to notice */
+    color: navy;
+}
+
+
+/* Style the news description */
+.news-item p {
+    /* Remove default paragraph spacing */
+    margin: 0;
+
+    /* Use a softer colour than the heading */
+    color: #555;
+
+    /* Make the description comfortable to read */
+    font-size: 14px;
+}
+
+
+/* Small movement when using a mouse */
+.news-item:hover {
+    transform: translateX(3px);
+}
+
+
+/* Small response when touching the news item */
+.news-item:active {
+    transform: translateX(2px);
+}
+
+
+/* =========================================
+   RECENT ACTIVITY
+   ========================================= */
+
+/* Give each activity some space */
+.activity-item {
+    /* Add space inside the activity */
+    padding: 15px 0;
+
+    /* Separate activities visually */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+/* Remove the line underneath the final activity */
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Style the activity title */
+.activity-item h3 {
+    /* Remove default heading spacing */
+    margin: 0 0 5px 0;
+
+    /* Make the title stand out */
+    color: navy;
+
+    /* Put the indicator and title
+       into the same row */
+    display: flex;
+
+    /* Keep the indicator vertically centered */
+    align-items: center;
+
+    /* Add space between the dot and title */
+    gap: 8px;
+}
+
+
+/* Create the activity indicator */
+.activity-item h3::before {
+    /* Create the dot */
+    content: "";
+
+    /* Prevent the dot from shrinking
+       on narrow phone screens */
+    flex-shrink: 0;
+
+    /* Dot size */
+    width: 8px;
+    height: 8px;
+
+    /* Make the dot round */
+    border-radius: 50%;
+
+    /* Default indicator colour */
+    background-color: navy;
+}
+
+
+/* Style the activity description */
+.activity-item p {
+    /* Keep the description aligned
+       underneath the title */
+    margin: 0 0 5px 16px;
+
+    /* Softer colour than the title */
+    color: #555;
+
+    /* Comfortable reading size */
+    font-size: 14px;
+}
+
+
+/* Style the activity time */
+.activity-item small {
+    /* Keep the time aligned with
+       the description */
+    margin-left: 16px;
+
+    /* Make the time less prominent */
+    color: #888;
+
+    /* Smaller text */
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ACTIVITY TYPE INDICATORS
+   ========================================= */
+
+/* Student activity indicator */
+.student-activity h3::before {
+    background-color: green;
+}
+
+
+/* Homework activity indicator */
+.homework-activity h3::before {
+    background-color: orange;
+}
+
+
+/* Payment activity indicator */
+.payment-activity h3::before {
+    background-color: blue;
+}
+
+/* STUDENT ACTIVITY */
+.student-activity h3::before {
+    /* Give student activities their own indicator */
+    background-color: green;
+}
+
+
+/* HOMEWORK ACTIVITY */
+.homework-activity h3::before {
+    /* Give homework activities their own indicator */
+    background-color: orange;
+}
+
+
+/* PAYMENT ACTIVITY */
+.payment-activity h3::before {
+    /* Give payment activities their own indicator */
+    background-color: blue;
+}
+
+/* Style the activity description */
+.activity-item p {
+    /* Remove the default paragraph spacing */
+    margin: 0 0 5px 16px;
+
+    /* Make the description slightly softer
+       than the activity title */
+    color: #555;
+
+    /* Make the text comfortable to read */
+    font-size: 14px;
+}
+
+
+/* Style the activity time */
+.activity-item small {
+    /* Keep the time slightly indented
+       underneath the description */
+    margin-left: 16px;
+
+    /* Make the time less prominent */
+    color: #888;
+
+    /* Use a smaller font */
+    font-size: 12px;
+}
+
+/* =========================================
+   QUICK ACTIONS
+   ========================================= */
+
+/* Arrange the action buttons vertically */
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Style each action button */
+.action-button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: navy;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    
+    /* Make button changes happen smoothly */
+    transition: 0.2s ease;
+}
+
+/* Make the quick-action buttons easier to use */
+.action-button {
+    /* Make the button use the full available width */
+    width: 100%;
+
+    /* Give the text a little more breathing room */
+    line-height: 1.4;
+
+    /* Make the button feel comfortable to tap
+       on a phone */
+    min-height: 45px;
+}
+
+
+/* =========================================
+   QUICK ACTION BUTTON HOVER
+   ========================================= */
+
+.action-button:hover {
+
+    /* Slightly raise the button */
+    transform: translateY(-2px);
+
+    /* Make the button slightly transparent */
+    opacity: 0.9;
+}
+
+/* Give the button a visual response
+   while the user is pressing it */
+.action-button:active {
+    /* Move the button slightly downward
+       to make it feel like it is being pressed */
+    transform: translateY(1px);
+
+    /* Make the button slightly darker */
+    opacity: 0.8;
+}
+
+/* Give each news item some breathing room */
+.news-item {
+    padding: 15px 0;
+
+    /* Separate news items visually */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Add a small indicator beside each news item */
+.news-item {
+    /* Give the news item space on the left
+       for the indicator */
+    padding-left: 12px;
+
+    /* Add a small line beside the news */
+    border-left: 3px solid navy;
+}
+
+
+/* Remove the border from the last news item */
+.news-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Style the news title */
+.news-item h3 {
+    /* Remove default heading spacing */
+    margin: 0 0 5px 0;
+
+    /* Make the news title stand out */
+    color: navy;
+}
+
+
+/* Style the news description */
+.news-item p {
+    /* Remove the default paragraph margin */
+    margin: 0;
+
+    /* Use a softer colour for the description */
+    color: #555;
+
+    /* Make it comfortable to read */
+    font-size: 14px;
+}
+
