@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        
+        <title>ARWA - School Management Platform</title>
+        
+        <!-- Tell mobile browsers to use the device's actual screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Connect the HTML page to our external CSS stylesheet -->
+        <link rel="stylesheet" href="style.css">
+        
+    </head>
+    
+    <body>
+
+        <!-- ==============================
+        HEADER
+        The top section of our platform
+        ============================== -->
+        
+        <header class="main-header">
+    
+            <!-- Main school platform name -->
+            <h1>ARWA SCHOOL MANAGEMENT PLATFORM</h1>
+    
+        </header>
+    
+    
+        <!-- ==============================
+            DASHBOARD LAYOUT
+            Contains the sidebar and
+            the main content area
+            ============================== -->
+        <div class="dashboard-layout">
+    
+            <!-- ==============================
+                SIDEBAR
+                Navigation for the platform
+                ============================== -->
+            <aside class="sidebar">
+    
+                <h2>Menu</h2>
+    
+                <nav>
+                    <a href="#">Dashboard</a>
+                    <a href="#">Students</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Guardians</a>
+                    <a href="#">Attendance</a>
+                    <a href="#">Homework</a>
+                    <a href="#">Results</a>
+                    <a href="#">Fees</a>
+                    <a href="#">Timetable</a>
+                    <a href="#">School News</a>
+                </nav>
+    
+            </aside>
+    
+    
+            <main class="main-content">
+
+                <h2>Dashboard</h2>
+            
+                <p>
+                    Welcome to the Arwa School Management Platform.
+                </p>
+            
+            
+                <!-- =================================
+                    DASHBOARD SUMMARY CARDS
+                    These will show important
+                    school information
+                    ================================= -->
+            
+                <div class="dashboard-cards">
+            
+                    <!-- Total Students -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Students</h3>
+
+                        <!-- Main dashboard number -->
+                        <p>250</p>
+
+                        <!-- Short explanation of the number -->
+                        <small>Active students</small>
+
+                    </div>
+            
+            
+                    <!-- Total Teachers -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Teachers</h3>
+                        <!-- Main dashboard number -->
+                        <p>25</p>
+
+                        <!-- Short explanation -->
+                        <small>Active teachers</small>
+
+                    </div>
+            
+            
+                    <!-- Total Guardians -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Guardians</h3>
+
+                        <!-- Main dashboard number -->
+                        <p>210</p>
+
+                        <!-- Short explanation -->
+                        <small>Registered guardians</small>
+
+                    </div>
+            
+            
+                    <!-- Outstanding Fees -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Outstanding Fees</h3>
+
+                        <!-- Main dashboard amount -->
+                        <p>R125,000</p>
+
+                        <!-- Short explanation -->
+                        <small>Fees still unpaid</small>
+
+                    </div>
+            
+                </div>
+                
+                    
+                <!-- =================================
+                RECENT SCHOOL NEWS
+                Shows the latest announcements
+                ================================= -->
+        
+                <section class="dashboard-section">
+                
+                    <h2>Recent School News</h2>
+                
+                    <div class="news-list">
+                
+                        <div class="news-item">
+                            <h3>Parent Meeting</h3>
+                            <p>Parents meeting will be held on Friday.</p>
+                        </div>
+                
+                        <div class="news-item">
+                            <h3>Term 3 Examinations</h3>
+                            <p>Term 3 examinations will begin soon.</p>
+                        </div>
+                
+                        <div class="news-item">
+                            <h3>School Holiday</h3>
+                            <p>School will be closed during the upcoming holiday.</p>
+                        </div>
+                
+                        <div class="news-item">
+                           <h3>Sports Day</h3>
+                           <p>Students are reminded to prepare for Sports Day.</p>
+                        </div>
+                
+                    </div>
+                
+                </section>
+                    
+                <!-- =================================
+                RECENT ACTIVITY
+                Shows important actions happening
+                in the school system
+                ================================= -->
+
+                <section class="dashboard-section">
+                
+                   <h2>Recent Activity</h2>
+                
+                      <div class="activity-list">
+                
+                         <div class="activity-item student-activity">
+                            <h3>Student Registered</h3>
+                            <p>Nifah was registered in Grade 12.</p>
+                            <small>10 minutes ago</small>
+                         </div>
+                
+                
+                         <div class="activity-item homework-activity">
+                            <h3>Homework Submitted</h3>
+                            <p>Muhammad submitted Economics homework.</p>
+                            <small>25 minutes ago</small>
+                         </div>
+                
+                
+                         <div class="activity-item payment-activity">
+                            <h3>Fee Payment Received</h3>
+                            <p>A payment of R1,500 was received.</p>
+                            <small>1 hour ago</small>
+                         </div>
+                
+                      </div>
+                
+                </section>
+                    
+                <!-- =================================
+                QUICK ACTIONS
+                Provides shortcuts to common
+                administrator tasks
+                ================================= -->
+
+                <section class="dashboard-section">
+                    
+                   <h2>Quick Actions</h2>
+                    
+                        <!-- QUICK ACTION BUTTONS -->
+                        <div class="quick-actions">
+
+                            <!-- Button for registering a new student -->
+                            <button id="register-student" class="action-button">
+                                Register Student
+                            </button>
+                        
+                            <!-- Button for adding a teacher -->
+                            <button id="add-teacher" class="action-button">
+                                Add Teacher
+                            </button>
+                        
+                            <!-- Button for recording a fee payment -->
+                            <button id="record-payment" class="action-button">
+                                Record Payment
+                            </button>
+                        
+                            <!-- Button for posting school news -->
+                            <button id="post-news" class="action-button">
+                                Post School News
+                            </button>
+                        
+                            <!-- Button for viewing reports -->
+                            <button id="view-reports" class="action-button">
+                                View Reports
+                            </button>
+                        
+                        </div>
+                    
+                </section>
+                
+                <!-- =================================
+                STUDENT REGISTRATION
+                This section will contain the
+                student registration form.
+                ================================= -->
+            
+                <section id="student-registration" class="dashboard-section">
+
+                    <!-- Section heading -->
+                    <h2>Student Registration</h2>
+                
+                    <!-- Short introduction -->
+                    <p>
+                        Register a new student in the school system.
+                    </p>
+                
+                
+                    <!-- ==========================================================
+                        STUDENT PERSONAL INFORMATION
+                        ========================================================== -->
+                
+                    <h3>Student Information</h3>
+                
+                    <!-- Student name -->
+                    <label for="student-name">Student Name</label>
+                
+                    <input
+                        type="text"
+                        id="student-name"
+                        placeholder="Enter student name"
+                        required 
+                    >
+                    
+                    <br><br>
+                
+                
+                    <!-- Student surname -->
+                    <label for="student-surname">Student Surname</label>
+                
+                    <input
+                        type="text"
+                        id="student-surname"
+                        placeholder="Enter student surname"
+                        required
+                    >
+                
+                    <br><br>
+                
+                    <!-- Student ID number -->
+                    <label for="student-id">ID Number</label>
+                
+                    <input
+                        type="text"
+                        id="student-id"
+                        placeholder="Enter student ID number"
+                        required 
+                    >
+                
+                    <br><br>
+                
+                    <!-- Student age -->
+                    <label for="student-age">Age</label>
+                
+                    <input
+                        type="number"
+                        id="student-age"
+                        placeholder="Enter student age"
+                        min="1"
+                        required
+                    >
+                
+                    <br><br>
+                
+                    <!-- Student gender -->
+                    <label for="student-gender">Gender</label>
+                
+                    <select id="student-gender" required>
+                
+                        <!-- Default option -->
+                        <option value="">Select gender</option>
+                
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                
+                    </select>
+                
+                    <br><br>
+                
+                    <!-- Student nationality -->
+                    <label for="student-nationality">Nationality</label>
+                    
+                    <select id="student-nationality" required>
+                    
+                        <!-- Default option -->
+                        <option value="">Select nationality</option>
+                    
+                        <option value="South African">South Africa</option>
+                        <option value="Zimbabwean">Zimbabwe</option>
+                        <option value="Mozambican">Mozambique</option>
+                        <option value="Botswanan">Botswana</option>
+                        <option value="Namibian">Namibia</option>
+                        <option value="Zambian">Zambia</option>
+                        <option value="Malawian">Malawi</option>
+                        <option value="Lesotho">Mosotho</option>
+                        <option value="Eswatini">Swazi</option>
+                        <option value="Nigerian">Nigeria</option>
+                        <option value="Ghanaian">Ghana</option>
+                        <option value="Kenyan">Kenya</option>
+                        <option value="Tanzanian">Tanzania</option>
+                        <option value="Ugandan">Uganda</option>
+                        <option value="Ethiopian">Ethiopia</option>
+                        <option value="Somalian">Somalia</option>
+                        <option value="Congolese">Congo</option>
+                        <option value="Other">Other</option>
+                    
+                    </select>
+                
+                
+                    <!-- ==========================================================
+                        SCHOOL INFORMATION
+                        ========================================================== -->
+                
+                    <h3>School Information</h3>
+                
+                    <!-- Student grade -->
+                    <label for="student-grade">Grade</label>
+                
+                    <select id="student-grade" required>
+                
+                        <!-- Default option -->
+                        <option value="">Select grade</option>
+                
+                        <option value="R">R</option>
+                        <option value="1">Grade 1</option>
+                        <option value="2">Grade 2</option>
+                        <option value="3">Grade 3</option>
+                        <option value="4">Grade 4</option>
+                        <option value="5">Grade 5</option>
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                        <option value="12RW">Grade 12RW</option>
+                        <option value="Old Curriculum">Old Curriculum</option>
+                
+                    </select>
+                    
+                    <br><br>
+                
+                
+                    <!-- Classroom -->
+                    <label for="student-classroom">Classroom</label>
+                
+                    <input
+                        type="text"
+                        id="student-classroom"
+                        placeholder="Enter classroom"
+                        required
+                    >
+                
+                
+                    <!-- ==========================================================
+                        ACCOUNT INFORMATION
+                        ========================================================== -->
+                
+                    <h3>Account Information</h3>
+                
+                    <!-- Student password -->
+                    <label for="student-password">Password</label>
+                
+                    <input
+                        type="password"
+                        id="student-password"
+                        placeholder="Create student password"
+                        required
+                    >
+                
+                    <br><br>
+                
+                    <!-- Confirm password -->
+                    <label for="student-confirm-password">Confirm Password</label>
+                
+                    <input
+                        type="password"
+                        id="student-confirm-password"
+                        placeholder="Confirm student password"
+                        required
+                    >
+                    
+                    <br><br>  
+                
+                
+                    <!-- ==========================================================
+                        REGISTRATION BUTTON
+                        ========================================================== -->
+                
+                    <button id="submit-student" class="action-button">
+                        Register Student
+                    </button>
+                    
+                    <!--
+                    This area will display registration messages
+                    such as success or validation feedback.
+                    -->
+                    <div id="registration-message"></div>
+                
+                </section>
+            </main>
+            
+    
+        </div>
+        
+    <!-- Connect our JavaScript file to this HTML page -->
+    <script src="script.js"></script>    
+
+    </body>
+    
+</html>    
+        
+        
