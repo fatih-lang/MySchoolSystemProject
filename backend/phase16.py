@@ -45,17 +45,19 @@ def register_student(current_user):
     print("Thank you for choosing Python School.")
     print("Please fill in the form below to create your students account.\n")
 
-    student_name = input("1. Enter your name: ")
+    student_name = input("1. Enter students name: ")
+    
+    student_surname = input("2. Enter student surname: ")
 
-    id_number = input("2. Enter your ID number: ")
+    id_number = input("3. Enter students ID number: ")
 
-    age = int(input("3. Enter your age: "))
+    age = int(input("4. Enter students age: "))
 
-    gender = input("4. Enter your gender (Male/Female): ")
+    gender = input("5. Enter students gender (Male/Female): ")
 
-    nationality = input("5. Enter your nationality: ")
+    nationality = input("6. Enter students nationality: ")
 
-    grade_name = input("6. Enter your grade: ")
+    grade_name = input("7. Enter students grade: ")
 
     grade_record = get_grade_by_name(grade_name)
 
@@ -84,9 +86,9 @@ def register_student(current_user):
     print(f"\nYour grade: {grade_record['grade_name']}")
     print(f"Your school fee: {fees_balance:.2f}/year")
 
-    classroom = input("7. Enter your Classroom: ")
+    classroom = input("8. Enter students Classroom: ")
 
-    password = input("8. Choose your password:")
+    password = input("9. Creat students password:")
     print()
 
     # ----------------------------------------------------------
@@ -109,6 +111,7 @@ def register_student(current_user):
         # ----------------------------------------------------------
         student_number = register_student_db(
             student_name,
+            student_surname,
             id_number,
             age,
             gender,
@@ -4078,7 +4081,7 @@ def admin_menu(current_admin):
         elif choice == "14":
             
             if current_admin["category"] == "Principal":
-                register_student()
+                register_student(current_user)
                 
                 
             elif current_admin["category"] == "Accounts":
