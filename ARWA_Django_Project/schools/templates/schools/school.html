@@ -1,0 +1,528 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        
+        <title>ARWA - School Management Platform</title>
+        
+        <!-- Tell mobile browsers to use the device's actual screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Find the style.css file registered under the schools static files." -->
+        <link rel="stylesheet" href="{% static 'schools/style.css' %}">
+        
+    </head>
+    
+    <body>
+
+        <!-- ==============================
+        HEADER
+        The top section of our platform
+        ============================== -->
+        
+        <header class="main-header">
+    
+            <!-- Main school platform name -->
+            <h1>ARWA SCHOOL MANAGEMENT PLATFORM</h1>
+    
+        </header>
+    
+    
+        <!-- ==============================
+            DASHBOARD LAYOUT
+            Contains the sidebar and
+            the main content area
+            ============================== -->
+        <div class="dashboard-layout">
+    
+            <!-- ==============================
+                SIDEBAR
+                Navigation for the platform
+                ============================== -->
+            <aside class="sidebar">
+    
+                <h2>Menu</h2>
+    
+                <nav>
+                    <a href="#">Dashboard</a>
+                    <a href="#">Students</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Guardians</a>
+                    <a href="#">Attendance</a>
+                    <a href="#">Homework</a>
+                    <a href="#">Results</a>
+                    <a href="#">Fees</a>
+                    <a href="#">Timetable</a>
+                    <a href="#">School News</a>
+                </nav>
+    
+            </aside>
+    
+    
+            <main class="main-content">
+
+                <h2>Dashboard</h2>
+            
+                <p>
+                    Welcome to the Arwa School Management Platform.
+                </p>
+            
+            
+                <!-- =================================
+                    DASHBOARD SUMMARY CARDS
+                    These will show important
+                    school information
+                    ================================= -->
+            
+                <div class="dashboard-cards">
+            
+                    <!-- Total Students -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Students</h3>
+
+                        <!-- Main dashboard number -->
+                        <p>250</p>
+
+                        <!-- Short explanation of the number -->
+                        <small>Active students</small>
+
+                    </div>
+            
+            
+                    <!-- Total Teachers -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Teachers</h3>
+                        <!-- Main dashboard number -->
+                        <p>25</p>
+
+                        <!-- Short explanation -->
+                        <small>Active teachers</small>
+
+                    </div>
+            
+            
+                    <!-- Total Guardians -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Total Guardians</h3>
+
+                        <!-- Main dashboard number -->
+                        <p>210</p>
+
+                        <!-- Short explanation -->
+                        <small>Registered guardians</small>
+
+                    </div>
+            
+            
+                    <!-- Outstanding Fees -->
+                    <div class="dashboard-card">
+
+                        <!-- Card title -->
+                        <h3>Outstanding Fees</h3>
+
+                        <!-- Main dashboard amount -->
+                        <p>R125,000</p>
+
+                        <!-- Short explanation -->
+                        <small>Fees still unpaid</small>
+
+                    </div>
+            
+                </div>
+                
+                    
+                <!-- =================================
+                RECENT SCHOOL NEWS
+                Shows the latest announcements
+                ================================= -->
+        
+                <section class="dashboard-section">
+                
+                    <h2>Recent School News</h2>
+                
+                    <div class="news-list">
+                
+                        <div class="news-item">
+                            <h3>Parent Meeting</h3>
+                            <p>Parents meeting will be held on Friday.</p>
+                        </div>
+                
+                        <div class="news-item">
+                            <h3>Term 3 Examinations</h3>
+                            <p>Term 3 examinations will begin soon.</p>
+                        </div>
+                
+                        <div class="news-item">
+                            <h3>School Holiday</h3>
+                            <p>School will be closed during the upcoming holiday.</p>
+                        </div>
+                
+                        <div class="news-item">
+                           <h3>Sports Day</h3>
+                           <p>Students are reminded to prepare for Sports Day.</p>
+                        </div>
+                
+                    </div>
+                
+                </section>
+                    
+                <!-- =================================
+                RECENT ACTIVITY
+                Shows important actions happening
+                in the school system
+                ================================= -->
+
+                <section class="dashboard-section">
+                
+                   <h2>Recent Activity</h2>
+                
+                      <div class="activity-list">
+                
+                         <div class="activity-item student-activity">
+                            <h3>Student Registered</h3>
+                            <p>Nifah was registered in Grade 12.</p>
+                            <small>10 minutes ago</small>
+                         </div>
+                
+                
+                         <div class="activity-item homework-activity">
+                            <h3>Homework Submitted</h3>
+                            <p>Muhammad submitted Economics homework.</p>
+                            <small>25 minutes ago</small>
+                         </div>
+                
+                
+                         <div class="activity-item payment-activity">
+                            <h3>Fee Payment Received</h3>
+                            <p>A payment of R1,500 was received.</p>
+                            <small>1 hour ago</small>
+                         </div>
+                
+                      </div>
+                
+                </section>
+                    
+                <!-- =================================
+                QUICK ACTIONS
+                Provides shortcuts to common
+                administrator tasks
+                ================================= -->
+
+                <section class="dashboard-section">
+                    
+                   <h2>Quick Actions</h2>
+                    
+                        <!-- QUICK ACTION BUTTONS -->
+                        <div class="quick-actions">
+
+                            <!-- Button for registering a new student -->
+                            <button id="register-student" class="action-button">
+                                Register Student
+                            </button>
+                        
+                            <!-- Button for adding a teacher -->
+                            <button id="add-teacher" class="action-button">
+                                Add Teacher
+                            </button>
+                        
+                            <!-- Button for recording a fee payment -->
+                            <button id="record-payment" class="action-button">
+                                Record Payment
+                            </button>
+                        
+                            <!-- Button for posting school news -->
+                            <button id="post-news" class="action-button">
+                                Post School News
+                            </button>
+                        
+                            <!-- Button for viewing reports -->
+                            <button id="view-reports" class="action-button">
+                                View Reports
+                            </button>
+                        
+                        </div>
+                    
+                </section>
+                
+                <!-- =================================
+                STUDENT REGISTRATION
+                This section will contain the
+                student registration form.
+                ================================= -->
+            
+                <section id="student-registration" class="dashboard-section">
+
+                    <!-- Section heading -->
+                    <h2>Student Registration</h2>
+                
+                    <!-- Short introduction -->
+                    <p>
+                        Register a new student in the school system.
+                    </p>
+                
+                
+                    <!-- ==========================================================
+                        STUDENT PERSONAL INFORMATION
+                        ========================================================== -->
+                    <form
+                        id="student-registration-form"
+                        method="post"
+                        action="{% url 'student_register' %}"
+                    >
+                    
+                        {% csrf_token %}
+                    
+                        <h3>School Information</h3>
+                    
+                        <!-- School where the student will be registered -->
+                        <label for="student-school">School</label>
+                    
+                        <select
+                            id="student-school"
+                            name="school"
+                            required
+                        >
+                    
+                            <!-- Default option shown before a school is selected. -->
+                            <option value="">Select school</option>
+                    
+                            <!-- Loop through the active schools sent by Django. -->
+                            {% for school in schools %}
+                    
+                                <!--
+                                    Send the school's database ID to Django.
+                                    Show the school's name to the user.
+                                -->
+                                <option value="{{ school.id }}">
+                                    {{ school.name }}
+                                </option>
+                    
+                            {% endfor %}
+                    
+                        </select>
+                    
+                        <br><br>
+                    
+                        <h3>Student Information</h3>
+                    
+                        <!--- Student name --->
+                        <!-- Why name first_name The id is mainly used by the browser, CSS, JavaScript, and the <label>.The name is what allows the submitted form to say:first_name = John. Django can then access it with: request.POST.get("first_name") -->
+                        <label for="student-name">Student Name</label>
+                    
+                        <input
+                            type="text"
+                            id="student-name"
+                            name="first_name"
+                            placeholder="Enter student name"
+                            required 
+                        >
+                        
+                        <br><br>
+                    
+                    
+                        <!-- Student surname -->
+                        <!-- Why name last_name The id is mainly used by the browser, CSS, JavaScript, and the <label>.The name is what allows the submitted form to say:last_name = John. Django can then access it with: request.POST.get("last_name") -->
+                        <label for="student-surname">Student Surname</label>
+                    
+                        <input
+                            type="text"
+                            id="student-surname"
+                            name="last_name"
+                            placeholder="Enter student surname"
+                            required
+                        >
+                    
+                        <br><br>
+                    
+                        <!-- Student ID number -->
+                        <label for="student-id">ID Number</label>
+                    
+                        <input
+                            type="text"
+                            id="student-id"
+                            name="id_or_passport"
+                            placeholder="Enter student ID number/passport"
+                            required 
+                        >
+                    
+                        <br><br>
+                    
+                        <!-- Student date of birth -->
+                        <label for="student-date-of-birth">Date of Birth</label>
+                    
+                        <input
+                            type="date"
+                            id="student-date-of-birth"
+                            name="date_of_birth"
+                            required
+                        >
+                    
+                        <br><br>
+                    
+                        <!-- Student gender -->
+                        <label for="student-gender">Gender</label>
+                    
+                        <select id="student-gender" name="gender" required>
+                    
+                            <!-- Default option -->
+                            <option value="">Select gender</option>
+                    
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
+                            <option value="PREFER_NOT_TO_SAY">Prefer not to say</option>
+                    
+                        </select>
+                    
+                        <br><br>
+                    
+                        <!-- Student nationality -->
+                        <label for="student-nationality">Nationality</label>
+                        
+                        <select id="student-nationality" name="nationality" required>
+                        
+                            <!-- Default option shown before a country is selected. -->
+                            <option value="">Select nationality</option>
+                        
+                            <!-- Loop through the countries sent by Django. -->
+                            {% for country in countries %}
+                        
+                                <!--
+                                    country.id is sent to Django when the form is submitted.
+                                    country.name is what the user sees in the dropdown.
+                                -->
+                                <option value="{{ country.id }}">
+                                    {{ country.name }}
+                                </option>
+                        
+                            {% endfor %}
+                        
+                        </select>
+                    
+                    
+                        <!-- ==========================================================
+                            SCHOOL INFORMATION
+                            ========================================================== -->
+                    
+                        <h3>School Information</h3>
+                    
+                        <!-- Student academic level -->
+                        <label for="student-grade">Grade</label>
+                        
+                        <select id="student-grade" name="academic_level" required>
+                        
+                            <!-- Default option shown before a grade is selected. -->
+                            <option value="">Select grade</option>
+                        
+                            <!--
+                                Loop through the academic levels sent by Django.
+                            -->
+                            {% for academic_level in academic_levels %}
+                        
+                                <!--
+                                    The database ID is submitted to Django.
+                                    The display name is shown to the user.
+                                -->
+                                <option value="{{ academic_level.id }}">
+                                    {{ academic_level.display_name|default:academic_level.academic_level.name }}
+                                </option>
+                        
+                            {% endfor %}
+                        
+                        </select>
+                        
+                        <br><br>
+                    
+                    
+                        <!-- Student classroom -->
+                        <label for="student-classroom">Classroom</label>
+                        
+                        <select id="student-classroom" name="classroom" required>
+                        
+                            <!-- Default option shown before a classroom is selected. -->
+                            <option value="">Select classroom</option>
+                        
+                            <!-- Loop through the classrooms sent by Django. and make sure the classroom displayed matches the grade selected -->
+                            {% for classroom in classrooms %}
+                                <option
+                                    value="{{ classroom.id }}"
+                                    data-academic-level="{{ classroom.academic_level_id }}"
+                                >
+                                    {{ classroom.name }}
+                                </option>
+                            {% endfor %}
+                        
+                        </select>
+                    
+                    
+                        <!-- ==========================================================
+                            ACCOUNT INFORMATION
+                            ========================================================== -->
+                    
+                        <h3>Account Information</h3>
+                    
+                        <!-- Student password -->
+                        <label for="student-password">Password</label>
+                    
+                        <input
+                            type="password"
+                            id="student-password"
+                            name="password"
+                            placeholder="Create student password"
+                            required
+                        >
+                    
+                        <br><br>
+                    
+                        <!-- Confirm password -->
+                        <label for="student-confirm-password">Confirm Password</label>
+                    
+                        <input
+                            type="password"
+                            id="student-confirm-password"
+                            name="confirm_password"
+                            placeholder="Confirm student password"
+                            required
+                        >
+                        
+                        <br><br>  
+                    
+                    
+                        <!-- ==========================================================
+                            REGISTRATION BUTTON
+                            ========================================================== -->
+                    
+                        <button id="submit-student" class="action-button">
+                            Register Student
+                        </button>
+                        
+                        <!--
+                        This area will display registration messages
+                        such as success or validation feedback.
+                        -->
+                        <div id="registration-message"></div>
+                    </form>
+                
+                </section>
+            </main>
+            
+    
+        </div>
+        
+    <!-- Connect our JavaScript file to this HTML page -->
+    <script src="{% static 'schools/script.js' %}"></script>  
+
+    </body>
+    
+</html>    
+        
+        

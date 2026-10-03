@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en">
+    <head>
+        <meta charset="UTF-8"><!-- Make the page responsive on phones. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Student Registered Successfully</title>
+    
+    </head>
+        <body><!-- Main registration-success heading. -->
+            <h1>Student Registered Successfully</h1>
+            
+            <!-- Display the student's generated ARWA number. -->
+            <p>
+                <strong>Student Number:</strong>
+                {{ student.student_number }}
+            </p>
+            
+            <!-- Display the student's first name. -->
+            <p>
+                <strong>Name:</strong>
+                {{ student.first_name }}
+            </p>
+            
+            <!-- Display the student's surname. -->
+            <p>
+                <strong>Surname:</strong>
+                {{ student.last_name }}
+            </p>
+            
+            <!-- Display the student's identification/passport number. -->
+            <p>
+                <strong>ID/Passport:</strong>
+                {{ student.id_or_passport }}
+            </p>
+            
+            <!-- Display the student's academic level. -->
+            <p>
+                <strong>Academic Level:</strong>
+                {{ student.academic_level }}
+            </p>
+            
+            <!-- Display the student's classroom. -->
+            <p>
+                <strong>Classroom:</strong>
+                {{ student.classroom.name }}
+            </p>
+            
+            <!-- The phase will be connected through the academic level. -->
+            <p>
+                <strong>Phase:</strong>
+                {{ student.academic_level.academic_level.phase }}
+            </p>
+            
+            <!-- Subjects will be added after we build
+                the student-subject enrollment system. -->
+            <p>
+                <strong>Subject:</strong>
+                To be assigned
+            </p>
+        
+        </body>
+</html>
