@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!--
+        Makes the page responsive on phones,
+        tablets, and computers.
+    -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!--
+        Load the login page's own CSS file.
+    -->
+    {% load static %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'schools/login.css' %}"
+    >
+
+    <title>
+        ARWA School Management Platform - Login
+    </title>
+
+</head>
+
+
+<body>
+
+    <!--
+        Main container for the login page.
+    -->
+    <main class="login-container">
+
+
+        <!--
+            The login card contains everything
+            the staff member needs to sign in.
+        -->
+        <section class="login-card">
+
+
+            <!-- ARWA branding -->
+            <div class="brand">
+
+                <h1>
+                    ARWA
+                </h1>
+
+                <p>
+                    School Management Platform
+                </p>
+
+            </div>
+
+
+            <!-- Login heading -->
+            <div class="login-title">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to your ARWA account.
+                </p>
+
+            </div>
+
+
+            <!--
+                Django will display an error here
+                when authentication fails.
+            -->
+            {% if error_message %}
+
+                <div class="error-message">
+
+                    {{ error_message }}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- Login form -->
+            <form
+                method="post"
+                action="{% url 'login' %}"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- Username -->
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <!--
+                        Wrapper allows the Show/Hide
+                        button to sit inside the field.
+                    -->
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="show-password"
+                            class="show-password"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password recovery -->
+                <div class="forgot-password">
+
+                    <a href="#">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- Login button -->
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+
+            </form>
+
+
+            <!-- Page footer -->
+            <div class="login-footer">
+
+                ARWA School Management Platform
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!--
+        Load the login page's JavaScript file.
+
+        We put JavaScript at the bottom so that
+        the HTML elements already exist when
+        JavaScript starts working.
+    -->
+    <script
+        src="{% static 'schools/login.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

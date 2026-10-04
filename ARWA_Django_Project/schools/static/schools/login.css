@@ -1,0 +1,584 @@
+/* =========================================================
+   ARWA SCHOOL MANAGEMENT PLATFORM
+   LOGIN PAGE STYLES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. RESET AND BOX SIZING
+   --------------------------------------------------------- */
+
+/*
+    Make width and height calculations easier to control.
+
+    This prevents padding and borders from unexpectedly
+    making elements larger than their specified width.
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/*
+    Remove the browser's default spacing.
+*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ---------------------------------------------------------
+   2. PAGE BODY
+   --------------------------------------------------------- */
+
+/*
+    The login page uses the full height of the screen.
+
+    We use flexbox to place the login card in the
+    centre of the screen.
+*/
+body {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    /*
+        Use the same soft blue-gray feeling
+        as the ARWA dashboard.
+    */
+    background-color: #e8eef7;
+
+    /*
+        Use a clean system font so the page
+        looks good without downloading fonts.
+    */
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #1f2937;
+}
+
+
+/* ---------------------------------------------------------
+   3. MAIN LOGIN CONTAINER
+   --------------------------------------------------------- */
+
+/*
+    This controls the maximum width of the
+    entire login area.
+
+    On a phone it will use almost the whole screen.
+    On a larger screen it will remain compact.
+*/
+.login-container {
+    width: 100%;
+
+    max-width: 440px;
+}
+
+
+/* ---------------------------------------------------------
+   4. LOGIN CARD
+   --------------------------------------------------------- */
+
+/*
+    This is the white card containing
+    the complete login form.
+*/
+.login-card {
+    width: 100%;
+
+    padding: 36px;
+
+    background-color: #ffffff;
+
+    border-radius: 18px;
+
+    /*
+        A soft shadow gives the card depth
+        without making it look too heavy.
+    */
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   5. ARWA BRAND
+   --------------------------------------------------------- */
+
+/*
+    Centre the ARWA logo and platform name.
+*/
+.brand {
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+
+/*
+    Main ARWA heading.
+*/
+.brand h1 {
+    margin: 0 0 8px 0;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #1e3a8a;
+}
+
+
+/*
+    Platform name underneath ARWA.
+*/
+.brand p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ---------------------------------------------------------
+   6. LOGIN TITLE
+   --------------------------------------------------------- */
+
+.login-title {
+    margin-bottom: 26px;
+}
+
+
+/*
+    "Welcome Back"
+*/
+.login-title h2 {
+    margin: 0 0 8px 0;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+
+/*
+    Supporting text.
+*/
+.login-title p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #64748b;
+}
+
+
+/* ---------------------------------------------------------
+   7. ERROR MESSAGE
+   --------------------------------------------------------- */
+
+/*
+    Django will use this area when login fails.
+
+    We are styling it now so we don't have to
+    redesign it later.
+*/
+.error-message {
+    margin-bottom: 20px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 9px;
+
+    background-color: #fef2f2;
+
+    color: #991b1b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ---------------------------------------------------------
+   8. FORM GROUP
+   --------------------------------------------------------- */
+
+/*
+    Each label + input combination gets
+    its own spacing.
+*/
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+/*
+    Form labels.
+*/
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #334155;
+}
+
+
+/* ---------------------------------------------------------
+   9. INPUT FIELDS
+   --------------------------------------------------------- */
+
+/*
+    Style both username and password inputs.
+*/
+.form-group input {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    background-color: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 16px;
+
+    /*
+        Remove the browser's default outline.
+        We create our own focus design below.
+    */
+    outline: none;
+
+    /*
+        Make focus changes smooth.
+    */
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+    Change the border when the user
+    taps into an input.
+*/
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/*
+    Style the placeholder text.
+*/
+.form-group input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* ---------------------------------------------------------
+   10. PASSWORD WRAPPER
+   --------------------------------------------------------- */
+
+/*
+    The password wrapper allows the Show button
+    to sit inside the password field.
+*/
+.password-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+
+/*
+    Leave space on the right for the Show button.
+*/
+.password-wrapper input {
+    padding-right: 70px;
+}
+
+
+/* ---------------------------------------------------------
+   11. SHOW / HIDE PASSWORD BUTTON
+   --------------------------------------------------------- */
+
+.show-password {
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    padding: 5px;
+
+    background: transparent;
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/*
+    Give the button a subtle visual response
+    when the user interacts with it.
+*/
+.show-password:hover {
+    color: #1d4ed8;
+}
+
+
+/* ---------------------------------------------------------
+   12. FORGOT PASSWORD
+   --------------------------------------------------------- */
+
+.forgot-password {
+    margin-top: -5px;
+
+    margin-bottom: 22px;
+
+    text-align: right;
+}
+
+
+.forgot-password a {
+    color: #2563eb;
+
+    font-size: 14px;
+
+    text-decoration: none;
+}
+
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------------------------------------------------------
+   13. LOGIN BUTTON
+   --------------------------------------------------------- */
+
+/*
+    Large touch-friendly login button.
+
+    This is especially important because
+    you are testing ARWA on your phone.
+*/
+.login-button {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 13px 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background-color: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+    Desktop hover effect.
+*/
+.login-button:hover {
+    background-color: #1d4ed8;
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.25);
+}
+
+
+/*
+    Small press effect for touch/click.
+*/
+.login-button:active {
+    transform: scale(0.98);
+}
+
+
+/* ---------------------------------------------------------
+   14. LOGIN FOOTER
+   --------------------------------------------------------- */
+
+.login-footer {
+    margin-top: 26px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #94a3b8;
+}
+
+
+/* ---------------------------------------------------------
+   15. TABLET AND DESKTOP
+   --------------------------------------------------------- */
+
+/*
+    Give the card slightly more breathing room
+    on larger screens.
+*/
+@media (min-width: 600px) {
+
+    .login-card {
+        padding: 40px;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   16. PHONE RESPONSIVE DESIGN
+   --------------------------------------------------------- */
+
+/*
+    Phones have less available screen space.
+
+    We reduce the card padding and heading sizes
+    so everything remains comfortable.
+*/
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .login-card {
+        padding: 28px 20px;
+
+        border-radius: 15px;
+    }
+
+
+    .brand {
+        margin-bottom: 28px;
+    }
+
+
+    .brand h1 {
+        font-size: 28px;
+    }
+
+
+    .brand p {
+        font-size: 13px;
+    }
+
+
+    .login-title h2 {
+        font-size: 21px;
+    }
+
+
+    .login-title p {
+        font-size: 13px;
+    }
+
+
+    .form-group input {
+        min-height: 50px;
+
+        font-size: 16px;
+    }
+
+
+    .login-button {
+        min-height: 50px;
+
+        font-size: 16px;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   17. VERY SMALL PHONES
+   --------------------------------------------------------- */
+
+/*
+    Extra adjustment for very small screens.
+*/
+@media (max-width: 360px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    .login-card {
+        padding: 24px 16px;
+    }
+
+
+    .brand h1 {
+        font-size: 25px;
+    }
+
+
+    .login-title h2 {
+        font-size: 20px;
+    }
+
+}

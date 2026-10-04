@@ -1,7 +1,13 @@
 # render() displays our HTML template.
 # get_object_or_404() safely finds a database object
 # or returns a 404 error if the object does not exist.
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    redirect,
+)
+
+from django.contrib.auth import authenticate, login
 
 # Converts a date string from the HTML form
 # into a Python date object.
@@ -30,23 +36,45 @@ def dashboard(request):
         status="ACTIVE"
     )
 
-    # Get our test school.
-    # Later, the logged-in school will determine this automatically.
-    school = School.objects.get(
-        school_code="ARWA"
-    )
-
-    # Get only the academic levels that belong to this school.
-    academic_levels = SchoolAcademicLevel.objects.filter(
-        school=school,
-        status="ACTIVE"
-    )
+    # Get the school selected by the user.
+    # The school ID will come from the request.
+    selected_school_id = request.GET.get("school")
     
-    # Get only the active classrooms that belong to this school.
-    classrooms = Classroom.objects.filter(
-        school=school,
-        status="ACTIVE"
-    )
+    # Start with no school selected.
+    school = None
+    
+    # If the user selected a school, find that school.
+    if selected_school_id:
+        school = get_object_or_404(
+            School,
+            id=selected_school_id,
+            status="ACTIVE"
+        )
+
+    # Start with no academic levels.
+    academic_levels = SchoolAcademicLevel.objects.none()
+    
+    # Start with no classrooms.
+    classrooms = Classroom.objects.none()
+    
+    # Only load academic levels and classrooms
+    # after a valid school has been selected.
+    if school:
+    
+        # Get only the academic levels that belong
+        # to the selected school.
+        academic_levels = SchoolAcademicLevel.objects.filter(
+            school=school,
+            status="ACTIVE"
+        )
+    
+        # Get only the classrooms that belong
+        # to the selected school.
+        classrooms = Classroom.objects.filter(
+            school=school,
+            status="ACTIVE"
+        )
+        
 
     # Send the countries and academic levels to the HTML template.
     return render(
@@ -204,3 +232,57 @@ def student_register(request):
         request,
         "schools/school.html"
     )
+    
+
+# ---------------------------------------------------------
+# ARWA USER LOGIN
+# ---------------------------------------------------------
+
+def login_view(request):
+
+    # Check whether the user submitted the login form.
+    if request.method == "POST":
+
+        # Get the username entered on the login page.
+        username = request.POST.get("username")
+
+        # Get the password entered on the login page.
+        password = request.POST.get("password")
+
+        # Ask Django to verify the username and password.
+        user = authenticate(
+            request,
+            username=username,
+            password=password,
+        )
+
+        # If Django successfully authenticated the user...
+        if user is not None:
+
+            # Create the user's authenticated session.
+            login(request, user)
+
+            # For now, send the authenticated user
+            # to the main ARWA dashboard.
+            return redirect("dashboard")
+
+        # If authentication failed, show the login page
+        # again with an error message.
+        return render(
+            request,
+            "schools/login.html",
+            {
+                "error_message":
+                    "Invalid username or password."
+            }
+        )
+
+    # If the page was opened normally with GET,
+    # simply display the login page.
+    return render(
+        request,
+        "schools/login.html"
+    )
+    
+    
+    

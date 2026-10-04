@@ -11,6 +11,13 @@ urlpatterns = [
     # Main ARWA dashboard.
     path("", views.dashboard, name="dashboard"),
     
+    # ARWA login page.
+    path(
+        "login/",
+        views.login_view,
+        name="login",
+    ),
+    
     # Student registration.
     # This URL will receive the student registration form.
     path(

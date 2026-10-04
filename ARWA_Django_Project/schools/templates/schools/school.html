@@ -273,42 +273,53 @@
                     <!-- ==========================================================
                         STUDENT PERSONAL INFORMATION
                         ========================================================== -->
-                    <form
-                        id="student-registration-form"
-                        method="post"
-                        action="{% url 'student_register' %}"
-                    >
                     
-                        {% csrf_token %}
+                    <!-- School selection is a separate GET form. -->
+                    <h3>School Information</h3>
                     
-                        <h3>School Information</h3>
+                    <form method="get" action="{% url 'dashboard' %}">
                     
-                        <!-- School where the student will be registered -->
                         <label for="student-school">School</label>
                     
                         <select
                             id="student-school"
                             name="school"
+                            onchange="this.form.submit()"
                             required
                         >
-                    
-                            <!-- Default option shown before a school is selected. -->
                             <option value="">Select school</option>
                     
-                            <!-- Loop through the active schools sent by Django. -->
                             {% for school in schools %}
-                    
-                                <!--
-                                    Send the school's database ID to Django.
-                                    Show the school's name to the user.
-                                -->
-                                <option value="{{ school.id }}">
+                                <option
+                                    value="{{ school.id }}"
+                                    {% if request.GET.school == school.id|stringformat:"s" %}
+                                        selected
+                                    {% endif %}
+                                >
                                     {{ school.name }}
                                 </option>
-                    
                             {% endfor %}
-                    
                         </select>
+                    
+                    </form>
+                    
+                    <br><br>
+                    
+                    <!-- Student registration is a separate POST form. -->
+                    <form
+                        id="student-registration-form"
+                        method="post"
+                        action="{% url 'student_register' %}"
+                    >
+                        {% csrf_token %}
+                    
+                        <!-- Carry the selected school ID into registration. -->
+                        <input
+                            type="hidden"
+                            name="school"
+                            value="{{ request.GET.school }}"
+                        >
+    
                     
                         <br><br>
                     
@@ -417,6 +428,7 @@
                     
                         <!-- Student academic level -->
                         <label for="student-grade">Grade</label>
+
                         
                         <select id="student-grade" name="academic_level" required>
                         
@@ -451,7 +463,7 @@
                             <!-- Default option shown before a classroom is selected. -->
                             <option value="">Select classroom</option>
                         
-                            <!-- Loop through the classrooms sent by Django. and make sure the classroom displayed matches the grade selected -->
+                            <!-- Loop through the classrooms sent by Django. and make sure  -->
                             {% for classroom in classrooms %}
                                 <option
                                     value="{{ classroom.id }}"
