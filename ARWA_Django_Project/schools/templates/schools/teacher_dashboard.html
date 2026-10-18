@@ -1,0 +1,4595 @@
+{% load static %}
+
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!--
+        This makes the dashboard responsive.
+        It is especially important because we are
+        testing ARWA on a phone.
+    -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teacher Dashboard | ARWA</title>
+
+    <!--
+        Connect the teacher dashboard stylesheet.
+    -->
+    <link
+        rel="stylesheet"
+        href="{% static 'schools/teacher_dashboard.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         TEACHER DASHBOARD
+         ===================================================== -->
+
+    <div class="teacher-dashboard">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="teacher-sidebar">
+
+            <!-- ARWA branding -->
+            <div class="sidebar-brand">
+
+                <h1>ARWA</h1>
+
+                <p>
+                    School Management
+                </p>
+
+            </div>
+
+
+            <!-- Teacher navigation -->
+            <nav class="teacher-navigation">
+
+                <p class="navigation-title">
+                    MAIN
+                </p>
+
+
+                <!-- Dashboard -->
+                <a
+                    href="{% url 'teacher_dashboard' %}"
+                    class="navigation-link active"
+                >
+                    {% trans "Dashboard" %}
+                </a>
+
+
+                <!-- My Classes -->
+                <a
+                    href="#my-classes"
+                    class="navigation-link"
+                    data-section="my_classes"
+                >
+                    {% trans "My Classes" %}
+                </a>
+
+
+                <!-- My Subjects -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="subjects"
+                >
+                    {% trans "My Subjects" %}
+                </a>
+
+
+                <!-- My Students -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="students"
+                >
+                    {% trans "My Students" %}
+                </a>
+
+
+                <!-- Attendance -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="attendance"
+                >
+                    {% trans "Attendance" %}
+                </a>
+
+
+                <!-- Homework -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="homework"
+                >
+                    {% trans "Homework" %}
+                </a>
+
+
+                <!-- Marks and Results -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="marks_and_results"
+                >
+                   {% trans "Marks & Results" %}
+                </a>
+
+
+                <!-- Timetable -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="timetable"
+                >
+                    {% trans "My Timetable" %}
+                </a>
+
+
+                <p class="navigation-title">
+                   {% trans "SCHOOL" %}
+                </p>
+
+
+                <!-- School News -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="school_news"
+                >
+                   {% trans "School News" %}
+                </a>
+
+
+                <!-- Guardians -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="guardians"
+                >
+                    {% trans "My Guardians" %}
+                </a>
+
+
+                <!-- HOD -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="hod"
+                >
+                   {% trans "My HOD" %}
+                </a>
+
+
+                <!-- Staff Meetings -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="staff_meetings"
+                >
+                    {% trans "Staff Meetings" %}
+                </a>
+
+
+                <p class="navigation-title">
+                    {% trans "ACCOUNT" %}
+                </p>
+
+
+                <!-- Teacher profile -->
+                <a
+                    href="#"
+                    class="navigation-link"
+                    data-section="teacher_profile"
+                >
+                    {% trans "My Profile" %}
+                </a>
+
+            </nav>
+
+
+            <!-- Logout -->
+            <div class="sidebar-logout">
+
+                <form
+                    method="post"
+                    action="{% url 'logout' %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="logout-button"
+                    >
+                        {% trans "Logout" %}
+                    </button>
+
+                </form>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             MAIN DASHBOARD AREA
+             ================================================= -->
+
+        <main class="teacher-main">
+
+
+            <!-- =================================================
+            TOP BAR
+            ================================================= -->
+
+            <header class="teacher-topbar">
+
+                <div>
+            
+                    <p class="topbar-school">
+                        {{ school.name }}
+                    </p>
+            
+                    <h2>
+                        Teacher Dashboard
+                    </h2>
+            
+                </div>
+            
+            
+                <div class="teacher-notification-wrapper">
+
+                    <!-- Notification bell -->
+                    <button
+                        type="button"
+                        class="teacher-notification-button"
+                        id="teacher-notification-button"
+                        aria-label="Open notifications"
+                    >
+                        🔔
+                
+                        <!-- Number of unread notifications -->
+                        <span
+                            class="teacher-notification-count"
+                            id="teacher-notification-count"
+                        >
+                            3
+                        </span>
+                
+                    </button>
+                
+                
+                    <!-- Notification panel -->
+                    <div
+                        class="teacher-notification-panel"
+                        id="teacher-notification-panel"
+                    >
+                
+                        <!-- Notification panel header -->
+                        <div class="teacher-notification-panel-header">
+                        
+                            <div>
+                        
+                                <h3>
+                                    Notifications
+                                </h3>
+                        
+                            </div>
+                        
+                        
+                            <!-- Number of unread notifications -->
+                            <span
+                                id="notification-panel-count"
+                            >
+                                3
+                            </span>
+                        
+                        </div>
+                
+                
+                        <!-- Notification  -->
+                        <div class="teacher-notification-item unread"
+                             data-notification-type="homework"
+                        >
+                
+                            <div class="teacher-notification-item-icon">
+                                📝
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    New homework submission
+                                </h4>
+                
+                                <p>
+                                    Grade 12A submitted Economics homework.
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                        <!-- Notification 2 -->
+                        <div class="teacher-notification-item unread"
+                             data-notification-type="school_news"
+                        >
+                
+                            <div class="teacher-notification-item-icon">
+                                📢
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    School announcement
+                                </h4>
+                
+                                <p>
+                                    Staff meeting tomorrow at 14:00.
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                        <!-- Notification 3 -->
+                        <div class="teacher-notification-item unread"
+                             data-notification-type="attendance"
+                        >
+                
+                            <div class="teacher-notification-item-icon">
+                                ⚠️
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    Attendance reminder
+                                </h4>
+                
+                                <p>
+                                    3 students need attendance attention.
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                
+                </div>
+            
+            
+                <!-- Teacher profile -->
+                <button
+                    type="button"
+                    class="teacher-profile"
+                    id="teacher-profile-button"
+                    aria-label="Open teacher profile menu"
+                >
+                
+                    <!-- Teacher avatar -->
+                    <div class="teacher-profile-avatar">
+                
+                        {{ staff_profile.user.first_name|first }}
+                
+                    </div>
+                
+                
+                    <!-- Teacher information -->
+                    <div>
+                
+                        <p class="teacher-profile-name">
+                
+                            {{ staff_profile.user.first_name }}
+                            {{ staff_profile.user.last_name }}
+                
+                        </p>
+                
+                        <p class="teacher-profile-role">
+                            Teacher
+                        </p>
+                
+                    </div>
+                
+                </button>
+                
+                
+                <!-- Teacher profile menu -->
+                <div
+                    class="teacher-profile-menu"
+                    id="teacher-profile-menu"
+                >
+                
+                    <!-- Profile menu heading -->
+                    <div class="teacher-profile-menu-header">
+                
+                        <p>
+                            {{ staff_profile.user.first_name }}
+                            {{ staff_profile.user.last_name }}
+                        </p>
+                
+                        <span>
+                            Teacher
+                        </span>
+                
+                    </div>
+                
+                
+                    <!-- My Profile -->
+                    <a href="#" class="teacher-profile-menu-item"
+                                data-profile-action="profile"
+                    >
+                
+                        <span>👤</span>
+                        <span>My Profile</span>
+                
+                    </a>
+                
+                
+                    <!-- Account Settings -->
+                    <a href="#" class="teacher-profile-menu-item"
+                                data-profile-action="settings"
+                    >
+                
+                        <span>⚙️</span>
+                        <span>Account Settings</span>
+                
+                    </a>
+                
+                
+                    <!-- Change Password -->
+                    <a href="#" class="teacher-profile-menu-item"
+                                data-profile-action="change_password"
+                    >
+                
+                        <span>🔐</span>
+                        <span>Change Password</span>
+                
+                    </a>
+                
+                
+                    <!-- Logout -->
+                    <form method="post" action="{% url 'logout' %}">
+                    
+                        {% csrf_token %}
+                    
+                        <button
+                            type="submit"
+                            class="teacher-profile-menu-item logout"
+                        >
+                    
+                            <span>🚪</span>
+                            <span>Logout</span>
+                    
+                        </button>
+                    
+                    </form>
+                
+                </div>
+            
+            </header>
+
+
+
+            <!-- =================================================
+                 WELCOME PANEL
+                 ================================================= -->
+
+            <section class="teacher-welcome-panel">
+
+                <div class="welcome-content">
+
+                    <!-- Small greeting -->
+                    <p class="welcome-small-text">
+                        Good morning,
+                    </p>
+                    
+                    
+                    <!-- Teacher's name -->
+                    <h1>
+                    
+                        {{ staff_profile.user.first_name }}
+                        {{ staff_profile.user.last_name }}
+                    
+                        👋
+                    
+                    </h1>
+                    
+                    
+                    <!-- Welcome message -->
+                    <p>
+                        Welcome to your teacher dashboard.
+                    </p>
+                    
+                    
+                    <!-- School name -->
+                    <p class="welcome-school-name">
+                        {{ school.name }}
+                    </p>
+                    
+                    <!-- Display the current academic period from the database -->
+                    <div class="teacher-academic-period">
+                    
+                        <span>
+                            Academic Year:
+                            {{ current_academic_year.year }}
+                        </span>
+                    
+                        <span>
+                            Current Term:
+                            {{ current_term.name }}
+                        </span>
+                    
+                    </div>
+
+                </div>
+
+
+                <!--
+                    This area will later contain our
+                    ARWA teacher illustration.
+
+                    We will have BOTH:
+                    - Male teacher
+                    - Female teacher
+                -->
+                <div class="welcome-illustration">
+
+                    <div class="illustration-placeholder">
+
+                        Teacher
+
+                    </div>
+
+                </div>
+
+            </section>
+            
+            <!-- =================================================
+            TEACHER CALENDAR & LIVE CLOCK
+            ================================================= -->
+
+            <section class="teacher-date-time-section">
+            
+                <!-- LIVE CLOCK -->
+                <div class="teacher-clock-card">
+            
+                    <div class="clock-label">
+                        Local Time
+                    </div>
+            
+                    <div id="teacher-clock">
+                        08:00:00
+                    </div>
+            
+                    <div id="teacher-current-date">
+                        Monday, 05 October 2026
+                    </div>
+            
+                </div>
+            
+            
+                <!-- CALENDAR -->
+                <div class="teacher-calendar-card">
+            
+                    <div class="calendar-header">
+            
+                        <button
+                            type="button"
+                            id="previous-month"
+                            class="calendar-navigation-button"
+                            aria-label="Previous month">
+                            ‹
+                        </button>
+            
+                        <h2 id="calendar-month">
+                            October 2026
+                        </h2>
+            
+                        <button
+                            type="button"
+                            id="next-month"
+                            class="calendar-navigation-button"
+                            aria-label="Next month">
+                            ›
+                        </button>
+            
+                    </div>
+            
+            
+                    <!-- DAYS OF THE WEEK -->
+                    <div class="calendar-weekdays">
+            
+                        <span>Sun</span>
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+            
+                    </div>
+            
+            
+                    <!-- CALENDAR DATES -->
+                    <div
+                        id="calendar-days"
+                        class="calendar-days">
+            
+                        <!-- JavaScript will create the dates here -->
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+
+
+            <!-- =================================================
+                TEACHER OVERVIEW
+                ================================================= -->
+    
+            <section class="teacher-overview">
+    
+                <!-- My Students -->
+                <div class="overview-card">
+    
+                    <div class="overview-card-content">
+    
+                        <p class="overview-label">
+                            My Students
+                        </p>
+    
+                        <h3>
+                            125
+                        </h3>
+    
+                        <p class="overview-description">
+                            Students assigned to you
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- My Classes -->
+                <div class="overview-card">
+    
+                    <div class="overview-card-content">
+    
+                        <p class="overview-label">
+                            My Classes
+                        </p>
+    
+                        <h3>
+                            4
+                        </h3>
+    
+                        <p class="overview-description">
+                            Active classes
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Pending Homework -->
+                <div class="overview-card">
+    
+                    <div class="overview-card-content">
+    
+                        <p class="overview-label">
+                            Pending Homework
+                        </p>
+    
+                        <h3>
+                            18
+                        </h3>
+    
+                        <p class="overview-description">
+                            Waiting for marking
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Average Performance -->
+                <div class="overview-card">
+    
+                    <div class="overview-card-content">
+    
+                        <p class="overview-label">
+                            Average Performance
+                        </p>
+    
+                        <h3>
+                            72%
+                        </h3>
+    
+                        <p class="overview-description">
+                            Across your classes
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+            </section>
+
+
+            <!-- =================================================
+                RECENT HOMEWORK
+                ================================================= -->
+    
+            <section class="teacher-section recent-homework-section">
+    
+                <!-- Section heading -->
+                <div class="section-heading">
+    
+                    <div>
+    
+                        <h2>
+                            Recent Homework
+                        </h2>
+    
+                        <p>
+                            Homework that may need your attention.
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Homework list -->
+                <div class="homework-list">
+    
+    
+                    <!-- Homework item 1 -->
+                    <div class="homework-item">
+    
+                        <div class="homework-info">
+    
+                            <h3>
+                                Algebra
+                            </h3>
+    
+                            <p class="homework-subject">
+                                Mathematics · Grade 12A
+                            </p>
+    
+                            <p class="homework-due">
+                                Due: 06 October 2026
+                            </p>
+    
+                        </div>
+    
+    
+                        <div class="homework-status">
+    
+                            <span class="homework-count">
+                                12 submissions
+                            </span>
+    
+                            <span class="homework-badge pending">
+                                Pending marking
+                            </span>
+    
+                        </div>
+    
+    
+                        <a
+                            href="#"
+                            class="homework-action"
+                        >
+                            View Homework →
+                        </a>
+    
+                    </div>
+    
+    
+    
+                    <!-- Homework item 2 -->
+                    <div class="homework-item">
+    
+                        <div class="homework-info">
+    
+                            <h3>
+                                Cold War
+                            </h3>
+    
+                            <p class="homework-subject">
+                                History · Grade 12B
+                            </p>
+    
+                            <p class="homework-due">
+                                Due: 07 October 2026
+                            </p>
+    
+                        </div>
+    
+    
+                        <div class="homework-status">
+    
+                            <span class="homework-count">
+                                5 submissions
+                            </span>
+    
+                            <span class="homework-badge pending">
+                                Pending marking
+                            </span>
+    
+                        </div>
+    
+    
+                        <a
+                            href="#"
+                            class="homework-action"
+                        >
+                            View Homework →
+                        </a>
+    
+                    </div>
+    
+    
+    
+                    <!-- Homework item 3 -->
+                    <div class="homework-item">
+    
+                        <div class="homework-info">
+    
+                            <h3>
+                                Market Structures
+                            </h3>
+    
+                            <p class="homework-subject">
+                                Economics · Grade 12A
+                            </p>
+    
+                            <p class="homework-due">
+                                Due: 08 October 2026
+                            </p>
+    
+                        </div>
+    
+    
+                        <div class="homework-status">
+    
+                            <span class="homework-count">
+                                3 submissions
+                            </span>
+    
+                            <span class="homework-badge pending">
+                                Pending marking
+                            </span>
+    
+                        </div>
+    
+    
+                        <a
+                            href="#"
+                            class="homework-action"
+                        >
+                            View Homework →
+                        </a>
+    
+                    </div>
+    
+    
+                </div>
+    
+            </section>
+
+
+            <!-- =================================================
+                TODAY'S SCHEDULE
+                ================================================= -->
+    
+            <section class="teacher-section today's-schedule-section">
+    
+                <!-- Section heading -->
+                <div class="section-heading">
+    
+                    <div>
+    
+                        <h2>
+                            Today's Schedule
+                        </h2>
+    
+                        <p>
+                            Your classes and activities for today.
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Schedule list -->
+                <div class="schedule-list">
+    
+    
+                    <!-- Schedule item 1 -->
+                    <div class="schedule-item">
+    
+                        <div class="schedule-time">
+                            08:00
+                        </div>
+    
+    
+                        <div class="schedule-details">
+    
+                            <h3>
+                                Mathematics
+                            </h3>
+    
+                            <p>
+                                Grade 12A · Room 12
+                            </p>
+    
+                        </div>
+    
+    
+                        <span class="schedule-status current">
+                            Current
+                        </span>
+    
+                    </div>
+    
+    
+    
+                    <!-- Schedule item 2 -->
+                    <div class="schedule-item">
+    
+                        <div class="schedule-time">
+                            10:00
+                        </div>
+    
+    
+                        <div class="schedule-details">
+    
+                            <h3>
+                                Economics
+                            </h3>
+    
+                            <p>
+                                Grade 12B · Room 8
+                            </p>
+    
+                        </div>
+    
+    
+                        <span class="schedule-status">
+                            Upcoming
+                        </span>
+    
+                    </div>
+    
+    
+    
+                    <!-- Schedule item 3 -->
+                    <div class="schedule-item">
+    
+                        <div class="schedule-time">
+                            12:00
+                        </div>
+    
+    
+                        <div class="schedule-details">
+    
+                            <h3>
+                                Mathematics
+                            </h3>
+    
+                            <p>
+                                Grade 11A · Room 12
+                            </p>
+    
+                        </div>
+    
+    
+                        <span class="schedule-status">
+                            Upcoming
+                        </span>
+    
+                    </div>
+    
+    
+    
+                    <!-- Schedule item 4 -->
+                    <div class="schedule-item">
+    
+                        <div class="schedule-time">
+                            14:00
+                        </div>
+    
+    
+                        <div class="schedule-details">
+    
+                            <h3>
+                                Staff Meeting
+                            </h3>
+    
+                            <p>
+                                Staff Room
+                            </p>
+    
+                        </div>
+    
+    
+                        <span class="schedule-status">
+                            Upcoming
+                        </span>
+    
+                    </div>
+    
+    
+                </div>
+    
+            </section>
+
+
+            <!-- =================================================
+                CLASS PERFORMANCE
+                ================================================= -->
+    
+            <section class="teacher-section class-performance-section">
+    
+                <!-- Section heading -->
+                <div class="section-heading">
+    
+                    <div>
+    
+                        <h2>
+                            Class Performance
+                        </h2>
+    
+                        <p>
+                            Average performance across your classes.
+                        </p>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <!-- Performance list -->
+                <div class="performance-list">
+    
+    
+                    <!-- Grade 12A -->
+                    <div class="performance-item">
+    
+                        <div class="performance-info">
+    
+                            <div>
+    
+                                <h3>
+                                    Grade 12A
+                                </h3>
+    
+                                <p>
+                                    Mathematics
+                                </p>
+    
+                            </div>
+    
+    
+                            <strong>
+                                78%
+                            </strong>
+    
+                        </div>
+    
+    
+                        <div class="performance-bar">
+    
+                            <div
+                                class="performance-progress"
+                                style="width: 78%;"
+                            ></div>
+    
+                        </div>
+    
+                    </div>
+    
+    
+    
+                    <!-- Grade 12B -->
+                    <div class="performance-item">
+    
+                        <div class="performance-info">
+    
+                            <div>
+    
+                                <h3>
+                                    Grade 12B
+                                </h3>
+    
+                                <p>
+                                    Economics
+                                </p>
+    
+                            </div>
+    
+    
+                            <strong>
+                                71%
+                            </strong>
+    
+                        </div>
+    
+    
+                        <div class="performance-bar">
+    
+                            <div
+                                class="performance-progress"
+                                style="width: 71%;"
+                            ></div>
+    
+                        </div>
+    
+                    </div>
+    
+    
+    
+                    <!-- Grade 11A -->
+                    <div class="performance-item">
+    
+                        <div class="performance-info">
+    
+                            <div>
+    
+                                <h3>
+                                    Grade 11A
+                                </h3>
+    
+                                <p>
+                                    Mathematics
+                                </p>
+    
+                            </div>
+    
+    
+                            <strong>
+                                68%
+                            </strong>
+    
+                        </div>
+    
+    
+                        <div class="performance-bar">
+    
+                            <div
+                                class="performance-progress"
+                                style="width: 68%;"
+                            ></div>
+    
+                        </div>
+    
+                    </div>
+    
+    
+                </div>
+    
+            </section>
+            
+            
+            <!-- =================================================
+            SCHOOL NEWS / ANNOUNCEMENTS
+            ================================================= -->
+        
+            <section class="teacher-section school-news-section"
+                     id="news"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>School News</h2>
+                        <p>Important announcements from the school.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-news">View All →</a>
+                </div>
+            
+                <div class="school-news-list">
+            
+                    <!-- News Item 1 -->
+                    <div class="school-news-item">
+            
+                        <div class="news-date">
+                            <strong>04</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="news-content">
+                            <h3>Staff Meeting</h3>
+                            <p>
+                                All teaching staff are reminded to attend the
+                                staff meeting at 14:00 in the staff room.
+                            </p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- News Item 2 -->
+                    <div class="school-news-item">
+            
+                        <div class="news-date">
+                            <strong>07</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="news-content">
+                            <h3>Term Assessment</h3>
+                            <p>
+                                Teachers are reminded to submit all term assessment
+                                marks before the closing date.
+                            </p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- News Item 3 -->
+                    <div class="school-news-item">
+            
+                        <div class="news-date">
+                            <strong>10</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="news-content">
+                            <h3>Parent Meeting</h3>
+                            <p>
+                                Parent meetings will take place in the school hall
+                                from 09:00 to 13:00.
+                            </p>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            UPCOMING EVENTS
+            ================================================= -->
+        
+            <section class="teacher-section upcoming-events-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Upcoming Events</h2>
+                        <p>Important school events coming up.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-events">View All →</a>
+                </div>
+            
+                <div class="events-list">
+            
+                    <!-- Event 1 -->
+                    <div class="event-item">
+            
+                        <div class="event-date">
+                            <strong>08</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="event-details">
+                            <h3>Grade 12 Mathematics Test</h3>
+                            <p>08:00 · Examination Room</p>
+                        </div>
+            
+                        <span class="event-category academic">
+                            Academic
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Event 2 -->
+                    <div class="event-item">
+            
+                        <div class="event-date">
+                            <strong>11</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="event-details">
+                            <h3>Parent Meeting</h3>
+                            <p>09:00 · School Hall</p>
+                        </div>
+            
+                        <span class="event-category meeting">
+                            Meeting
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Event 3 -->
+                    <div class="event-item">
+            
+                        <div class="event-date">
+                            <strong>15</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="event-details">
+                            <h3>Staff Development Day</h3>
+                            <p>08:00 · Staff Room</p>
+                        </div>
+            
+                        <span class="event-category staff">
+                            Staff
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Event 4 -->
+                    <div class="event-item">
+            
+                        <div class="event-date">
+                            <strong>18</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="event-details">
+                            <h3>School Sports Day</h3>
+                            <p>08:00 · School Grounds</p>
+                        </div>
+            
+                        <span class="event-category activity">
+                            Activity
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            QUICK ACTIONS
+            ================================================= -->
+        
+            <section class="teacher-section quick-actions-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Quick access to your most common tasks.</p>
+                    </div>
+                </div>
+            
+                <div class="quick-actions-grid">
+            
+                    <!-- Create Homework -->
+                    <a href="#" class="quick-action-card"
+                                data-action="create_homework"
+                    >
+                        <span class="quick-action-icon">📝</span>
+                        <div>
+                            <h3>Create Homework</h3>
+                            <p>Give students new homework</p>
+                        </div>
+                    </a>
+            
+            
+                    <!-- Mark Attendance -->
+                    <a href="#" class="quick-action-card"
+                                data-action="mark_attendance"
+                    >
+                        <span class="quick-action-icon">✅</span>
+                        <div>
+                            <h3>Mark Attendance</h3>
+                            <p>Record today's attendance</p>
+                        </div>
+                    </a>
+            
+            
+                    <!-- Enter Marks -->
+                    <a href="#" class="quick-action-card"
+                                data-action="enter_marks"
+                    >
+                        <span class="quick-action-icon">📊</span>
+                        <div>
+                            <h3>Enter Marks</h3>
+                            <p>Record student results</p>
+                        </div>
+                    </a>
+            
+            
+                    <!-- View Students -->
+                    <a href="#" class="quick-action-card"
+                                data-action="view_students"
+                    >
+                        <span class="quick-action-icon">👨‍🎓</span>
+                        <div>
+                            <h3>View Students</h3>
+                            <p>See students in your classes</p>
+                        </div>
+                    </a>
+            
+            
+                    <!-- Timetable -->
+                    <a href="#" class="quick-action-card"
+                                data-action="timetable"
+                    >
+                        <span class="quick-action-icon">📅</span>
+                        <div>
+                            <h3>My Timetable</h3>
+                            <p>View your teaching schedule</p>
+                        </div>
+                    </a>
+            
+            
+                    <!-- School News -->
+                    <a href="#" class="quick-action-card"
+                                data-action="school_news"
+                    >
+                        <span class="quick-action-icon">📢</span>
+                        <div>
+                            <h3>School News</h3>
+                            <p>Read the latest announcements</p>
+                        </div>
+                    </a>
+            
+                </div>
+            
+            </section>    
+            
+            <!-- =================================================
+            RECENT TEACHER ACTIVITY
+            ================================================= -->
+
+            <section class="teacher-section teacher-activity-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Recent Activity</h2>
+                        <p>Your latest activity on the platform.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-activity">View All →</a>
+                </div>
+            
+                <div class="activity-list">
+            
+                    <!-- Activity 1 -->
+                    <div class="activity-item">
+            
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+            
+                        <div class="activity-content">
+                            <h3>Attendance recorded</h3>
+                            <p>Grade 12A · Mathematics</p>
+                        </div>
+            
+                        <span class="activity-time">
+                            10 min ago
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Activity 2 -->
+                    <div class="activity-item">
+            
+                        <div class="activity-icon">
+                            📝
+                        </div>
+            
+                        <div class="activity-content">
+                            <h3>Homework created</h3>
+                            <p>Algebra · Grade 12A</p>
+                        </div>
+            
+                        <span class="activity-time">
+                            1 hour ago
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Activity 3 -->
+                    <div class="activity-item">
+            
+                        <div class="activity-icon">
+                            📊
+                        </div>
+            
+                        <div class="activity-content">
+                            <h3>Marks entered</h3>
+                            <p>Economics · Grade 12B</p>
+                        </div>
+            
+                        <span class="activity-time">
+                            2 hours ago
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Activity 4 -->
+                    <div class="activity-item">
+            
+                        <div class="activity-icon">
+                            ✓
+                        </div>
+            
+                        <div class="activity-content">
+                            <h3>Homework marked</h3>
+                            <p>Cold War · Grade 12B</p>
+                        </div>
+            
+                        <span class="activity-time">
+                            Yesterday
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            ATTENDANCE OVERVIEW
+            ================================================= -->
+
+            <section class="teacher-section attendance-overview-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Attendance Overview</h2>
+                        <p>Attendance across your classes.</p>
+                    </div>
+            
+                    <a href="#" class="view-attendance-link">
+                        View Attendance →
+                    </a>
+                </div>
+            
+            
+                <div class="attendance-overview-grid">
+            
+                    <!-- Overall Attendance -->
+                    <div class="attendance-summary-card">
+            
+                        <div class="attendance-summary-header">
+                            <p>Overall Attendance</p>
+                            <span>Today</span>
+                        </div>
+            
+                        <h3>94%</h3>
+            
+                        <p class="attendance-summary-description">
+                            Attendance across your classes
+                        </p>
+            
+                        <div class="attendance-progress">
+                            <div
+                                class="attendance-progress-bar"
+                                style="width: 94%;">
+                            </div>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- Present -->
+                    <div class="attendance-stat-card">
+            
+                        <span class="attendance-stat-icon present">
+                            ✓
+                        </span>
+            
+                        <div>
+                            <p>Present</p>
+                            <h3>118</h3>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- Absent -->
+                    <div class="attendance-stat-card">
+            
+                        <span class="attendance-stat-icon absent">
+                            !
+                        </span>
+            
+                        <div>
+                            <p>Absent</p>
+                            <h3>5</h3>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- Late -->
+                    <div class="attendance-stat-card">
+            
+                        <span class="attendance-stat-icon late">
+                            ⏱
+                        </span>
+            
+                        <div>
+                            <p>Late</p>
+                            <h3>2</h3>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            PENDING TASKS
+            ================================================= -->
+
+            <section class="teacher-section pending-tasks-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Pending Tasks</h2>
+                        <p>Tasks that may need your attention.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-tasks">
+                        View All →
+                    </a>
+                </div>
+            
+            
+                <div class="pending-tasks-list">
+            
+                    <!-- Task 1 -->
+                    <div class="pending-task-item">
+            
+                        <span class="task-priority high">
+                            High
+                        </span>
+            
+                        <div class="task-content">
+                            <h3>Mark Algebra Homework</h3>
+                            <p>12 submissions · Grade 12A</p>
+                        </div>
+            
+                        <span class="task-due">
+                            Due today
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Task 2 -->
+                    <div class="pending-task-item">
+            
+                        <span class="task-priority high">
+                            High
+                        </span>
+            
+                        <div class="task-content">
+                            <h3>Enter Economics Marks</h3>
+                            <p>Grade 12B · Term Assessment</p>
+                        </div>
+            
+                        <span class="task-due">
+                            Due tomorrow
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Task 3 -->
+                    <div class="pending-task-item">
+            
+                        <span class="task-priority medium">
+                            Medium
+                        </span>
+            
+                        <div class="task-content">
+                            <h3>Review Student Submissions</h3>
+                            <p>5 submissions · Cold War</p>
+                        </div>
+            
+                        <span class="task-due">
+                            3 days
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Task 4 -->
+                    <div class="pending-task-item">
+            
+                        <span class="task-priority low">
+                            Low
+                        </span>
+            
+                        <div class="task-content">
+                            <h3>Review Class Attendance</h3>
+                            <p>Grade 11A · Weekly attendance</p>
+                        </div>
+            
+                        <span class="task-due">
+                            This week
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            STUDENT ALERTS
+            ================================================= -->
+
+            <section class="teacher-section student-alerts-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Student Alerts</h2>
+                        <p>Students who may need your attention.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-alerts">
+                        View All →
+                    </a>
+                </div>
+            
+            
+                <div class="student-alerts-list">
+            
+                    <!-- Alert 1 -->
+                    <div class="student-alert-item">
+            
+                        <div class="alert-icon attendance">
+                            !
+                        </div>
+            
+                        <div class="alert-content">
+                            <h3>Nifah Mokoena</h3>
+                            <p>
+                                Attendance has dropped below 80% · Grade 12A
+                            </p>
+                        </div>
+            
+                        <span class="alert-label warning">
+                            Attendance
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Alert 2 -->
+                    <div class="student-alert-item">
+            
+                        <div class="alert-icon academic">
+                            !
+                        </div>
+            
+                        <div class="alert-content">
+                            <h3>Muhammad Khan</h3>
+                            <p>
+                                Mathematics average is below 50% · Grade 12B
+                            </p>
+                        </div>
+            
+                        <span class="alert-label danger">
+                            Performance
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Alert 3 -->
+                    <div class="student-alert-item">
+            
+                        <div class="alert-icon homework">
+                            !
+                        </div>
+            
+                        <div class="alert-content">
+                            <h3>Lisego Molefe</h3>
+                            <p>
+                                Three homework submissions are outstanding
+                            </p>
+                        </div>
+            
+                        <span class="alert-label info">
+                            Homework
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- Alert 4 -->
+                    <div class="student-alert-item">
+            
+                        <div class="alert-icon attendance">
+                            !
+                        </div>
+            
+                        <div class="alert-content">
+                            <h3>Thabo Dlamini</h3>
+                            <p>
+                                Late attendance recorded 3 times this week
+                            </p>
+                        </div>
+            
+                        <span class="alert-label warning">
+                            Attendance
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY SUBJECTS
+            ================================================= -->
+            
+            <!-- Display the subjects currently taught by the teacher -->
+            <section class="teacher-section my-subjects-section"
+                     id="my-subjects"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Subjects</h2>
+                        <p>Subjects you are currently teaching.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-subjects">
+                        View All →
+                    </a>
+                </div>
+            
+            
+                <div class="subjects-grid">
+            
+                    <!-- Mathematics -->
+                    <a href="#" class="subject-card">
+            
+                        <div class="subject-card-top">
+                            <span class="subject-icon">
+                                M
+                            </span>
+            
+                            <span class="subject-average">
+                                72%
+                            </span>
+                        </div>
+            
+                        <h3>Mathematics</h3>
+            
+                        <p>
+                            2 classes · 58 students
+                        </p>
+            
+                        <span class="subject-card-link">
+                            View Subject →
+                        </span>
+            
+                    </a>
+            
+            
+                    <!-- Economics -->
+                    <a href="#" class="subject-card">
+            
+                        <div class="subject-card-top">
+                            <span class="subject-icon">
+                                E
+                            </span>
+            
+                            <span class="subject-average">
+                                69%
+                            </span>
+                        </div>
+            
+                        <h3>Economics</h3>
+            
+                        <p>
+                            1 class · 32 students
+                        </p>
+            
+                        <span class="subject-card-link">
+                            View Subject →
+                        </span>
+            
+                    </a>
+            
+            
+                    <!-- History -->
+                    <a href="#" class="subject-card">
+            
+                        <div class="subject-card-top">
+                            <span class="subject-icon">
+                                H
+                            </span>
+            
+                            <span class="subject-average">
+                                76%
+                            </span>
+                        </div>
+            
+                        <h3>History</h3>
+            
+                        <p>
+                            1 class · 35 students
+                        </p>
+            
+                        <span class="subject-card-link">
+                            View Subject →
+                        </span>
+            
+                    </a>
+            
+            
+                    <!-- Life Orientation -->
+                    <a href="#" class="subject-card">
+            
+                        <div class="subject-card-top">
+                            <span class="subject-icon">
+                                L
+                            </span>
+            
+                            <span class="subject-average">
+                                81%
+                            </span>
+                        </div>
+            
+                        <h3>Life Orientation</h3>
+            
+                        <p>
+                            2 classes · 61 students
+                        </p>
+            
+                        <span class="subject-card-link">
+                            View Subject →
+                        </span>
+            
+                    </a>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY STUDENTS
+            ================================================= -->
+
+            <section class="teacher-section my-students-section"
+                     id="my-students"                   
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Students</h2>
+                        <p>Students in your assigned classes.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-students">
+                        View All →
+                    </a>
+                </div>
+            
+            
+                <div class="students-table-wrapper">
+            
+                    <table class="students-table">
+            
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Attendance</th>
+                                <th>Average</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+            
+                            <!-- Student 1 -->
+                            <tr>
+            
+                                <td>
+                                    <div class="student-name-cell">
+            
+                                        <span class="student-avatar">
+                                            NM
+                                        </span>
+            
+                                        <div>
+                                            <strong>Nifah Mokoena</strong>
+                                            <span>Student No. 1000050</span>
+                                        </div>
+            
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12A</td>
+            
+                                <td>96%</td>
+            
+                                <td>78%</td>
+            
+                                <td>
+                                    <span class="student-status good">
+                                        Good
+                                    </span>
+                                </td>
+            
+                                <td>
+                                    <a href="#" class="student-view-link">
+                                        View →
+                                    </a>
+                                </td>
+            
+                            </tr>
+            
+            
+                            <!-- Student 2 -->
+                            <tr>
+            
+                                <td>
+                                    <div class="student-name-cell">
+            
+                                        <span class="student-avatar">
+                                            MK
+                                        </span>
+            
+                                        <div>
+                                            <strong>Muhammad Khan</strong>
+                                            <span>Student No. 1000053</span>
+                                        </div>
+            
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12B</td>
+            
+                                <td>88%</td>
+            
+                                <td>62%</td>
+            
+                                <td>
+                                    <span class="student-status warning">
+                                        Attention
+                                    </span>
+                                </td>
+            
+                                <td>
+                                    <a href="#" class="student-view-link">
+                                        View →
+                                    </a>
+                                </td>
+            
+                            </tr>
+            
+            
+                            <!-- Student 3 -->
+                            <tr>
+            
+                                <td>
+                                    <div class="student-name-cell">
+            
+                                        <span class="student-avatar">
+                                            LM
+                                        </span>
+            
+                                        <div>
+                                            <strong>Lisego Molefe</strong>
+                                            <span>Student No. 1000064</span>
+                                        </div>
+            
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12A</td>
+            
+                                <td>91%</td>
+            
+                                <td>74%</td>
+            
+                                <td>
+                                    <span class="student-status good">
+                                        Good
+                                    </span>
+                                </td>
+            
+                                <td>
+                                    <a href="#" class="student-view-link">
+                                        View →
+                                    </a>
+                                </td>
+            
+                            </tr>
+            
+            
+                            <!-- Student 4 -->
+                            <tr>
+            
+                                <td>
+                                    <div class="student-name-cell">
+            
+                                        <span class="student-avatar">
+                                            TD
+                                        </span>
+            
+                                        <div>
+                                            <strong>Thabo Dlamini</strong>
+                                            <span>Student No. 1000071</span>
+                                        </div>
+            
+                                    </div>
+                                </td>
+            
+                                <td>Grade 11A</td>
+            
+                                <td>79%</td>
+            
+                                <td>55%</td>
+            
+                                <td>
+                                    <span class="student-status danger">
+                                        At Risk
+                                    </span>
+                                </td>
+            
+                                <td>
+                                    <a href="#" class="student-view-link">
+                                        View →
+                                    </a>
+                                </td>
+            
+                            </tr>
+            
+                        </tbody>
+            
+                    </table>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY TIMETABLE
+            ================================================= -->
+
+            <section class="teacher-section teacher-timetable-section"
+                     id="my-timetable"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Timetable</h2>
+                        <p>Your teaching schedule for this week.</p>
+                    </div>
+            
+                    <a href="#" class="view-full-timetable">
+                        View Full Timetable →
+                    </a>
+                </div>
+            
+            
+                <div class="timetable-wrapper">
+            
+                    <div class="timetable-list">
+            
+                        <!-- Monday -->
+                        <div class="timetable-day">
+            
+                            <div class="timetable-day-header">
+                                <strong>Monday</strong>
+                                <span>05 Oct</span>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">08:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Mathematics</h3>
+                                    <p>Grade 12A · Room 12</p>
+                                </div>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">10:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Economics</h3>
+                                    <p>Grade 12B · Room 8</p>
+                                </div>
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- Tuesday -->
+                        <div class="timetable-day">
+            
+                            <div class="timetable-day-header">
+                                <strong>Tuesday</strong>
+                                <span>06 Oct</span>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">08:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Mathematics</h3>
+                                    <p>Grade 11A · Room 12</p>
+                                </div>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">11:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Life Orientation</h3>
+                                    <p>Grade 12A · Room 5</p>
+                                </div>
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- Wednesday -->
+                        <div class="timetable-day">
+            
+                            <div class="timetable-day-header">
+                                <strong>Wednesday</strong>
+                                <span>07 Oct</span>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">09:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Economics</h3>
+                                    <p>Grade 12B · Room 8</p>
+                                </div>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">13:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Mathematics</h3>
+                                    <p>Grade 12A · Room 12</p>
+                                </div>
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- Thursday -->
+                        <div class="timetable-day">
+            
+                            <div class="timetable-day-header">
+                                <strong>Thursday</strong>
+                                <span>08 Oct</span>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">08:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>History</h3>
+                                    <p>Grade 12B · Room 10</p>
+                                </div>
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- Friday -->
+                        <div class="timetable-day">
+            
+                            <div class="timetable-day-header">
+                                <strong>Friday</strong>
+                                <span>09 Oct</span>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">09:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Mathematics</h3>
+                                    <p>Grade 11A · Room 12</p>
+                                </div>
+                            </div>
+            
+                            <div class="timetable-class">
+                                <span class="timetable-time">12:00</span>
+            
+                                <div class="timetable-class-info">
+                                    <h3>Staff Meeting</h3>
+                                    <p>Staff Room</p>
+                                </div>
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY GUARDIANS
+            ================================================= -->
+
+            <section class="teacher-section my-guardians-section"
+                      id="my-guardians"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Guardians</h2>
+                        <p>Parents and guardians connected to your students.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-guardians">
+                        View All →
+                    </a>
+                </div>
+            
+                <div class="guardians-table-wrapper">
+            
+                    <table class="guardians-table">
+            
+                        <thead>
+                            <tr>
+                                <th>Guardian</th>
+                                <th>Student</th>
+                                <th>Relationship</th>
+                                <th>Contact</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+            
+                            <tr>
+                                <td>
+                                    <div class="guardian-name-cell">
+                                        <span class="guardian-avatar">NM</span>
+            
+                                        <div>
+                                            <strong>Nomsa Mokoena</strong>
+                                            <span>Guardian</span>
+                                        </div>
+                                    </div>
+                                </td>
+            
+                                <td>Nifah Mokoena</td>
+            
+                                <td>Mother</td>
+            
+                                <td>072 456 7890</td>
+            
+                                <td>
+                                    <a href="#" class="guardian-view-link">
+                                        View →
+                                    </a>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="guardian-name-cell">
+                                        <span class="guardian-avatar">MK</span>
+            
+                                        <div>
+                                            <strong>Khalid Khan</strong>
+                                            <span>Guardian</span>
+                                        </div>
+                                    </div>
+                                </td>
+            
+                                <td>Muhammad Khan</td>
+            
+                                <td>Father</td>
+            
+                                <td>073 321 6548</td>
+            
+                                <td>
+                                    <a href="#" class="guardian-view-link">
+                                        View →
+                                    </a>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="guardian-name-cell">
+                                        <span class="guardian-avatar">LM</span>
+            
+                                        <div>
+                                            <strong>Molefe Family</strong>
+                                            <span>Guardian</span>
+                                        </div>
+                                    </div>
+                                </td>
+            
+                                <td>Lisego Molefe</td>
+            
+                                <td>Mother</td>
+            
+                                <td>076 845 2134</td>
+            
+                                <td>
+                                    <a href="#" class="guardian-view-link">
+                                        View →
+                                    </a>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="guardian-name-cell">
+                                        <span class="guardian-avatar">TD</span>
+            
+                                        <div>
+                                            <strong>Thabo Dlamini Sr.</strong>
+                                            <span>Guardian</span>
+                                        </div>
+                                    </div>
+                                </td>
+            
+                                <td>Thabo Dlamini</td>
+            
+                                <td>Father</td>
+            
+                                <td>078 654 3210</td>
+            
+                                <td>
+                                    <a href="#" class="guardian-view-link">
+                                        View →
+                                    </a>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+            
+                    </table>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MARKS & RESULTS OVERVIEW
+            ================================================= -->
+
+            <section class="teacher-section marks-results-section"
+                      id="marks-results"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Marks & Results</h2>
+                        <p>Recent assessments and student performance.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-results">
+                        View All Results →
+                    </a>
+                </div>
+            
+                <div class="results-table-wrapper">
+            
+                    <table class="results-table">
+            
+                        <thead>
+                            <tr>
+                                <th>Assessment</th>
+                                <th>Class</th>
+                                <th>Students</th>
+                                <th>Average</th>
+                                <th>Highest</th>
+                                <th>Lowest</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+            
+                            <tr>
+                                <td>
+                                    <div class="assessment-name">
+                                        <strong>Algebra Test</strong>
+                                        <span>Mathematics</span>
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12A</td>
+            
+                                <td>30</td>
+            
+                                <td class="result-average">78%</td>
+            
+                                <td>96%</td>
+            
+                                <td>52%</td>
+            
+                                <td>
+                                    <span class="result-status completed">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="assessment-name">
+                                        <strong>Market Structures</strong>
+                                        <span>Economics</span>
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12B</td>
+            
+                                <td>32</td>
+            
+                                <td class="result-average">71%</td>
+            
+                                <td>91%</td>
+            
+                                <td>43%</td>
+            
+                                <td>
+                                    <span class="result-status completed">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="assessment-name">
+                                        <strong>Functions Test</strong>
+                                        <span>Mathematics</span>
+                                    </div>
+                                </td>
+            
+                                <td>Grade 11A</td>
+            
+                                <td>28</td>
+            
+                                <td class="result-average">68%</td>
+            
+                                <td>88%</td>
+            
+                                <td>39%</td>
+            
+                                <td>
+                                    <span class="result-status pending">
+                                        Pending
+                                    </span>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>
+                                    <div class="assessment-name">
+                                        <strong>Cold War Essay</strong>
+                                        <span>History</span>
+                                    </div>
+                                </td>
+            
+                                <td>Grade 12B</td>
+            
+                                <td>35</td>
+            
+                                <td class="result-average">76%</td>
+            
+                                <td>94%</td>
+            
+                                <td>48%</td>
+            
+                                <td>
+                                    <span class="result-status completed">
+                                        Completed
+                                    </span>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+            
+                    </table>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            HOMEWORK SUBMISSION OVERVIEW
+            ================================================= -->
+
+            <section class="teacher-section homework-overview-section"
+                     id="homework"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Homework Submissions</h2>
+                        <p>Track student homework submissions and marking.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-homework">
+                        View All Homework →
+                    </a>
+                </div>
+            
+                <div class="homework-overview-list">
+            
+                    <div class="homework-overview-item">
+            
+                        <div class="homework-overview-info">
+                            <h3>Algebra</h3>
+                            <p>Mathematics · Grade 12A</p>
+                        </div>
+            
+                        <div class="homework-overview-stats">
+                            <div>
+                                <span>Total</span>
+                                <strong>30</strong>
+                            </div>
+            
+                            <div>
+                                <span>Marked</span>
+                                <strong class="marked">18</strong>
+                            </div>
+            
+                            <div>
+                                <span>Pending</span>
+                                <strong class="pending">12</strong>
+                            </div>
+                        </div>
+            
+                        <span class="homework-overview-status pending">
+                            12 to mark
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="homework-overview-item">
+            
+                        <div class="homework-overview-info">
+                            <h3>Market Structures</h3>
+                            <p>Economics · Grade 12B</p>
+                        </div>
+            
+                        <div class="homework-overview-stats">
+                            <div>
+                                <span>Total</span>
+                                <strong>32</strong>
+                            </div>
+            
+                            <div>
+                                <span>Marked</span>
+                                <strong class="marked">32</strong>
+                            </div>
+            
+                            <div>
+                                <span>Pending</span>
+                                <strong class="pending">0</strong>
+                            </div>
+                        </div>
+            
+                        <span class="homework-overview-status completed">
+                            Completed
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="homework-overview-item">
+            
+                        <div class="homework-overview-info">
+                            <h3>Cold War</h3>
+                            <p>History · Grade 12B</p>
+                        </div>
+            
+                        <div class="homework-overview-stats">
+                            <div>
+                                <span>Total</span>
+                                <strong>35</strong>
+                            </div>
+            
+                            <div>
+                                <span>Marked</span>
+                                <strong class="marked">27</strong>
+                            </div>
+            
+                            <div>
+                                <span>Pending</span>
+                                <strong class="pending">8</strong>
+                            </div>
+                        </div>
+            
+                        <span class="homework-overview-status pending">
+                            8 to mark
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="homework-overview-item">
+            
+                        <div class="homework-overview-info">
+                            <h3>Functions</h3>
+                            <p>Mathematics · Grade 11A</p>
+                        </div>
+            
+                        <div class="homework-overview-stats">
+                            <div>
+                                <span>Total</span>
+                                <strong>28</strong>
+                            </div>
+            
+                            <div>
+                                <span>Marked</span>
+                                <strong class="marked">28</strong>
+                            </div>
+            
+                            <div>
+                                <span>Pending</span>
+                                <strong class="pending">0</strong>
+                            </div>
+                        </div>
+            
+                        <span class="homework-overview-status completed">
+                            Completed
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER NOTES & STUDENT FOLLOW-UPS
+            ================================================= -->
+
+            <section class="teacher-section teacher-notes-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Teacher Notes & Follow-ups</h2>
+                        <p>Keep track of important student notes and follow-ups.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-notes">
+                        View All Notes →
+                    </a>
+                </div>
+            
+                <div class="teacher-notes-list">
+            
+                    <div class="teacher-note-item">
+            
+                        <div class="teacher-note-icon">
+                            📝
+                        </div>
+            
+                        <div class="teacher-note-content">
+                            <h3>Nifah Mokoena</h3>
+                            <p>
+                                Discuss attendance improvement with the student
+                                during the next class.
+                            </p>
+                            <span>Grade 12A · Mathematics</span>
+                        </div>
+            
+                        <span class="teacher-note-date">
+                            Today
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="teacher-note-item">
+            
+                        <div class="teacher-note-icon">
+                            📝
+                        </div>
+            
+                        <div class="teacher-note-content">
+                            <h3>Muhammad Khan</h3>
+                            <p>
+                                Student needs additional support with algebra
+                                and functions.
+                            </p>
+                            <span>Grade 12B · Mathematics</span>
+                        </div>
+            
+                        <span class="teacher-note-date">
+                            Yesterday
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="teacher-note-item">
+            
+                        <div class="teacher-note-icon">
+                            📝
+                        </div>
+            
+                        <div class="teacher-note-content">
+                            <h3>Lisego Molefe</h3>
+                            <p>
+                                Follow up on the three outstanding homework
+                                submissions.
+                            </p>
+                            <span>Grade 12A · Economics</span>
+                        </div>
+            
+                        <span class="teacher-note-date">
+                            2 days ago
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="teacher-note-item">
+            
+                        <div class="teacher-note-icon">
+                            📝
+                        </div>
+            
+                        <div class="teacher-note-content">
+                            <h3>Thabo Dlamini</h3>
+                            <p>
+                                Monitor academic performance after the next
+                                assessment.
+                            </p>
+                            <span>Grade 11A · Mathematics</span>
+                        </div>
+            
+                        <span class="teacher-note-date">
+                            3 days ago
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            STAFF MEETINGS & COMMUNICATION
+            ================================================= -->
+
+            <section class="teacher-section staff-communication-section"
+                     id="staff-meeting"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Staff Meetings & Communication</h2>
+                        <p>Important staff meetings and internal communication.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-meetings">
+                        View All →
+                    </a>
+                </div>
+            
+                <div class="staff-communication-list">
+            
+                    <div class="staff-meeting-item">
+            
+                        <div class="meeting-date">
+                            <strong>04</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="meeting-info">
+                            <h3>Weekly Staff Meeting</h3>
+                            <p>14:00 · Staff Room</p>
+                        </div>
+            
+                        <span class="meeting-status upcoming">
+                            Upcoming
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="staff-meeting-item">
+            
+                        <div class="meeting-date">
+                            <strong>08</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="meeting-info">
+                            <h3>Grade 12 Planning Meeting</h3>
+                            <p>15:00 · Meeting Room 2</p>
+                        </div>
+            
+                        <span class="meeting-status upcoming">
+                            Upcoming
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="staff-meeting-item">
+            
+                        <div class="meeting-date">
+                            <strong>12</strong>
+                            <span>OCT</span>
+                        </div>
+            
+                        <div class="meeting-info">
+                            <h3>Term Assessment Planning</h3>
+                            <p>14:30 · Staff Room</p>
+                        </div>
+            
+                        <span class="meeting-status important">
+                            Important
+                        </span>
+            
+                    </div>
+            
+            
+                    <div class="staff-message-item">
+            
+                        <div class="message-icon">
+                            📢
+                        </div>
+            
+                        <div class="message-info">
+                            <h3>Principal's Announcement</h3>
+                            <p>
+                                All teachers are reminded to submit their
+                                term assessment marks before the deadline.
+                            </p>
+                        </div>
+            
+                        <span class="message-date">
+                            Today
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER PROFILE SUMMARY
+            ================================================= -->
+
+            <section class="teacher-section teacher-profile-summary-section"
+                      id="profile"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Profile</h2>
+                        <p>Your teacher information and account details.</p>
+                    </div>
+            
+                    <a href="#" class="edit-teacher-profile">
+                        Edit Profile →
+                    </a>
+                </div>
+            
+                <div class="teacher-profile-summary">
+            
+                    <div class="profile-summary-header">
+            
+                        <div class="large-teacher-avatar">
+                            TM
+                        </div>
+            
+                        <div class="profile-summary-name">
+                            <h3>Thabo Mokoena</h3>
+                            <p>Teacher · Mathematics & Economics</p>
+                            <span>Employee No. TCH-0025</span>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="profile-summary-details">
+            
+                        <div class="profile-detail">
+                            <span class="profile-detail-label">
+                                Email
+                            </span>
+            
+                            <strong>
+                                thabo@arwaschool.co.za
+                            </strong>
+                        </div>
+            
+            
+                        <div class="profile-detail">
+                            <span class="profile-detail-label">
+                                Phone
+                            </span>
+            
+                            <strong>
+                                071 234 5678
+                            </strong>
+                        </div>
+            
+            
+                        <div class="profile-detail">
+                            <span class="profile-detail-label">
+                                Subjects
+                            </span>
+            
+                            <strong>
+                                Mathematics, Economics
+                            </strong>
+                        </div>
+            
+            
+                        <div class="profile-detail">
+                            <span class="profile-detail-label">
+                                Classes
+                            </span>
+            
+                            <strong>
+                                Grade 12A, 12B, 11A
+                            </strong>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER NOTIFICATIONS
+            ================================================= -->
+
+            <section class="teacher-section teacher-notifications-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Notifications</h2>
+                        <p>Important updates and actions that need your attention.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-notifications">
+                        View All →
+                    </a>
+                </div>
+            
+                <div class="notifications-list">
+            
+                    <div class="notification-item unread">
+            
+                        <div class="notification-icon homework">
+                            📝
+                        </div>
+            
+                        <div class="notification-content">
+                            <h3>New homework submissions</h3>
+                            <p>
+                                12 students submitted the Algebra homework
+                                for Grade 12A.
+                            </p>
+                            <span>10 minutes ago</span>
+                        </div>
+            
+                        <span class="notification-dot"></span>
+            
+                    </div>
+            
+            
+                    <div class="notification-item unread">
+            
+                        <div class="notification-icon announcement">
+                            📢
+                        </div>
+            
+                        <div class="notification-content">
+                            <h3>New school announcement</h3>
+                            <p>
+                                The principal has posted a new staff announcement.
+                            </p>
+                            <span>1 hour ago</span>
+                        </div>
+            
+                        <span class="notification-dot"></span>
+            
+                    </div>
+            
+            
+                    <div class="notification-item">
+            
+                        <div class="notification-icon attendance">
+                            ⚠
+                        </div>
+            
+                        <div class="notification-content">
+                            <h3>Attendance alert</h3>
+                            <p>
+                                Nifah Mokoena's attendance has dropped below 80%.
+                            </p>
+                            <span>Yesterday</span>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="notification-item">
+            
+                        <div class="notification-icon meeting">
+                            📅
+                        </div>
+            
+                        <div class="notification-content">
+                            <h3>Staff meeting reminder</h3>
+                            <p>
+                                Weekly staff meeting starts tomorrow at 14:00.
+                            </p>
+                            <span>Yesterday</span>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="notification-item">
+            
+                        <div class="notification-icon results">
+                            📊
+                        </div>
+            
+                        <div class="notification-content">
+                            <h3>Marks submission reminder</h3>
+                            <p>
+                                Grade 12 term assessment marks are due soon.
+                            </p>
+                            <span>2 days ago</span>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER CLASS ATTENDANCE
+            ================================================= -->
+
+            <section class="teacher-section class-attendance-section"
+                     id="attendance"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Class Attendance</h2>
+                        <p>Today's attendance for your assigned classes.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-class-attendance">
+                        View Attendance →
+                    </a>
+                </div>
+            
+                <div class="class-attendance-grid">
+            
+                    <div class="class-attendance-card">
+            
+                        <div class="class-attendance-header">
+                            <div>
+                                <h3>Grade 12A</h3>
+                                <p>Mathematics</p>
+                            </div>
+            
+                            <span class="attendance-percentage good">
+                                96%
+                            </span>
+                        </div>
+            
+                        <div class="class-attendance-stats">
+            
+                            <div>
+                                <span>Present</span>
+                                <strong>29</strong>
+                            </div>
+            
+                            <div>
+                                <span>Absent</span>
+                                <strong class="absent">1</strong>
+                            </div>
+            
+                            <div>
+                                <span>Late</span>
+                                <strong class="late">0</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-attendance-progress">
+                            <div
+                                class="class-attendance-progress-bar"
+                                style="width: 96%;">
+                            </div>
+                        </div>
+            
+                        <a href="#" class="record-attendance-link">
+                            Record Attendance →
+                        </a>
+            
+                    </div>
+            
+            
+                    <div class="class-attendance-card">
+            
+                        <div class="class-attendance-header">
+                            <div>
+                                <h3>Grade 12B</h3>
+                                <p>Economics</p>
+                            </div>
+            
+                            <span class="attendance-percentage good">
+                                91%
+                            </span>
+                        </div>
+            
+                        <div class="class-attendance-stats">
+            
+                            <div>
+                                <span>Present</span>
+                                <strong>29</strong>
+                            </div>
+            
+                            <div>
+                                <span>Absent</span>
+                                <strong class="absent">2</strong>
+                            </div>
+            
+                            <div>
+                                <span>Late</span>
+                                <strong class="late">1</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-attendance-progress">
+                            <div
+                                class="class-attendance-progress-bar"
+                                style="width: 91%;">
+                            </div>
+                        </div>
+            
+                        <a href="#" class="record-attendance-link">
+                            Record Attendance →
+                        </a>
+            
+                    </div>
+            
+            
+                    <div class="class-attendance-card">
+            
+                        <div class="class-attendance-header">
+                            <div>
+                                <h3>Grade 11A</h3>
+                                <p>Mathematics</p>
+                            </div>
+            
+                            <span class="attendance-percentage warning">
+                                79%
+                            </span>
+                        </div>
+            
+                        <div class="class-attendance-stats">
+            
+                            <div>
+                                <span>Present</span>
+                                <strong>22</strong>
+                            </div>
+            
+                            <div>
+                                <span>Absent</span>
+                                <strong class="absent">5</strong>
+                            </div>
+            
+                            <div>
+                                <span>Late</span>
+                                <strong class="late">1</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-attendance-progress">
+                            <div
+                                class="class-attendance-progress-bar warning"
+                                style="width: 79%;">
+                            </div>
+                        </div>
+            
+                        <a href="#" class="record-attendance-link">
+                            Record Attendance →
+                        </a>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY CLASSES SUMMARY
+            ================================================= -->
+
+            <section class="teacher-section my-classes-summary-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My Classes</h2>
+                        <p>A quick overview of your assigned classes.</p>
+                    </div>
+            
+                    <a href="#my-classes" class="view-all-classes">
+                        View All Classes →
+                    </a>
+                </div>
+            
+                <div class="classes-summary-grid">
+            
+                    <div class="class-summary-card">
+            
+                        <div class="class-summary-header">
+                            <div>
+                                <h3>Grade 12A</h3>
+                                <p>Mathematics</p>
+                            </div>
+            
+                            <span class="class-summary-badge">
+                                30 Students
+                            </span>
+                        </div>
+            
+                        <div class="class-summary-stats">
+            
+                            <div>
+                                <span>Average</span>
+                                <strong>78%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Attendance</span>
+                                <strong>96%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Homework</span>
+                                <strong class="class-warning">12</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-summary-footer">
+                            <span>12 homework submissions pending</span>
+            
+                            <a href="#" class="class-summary-link">
+                                View Class →
+                            </a>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="class-summary-card">
+            
+                        <div class="class-summary-header">
+                            <div>
+                                <h3>Grade 12B</h3>
+                                <p>Economics</p>
+                            </div>
+            
+                            <span class="class-summary-badge">
+                                32 Students
+                            </span>
+                        </div>
+            
+                        <div class="class-summary-stats">
+            
+                            <div>
+                                <span>Average</span>
+                                <strong>71%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Attendance</span>
+                                <strong>91%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Homework</span>
+                                <strong class="class-good">0</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-summary-footer">
+                            <span>All homework submissions marked</span>
+            
+                            <a href="#" class="class-summary-link">
+                                View Class →
+                            </a>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="class-summary-card">
+            
+                        <div class="class-summary-header">
+                            <div>
+                                <h3>Grade 11A</h3>
+                                <p>Mathematics</p>
+                            </div>
+            
+                            <span class="class-summary-badge">
+                                28 Students
+                            </span>
+                        </div>
+            
+                        <div class="class-summary-stats">
+            
+                            <div>
+                                <span>Average</span>
+                                <strong>68%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Attendance</span>
+                                <strong class="class-warning">79%</strong>
+                            </div>
+            
+                            <div>
+                                <span>Homework</span>
+                                <strong class="class-good">0</strong>
+                            </div>
+            
+                        </div>
+            
+                        <div class="class-summary-footer">
+                            <span>Attendance needs attention</span>
+            
+                            <a href="#" class="class-summary-link">
+                                View Class →
+                            </a>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHING WORKLOAD OVERVIEW
+            ================================================= -->
+
+            <section class="teacher-section teaching-workload-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Teaching Workload</h2>
+                        <p>An overview of your current teaching responsibilities.</p>
+                    </div>
+            
+                    <a href="#" class="view-workload-link">
+                        View Details →
+                    </a>
+                </div>
+            
+                <div class="workload-grid">
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon classes">
+                            📚
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>Classes</span>
+                            <strong>4</strong>
+                            <p>Active classes</p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon subjects">
+                            📖
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>Subjects</span>
+                            <strong>3</strong>
+                            <p>Subjects taught</p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon students">
+                            👨‍🎓
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>Students</span>
+                            <strong>125</strong>
+                            <p>Students assigned</p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon marking">
+                            📝
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>To Mark</span>
+                            <strong>20</strong>
+                            <p>Submissions waiting</p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon assessments">
+                            📊
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>Assessments</span>
+                            <strong>6</strong>
+                            <p>This term</p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="workload-card">
+            
+                        <div class="workload-icon hours">
+                            ⏱
+                        </div>
+            
+                        <div class="workload-content">
+                            <span>Teaching Hours</span>
+                            <strong>22</strong>
+                            <p>Per week</p>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            MY HOD & TEACHER SUPPORT
+            ================================================= -->
+
+            <section class="teacher-section teacher-hod-section"
+                     id="hod"
+            >
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>My HOD & Teacher Support</h2>
+                        <p>Your department head and important support information.</p>
+                    </div>
+            
+                    <a href="#" class="view-hod-link">
+                        View HOD Profile →
+                    </a>
+                </div>
+            
+            
+                <div class="hod-support-grid">
+            
+                    <!-- HOD PROFILE -->
+                    <div class="hod-profile-card">
+            
+                        <div class="hod-profile-header">
+            
+                            <div class="hod-avatar">
+                                NM
+                            </div>
+            
+                            <div class="hod-profile-info">
+                                <h3>Nomsa Mokoena</h3>
+                                <p>Head of Department</p>
+                                <span>Mathematics & Sciences</span>
+                            </div>
+            
+                        </div>
+            
+            
+                        <div class="hod-contact-details">
+            
+                            <div class="hod-contact-item">
+                                <span class="hod-contact-label">Email</span>
+                                <strong>nomsa@arwaschool.co.za</strong>
+                            </div>
+            
+                            <div class="hod-contact-item">
+                                <span class="hod-contact-label">Phone</span>
+                                <strong>072 456 7890</strong>
+                            </div>
+            
+                        </div>
+            
+            
+                        <a href="#" class="contact-hod-button">
+                            Contact HOD
+                        </a>
+            
+                    </div>
+            
+            
+                    <!-- HOD MESSAGE -->
+                    <div class="hod-message-card">
+            
+                        <div class="hod-message-header">
+                            <div>
+                                <span class="hod-message-label">
+                                    Latest Message
+                                </span>
+            
+                                <h3>Term Assessment Preparation</h3>
+                            </div>
+            
+                            <span class="hod-message-date">
+                                Today
+                            </span>
+                        </div>
+            
+                        <p class="hod-message-text">
+                            Please make sure all Grade 12 assessment marks
+                            are entered and reviewed before the submission
+                            deadline.
+                        </p>
+            
+                        <div class="hod-message-footer">
+            
+                            <span>
+                                From: Nomsa Mokoena · HOD
+                            </span>
+            
+                            <a href="#" class="hod-message-link">
+                                View Message →
+                            </a>
+            
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- RECENT FEEDBACK -->
+                    <div class="hod-feedback-card">
+            
+                        <div class="hod-feedback-header">
+            
+                            <div>
+                                <span class="hod-message-label">
+                                    Recent Feedback
+                                </span>
+            
+                                <h3>Class Performance Review</h3>
+                            </div>
+            
+                            <span class="feedback-status">
+                                Reviewed
+                            </span>
+            
+                        </div>
+            
+                        <p class="hod-feedback-text">
+                            Your Grade 12 Mathematics results are showing
+                            good progress. Continue supporting students
+                            who are below the 50% mark.
+                        </p>
+            
+                        <span class="hod-feedback-date">
+                            Reviewed 2 days ago
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER RESOURCES & DOCUMENTS
+            ================================================= -->
+
+            <section class="teacher-section teacher-resources-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Resources & Documents</h2>
+                        <p>Important teaching resources and school documents.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-resources">
+                        View All Documents →
+                    </a>
+                </div>
+            
+            
+                <div class="resources-grid">
+            
+                    <!-- SCHOOL POLICY -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon policy">
+                            📄
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>School Policies</h3>
+                            <p>Important school rules and policies.</p>
+                            <span>12 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+            
+                    <!-- TEACHING RESOURCES -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon teaching">
+                            📚
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>Teaching Resources</h3>
+                            <p>Resources for your subjects and classes.</p>
+                            <span>28 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+            
+                    <!-- ASSESSMENT -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon assessment">
+                            📝
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>Assessment Guidelines</h3>
+                            <p>Assessment and marking guidelines.</p>
+                            <span>9 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+            
+                    <!-- CURRICULUM -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon curriculum">
+                            📖
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>Curriculum Documents</h3>
+                            <p>Curriculum and subject information.</p>
+                            <span>16 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+            
+                    <!-- DEPARTMENT -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon department">
+                            🗂️
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>Department Documents</h3>
+                            <p>Documents shared by your department.</p>
+                            <span>7 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+            
+                    <!-- STAFF DOCUMENTS -->
+                    <a href="#" class="resource-card">
+            
+                        <div class="resource-icon staff">
+                            📁
+                        </div>
+            
+                        <div class="resource-content">
+                            <h3>Staff Documents</h3>
+                            <p>Documents shared with teaching staff.</p>
+                            <span>14 documents</span>
+                        </div>
+            
+                        <span class="resource-arrow">→</span>
+            
+                    </a>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER LEAVE & AVAILABILITY
+            ================================================= -->
+
+            <section class="teacher-section teacher-leave-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Leave & Availability</h2>
+                        <p>View your availability and leave information.</p>
+                    </div>
+            
+                    <a href="#" class="view-leave-link">
+                        View Leave History →
+                    </a>
+                </div>
+            
+            
+                <div class="leave-overview-grid">
+            
+                    <!-- LEAVE BALANCE -->
+                    <div class="leave-balance-card">
+            
+                        <div class="leave-card-header">
+                            <span>Annual Leave</span>
+            
+                            <span class="leave-status available">
+                                Available
+                            </span>
+                        </div>
+            
+                        <div class="leave-balance">
+                            <strong>18</strong>
+                            <span>days remaining</span>
+                        </div>
+            
+                        <div class="leave-progress">
+                            <div
+                                class="leave-progress-bar"
+                                style="width: 60%;">
+                            </div>
+                        </div>
+            
+                        <p class="leave-card-description">
+                            12 of 30 annual leave days used.
+                        </p>
+            
+                    </div>
+            
+            
+                    <!-- CURRENT STATUS -->
+                    <div class="availability-card">
+            
+                        <div class="availability-icon">
+                            ✓
+                        </div>
+            
+                        <div class="availability-content">
+                            <span>Current Status</span>
+            
+                            <strong>Available</strong>
+            
+                            <p>
+                                Available for teaching today
+                            </p>
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- NEXT LEAVE -->
+                    <div class="next-leave-card">
+            
+                        <div class="leave-card-header">
+                            <span>Upcoming Leave</span>
+            
+                            <span class="leave-status approved">
+                                Approved
+                            </span>
+                        </div>
+            
+                        <h3>Annual Leave</h3>
+            
+                        <p class="next-leave-date">
+                            20 October – 24 October 2026
+                        </p>
+            
+                        <span class="next-leave-duration">
+                            5 working days
+                        </span>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!-- LEAVE REQUESTS -->
+                <div class="leave-requests">
+            
+                    <div class="leave-requests-header">
+                        <div>
+                            <h3>Recent Leave Requests</h3>
+                            <p>Your latest leave applications.</p>
+                        </div>
+            
+                        <a href="#" class="request-leave-link">
+                            Request Leave →
+                        </a>
+                    </div>
+            
+            
+                    <div class="leave-request-list">
+            
+                        <div class="leave-request-item">
+            
+                            <div class="leave-request-info">
+                                <strong>Annual Leave</strong>
+                                <span>
+                                    20 Oct – 24 Oct 2026
+                                </span>
+                            </div>
+            
+                            <span class="leave-request-status approved">
+                                Approved
+                            </span>
+            
+                        </div>
+            
+            
+                        <div class="leave-request-item">
+            
+                            <div class="leave-request-info">
+                                <strong>Personal Leave</strong>
+                                <span>
+                                    02 Sep 2026
+                                </span>
+                            </div>
+            
+                            <span class="leave-request-status approved">
+                                Approved
+                            </span>
+            
+                        </div>
+            
+            
+                        <div class="leave-request-item">
+            
+                            <div class="leave-request-info">
+                                <strong>Annual Leave</strong>
+                                <span>
+                                    03 Nov – 05 Nov 2026
+                                </span>
+                            </div>
+            
+                            <span class="leave-request-status pending">
+                                Pending
+                            </span>
+            
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER PAYROLL & PAYSLIP SUMMARY
+            ================================================= -->
+
+            <section class="teacher-section teacher-payroll-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Payroll & Payslips</h2>
+                        <p>Your personal salary and payslip information.</p>
+                    </div>
+            
+                    <a href="#" class="view-all-payslips">
+                        View All Payslips →
+                    </a>
+                </div>
+            
+            
+                <div class="payroll-overview-grid">
+            
+                    <!-- PAYMENT STATUS -->
+                    <div class="payroll-status-card">
+            
+                        <div class="payroll-card-header">
+                            <span>Payment Status</span>
+            
+                            <span class="payroll-status paid">
+                                Paid
+                            </span>
+                        </div>
+            
+                        <strong class="payroll-amount">
+                            R28,500.00
+                        </strong>
+            
+                        <p>
+                            September 2026 salary
+                        </p>
+            
+                        <span class="payroll-payment-date">
+                            Paid on 30 September 2026
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- NEXT PAYDAY -->
+                    <div class="payroll-info-card">
+            
+                        <div class="payroll-info-icon payday">
+                            💰
+                        </div>
+            
+                        <div class="payroll-info-content">
+            
+                            <span>Next Payday</span>
+            
+                            <strong>30 October</strong>
+            
+                            <p>
+                                25 days remaining
+                            </p>
+            
+                        </div>
+            
+                    </div>
+            
+            
+                    <!-- PAYSLIP -->
+                    <div class="payroll-info-card">
+            
+                        <div class="payroll-info-icon payslip">
+                            📄
+                        </div>
+            
+                        <div class="payroll-info-content">
+            
+                            <span>Latest Payslip</span>
+            
+                            <strong>September</strong>
+            
+                            <p>
+                                Available to download
+                            </p>
+            
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!-- RECENT PAYSLIPS -->
+                <div class="payslip-list-card">
+            
+                    <div class="payslip-list-header">
+            
+                        <div>
+                            <h3>Recent Payslips</h3>
+            
+                            <p>
+                                Your latest salary documents.
+                            </p>
+                        </div>
+            
+                        <a href="#" class="download-payslip-link">
+                            Download Latest
+                        </a>
+            
+                    </div>
+            
+            
+                    <div class="payslip-list">
+            
+                        <div class="payslip-item">
+            
+                            <div class="payslip-icon">
+                                📄
+                            </div>
+            
+                            <div class="payslip-info">
+                                <strong>September 2026</strong>
+                                <span>Paid · R28,500.00</span>
+                            </div>
+            
+                            <a href="#" class="payslip-view-link">
+                                View →
+                            </a>
+            
+                        </div>
+            
+            
+                        <div class="payslip-item">
+            
+                            <div class="payslip-icon">
+                                📄
+                            </div>
+            
+                            <div class="payslip-info">
+                                <strong>August 2026</strong>
+                                <span>Paid · R28,500.00</span>
+                            </div>
+            
+                            <a href="#" class="payslip-view-link">
+                                View →
+                            </a>
+            
+                        </div>
+            
+            
+                        <div class="payslip-item">
+            
+                            <div class="payslip-icon">
+                                📄
+                            </div>
+            
+                            <div class="payslip-info">
+                                <strong>July 2026</strong>
+                                <span>Paid · R28,500.00</span>
+                            </div>
+            
+                            <a href="#" class="payslip-view-link">
+                                View →
+                            </a>
+            
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!-- =================================================
+            TEACHER SUBSTITUTIONS
+            ================================================= -->
+
+            <section class="teacher-section teacher-substitution-section">
+            
+                <div class="section-heading">
+                    <div>
+                        <h2>Substitutions</h2>
+                        <p>Classes you are covering or that require cover.</p>
+                    </div>
+            
+                    <a href="#" class="view-substitutions-link">
+                        View All →
+                    </a>
+                </div>
+            
+            
+                <div class="substitution-list">
+            
+                    <!-- COVERING CLASS -->
+                    <div class="substitution-item">
+            
+                        <div class="substitution-date">
+                            <strong>06</strong>
+                            <span>OCT</span>
+                        </div>
+            
+            
+                        <div class="substitution-info">
+            
+                            <div class="substitution-title">
+                                <h3>Covering Mathematics</h3>
+            
+                                <span class="substitution-badge covering">
+                                    Covering
+                                </span>
+                            </div>
+            
+                            <p>
+                                Grade 12A · Period 2 · Room 12
+                            </p>
+            
+                            <span class="substitution-teacher">
+                                Regular teacher: Sarah Nkosi
+                            </span>
+            
+                        </div>
+            
+            
+                        <a href="#" class="substitution-view-link">
+                            View →
+                        </a>
+            
+                    </div>
+            
+            
+                    <!-- COVERING CLASS -->
+                    <div class="substitution-item">
+            
+                        <div class="substitution-date">
+                            <strong>08</strong>
+                            <span>OCT</span>
+                        </div>
+            
+            
+                        <div class="substitution-info">
+            
+                            <div class="substitution-title">
+                                <h3>Covering Economics</h3>
+            
+                                <span class="substitution-badge covering">
+                                    Covering
+                                </span>
+                            </div>
+            
+                            <p>
+                                Grade 12B · Period 4 · Room 8
+                            </p>
+            
+                            <span class="substitution-teacher">
+                                Regular teacher: David Maseko
+                            </span>
+            
+                        </div>
+            
+            
+                        <a href="#" class="substitution-view-link">
+                            View →
+                        </a>
+            
+                    </div>
+            
+            
+                    <!-- TEACHER'S CLASS BEING COVERED -->
+                    <div class="substitution-item">
+            
+                        <div class="substitution-date">
+                            <strong>20</strong>
+                            <span>OCT</span>
+                        </div>
+            
+            
+                        <div class="substitution-info">
+            
+                            <div class="substitution-title">
+                                <h3>Mathematics Class Covered</h3>
+            
+                                <span class="substitution-badge covered">
+                                    Covered
+                                </span>
+                            </div>
+            
+                            <p>
+                                Grade 11A · Period 3 · Room 12
+                            </p>
+            
+                            <span class="substitution-teacher">
+                                Covering teacher: Peter Dlamini
+                            </span>
+            
+                        </div>
+            
+            
+                        <a href="#" class="substitution-view-link">
+                            View →
+                        </a>
+            
+                    </div>
+            
+            
+                    <!-- PENDING SUBSTITUTION -->
+                    <div class="substitution-item">
+            
+                        <div class="substitution-date">
+                            <strong>23</strong>
+                            <span>OCT</span>
+                        </div>
+            
+            
+                        <div class="substitution-info">
+            
+                            <div class="substitution-title">
+                                <h3>Economics Class</h3>
+            
+                                <span class="substitution-badge pending">
+                                    Pending
+                                </span>
+            
+                            </div>
+            
+                            <p>
+                                Grade 12B · Period 5 · Room 8
+                            </p>
+            
+                            <span class="substitution-teacher">
+                                Substitute teacher not assigned yet
+                            </span>
+            
+                        </div>
+            
+            
+                        <a href="#" class="substitution-view-link">
+                            View →
+                        </a>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+
+
+            <!-- =================================================
+             MY CLASSES
+            ================================================= -->
+
+            <section
+                class="teacher-section"
+                id="my-classes"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            My Classes
+                        </h2>
+
+                        <p>
+                            Classes and subjects assigned to you.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Assignment cards -->
+                <div class="assignment-grid">
+
+                    {% for assignment in teaching_assignments %}
+
+                        <a
+                            href="{% url 'teacher_class' assignment.id %}"
+                            class="assignment-card"
+                        >
+
+                            <h3>
+                                {{ assignment.classroom.name }}
+                            </h3>
+
+                            <p class="assignment-grade">
+
+                                {{ assignment.classroom.academic_level }}
+
+                            </p>
+
+                            <p class="assignment-subject">
+
+                                {{ assignment.school_subject.subject.name }}
+
+                            </p>
+
+                            <span class="assignment-link">
+                                View Class →
+                            </span>
+
+                        </a>
+
+                    {% empty %}
+
+                        <p class="empty-message">
+
+                            No teaching assignments have been
+                            assigned to you yet.
+
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+            
+            <!-- =================================================
+            TEACHER DASHBOARD FOOTER
+            ================================================= -->
+
+            <footer class="teacher-dashboard-footer">
+            
+                <div class="footer-main-content">
+            
+                    <!-- PLATFORM INFORMATION -->
+                    <div class="footer-brand">
+            
+                        <h2>ARWA</h2>
+            
+                        <p>
+                            School Management Platform
+                        </p>
+            
+                        <span>
+                            Empowering schools, teachers and learners.
+                        </span>
+            
+                    </div>
+            
+            
+                    <!-- SCHOOL INFORMATION -->
+                    <div class="footer-column">
+            
+                        <h3>School</h3>
+            
+                        <p>
+                            {{ school.name }}
+                        </p>
+            
+                        <p>
+                            Academic Year: 2026
+                        </p>
+            
+                    </div>
+            
+            
+                    <!-- SUPPORT -->
+                    <div class="footer-column">
+            
+                        <h3>Support</h3>
+            
+                        <a href="#">
+                            Help Centre
+                        </a>
+            
+                        <a href="#">
+                            Contact Support
+                        </a>
+            
+                        <a href="#">
+                            Report a Problem
+                        </a>
+            
+                    </div>
+            
+            
+                    <!-- SYSTEM -->
+                    <div class="footer-column">
+            
+                        <h3>System</h3>
+            
+                        <a href="#">
+                            Privacy
+                        </a>
+            
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+            
+                        <a href="#">
+                            System Status
+                        </a>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!-- FOOTER BOTTOM -->
+                <div class="footer-bottom">
+            
+                    <p>
+                        © 2026 ARWA School Management Platform.
+                        All rights reserved.
+                    </p>
+            
+                    <span>
+                        Version 1.0.0
+                    </span>
+            
+                </div>
+            
+            </footer>
+
+
+        </main>
+
+    </div>
+
+<script src="{% static 'schools/teacher_dashboard.js' %}"></script> 
+</body>
+
+</html>

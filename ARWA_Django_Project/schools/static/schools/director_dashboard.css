@@ -1,0 +1,788 @@
+/*
+    ARWA Director Dashboard
+    Premium Executive Design Foundation
+
+    This stylesheet establishes the visual identity
+    of the Director's Executive Command Centre.
+*/
+
+
+/* --------------------------------------------------
+   GLOBAL RESET
+   -------------------------------------------------- */
+
+/*
+    Make width and height calculations predictable
+    throughout the dashboard.
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/*
+    Remove the browser's default page spacing.
+*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*
+    Premium executive typography and background.
+*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6fa;
+    color: #172033;
+}
+
+
+/* --------------------------------------------------
+   MAIN DASHBOARD LAYOUT
+   -------------------------------------------------- */
+
+/*
+    Place the executive sidebar beside the
+    main dashboard content.
+*/
+.director-dashboard {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* --------------------------------------------------
+   DIRECTOR SIDEBAR
+   -------------------------------------------------- */
+
+/*
+    Deep midnight navy gives the sidebar an
+    authoritative executive appearance.
+*/
+.director-sidebar {
+    width: 270px;
+    min-height: 100vh;
+
+    background: #0b1730;
+
+    color: #ffffff;
+
+    padding: 32px 24px;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+/* --------------------------------------------------
+   ARWA BRANDING
+   -------------------------------------------------- */
+
+/*
+    The ARWA name is the main institutional brand.
+*/
+.director-brand h1 {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: #f0d58a;
+}
+
+
+/*
+    Small subtitle underneath the ARWA logo.
+*/
+.director-brand p {
+    margin: 7px 0 0;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    color: #b8c2d6;
+}
+
+/* --------------------------------------------------
+   DIRECTOR EXECUTIVE NAVIGATION
+   -------------------------------------------------- */
+
+/*
+    Create space between the ARWA branding and
+    the executive navigation.
+*/
+.director-navigation {
+    margin-top: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/*
+    Base appearance of each navigation item.
+*/
+.director-nav-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 14px;
+
+    border-radius: 10px;
+
+    color: #b8c2d6;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+    Small visual symbol used for each
+    executive navigation section.
+*/
+.director-nav-icon {
+    width: 24px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    color: #8793aa;
+
+    flex-shrink: 0;
+}
+
+
+/*
+    Hover state.
+
+    The navigation should feel responsive without
+    becoming overly animated.
+*/
+.director-nav-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+
+    color: #ffffff;
+
+    transform: translateX(3px);
+}
+
+
+/*
+    Active navigation item.
+
+    Champagne gold identifies the Director's
+    current executive section.
+*/
+.director-nav-item.active {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(240, 213, 138, 0.18),
+            rgba(240, 213, 138, 0.06)
+        );
+
+    color: #f0d58a;
+
+    border-left: 3px solid #f0d58a;
+}
+
+
+/*
+    Active navigation icon.
+*/
+.director-nav-item.active .director-nav-icon {
+    color: #f0d58a;
+}
+
+
+/* --------------------------------------------------
+   MAIN CONTENT AREA
+   -------------------------------------------------- */
+
+/*
+    Leave room for the fixed sidebar.
+*/
+.director-main {
+    width: calc(100% - 270px);
+
+    margin-left: 270px;
+
+    min-height: 100vh;
+
+    padding: 38px 42px;
+}
+
+
+/* --------------------------------------------------
+   EXECUTIVE HEADER
+   -------------------------------------------------- */
+
+/*
+    The header establishes the hierarchy of the
+    Director's command centre.
+*/
+.director-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+/* --------------------------------------------------
+   EXECUTIVE HEADER TOOLS
+   -------------------------------------------------- */
+
+/*
+    Keep the calendar, Director profile, and
+    notification bell aligned on one executive row.
+*/
+.director-header-tools {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+/*
+    Calendar container.
+
+    This gives the date a clean executive-card
+    appearance without making it too heavy.
+*/
+.director-calendar {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e7ef;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 29, 55, 0.05);
+}
+
+
+/*
+    Calendar icon.
+*/
+.director-calendar-icon {
+    font-size: 18px;
+
+    color: #b08a2e;
+}
+
+
+/*
+    Calendar text container.
+*/
+.director-calendar-details {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+/*
+    Small TODAY label.
+*/
+.director-calendar-details span {
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    color: #9a7a25;
+}
+
+
+/*
+    Actual date.
+*/
+.director-calendar-details strong {
+    font-size: 13px;
+
+    color: #172033;
+}
+
+/* --------------------------------------------------
+   EXECUTIVE CALENDAR
+   -------------------------------------------------- */
+
+/*
+    Give the calendar a slightly richer appearance
+    while keeping it clean and professional.
+*/
+.director-calendar {
+    min-height: 46px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 29, 55, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+    Subtle executive interaction when the user
+    moves over the calendar.
+*/
+.director-calendar:hover {
+    border-color: #d8c17a;
+
+    box-shadow:
+        0 8px 22px rgba(15, 29, 55, 0.08);
+
+    transform: translateY(-2px);
+}
+
+
+/*
+    Make the displayed date feel important without
+    competing with the Director's name.
+*/
+.director-calendar-details strong {
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+}
+
+
+/*
+    Director profile area.
+*/
+.director-identity {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/*
+    Director profile picture.
+
+    The gold border gives the profile a subtle
+    executive identity.
+*/
+.director-avatar {
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    padding: 2px;
+
+    background: #f0d58a;
+
+    flex-shrink: 0;
+}
+
+
+/*
+    Keep the profile image perfectly circular.
+*/
+.director-avatar img {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid #ffffff;
+}
+
+
+/*
+    Director name and role.
+*/
+.director-identity-details {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+/*
+    Director's name.
+*/
+.director-identity-details strong {
+    font-size: 13px;
+
+    color: #101a2f;
+}
+
+
+/*
+    Director's executive role.
+*/
+.director-identity-details span {
+    font-size: 10px;
+
+    color: #7d8799;
+}
+
+/* --------------------------------------------------
+   DIRECTOR EXECUTIVE PROFILE
+   -------------------------------------------------- */
+
+/*
+    Make the Director profile area feel like an
+    important executive identity section.
+*/
+.director-identity {
+    padding: 6px 10px 6px 6px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e7ef;
+
+    box-shadow:
+        0 5px 18px rgba(15, 29, 55, 0.05);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+    Give the profile a subtle executive hover effect.
+*/
+.director-identity:hover {
+    border-color: #d8c17a;
+
+    box-shadow:
+        0 8px 22px rgba(15, 29, 55, 0.08);
+
+    transform: translateY(-2px);
+}
+
+
+/*
+    Make the Director's name slightly stronger
+    than the supporting role text.
+*/
+.director-identity-details strong {
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    color: #101a2f;
+}
+
+
+/*
+    Keep the executive role understated.
+*/
+.director-identity-details span {
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.2px;
+
+    color: #7d8799;
+}
+
+/*
+    Notification button.
+
+    It is intentionally clean and compact so the
+    profile remains the visual focus.
+*/
+.director-notification-button {
+    position: relative;
+
+    width: 46px;
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #e3e7ef;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/*
+    Notification icon.
+*/
+.director-notification-icon {
+    font-size: 21px;
+
+    color: #9a7a25;
+}
+
+
+/*
+    Small notification count badge.
+*/
+.director-notification-badge {
+    position: absolute;
+
+    top: -5px;
+
+    right: -5px;
+
+    min-width: 18px;
+
+    height: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 4px;
+
+    border-radius: 50%;
+
+    background: #0b1730;
+
+    color: #f0d58a;
+
+    border: 2px solid #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/*
+    Subtle hover effect for the notification bell.
+*/
+.director-notification-button:hover {
+    background: #f8f9fc;
+
+    border-color: #d5dbe6;
+
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------
+   EXECUTIVE NOTIFICATION CONTROL
+   -------------------------------------------------- */
+
+/*
+    Give the notification button a refined executive
+    appearance and make it feel interactive.
+*/
+.director-notification-button {
+    box-shadow:
+        0 5px 18px rgba(15, 29, 55, 0.05);
+}
+
+
+/*
+    Make the bell slightly stronger when the user
+    moves the pointer over it.
+*/
+.director-notification-button:hover
+.director-notification-icon {
+    color: #b08a2e;
+}
+
+
+/*
+    Make the notification badge clearly visible
+    without overpowering the executive design.
+*/
+.director-notification-badge {
+    line-height: 1;
+
+    letter-spacing: 0.2px;
+}
+
+
+/*
+    Small executive section label.
+*/
+.director-label {
+    margin: 0 0 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #9a7a25;
+}
+
+
+/*
+    Main dashboard heading.
+*/
+.director-header h2 {
+    margin: 0;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #101a2f;
+}
+
+
+/* --------------------------------------------------
+   MAIN CONTENT
+   -------------------------------------------------- */
+
+/*
+    Main dashboard content surface.
+*/
+.director-content {
+    background: #ffffff;
+
+    border: 1px solid #e5e9f1;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 29, 55, 0.06);
+}
+
+
+/* --------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------- */
+
+/*
+    Tablet and smaller screens.
+
+    The sidebar becomes narrower so that the
+    dashboard remains usable.
+*/
+@media (max-width: 900px) {
+
+    .director-sidebar {
+        width: 220px;
+    }
+
+    .director-main {
+        width: calc(100% - 220px);
+
+        margin-left: 220px;
+
+        padding: 30px;
+    }
+
+}
+
+
+/*
+    Phone layout.
+
+    The sidebar becomes part of the normal page flow.
+
+    Later we will replace this with a polished
+    mobile navigation system.
+*/
+@media (max-width: 700px) {
+
+    .director-dashboard {
+        display: block;
+    }
+
+    .director-sidebar {
+        position: relative;
+
+        width: 100%;
+        min-height: auto;
+
+        padding: 22px 20px;
+    }
+
+    .director-main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 24px 18px;
+    }
+
+    .director-header h2 {
+        font-size: 26px;
+    }
+
+    .director-content {
+        padding: 22px;
+    }
+
+}

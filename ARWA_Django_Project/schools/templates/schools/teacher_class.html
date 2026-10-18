@@ -1,0 +1,796 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        My Classes | ARWA
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'schools/teacher_dashboard.css' %}">
+
+</head>
+
+
+<body>
+
+<div class="teacher-dashboard">
+
+
+    <!-- =================================================
+         TEACHER SIDEBAR
+         ================================================= -->
+
+    <aside class="teacher-sidebar">
+
+        <div class="sidebar-brand">
+
+            <h1>ARWA</h1>
+
+            <p>
+                School Management
+            </p>
+
+        </div>
+
+
+        <nav class="teacher-navigation">
+
+            <p class="navigation-title">
+                MAIN
+            </p>
+
+
+            <a
+                href="{% url 'teacher_dashboard' %}"
+                class="navigation-link">
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link active">
+
+                My Classes
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My Subjects
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My Students
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                Attendance
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                Homework
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                Marks & Results
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My Timetable
+
+            </a>
+
+
+            <p class="navigation-title">
+                SCHOOL
+            </p>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                School News
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My Guardians
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My HOD
+
+            </a>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                Staff Meetings
+
+            </a>
+
+
+            <p class="navigation-title">
+                ACCOUNT
+            </p>
+
+
+            <a
+                href="#"
+                class="navigation-link">
+
+                My Profile
+
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-logout">
+
+            <form
+                method="post"
+                action="{% url 'logout' %}">
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="logout-button">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+         ================================================= -->
+
+    <main class="teacher-main">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <header class="teacher-topbar">
+
+            <div>
+
+                <p class="topbar-school">
+                    {{ school.name }}
+                </p>
+
+                <h2>
+                    My Classes
+                </h2>
+
+            </div>
+
+
+            <div class="teacher-profile">
+
+                <div class="teacher-profile-avatar">
+
+                    {{ staff_profile.user.first_name|first }}
+
+                </div>
+
+
+                <div>
+
+                    <p class="teacher-profile-name">
+
+                        {{ staff_profile.user.first_name }}
+                        {{ staff_profile.user.last_name }}
+
+                    </p>
+
+
+                    <p class="teacher-profile-role">
+                        Teacher
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE INTRODUCTION
+             ================================================= -->
+
+        <section class="my-classes-page-intro">
+
+            <div>
+
+                <p class="page-intro-label">
+                    TEACHING
+                </p>
+
+                <h1>
+                    My Classes
+                </h1>
+
+                <p>
+                    View and manage the classes and subjects
+                    assigned to you.
+                </p>
+
+            </div>
+
+
+            <div class="academic-year-badge">
+
+                <span>
+                    Academic Year
+                </span>
+
+                <strong>
+                    2026
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CLASS SUMMARY
+             ================================================= -->
+
+        <section class="class-summary-overview">
+
+            <div class="class-overview-card">
+
+                <span>
+                    Active Classes
+                </span>
+
+                <strong>
+                    4
+                </strong>
+
+                <p>
+                    Classes assigned
+                </p>
+
+            </div>
+
+
+            <div class="class-overview-card">
+
+                <span>
+                    Subjects
+                </span>
+
+                <strong>
+                    3
+                </strong>
+
+                <p>
+                    Subjects taught
+                </p>
+
+            </div>
+
+
+            <div class="class-overview-card">
+
+                <span>
+                    Students
+                </span>
+
+                <strong>
+                    125
+                </strong>
+
+                <p>
+                    Students across classes
+                </p>
+
+            </div>
+
+
+            <div class="class-overview-card">
+
+                <span>
+                    Pending Work
+                </span>
+
+                <strong class="overview-warning">
+                    20
+                </strong>
+
+                <p>
+                    Items requiring attention
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MY CLASS LIST
+             ================================================= -->
+
+        <section class="teacher-section teacher-my-classes-page">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Assigned Classes
+                    </h2>
+
+                    <p>
+                        Your current teaching assignments.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="class-filter-button">
+
+                    All Classes ▾
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CLASS CARDS
+                 ================================================= -->
+
+            <div class="teacher-class-grid">
+
+
+                <!-- CLASS 1 -->
+
+                <div class="teacher-class-card">
+
+                    <div class="teacher-class-card-header">
+
+                        <div>
+
+                            <span class="class-grade-label">
+                                GRADE 12
+                            </span>
+
+                            <h3>
+                                Grade 12A
+                            </h3>
+
+                            <p>
+                                Mathematics
+                            </p>
+
+                        </div>
+
+
+                        <span class="class-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="teacher-class-stats">
+
+                        <div>
+
+                            <span>
+                                Students
+                            </span>
+
+                            <strong>
+                                30
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Average
+                            </span>
+
+                            <strong>
+                                78%
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Attendance
+                            </span>
+
+                            <strong>
+                                96%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="teacher-class-footer">
+
+                        <span>
+                            12 homework submissions pending
+                        </span>
+
+                        <a href="#">
+                            View Class →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CLASS 2 -->
+
+                <div class="teacher-class-card">
+
+                    <div class="teacher-class-card-header">
+
+                        <div>
+
+                            <!-- Display the actual class and subject assigned to the teacher -->
+                            <div>
+                            
+                                <span class="class-grade-label">
+                                    {{ assignment.classroom.academic_level.academic_level }}
+                                </span>
+                            
+                                <h3>
+                                    {{ assignment.classroom.name }}
+                                </h3>
+                            
+                                <p>
+                                    {{ assignment.school_subject.subject.name }}
+                                </p>
+                            
+                            </div>
+
+                        </div>
+
+
+                        <span class="class-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="teacher-class-stats">
+                        
+                        <!-- Display the actual number of active students in this class -->
+                        <div>
+
+                            <span>
+                                Students
+                            </span>
+
+                            <strong>
+                                {{ students|length }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Average
+                            </span>
+
+                            <strong>
+                                71%
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Attendance
+                            </span>
+
+                            <strong>
+                                91%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="teacher-class-footer">
+
+                        <span class="class-success-text">
+                            All homework marked
+                        </span>
+
+                        <a href="#">
+                            View Class →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CLASS 3 -->
+
+                <div class="teacher-class-card">
+
+                    <div class="teacher-class-card-header">
+
+                        <div>
+
+                            <span class="class-grade-label">
+                                GRADE 11
+                            </span>
+
+                            <h3>
+                                Grade 11A
+                            </h3>
+
+                            <p>
+                                Mathematics
+                            </p>
+
+                        </div>
+
+
+                        <span class="class-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="teacher-class-stats">
+
+                        <div>
+
+                            <span>
+                                Students
+                            </span>
+
+                            <strong>
+                                28
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Average
+                            </span>
+
+                            <strong>
+                                68%
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Attendance
+                            </span>
+
+                            <strong class="class-attention">
+                                79%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="teacher-class-footer">
+
+                        <span class="class-attention-text">
+                            Attendance needs attention
+                        </span>
+
+                        <a href="#">
+                            View Class →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CLASS 4 -->
+
+                <div class="teacher-class-card">
+
+                    <div class="teacher-class-card-header">
+
+                        <div>
+
+                            <span class="class-grade-label">
+                                GRADE 10
+                            </span>
+
+                            <h3>
+                                Grade 10B
+                            </h3>
+
+                            <p>
+                                Mathematics
+                            </p>
+
+                        </div>
+
+
+                        <span class="class-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="teacher-class-stats">
+
+                        <div>
+
+                            <span>
+                                Students
+                            </span>
+
+                            <strong>
+                                35
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Average
+                            </span>
+
+                            <strong>
+                                74%
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Attendance
+                            </span>
+
+                            <strong>
+                                94%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="teacher-class-footer">
+
+                        <span class="class-success-text">
+                            All classes up to date
+                        </span>
+
+                        <a href="#">
+                            View Class →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

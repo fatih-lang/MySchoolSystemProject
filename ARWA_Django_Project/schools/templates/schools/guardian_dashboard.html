@@ -1,0 +1,850 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- Make the dashboard responsive on phones and tablets. -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Guardian Portal | ARWA</title>
+
+    <!-- Main Guardian Dashboard stylesheet. -->
+    <link rel="stylesheet"
+          href="{% static 'schools/guardian_dashboard.css' %}">
+
+</head>
+
+
+    <body>
+    
+        <div class="guardian-dashboard">
+        
+        
+            <!-- =====================================================
+                SIDEBAR
+                ===================================================== -->
+        
+            <aside class="guardian-sidebar">
+        
+                <!-- ARWA branding. -->
+                <div class="guardian-brand">
+        
+                    <h1>ARWA</h1>
+        
+                    <p>Guardian Portal</p>
+        
+                </div>
+        
+        
+                <!-- Guardian navigation. -->
+                <nav class="guardian-navigation">
+        
+                    <a href="#" class="active">
+                        🏠
+                        <span>Dashboard</span>
+                    </a>
+        
+                    <a href="#children">
+                        👨‍👩‍👧
+                        <span>My Children</span>
+                    </a>
+        
+                    <a href="#attendance">
+                        ✅
+                        <span>Attendance</span>
+                    </a>
+        
+                    <a href="#results">
+                        📊
+                        <span>Results</span>
+                    </a>
+        
+                    <a href="#homework">
+                        📝
+                        <span>Homework</span>
+                    </a>
+        
+                    <a href="#fees">
+                        💰
+                        <span>Fees</span>
+                    </a>
+        
+                    <a href="#timetable">
+                        📅
+                        <span>Timetable</span>
+                    </a>
+        
+                    <a href="#news">
+                        📰
+                        <span>School News</span>
+                    </a>
+        
+                    <a href="#profile">
+                        👤
+                        <span>My Profile</span>
+                    </a>
+        
+                    <a href="{% url 'logout' %}">
+                        🚪
+                        <span>Logout</span>
+                    </a>
+        
+                </nav>
+        
+            </aside>
+        
+        
+        
+            <!-- =====================================================
+                MAIN DASHBOARD AREA
+                ===================================================== -->
+        
+            <main class="guardian-main">
+        
+        
+                <!-- =================================================
+                    TOP HEADER
+                    ================================================= -->
+        
+                <header class="guardian-topbar">
+        
+        
+                    <!-- Notifications. -->
+                    <div class="guardian-notifications">
+        
+                        <span class="notification-icon">
+                            🔔
+                        </span>
+        
+                        <span class="notification-count">
+                            2
+                        </span>
+        
+                    </div>
+        
+        
+                    <!-- Welcome message. -->
+                    <div class="guardian-welcome-text">
+        
+                        <span>Welcome back,</span>
+        
+                        <strong>
+                            {{ guardian.first_name }}!
+                        </strong>
+        
+                    </div>
+        
+        
+                    <!-- Guardian profile. -->
+                    <div class="guardian-account">
+        
+                        {% if guardian.profile_picture %}
+        
+                            <img
+                                src="{{ guardian.profile_picture.url }}"
+                                alt="{{ guardian.first_name }} {{ guardian.last_name }}"
+                                class="guardian-profile-picture"
+                            >
+        
+                        {% else %}
+        
+                            <div class="guardian-profile-placeholder">
+                                👤
+                            </div>
+        
+                        {% endif %}
+        
+                        <div class="guardian-account-name">
+        
+                            <strong>
+                                {{ guardian.first_name }}
+                                {{ guardian.last_name }}
+                            </strong>
+        
+                            <span>
+                                Guardian
+                            </span>
+        
+                        </div>
+        
+                    </div>
+        
+                </header>
+        
+        
+        
+                <!-- =================================================
+                    SCHOOL INFORMATION
+                    ================================================= -->
+        
+                <section class="guardian-school-heading">
+        
+                    <div>
+        
+                        <span class="section-eyebrow">
+                            ARWA SCHOOL MANAGEMENT PLATFORM
+                        </span>
+        
+                        <h2>
+                            {{ school.name }}
+                        </h2>
+        
+                        <p>
+                            Monitor your children's school progress
+                            from one place.
+                        </p>
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    MY CHILDREN
+                    ================================================= -->
+        
+                <section
+                    id="children"
+                    class="dashboard-section"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                FAMILY
+                            </span>
+        
+                            <h2>
+                                My Children
+                            </h2>
+        
+                            <p>
+                                View and follow your children's
+                                school progress.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="children-grid">
+        
+                        {% for student_guardian in student_guardians %}
+        
+                            <article class="child-card">
+        
+        
+                                <!-- Student profile picture. -->
+                                <div class="child-photo-container">
+        
+                                    {% if student_guardian.student.profile_picture %}
+        
+                                        <img
+                                            src="{{ student_guardian.student.profile_picture.url }}"
+                                            alt="{{ student_guardian.student.first_name }} {{ student_guardian.student.last_name }}"
+                                            class="child-profile-picture"
+                                        >
+        
+                                    {% else %}
+        
+                                        <div class="child-profile-placeholder">
+                                            👤
+                                        </div>
+        
+                                    {% endif %}
+        
+                                </div>
+        
+        
+                                <!-- Student information. -->
+                                <div class="child-information">
+        
+                                    <h3>
+        
+                                        {{ student_guardian.student.first_name }}
+        
+                                        {{ student_guardian.student.last_name }}
+        
+                                    </h3>
+        
+                                    <p>
+        
+                                        <strong>Grade:</strong>
+        
+                                        {{ student_guardian.student.academic_level.academic_level }}
+        
+                                    </p>
+        
+                                    <p>
+        
+                                        <strong>Classroom:</strong>
+        
+                                        {{ student_guardian.student.classroom.name }}
+        
+                                    </p>
+        
+                                    <p>
+        
+                                        <strong>Student Number:</strong>
+        
+                                        {{ student_guardian.student.student_number }}
+        
+                                    </p>
+        
+                                    <p>
+        
+                                        <strong>Relationship:</strong>
+        
+                                        {{ student_guardian.relationship }}
+        
+                                    </p>
+        
+                                </div>
+        
+        
+                                <!-- Future child dashboard action. -->
+                                <a
+                                    href="#"
+                                    class="child-view-button"
+                                >
+                                    View Child
+                                    <span>→</span>
+                                </a>
+        
+                            </article>
+        
+        
+                        {% empty %}
+        
+                            <div class="no-children">
+        
+                                <h3>
+                                    No children found
+                                </h3>
+        
+                                <p>
+                                    No active students are currently
+                                    linked to your guardian account.
+                                </p>
+        
+                            </div>
+        
+                        {% endfor %}
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    AT-A-GLANCE MONITORING
+                    ================================================= -->
+        
+                <section
+                    class="dashboard-section"
+                    id="attendance"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                QUICK OVERVIEW
+                            </span>
+        
+                            <h2>
+                                At-a-Glance Monitoring
+                            </h2>
+        
+                            <p>
+                                Important information about your
+                                children's school activity.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="monitoring-grid">
+        
+        
+                        <!-- Attendance card. -->
+                        <article class="monitoring-card">
+        
+                            <div class="monitoring-icon">
+                                🗓️
+                            </div>
+        
+                            <div>
+        
+                                <span>
+                                    Attendance
+                                </span>
+        
+                                <strong>
+                                    --
+                                </strong>
+        
+                            </div>
+        
+                            <p>
+                                Attendance overview
+                            </p>
+        
+                        </article>
+        
+        
+                        <!-- Homework card. -->
+                        <article
+                            class="monitoring-card"
+                            id="homework"
+                        >
+        
+                            <div class="monitoring-icon">
+                                📚
+                            </div>
+        
+                            <div>
+        
+                                <span>
+                                    Homework
+                                </span>
+        
+                                <strong>
+                                    --
+                                </strong>
+        
+                            </div>
+        
+                            <p>
+                                Pending homework
+                            </p>
+        
+                        </article>
+        
+        
+                        <!-- Fees card. -->
+                        <article
+                            class="monitoring-card"
+                            id="fees"
+                        >
+        
+                            <div class="monitoring-icon">
+                                💰
+                            </div>
+        
+                            <div>
+        
+                                <span>
+                                    Fees
+                                </span>
+        
+                                <strong>
+                                    --
+                                </strong>
+        
+                            </div>
+        
+                            <p>
+                                Outstanding balance
+                            </p>
+        
+                        </article>
+        
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    SCHEDULE AND TIME TRACKING
+                    ================================================= -->
+        
+                <section class="dashboard-section">
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                SCHOOL DAY
+                            </span>
+        
+                            <h2>
+                                Schedule & Time Tracking
+                            </h2>
+        
+                            <p>
+                                Keep track of the school day and
+                                important dates.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="schedule-grid">
+        
+        
+                        <!-- Live campus clock. -->
+                        <article class="clock-card">
+        
+                            <div class="card-top">
+        
+                                <span>
+                                    🕒
+                                </span>
+        
+                                <span>
+                                    LIVE CAMPUS CLOCK
+                                </span>
+        
+                            </div>
+        
+        
+                            <div
+                                id="guardian-clock"
+                                class="live-clock"
+                            >
+                                00:00:00
+                            </div>
+        
+        
+                            <div
+                                id="guardian-school-status"
+                                class="school-status"
+                            >
+                                Checking school status...
+                            </div>
+        
+        
+                            <p class="clock-description">
+        
+                                Current time at
+                                {{ school.name }}.
+        
+                            </p>
+        
+                        </article>
+        
+        
+        
+                        <!-- Mini calendar. -->
+                        <article class="calendar-card">
+        
+                            <div class="card-top">
+        
+                                <span>
+                                    📅
+                                </span>
+        
+                                <span>
+                                    MINI-CALENDAR
+                                </span>
+        
+                            </div>
+        
+        
+                            <div
+                                id="guardian-calendar"
+                                class="mini-calendar"
+                            >
+        
+                                <!-- JavaScript will build the calendar here. -->
+        
+                            </div>
+                            
+                            
+                            <!-- Display school-event details when a guardian taps a calendar date. -->
+                            <div
+                                id="guardian-event-details"
+                                class="calendar-event-details"
+                                aria-live="polite"
+                            >
+                                <p>Tap a date to view school events.</p>
+                            </div>
+
+                            
+                            <!-- Safely pass Django calendar data to JavaScript. -->
+                            {{ school_events|json_script:"guardian-school-events" }}
+        
+                        </article>
+        
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    RESULTS
+                    ================================================= -->
+        
+                <section
+                    class="dashboard-section"
+                    id="results"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                ACADEMIC PERFORMANCE
+                            </span>
+        
+                            <h2>
+                                Results
+                            </h2>
+        
+                            <p>
+                                Your children's latest academic
+                                performance will appear here.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="empty-dashboard-card">
+        
+                        📊
+        
+                        <h3>
+                            Results will appear here
+                        </h3>
+        
+                        <p>
+                            Academic results will be connected
+                            to the real Django assessment system.
+                        </p>
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    TIMETABLE
+                    ================================================= -->
+        
+                <section
+                    class="dashboard-section"
+                    id="timetable"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                SCHOOL SCHEDULE
+                            </span>
+        
+                            <h2>
+                                Timetable
+                            </h2>
+        
+                            <p>
+                                Your children's class schedules
+                                will appear here.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="empty-dashboard-card">
+        
+                        📅
+        
+                        <h3>
+                            Timetable will appear here
+                        </h3>
+        
+                        <p>
+                            Timetable information will be
+                            connected to the school timetable system.
+                        </p>
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    SCHOOL NEWS
+                    ================================================= -->
+        
+                <section
+                    class="dashboard-section"
+                    id="news"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                SCHOOL COMMUNICATION
+                            </span>
+        
+                            <h2>
+                                Latest School News
+                            </h2>
+        
+                            <p>
+                                Important announcements from
+                                {{ school.name }}.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="news-card">
+        
+                        <div class="news-item">
+        
+                            <div class="news-icon">
+                                📣
+                            </div>
+        
+                            <div>
+        
+                                <h3>
+                                    School announcements
+                                </h3>
+        
+                                <p>
+                                    The latest school news and
+                                    announcements will appear here.
+                                </p>
+        
+                            </div>
+        
+                            <a href="#">
+                                Read More →
+                            </a>
+        
+                        </div>
+        
+                    </div>
+        
+                </section>
+        
+        
+        
+                <!-- =================================================
+                    GUARDIAN PROFILE
+                    ================================================= -->
+        
+                <section
+                    class="dashboard-section"
+                    id="profile"
+                >
+        
+                    <div class="section-heading">
+        
+                        <div>
+        
+                            <span class="section-eyebrow">
+                                ACCOUNT
+                            </span>
+        
+                            <h2>
+                                My Profile
+                            </h2>
+        
+                            <p>
+                                Your guardian account information.
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+        
+                    <div class="guardian-profile-card">
+        
+        
+                        {% if guardian.profile_picture %}
+        
+                            <img
+                                src="{{ guardian.profile_picture.url }}"
+                                alt="{{ guardian.first_name }} {{ guardian.last_name }}"
+                                class="guardian-profile-large"
+                            >
+        
+                        {% else %}
+        
+                            <div class="guardian-profile-large-placeholder">
+                                👤
+                            </div>
+        
+                        {% endif %}
+        
+        
+                        <div class="guardian-profile-information">
+        
+                            <h3>
+        
+                                {{ guardian.first_name }}
+                                {{ guardian.last_name }}
+        
+                            </h3>
+        
+                            <p>
+                                <strong>Guardian Number:</strong>
+                                {{ guardian.guardian_number }}
+                            </p>
+        
+                            <p>
+                                <strong>Phone:</strong>
+                                {{ guardian.phone_number }}
+                            </p>
+        
+                            <p>
+                                <strong>Email:</strong>
+                                {{ guardian.email|default:"Not provided" }}
+                            </p>
+        
+                        </div>
+        
+                    </div>
+        
+                </section>
+        
+        
+            </main>
+        
+        </div>
+    
+    
+    <!-- Load the Guardian Dashboard JavaScript after the page content. -->
+    <script src="{% static 'schools/guardian_dashboard.js' %}"></script>
+    
+    </body>
+
+</html>

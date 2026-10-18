@@ -1,0 +1,1641 @@
+ /* =========================================================
+    ARWA GUARDIAN PORTAL
+    STEP 1 — FOUNDATION & PAGE LAYOUT
+    ========================================================= */
+
+ /* Make width and height calculations predictable. */
+ * {
+     box-sizing: border-box;
+ }
+
+ /* Remove the browser's default page spacing. */
+ html,
+ body {
+     margin: 0;
+     padding: 0;
+ }
+
+ /* Main page typography and background. */
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #f8fafc;
+     color: #0f172a;
+ }
+
+ /* Main dashboard container. */
+ .guardian-dashboard {
+     display: flex;
+     min-height: 100vh;
+     width: 100%;
+ }
+
+ /* Main content must be allowed to shrink
+    instead of creating horizontal overflow. */
+ .guardian-main {
+     flex: 1;
+     min-width: 0;
+     padding: 30px;
+ }
+ 
+ /* =========================================================
+   STEP 2 — GUARDIAN SIDEBAR
+   ========================================================= */
+
+/* Main sidebar container. */
+.guardian-sidebar {
+    width: 240px;
+    min-height: 100vh;
+    flex-shrink: 0;
+
+    background-color: #ffffff;
+
+    border-right: 1px solid #e2e8f0;
+
+    padding: 28px 16px;
+
+    position: sticky;
+    top: 0;
+
+    overflow-y: auto;
+}
+
+
+/* ---------------------------------------------------------
+   ARWA BRANDING
+   --------------------------------------------------------- */
+
+/* Keep the ARWA branding separate from navigation. */
+.guardian-brand {
+    padding: 0 12px 28px;
+}
+
+
+/* Main ARWA logo text. */
+.guardian-brand h1 {
+    margin: 0;
+
+    color: #3b82f6;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* Guardian Portal text underneath ARWA. */
+.guardian-brand p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+/* ---------------------------------------------------------
+   NAVIGATION
+   --------------------------------------------------------- */
+
+/* Arrange navigation links vertically. */
+.guardian-navigation {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+/* Individual navigation link. */
+.guardian-navigation a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: #475569;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Keep the emoji/icon area aligned. */
+.guardian-navigation a:first-letter {
+    font-size: 17px;
+}
+
+
+/* Highlight the currently selected page. */
+.guardian-navigation a.active {
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+}
+
+
+/* Soft hover effect for other navigation items. */
+.guardian-navigation a:hover {
+    background-color: #f8fafc;
+
+    color: #3b82f6;
+}
+
+
+/* Keep the active item's hover state consistent. */
+.guardian-navigation a.active:hover {
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+}
+
+/* =========================================================
+   STEP 3 — GUARDIAN TOP HEADER
+   ========================================================= */
+
+/* Main top header. */
+.guardian-topbar {
+    display: flex;
+    align-items: center;
+
+    min-height: 72px;
+
+    margin-bottom: 30px;
+
+    padding: 0 4px;
+}
+
+
+/* ---------------------------------------------------------
+   NOTIFICATIONS
+   --------------------------------------------------------- */
+
+/* Notification area. */
+.guardian-notifications {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    margin-right: 20px;
+
+    border-radius: 12px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* Notification bell. */
+.notification-icon {
+    font-size: 18px;
+}
+
+
+/* Small notification counter. */
+.notification-count {
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background-color: #ef4444;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   WELCOME MESSAGE
+   --------------------------------------------------------- */
+
+/* Welcome text takes the available middle space. */
+.guardian-welcome-text {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    flex: 1;
+}
+
+
+/* "Welcome back," text. */
+.guardian-welcome-text span {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* Guardian's first name. */
+.guardian-welcome-text strong {
+    color: #0f172a;
+
+    font-size: 15px;
+}
+
+
+/* ---------------------------------------------------------
+   GUARDIAN ACCOUNT
+   --------------------------------------------------------- */
+
+/* Guardian account area on the right. */
+.guardian-account {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 6px 10px;
+
+    border-radius: 12px;
+}
+
+
+/* Guardian profile picture. */
+.guardian-profile-picture {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #dbeafe;
+}
+
+
+/* Placeholder when no profile picture exists. */
+.guardian-profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+
+    font-size: 19px;
+
+    border: 2px solid #dbeafe;
+}
+
+
+/* Guardian name and role container. */
+.guardian-account-name {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+/* Guardian's full name. */
+.guardian-account-name strong {
+    color: #0f172a;
+
+    font-size: 14px;
+}
+
+
+/* Guardian role. */
+.guardian-account-name span {
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   STEP 4 — SCHOOL INFORMATION HEADING
+   ========================================================= */
+
+/* School information section. */
+.guardian-school-heading {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 42px;
+
+    padding: 28px 30px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+}
+
+
+/* Small section label above the school name. */
+.section-eyebrow {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #3b82f6;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.9px;
+}
+
+
+/* School name. */
+.guardian-school-heading h2 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* Supporting school description. */
+.guardian-school-heading p {
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   STEP 5 — MY CHILDREN SECTION
+   ========================================================= */
+
+/* Give each dashboard section consistent spacing. */
+.dashboard-section {
+    margin-bottom: 48px;
+}
+
+
+/* Section heading container. */
+.section-heading {
+    margin-bottom: 22px;
+}
+
+
+/* Main section heading. */
+.section-heading h2 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* Supporting text underneath section headings. */
+.section-heading p {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   CHILDREN GRID
+   --------------------------------------------------------- */
+
+/* Arrange child cards in a responsive grid. */
+.children-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* Individual child card. */
+.child-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Small lift when the user moves over a child card. */
+.child-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   CHILD PROFILE PHOTO
+   --------------------------------------------------------- */
+
+/* Container keeps the child photo centered. */
+.child-photo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+}
+
+
+/* Real child profile picture. */
+.child-profile-picture {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 4px solid #eff6ff;
+}
+
+
+/* Placeholder when the child has no picture. */
+.child-profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+
+    font-size: 30px;
+
+    border: 4px solid #dbeafe;
+}
+
+
+/* ---------------------------------------------------------
+   CHILD INFORMATION
+   --------------------------------------------------------- */
+
+/* Child information area. */
+.child-information {
+    flex: 1;
+
+    text-align: center;
+}
+
+
+/* Child's full name. */
+.child-information h3 {
+    margin: 0 0 15px;
+
+    color: #0f172a;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* Individual child information row. */
+.child-information p {
+    margin: 7px 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* Labels such as Grade and Classroom. */
+.child-information p strong {
+    color: #334155;
+
+    font-weight: 600;
+}
+
+
+/* ---------------------------------------------------------
+   VIEW CHILD BUTTON
+   --------------------------------------------------------- */
+
+/* Child dashboard action button. */
+.child-view-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Button hover state. */
+.child-view-button:hover {
+    background-color: #3b82f6;
+
+    color: #ffffff;
+}
+
+
+/* Arrow movement on hover. */
+.child-view-button span {
+    transition: transform 0.2s ease;
+}
+
+
+.child-view-button:hover span {
+    transform: translateX(3px);
+}
+
+
+/* ---------------------------------------------------------
+   NO CHILDREN MESSAGE
+   --------------------------------------------------------- */
+
+/* Message shown when the guardian has no active children. */
+.no-children {
+    grid-column: 1 / -1;
+
+    padding: 30px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    text-align: center;
+}
+
+
+/* No-children heading. */
+.no-children h3 {
+    margin: 0 0 8px;
+
+    color: #0f172a;
+
+    font-size: 18px;
+}
+
+
+/* No-children description. */
+.no-children p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   STEP 6 — AT-A-GLANCE MONITORING
+   ========================================================= */
+
+/* Arrange the monitoring cards in a flexible grid. */
+.monitoring-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* Individual monitoring card. */
+.monitoring-card {
+    position: relative;
+
+    padding: 22px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Small hover effect. */
+.monitoring-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   MONITORING ICON
+   --------------------------------------------------------- */
+
+/* Icon container. */
+.monitoring-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    background-color: #eff6ff;
+
+    font-size: 20px;
+}
+
+
+/* ---------------------------------------------------------
+   MONITORING VALUE
+   --------------------------------------------------------- */
+
+/* Label and value container. */
+.monitoring-card > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+/* Monitoring category name. */
+.monitoring-card > div:nth-child(2) span {
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Main monitoring value. */
+.monitoring-card > div:nth-child(2) strong {
+    color: #0f172a;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* Description underneath the value. */
+.monitoring-card p {
+    margin: 13px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   STEP 7 — SCHEDULE & TIME TRACKING
+   ========================================================= */
+
+/* Place the clock and calendar beside each other. */
+.schedule-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 20px;
+}
+
+
+/* Shared styling for the clock and calendar cards. */
+.clock-card,
+.calendar-card {
+    min-width: 0;
+
+    padding: 24px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   CARD TOP AREA
+   --------------------------------------------------------- */
+
+/* Small heading at the top of each card. */
+.card-top {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 22px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* Icon inside the card heading. */
+.card-top span:first-child {
+    font-size: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   LIVE CLOCK
+   --------------------------------------------------------- */
+
+/* Large digital-style clock display. */
+.live-clock {
+    margin: 8px 0 12px;
+
+    color: #0f172a;
+
+    font-size: 42px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    line-height: 1.1;
+}
+
+
+/* Current school status. */
+.school-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background-color: #ecfdf5;
+
+    color: #10b981;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* Description underneath the clock. */
+.clock-description {
+    margin: 18px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   MINI CALENDAR
+   --------------------------------------------------------- */
+
+/* Calendar JavaScript will populate this container. */
+.mini-calendar {
+    width: 100%;
+
+    min-height: 220px;
+}
+
+
+/* ---------------------------------------------------------
+   CALENDAR SUPPORT STYLES
+   --------------------------------------------------------- */
+
+/* Calendar header when JavaScript creates one. */
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+/* Calendar month and year. */
+.calendar-header h3 {
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 16px;
+}
+
+
+
+/* Calendar navigation buttons. */
+.calendar-header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #f1f5f9;
+    color: #475569;
+
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* Weekday names: Monday through Sunday. */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 5px;
+
+    margin-bottom: 7px;
+    text-align: center;
+}
+
+
+/* Individual weekday label. */
+.calendar-weekdays div {
+    min-width: 0;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* Seven-column grid for the dates. */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 5px;
+}
+
+
+/* Individual calendar date. */
+.calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 34px;
+
+    border-radius: 8px;
+
+    color: #475569;
+    font-size: 12px;
+}
+
+
+/* Highlight today's date. */
+.calendar-day.today {
+    background-color: #2563eb;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* Keep empty cells before the first day invisible. */
+.calendar-day.empty {
+    visibility: hidden;
+}
+
+
+/* Hover effect for dates other than today. */
+.calendar-day:not(.empty):not(.today):hover {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+    
+/* =========================================================
+   STEP 8 — RESULTS & TIMETABLE
+   ========================================================= */
+
+/* Shared empty-state card used by Results and Timetable. */
+.empty-dashboard-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 190px;
+
+    padding: 30px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 28px;
+}
+
+
+/* Empty-state heading. */
+.empty-dashboard-card h3 {
+    margin: 15px 0 7px;
+
+    color: #0f172a;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* Empty-state explanation. */
+.empty-dashboard-card p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}  
+
+/* =========================================================
+   STEP 9 — LATEST SCHOOL NEWS
+   ========================================================= */
+
+/* Main news container. */
+.news-card {
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 8px 22px;
+}
+
+
+/* Individual news item. */
+.news-item {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 20px 0;
+}
+
+
+/* News icon container. */
+.news-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background-color: #eff6ff;
+
+    font-size: 20px;
+}
+
+
+/* News text area. */
+.news-item > div:nth-child(2) {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* News title. */
+.news-item h3 {
+    margin: 0 0 6px;
+
+    color: #0f172a;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* News description. */
+.news-item p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* Read More link. */
+.news-item > a {
+    flex-shrink: 0;
+
+    color: #3b82f6;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: color 0.2s ease;
+}
+
+
+/* Read More hover state. */
+.news-item > a:hover {
+    color: #2563eb;
+}
+
+/* =========================================================
+   STEP 10 — GUARDIAN PROFILE
+   ========================================================= */
+
+/* Main guardian profile card. */
+.guardian-profile-card {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+
+    padding: 26px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   GUARDIAN PROFILE IMAGE
+   --------------------------------------------------------- */
+
+/* Large guardian profile picture. */
+.guardian-profile-large {
+    width: 100px;
+    height: 100px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 5px solid #eff6ff;
+}
+
+
+/* Placeholder when no guardian picture exists. */
+.guardian-profile-large-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background-color: #eff6ff;
+
+    color: #3b82f6;
+
+    font-size: 36px;
+
+    border: 5px solid #dbeafe;
+}
+
+
+/* ---------------------------------------------------------
+   GUARDIAN INFORMATION
+   --------------------------------------------------------- */
+
+/* Guardian information container. */
+.guardian-profile-information {
+    min-width: 0;
+}
+
+
+/* Guardian's name. */
+.guardian-profile-information h3 {
+    margin: 0 0 14px;
+
+    color: #0f172a;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* Individual profile information row. */
+.guardian-profile-information p {
+    margin: 7px 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* Profile information labels. */
+.guardian-profile-information p strong {
+    color: #334155;
+
+    font-weight: 600;
+}
+
+/* =========================================================
+   STEP 11 — PHONE RESPONSIVENESS
+   ========================================================= */
+
+/* Apply mobile-friendly layout rules to smaller screens. */
+@media (max-width: 768px) {
+
+
+    /* -----------------------------------------------------
+       MAIN DASHBOARD
+       ----------------------------------------------------- */
+
+    /* Reduce the main content spacing on phones. */
+    .guardian-main {
+        width: 100%;
+
+        padding: 18px;
+    }
+
+
+    /* -----------------------------------------------------
+       SIDEBAR
+       ----------------------------------------------------- */
+
+    /* Turn the desktop sidebar into a compact navigation area. */
+    .guardian-sidebar {
+        width: 76px;
+
+        padding: 22px 8px;
+
+        position: sticky;
+        top: 0;
+    }
+
+
+    /* Center the ARWA branding. */
+    .guardian-brand {
+        padding: 0 0 24px;
+
+        text-align: center;
+    }
+
+
+    /* Make ARWA smaller on phones. */
+    .guardian-brand h1 {
+        font-size: 20px;
+    }
+
+
+    /* Hide "Guardian Portal" to save space. */
+    .guardian-brand p {
+        display: none;
+    }
+
+
+    /* Center navigation icons. */
+    .guardian-navigation a {
+        justify-content: center;
+
+        padding: 11px 6px;
+
+        font-size: 17px;
+    }
+
+
+    /* Hide navigation text on phones. */
+    .guardian-navigation a span {
+        display: none;
+    }
+
+
+    /* -----------------------------------------------------
+       TOP HEADER
+       ----------------------------------------------------- */
+
+    /* Allow the header to wrap naturally. */
+    .guardian-topbar {
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        margin-bottom: 22px;
+    }
+
+
+    /* Keep notifications compact. */
+    .guardian-notifications {
+        width: 40px;
+        height: 40px;
+
+        margin-right: 0;
+    }
+
+
+    /* Allow the welcome message to use available space. */
+    .guardian-welcome-text {
+        flex: 1;
+
+        min-width: 120px;
+    }
+
+
+    /* Stack welcome text on very narrow screens. */
+    .guardian-welcome-text {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 2px;
+    }
+
+
+    /* Keep the account section compact. */
+    .guardian-account {
+        padding: 4px;
+    }
+
+
+    /* Hide the account name to save horizontal space. */
+    .guardian-account-name {
+        display: none;
+    }
+
+
+    /* -----------------------------------------------------
+       SCHOOL HEADING
+       ----------------------------------------------------- */
+
+    /* Reduce school heading spacing. */
+    .guardian-school-heading {
+        margin-bottom: 32px;
+
+        padding: 22px;
+    }
+
+
+    /* Reduce school name size. */
+    .guardian-school-heading h2 {
+        font-size: 21px;
+    }
+
+
+    /* -----------------------------------------------------
+       SECTION HEADINGS
+       ----------------------------------------------------- */
+
+    /* Make dashboard section headings slightly smaller. */
+    .section-heading h2 {
+        font-size: 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       CHILDREN
+       ----------------------------------------------------- */
+
+    /* Stack child cards vertically. */
+    .children-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    /* Reduce child card padding. */
+    .child-card {
+        padding: 20px;
+    }
+
+
+    /* -----------------------------------------------------
+       MONITORING
+       ----------------------------------------------------- */
+
+    /* Stack monitoring cards vertically. */
+    .monitoring-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    /* -----------------------------------------------------
+       CLOCK & CALENDAR
+       ----------------------------------------------------- */
+
+    /* Stack clock and calendar vertically. */
+    .schedule-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    /* Make the clock slightly smaller. */
+    .live-clock {
+        font-size: 34px;
+    }
+
+
+    /* -----------------------------------------------------
+       NEWS
+       ----------------------------------------------------- */
+
+    /* Allow news content to wrap on phones. */
+    .news-item {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+
+    /* Let the news text use the available width. */
+    .news-item > div:nth-child(2) {
+        flex: 1;
+
+        min-width: 180px;
+    }
+
+
+    /* Put Read More on its own line when needed. */
+    .news-item > a {
+        width: 100%;
+
+        margin-left: 56px;
+    }
+
+
+    /* -----------------------------------------------------
+       GUARDIAN PROFILE
+       ----------------------------------------------------- */
+
+    /* Stack guardian profile vertically. */
+    .guardian-profile-card {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        padding: 24px 18px;
+    }
+
+
+    /* Keep guardian information centered. */
+    .guardian-profile-information {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       GENERAL SPACING
+       ----------------------------------------------------- */
+
+    /* Reduce section spacing on smaller screens. */
+    .dashboard-section {
+        margin-bottom: 38px;
+    }
+
+}
+
+/* Highlight dates that contain school events. */
+.calendar-day.has-event {
+    position: relative;
+    background-color: #eaf2ff;
+    color: #1d4ed8;
+    font-weight: 700;
+}
+
+
+/* Add a visible dot beneath dates with school events. */
+.calendar-day.has-event::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Make the event marker easier to see on a phone. */
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+
+    /* Use white on today's blue date, blue on other dates. */
+    background-color: #2563eb;
+}
+
+/* Keep the event dot visible against today's blue background. */
+.calendar-day.today.has-event::after {
+    background-color: #ffffff;
+}
+
+
+
+/* Highlight the selected date, overriding today's normal styling. */
+#guardian-calendar .calendar-day.selected-date {
+    background-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+/* Keep the event dot visible on a selected date. */
+#guardian-calendar .calendar-day.selected-date.has-event::after {
+    background-color: #ffffff;
+}
+
+
+
+/* Style the area that displays selected-date event details. */
+.calendar-event-details {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #e2f0d9;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    /* Keep event details readable on smaller screens. */
+    overflow-wrap: break-word;
+}
+
+/* Style the selected-date heading. */
+.calendar-event-details h4 {
+    margin: 0 0 12px;
+    color: #1e293b;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Style each school-event title. */
+.calendar-event-details h5 {
+    margin: 12px 0 6px;
+    color: #2563eb;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Make descriptions and event types easy to read. */
+.calendar-event-details p {
+    margin: 6px 0;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Adjust spacing and text for narrow phone screens. */
+@media (max-width: 480px) {
+    .calendar-event-details {
+        padding: 12px;
+        margin-top: 12px;
+    }
+
+    .calendar-event-details h4,
+    .calendar-event-details h5 {
+        font-size: 14px;
+    }
+
+    .calendar-event-details p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+}
+
+
+
+
+/* Give the selected date priority over the normal date styling. */
+#guardian-calendar .calendar-day.selected-date {
+    background-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+
+/* Keep the event marker visible on a selected date. */
+.calendar-day.selected-date.has-event::after {
+    background-color: #ffffff;
+}

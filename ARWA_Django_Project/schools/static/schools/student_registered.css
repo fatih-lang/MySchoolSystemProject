@@ -1,0 +1,145 @@
+/* ---------------------------------------------------------
+   STUDENT REGISTRATION SUCCESS PAGE
+   --------------------------------------------------------- */
+
+/* Make width and height calculations easier to control. */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Give the page a clean, soft background. */
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f7fb;
+    font-family: Arial, sans-serif;
+    color: #263238;
+}
+
+
+/* Main container for the registration result. */
+.registration-success-container {
+    max-width: 850px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Main success heading. */
+.registration-success-container h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 28px;
+}
+
+
+/* Small introductory message below the heading. */
+.registration-success-message {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #607d8b;
+}
+
+
+/* Keep the information table inside the container. */
+.student-information-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+/* Style both table headings and information cells. */
+.student-information-table th,
+.student-information-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e0e6ed;
+    text-align: left;
+}
+
+
+/* Give the left column a clear label appearance. */
+.student-information-table th {
+    width: 35%;
+    font-weight: 600;
+    background-color: #f8fafc;
+}
+
+
+/* Highlight the student number. */
+.student-number {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+/* Subject section heading. */
+.subjects-heading {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+
+/* Subject list. */
+.subject-list {
+    margin: 0;
+    padding-left: 25px;
+}
+
+
+/* Add some spacing between subjects. */
+.subject-list li {
+    padding: 5px 0;
+}
+
+
+/* ---------------------------------------------------------
+   PHONE RESPONSIVE DESIGN
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    /* Reduce page spacing on smaller screens. */
+    body {
+        padding: 10px;
+    }
+
+
+    /* Reduce the container spacing on phones. */
+    .registration-success-container {
+        margin: 20px auto;
+        padding: 20px 15px;
+        border-radius: 14px;
+    }
+
+
+    /* Make the heading smaller on phones. */
+    .registration-success-container h1 {
+        font-size: 23px;
+    }
+
+
+    /* Allow the table to remain readable on a small screen. */
+    .student-information-table th,
+    .student-information-table td {
+        padding: 11px 10px;
+        font-size: 14px;
+    }
+
+
+    /* Give the label column slightly less space on phones. */
+    .student-information-table th {
+        width: 40%;
+    }
+
+
+    /* Keep the student number readable. */
+    .student-number {
+        font-size: 16px;
+    }
+}

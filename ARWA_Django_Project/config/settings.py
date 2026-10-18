@@ -12,8 +12,17 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
+# os allows Django to read an environment variable supplied by the computer/server running ARWA
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Directory where ARWA translation files will 
+# be stored.(Django will know that our project translations or language translations are stored in)
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,14 +52,30 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    # Activates the interface language selected
+    # by the logged-in ARWA user.
+    'schools.middleware.UserLanguageMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+# ============================================================
+# AUTHENTICATION URL
+# ============================================================
+#
+# Tell Django which URL should be used when an unauthenticated
+# user tries to access a protected ARWA page.
+#
+# ARWA uses /login/ as its login page.
+LOGIN_URL = "/login/"
 
 TEMPLATES = [
     {
@@ -117,6 +142,27 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# ---------------------------------------------------------
+# MEDIA FILE SETTINGS
+# ---------------------------------------------------------
+#
+# The media location is configurable through the
+# ARWA_MEDIA_ROOT environment variable.
+#
+# This keeps ARWA independent from a particular computer,
+# operating system, or storage location.
+#
+MEDIA_ROOT = Path(
+    os.environ.get(
+        "ARWA_MEDIA_ROOT",
+        BASE_DIR / "media",
+    )
+)
+
+
+# URL used by the browser to access uploaded media files.
+MEDIA_URL = "/media/"
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
@@ -126,3 +172,6 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+

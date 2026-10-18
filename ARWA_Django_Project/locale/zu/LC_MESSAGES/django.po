@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-16 12:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: schools/templates/schools/teacher_dashboard.html:75
+msgid "Dashboard"
+msgstr "Ideshibhodi"
+
+#: schools/templates/schools/teacher_dashboard.html:85
+msgid "My Classes"
+msgstr "Amakilasi Ami"
+
+#: schools/templates/schools/teacher_dashboard.html:95
+msgid "My Subjects"
+msgstr "Izifundo Zami"
+
+#: schools/templates/schools/teacher_dashboard.html:105
+msgid "My Students"
+msgstr "Abafundi Bami"
+
+#: schools/templates/schools/teacher_dashboard.html:115
+msgid "Attendance"
+msgstr "Ukuya Esikoleni"
+
+#: schools/templates/schools/teacher_dashboard.html:125
+msgid "Homework"
+msgstr "Umsebenzi Wasekhaya"
+
+#: schools/templates/schools/teacher_dashboard.html:135
+msgid "Marks & Results"
+msgstr "Amamaki Nemiphumela"
+
+#: schools/templates/schools/teacher_dashboard.html:145
+msgid "My Timetable"
+msgstr "Uhlelo Lwami Lwesikhathi"
+
+#: schools/templates/schools/teacher_dashboard.html:150
+msgid "SCHOOL"
+msgstr "ISIKOLO"
+
+#: schools/templates/schools/teacher_dashboard.html:160
+msgid "School News"
+msgstr "Izindaba Zesikole"
+
+#: schools/templates/schools/teacher_dashboard.html:170
+msgid "My Guardians"
+msgstr "Abanakekeli Bami"
+
+#: schools/templates/schools/teacher_dashboard.html:180
+msgid "My HOD"
+msgstr "Inhloko Yomnyango Wami"
+
+#: schools/templates/schools/teacher_dashboard.html:190
+msgid "Staff Meetings"
+msgstr "Imihlangano Yabasebenzi"
+
+#: schools/templates/schools/teacher_dashboard.html:195
+msgid "ACCOUNT"
+msgstr "I-AKHAWUNTI"
+
+#: schools/templates/schools/teacher_dashboard.html:205
+msgid "My Profile"
+msgstr "Iphrofayela Yami"
+
+#: schools/templates/schools/teacher_dashboard.html:225
+msgid "Logout"
+msgstr "Phuma"

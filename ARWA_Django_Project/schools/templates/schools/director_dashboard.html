@@ -1,0 +1,321 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    
+        <!--
+            Make the Director dashboard responsive on phones,
+            tablets, and desktop screens.
+        -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+    
+        <title>Director Dashboard | ARWA</title>
+    
+        <!--
+            Director dashboard styling will be connected here.
+            We will create the CSS file in the next step.
+        -->
+        <link
+            rel="stylesheet"
+            href="{% static 'schools/director_dashboard.css' %}"
+        >
+    </head>
+
+    <body>
+    
+        <!--
+            Main Director dashboard container.
+    
+            All executive dashboard sections will be
+            placed inside this container.
+        -->
+        <div class="director-dashboard">
+    
+            <!--
+                The sidebar will contain the Director's
+                executive navigation.
+            -->
+            <!--
+                Director executive navigation.
+            
+                Each navigation item represents a major
+                area of executive responsibility.
+            -->
+            <aside class="director-sidebar">
+            
+                <!-- ARWA executive branding -->
+                <div class="director-brand">
+            
+                    <h1>ARWA</h1>
+            
+                    <p>Executive Portal</p>
+            
+                </div>
+            
+            
+                <!-- Main executive navigation -->
+                <nav class="director-navigation">
+            
+                    <!-- Executive overview -->
+                    <a href="#" class="director-nav-item active">
+                        <span class="director-nav-icon">⌂</span>
+                        <span>Executive Overview</span>
+                    </a>
+            
+            
+                    <!-- School oversight -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">▣</span>
+                        <span>School Oversight</span>
+                    </a>
+            
+            
+                    <!-- Staff oversight -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">♙</span>
+                        <span>Staff Oversight</span>
+                    </a>
+            
+            
+                    <!-- Account control -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">◉</span>
+                        <span>Account Control</span>
+                    </a>
+            
+            
+                    <!-- Financial oversight -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">◆</span>
+                        <span>Financial Oversight</span>
+                    </a>
+            
+            
+                    <!-- Academic oversight -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">◇</span>
+                        <span>Academic Oversight</span>
+                    </a>
+            
+            
+                    <!-- Communication hub -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">✦</span>
+                        <span>Communication Hub</span>
+                    </a>
+            
+            
+                    <!-- Executive audit -->
+                    <a href="#" class="director-nav-item">
+                        <span class="director-nav-icon">◎</span>
+                        <span>Executive Audit</span>
+                    </a>
+            
+                </nav>
+            
+            </aside>
+    
+    
+            <!--
+                Main content area.
+    
+                This is where the executive overview,
+                financial information, academic information,
+                staff oversight, and other sections will appear.
+            -->
+            <main class="director-main">
+                <!--
+                    ARWA Director Executive Header
+                
+                    Left:
+                        School identity and dashboard title.
+                
+                    Right:
+                        Calendar
+                        Notifications
+                        Director profile
+                -->
+                <header class="director-header">
+                
+                
+                    <!-- ==========================================
+                        LEFT SIDE — SCHOOL IDENTITY
+                        ========================================== -->
+                
+                    <div class="director-header-title">
+                
+                        <!-- School identity -->
+                        <div class="director-school-identity">
+                
+                            <div class="director-school-logo">
+                
+                                <img
+                                    src="{% static 'schools/images/default-school-logo.png' %}"
+                                    alt="School logo"
+                                >
+                
+                            </div>
+                
+                
+                            <div class="director-school-details">
+                
+                                <strong>
+                                    ARWA Demonstration School
+                                </strong>
+                
+                                <span>
+                                    Executive Management
+                                </span>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                        <p class="director-label">
+                            EXECUTIVE COMMAND CENTRE
+                        </p>
+                
+                
+                        <h2>
+                            Director Dashboard
+                        </h2>
+                
+                
+                        <p class="director-header-description">
+                            Strategic oversight and institutional management
+                            for your ARWA school.
+                        </p>
+                
+                    </div>
+                
+                
+                    <!-- ==========================================
+                        RIGHT SIDE — DIRECTOR CONTROLS
+                        ========================================== -->
+                
+                    <div class="director-header-tools">
+                
+                
+                        <!-- Calendar -->
+                        <div class="director-calendar">
+                        
+                            <span class="director-calendar-icon">
+                                ▣
+                            </span>
+                        
+                            <div class="director-calendar-details">
+                        
+                                <span>
+                                    TODAY
+                                </span>
+                        
+                                <strong id="director-date">
+                                    -- --- ----
+                                </strong>
+                        
+                            </div>
+                        
+                        </div>
+                        
+                        
+                        <!-- Notification bell -->
+                        <button
+                            type="button"
+                            class="director-notification-button"
+                            aria-label="Open notifications"
+                        >
+                        
+                            <span class="director-notification-icon">
+                                ♢
+                            </span>
+                        
+                            <span
+                                class="director-notification-badge"
+                                id="director-notification-count"
+                            >
+                                0
+                            </span>
+                        
+                        </button>
+                        
+                        
+                        <!-- Director profile -->
+                        <div class="director-identity">
+                        
+                            <div class="director-avatar">
+                        
+                                <img
+                                    src="{{ request.user.staffprofile.profile_picture.url }}"
+                                    alt="Director profile picture"
+                                >
+                        
+                            </div>
+                        
+                            <div class="director-identity-details">
+                        
+                                <!--
+                                    Display the logged-in Director's real name
+                                    from the Django User account.
+                                -->
+                                <strong>
+                                    {{ request.user.first_name }}
+                                    {{ request.user.last_name }}
+                                </strong>
+                        
+                                <span>
+                                    Executive Management
+                                </span>
+                        
+                            </div>
+                        
+                        </div>
+                
+                
+                    </div>
+                
+                </header>
+    
+    
+                <!--
+                    Dashboard content will be built here.
+                -->
+                <section class="director-content">
+    
+                    <p>
+                        Welcome to the ARWA Executive Portal.
+                    </p>
+                    
+                    <div class="director-tool clock-tool">
+                
+                            <span class="director-tool-icon">
+                                ◷
+                            </span>
+                
+                            <div class="director-tool-content">
+                
+                                <span class="director-tool-label">
+                                    TIME
+                                </span>
+                
+                                <strong id="director-clock">
+                                    --:--:--
+                                </strong>
+                
+                            </div>
+                
+                        </div>
+    
+                </section>
+    
+            </main>
+    
+        </div>
+    
+    </body>
+</html>

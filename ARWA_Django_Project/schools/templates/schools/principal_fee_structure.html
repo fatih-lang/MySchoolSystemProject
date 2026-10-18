@@ -1,0 +1,263 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Make the page responsive on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fee Structure | ARWA</title>
+</head>
+
+    <body>
+
+        <!--
+            This is only a temporary test screen.
+    
+            Later this page will contain the actual
+            Fee Structure management interface.
+        -->
+        <h1>Fee Structure</h1>
+
+        {% if no_access %}
+        
+            <!--
+                The logged-in Principal does not have an
+                active school-type responsibility.
+            -->
+            <p>
+                You do not currently have permission
+                to manage the fee structure for any
+                school type.
+            </p>
+        
+        {% else %}
+        
+            <!--
+                ARWA has identified the school type that
+                this Principal is responsible for.
+            -->
+            <p>
+                School Type:
+                {{ school_type.name }}
+            </p>
+        
+            <!--
+                Show the education system selected for
+                this school.
+            -->
+            <p>
+                Education System:
+                {{ education_system.name }}
+            </p>
+        
+            <!--
+                Show whether this education system uses
+                phases according to the global configuration.
+            -->
+            <p>
+                Uses Phases:
+                {{ uses_phases }}
+            </p>
+            
+            {% if uses_phases %}
+
+                
+            
+                {% if phases %}
+            
+                    <!--
+                        Allow the Principal to select the phase
+                        they want to manage.
+                    -->
+                    {% if not selected_phase %}
+
+                        <!--
+                            No phase has been selected yet.
+                            Show the available phases so the Principal
+                            can choose one.
+                        -->
+                        <h2>Available Phases</h2>
+                    
+                        <form method="get">
+                    
+                            {% for phase in phases %}
+                    
+                                <button
+                                    type="submit"
+                                    name="phase"
+                                    value="{{ phase.id }}"
+                                >
+                                    {{ phase.name }}
+                                </button>
+                    
+                            {% endfor %}
+                    
+                        </form>
+                    
+                    {% else %}
+
+                        <!--
+                            A phase has been selected.
+                            Show the selected phase first.
+                        -->
+                        <h2>Selected Phase</h2>
+                    
+                        <p>
+                            {{ selected_phase.name }}
+                        </p>
+                    
+                    
+                        <!--
+                            Now show the academic levels that belong
+                            to this selected phase.
+                    
+                            ARWA does not hard-code names such as
+                            Grade 1, Grade 2, Grade 3, etc.
+                    
+                            The academic levels come from the database
+                            configuration for this education system,
+                            school type, and phase.
+                        -->
+                        <h2>Available Academic Levels</h2>
+                    
+                        {% if academic_levels %}
+                    
+                            <form method="get">
+
+                                <!--
+                                    Keep the selected phase in the URL
+                                    when the Principal selects an academic level.
+                                -->
+                                <input
+                                    type="hidden"
+                                    name="phase"
+                                    value="{{ selected_phase.id }}"
+                                >
+                            
+                                {% for academic_level in academic_levels %}
+                            
+                                    <!--
+                                        Each button represents one valid
+                                        academic level for the selected phase.
+                                    -->
+                                    <button
+                                        type="submit"
+                                        name="academic_level"
+                                        value="{{ academic_level.id }}"
+                                    >
+                                        {{ academic_level.name }}
+                                    </button>
+                                    
+                                    
+                            
+                                {% endfor %}
+                            
+                            </form>
+                            
+                            {% if selected_academic_level %}
+
+                                <!--
+                                    The Principal has selected an academic level.
+                                    Display it so we can verify that the backend
+                                    correctly received and validated the selection.
+                                -->
+                                <h2>Selected Academic Level</h2>
+                            
+                                <p>
+                                    {{ selected_academic_level.name }}
+                                </p>
+                            
+                            {% endif %}
+                            
+                            {% if selected_academic_level %}
+
+                                <!--
+                                    Show the academic year that ARWA is using
+                                    for the fee structure lookup.
+                                -->
+                                <h2>Academic Year</h2>
+                            
+                                <p>
+                                    {{ current_academic_year.year }}
+                                </p>
+                            
+                            
+                                <!--
+                                    Check whether ARWA found an active fee structure
+                                    for the selected academic level and academic year.
+                                -->
+                                {% if fee_structure %}
+                            
+                                    <h2>Fee Structure</h2>
+                            
+                                    <p>
+                                        Fee structure found.
+                                    </p>
+                            
+                                {% else %}
+                            
+                                    <h2>Fee Structure</h2>
+                            
+                                    <p>
+                                        No active fee structure has been configured
+                                        for this academic level.
+                                    </p>
+                            
+                                {% endif %}
+                                
+                                <h2>Available Fee Items</h2>
+
+                                {% if available_fee_items %}
+                                
+                                    <ul>
+                                        {% for fee_item in available_fee_items %}
+                                            <li>
+                                                {{ fee_item.name }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                
+                                {% else %}
+                                
+                                    <p>
+                                        No fee items are currently available.
+                                    </p>
+                                
+                                {% endif %}
+                            
+                            {% endif %}
+                    
+                        {% else %}
+                    
+                            <p>
+                                No academic levels are currently configured
+                                for this phase.
+                            </p>
+                    
+                        {% endif %}
+                    
+                    {% endif %}
+            
+                {% else %} 
+            
+                    <!--
+                        The education system uses phases, but
+                        no phase has been configured for this
+                        school type yet.
+                    -->
+                    <p>
+                        No phases are currently configured
+                        for this school type.
+                    </p>
+            
+                {% endif %}
+            
+            {% endif %}
+        
+        {% endif %}
+
+    </body>
+</html>

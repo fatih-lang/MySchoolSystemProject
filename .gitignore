@@ -6,3 +6,9 @@ student_documents/
 homework_submissions/
 Git lessons/
 add into sqlite3
+media/
+
+*.sqlite3
+*.sqlite3-journal
+db.sqlite3.backup*
+arwa_project/

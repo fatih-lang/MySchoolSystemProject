@@ -1,0 +1,1043 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    
+        <!-- Make the page responsive on phones. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Principal Dashboard | ARWA</title>
+        
+        <!-- Principal Dashboard stylesheet -->
+        <link rel="stylesheet" href="{% static 'schools/principal_dashboard.css' %}">
+    </head>
+
+    <body>
+    
+        <!-- =====================================================
+        ARWA PRINCIPAL DASHBOARD HEADER
+        ===================================================== -->
+
+        <header class="main-header">
+        
+            <!-- ARWA platform name -->
+            <div class="header-brand">
+                <h1>ARWA</h1>
+                <span>School Management Platform</span>
+            </div>
+        
+        
+            <!-- Header actions -->
+            <div class="header-actions">
+                <!-- Container for the notification button and panel -->
+                <div class="principal-notification-container">
+        
+                    <!-- Notification bell -->
+                    <button
+                        type="button"
+                        class="principal-notification-button"
+                        id="principal-notification-button"
+                        aria-label="Open notifications"
+                    >
+                        🔔
+                
+                        <!-- Number of unread notifications -->
+                        <span
+                            class="principal-notification-count"
+                            id="principal-notification-count"
+                        >
+                            3
+                        </span>
+                
+                    </button>
+                
+                
+                    <!-- Notification panel -->
+                    <div
+                        class="principal-notification-panel"
+                        id="principal-notification-panel"
+                    >
+                
+                        <!-- Notification panel header -->
+                        <div class="principal-notification-panel-header">
+                        
+                            <div>
+                        
+                                <h3>
+                                    Notifications
+                                </h3>
+                        
+                            </div>
+                        
+                        
+                            <!-- Number of unread notifications -->
+                            <span
+                                id="notification-panel-count"
+                            >
+                                3
+                            </span>
+                        
+                        </div>
+                
+                
+                        <!-- Notification  -->
+                        <div class="principal-notification-item unread"
+                             data-notification-type="registered_student"
+                        >
+                
+                            <div class="principal-notification-item-icon">
+                                📝
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    New student registration 
+                                </h4>
+                
+                                <p>
+                                    A student was registred in grade 12.
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                        <!-- Notification 2 -->
+                        <div class="principal-notification-item unread"
+                             data-notification-type="fees_paid"
+                        >
+                
+                            <div class="principal-notification-item-icon">
+                                📢
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    fees payment 
+                                </h4>
+                
+                                <p>
+                                    fees payment was made
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                
+                        <!-- Notification 3 -->
+                        <div class="principal-notification-item unread"
+                             data-notification-type="parents_meeting"
+                        >
+                
+                            <div class="principal-notification-item-icon">
+                                ⚠️
+                            </div>
+                
+                            <div>
+                
+                                <h4>
+                                    parents meeting 
+                                </h4>
+                
+                                <p>
+                                    Grade 12 parents meeting is at 14:00 on saturday
+                                </p>
+                
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                </div>    
+        
+        
+                <!-- Principal calendar container -->
+                <div class="principal-calendar-container">
+                
+                    <!-- Calendar button -->
+                    <button
+                        type="button"
+                        class="principal-calendar-button"
+                        id="principal-calendar-button"
+                        aria-label="Open calendar"
+                    >
+                        📅
+                    </button>
+                    
+                    <!-- Calendar dropdown panel -->
+                    <div
+                        class="principal-calendar-panel"
+                        id="principal-calendar-panel"
+                    >
+                        <!-- Calendar header -->
+                        <div class="principal-calendar-header">
+                        
+                            <!-- Previous month button -->
+                            <button
+                                type="button"
+                                id="calendar-previous-month"
+                                aria-label="Previous month"
+                            >
+                                ◀
+                            </button>
+                        
+                            <!-- Current month and year -->
+                            <h3 id="calendar-month-year">
+                                October 2026
+                            </h3>
+                        
+                            <!-- Next month button -->
+                            <button
+                                type="button"
+                                id="calendar-next-month"
+                                aria-label="Next month"
+                            >
+                                ▶
+                            </button>
+                        
+                        </div>
+                        
+                        <!-- Days of the week -->
+                        <div class="principal-calendar-weekdays">
+                            
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            
+                        </div>
+                        
+                        <!-- Calendar dates 
+                             Why is it empty?
+                            That's intentional.
+                            We're going to let JavaScript calculate 
+                            the correct number of days, including:
+                            Which day the month starts on
+                            28, 29, 30, or 31 days
+                            Previous/next month navigation
+                            Today's date
+                            Different months and years
+                            So we don't manually type dates like 1, 2, 3, 4....
+                        
+                        -->
+                        <div
+                            class="principal-calendar-days"
+                            id="principal-calendar-days"
+                        >
+                        </div>
+                        
+                        <!-- Selected date school events 
+                             Why we're adding this
+                            The JavaScript function:
+                            showSchoolEvents(dateKey);
+                            needs somewhere to put the results.
+                            For example, when the Principal taps 12 October, this container will eventually show:
+                            Monday, 12 October 2026
+                            Parent Meeting
+                            Type: Meeting
+                            Grade 12 parents meeting...
+                        -->
+                        <div
+                            class="school-event-details"
+                            id="school-event-details"
+                        >
+                        </div>
+                        
+                    </div>
+                
+                </div>
+        
+        
+                <!-- Live clock -->
+                <div class="header-clock" title="Current time">
+                    🕐
+                    <span id="dashboard-clock">00:00:00</span>
+                </div>
+        
+        
+                <!-- Principal profile area -->
+                <div class="principal-profile-container">
+                
+                    <!-- Principal profile button -->
+                    <button
+                        class="principal-profile"
+                        type="button"
+                        onclick="togglePrincipalProfileMenu()"
+                    >
+                
+                        <!-- Show the principal's uploaded profile picture -->
+                        {% if staff_profile.profile_picture %}
+                
+                            <img
+                                src="{{ staff_profile.profile_picture.url }}"
+                                alt="Principal profile picture"
+                                class="principal-profile-picture"
+                            >
+                
+                        <!-- Show the principal's first initial if no picture exists -->
+                        {% else %}
+                
+                            <div class="principal-default-avatar">
+                                {{ request.user.first_name|first|upper }}
+                            </div>
+                
+                        {% endif %}
+                
+                
+                        <!-- Principal name and role -->
+                        <div class="principal-profile-info">
+                
+                            <strong>
+                                {{ request.user.first_name }}
+                            </strong>
+                
+                            <small>
+                                Principal
+                            </small>
+                
+                        </div>
+                
+                
+                        <!-- Arrow showing the profile menu state -->
+                        <span class="profile-arrow">
+                            ▼
+                        </span>
+                
+                    </button>
+                
+                
+                    <!-- Principal profile dropdown menu -->
+                    <div
+                        id="principal-profile-menu"
+                        class="principal-profile-menu"
+                    >
+                
+                        <a href="#">
+                            👤
+                            My Profile
+                        </a>
+                
+                        <a href="#">
+                            ⚙
+                            Account Settings
+                        </a>
+                
+                        <a href="{% url 'logout' %}">
+                            ⇥
+                            Logout
+                        </a>
+                
+                    </div>
+                
+                </div>
+        
+            </div>
+        
+        </header>
+        
+        
+        <!-- =====================================================
+            TEMPORARY DASHBOARD CONTENT
+            We will replace this with the real dashboard next.
+            ===================================================== -->
+        
+            <!-- =====================================================
+                PRINCIPAL DASHBOARD LAYOUT
+                ===================================================== -->
+            
+            <div class="dashboard-layout">
+            
+            
+                <!-- =================================================
+                    SIDEBAR
+                    ================================================= -->
+            
+                <aside class="sidebar">
+            
+                    <!-- ARWA sidebar branding -->
+                    <div class="sidebar-brand">
+                        <h2>ARWA</h2>
+                        <span>Principal Panel</span>
+                    </div>
+            
+            
+                    <nav class="sidebar-navigation">
+            
+            
+                        <!-- Dashboard -->
+                        <a href="#" class="sidebar-link active">
+                            <span class="sidebar-icon">▣</span>
+                            <span>Dashboard</span>
+                        </a>
+            
+            
+                        <!-- ================= STUDENTS ================= -->
+            
+                        <div class="sidebar-section">
+
+                            <!-- Students menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('students-menu', this)"
+                            >
+                                <span>
+                                    👨‍🎓
+                                    Students
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                        
+                            <!-- Students submenu -->
+                            <div id="students-menu" class="sidebar-submenu">
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">👨‍🎓</span>
+                                    <span>All Students</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">▤</span>
+                                    <span>Students by Grade</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">💰</span>
+                                    <span>Students Owing Fees</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">👤</span>
+                                    <span>Student Profile</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">＋</span>
+                                    <span>Register Student</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📄</span>
+                                    <span>Student Documents</span>
+                                </a>
+                                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🔒</span>
+                                    <span>Block / Unblock</span>
+                                </a>
+                        
+                            </div>
+                        
+                        </div>
+            
+            
+                        <!-- ================= TEACHERS ================= -->
+
+                        <div class="sidebar-section">
+                        
+                            <!-- Teachers menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('teachers-menu', this)"
+                            >
+                                <span>
+                                    👨‍🏫
+                                    Teachers
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                        
+                        
+                            <!-- Teachers submenu -->
+                            <div id="teachers-menu" class="sidebar-submenu">
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">👨‍🏫</span>
+                                    <span>All Teachers</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">＋</span>
+                                    <span>Register Teacher</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📚</span>
+                                    <span>Assign Subject</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🔒</span>
+                                    <span>Block / Unblock</span>
+                                </a>
+                        
+                            </div>
+                        
+                        </div>
+            
+            
+                        <!-- ================= GUARDIANS ================= -->
+
+                        <div class="sidebar-section">
+                        
+                            <!-- Guardians menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('guardians-menu', this)"
+                            >
+                                <span>
+                                    👪
+                                    Guardians
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                        
+                        
+                            <!-- Guardians submenu -->
+                            <div id="guardians-menu" class="sidebar-submenu">
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">👪</span>
+                                    <span>All Guardians</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">＋</span>
+                                    <span>Register Guardian</span>
+                                </a>
+                        
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🔗</span>
+                                    <span>Link Guardian</span>
+                                </a>
+                        
+                            </div>
+                        
+                        </div>
+            
+            
+                        <!-- ================= ACADEMICS ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- Academic menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('academics-menu', this)"
+                            >
+                                <span>
+                                    📚
+                                    Academics
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                            
+                            <!-- Academics submenu -->
+                            <div id="academics-menu" class="sidebar-submenu">
+            
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📚</span>
+                                    <span>Manage Subjects</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">✓</span>
+                                    <span>Attendance</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📝</span>
+                                    <span>Homework</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📊</span>
+                                    <span>Results</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🗓</span>
+                                    <span>Timetable</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📅</span>
+                                    <span>School Terms</span>
+                                </a>
+                                
+                            </div>    
+            
+                        </div>
+            
+            
+                        <!-- ================= FINANCE ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- Finance menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('finance-menu', this)"
+                            >
+                                <span>
+                                    💵
+                                    Finance
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                            
+                            <!-- Finance submenu -->
+                            <div id="finance-menu" class="sidebar-submenu">
+            
+                                <a href="{% url 'principal_fee_structure' %}" class="sidebar-link">
+                                    <span class="sidebar-icon">💵</span>
+                                    <span>Fee Structure</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">💳</span>
+                                    <span>Record Fee Payment</span>
+                                </a>
+                                
+                            </div>    
+            
+                        </div>
+            
+            
+                        <!-- ================= SCHOOL DOCUMENTS ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- School Documents menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('school_documents-menu', this)"
+                            >
+                                <span>
+                                    📄
+                                    School Documents
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+            
+                            <!-- School Documents submenu -->
+                            <div id="school_documents-menu" class="sidebar-submenu">
+            
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">⬆</span>
+                                    <span>Upload Document</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📄</span>
+                                    <span>School Circulars</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📋</span>
+                                    <span>School Requirements</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📜</span>
+                                    <span>Policies & Rules</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🗓</span>
+                                    <span>School Calendar</span>
+                                </a>
+                                
+                            </div>    
+            
+                        </div>
+            
+            
+                        <!-- ================= COMMUNICATION ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- Communication menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('communication-menu', this)"
+                            >
+                                <span>
+                                    📢
+                                    Communication
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                            
+                            <!-- Communication submenu -->
+                            <div id="communication-menu" class="sidebar-submenu">
+            
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📢</span>
+                                    <span>School News</span>
+                                </a>
+                                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📢</span>
+                                    <span>Post School News</span>
+                                </a>
+                            
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- ================= REPORTS ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- Reports menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('reports-menu', this)"
+                            >
+                                <span>
+                                    📊
+                                    Reports 
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                            
+                            <!-- Reports submenu -->
+                            <div id="reports-menu" class="sidebar-submenu">
+            
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📈</span>
+                                    <span>School Statistics</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">📋</span>
+                                    <span>Audit Log</span>
+                                </a>
+                            
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- ================= ADMINISTRATION ================= -->
+            
+                        <div class="sidebar-section">
+                        
+                            <!-- Administration menu button -->
+                            <button
+                                type="button"
+                                class="sidebar-section-toggle"
+                                onclick="toggleSidebarSection('administration-menu', this)"
+                            >
+                                <span>
+                                    👤
+                                    Administration
+                                </span>
+                        
+                                <!-- Arrow shows whether the menu is open or closed -->
+                                <span class="sidebar-section-arrow">▶</span>
+                            </button>
+                            
+                            <!-- Administration submenu -->
+                            <div id="administration-menu" class="sidebar-submenu">
+            
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">👤</span>
+                                    <span>Register Admin</span>
+                                </a>
+                
+                                <a href="#" class="sidebar-link">
+                                    <span class="sidebar-icon">🔒</span>
+                                    <span>Block / Unblock Admin</span>
+                                </a>
+                                
+                            </div>
+            
+                        </div>
+            
+            
+                        <!-- ================= ACCOUNT ================= -->
+            
+                        <div class="sidebar-section">
+            
+                            <div class="sidebar-section-title">
+                                ACCOUNT
+                            </div>
+            
+                            <a href="#" class="sidebar-link">
+                                <span class="sidebar-icon">⚙</span>
+                                <span>Account Settings</span>
+                            </a>
+            
+                            <a href="{% url 'logout' %}" class="sidebar-link">
+                                <span class="sidebar-icon">⇥</span>
+                                <span>Logout</span>
+                            </a>
+            
+                        </div>
+            
+                    </nav>
+            
+                </aside>
+            
+            
+                <!-- =================================================
+                    MAIN DASHBOARD CONTENT
+                    ================================================= -->
+            
+                <main class="main-content">
+            
+                    <h2>
+                        Good morning, {{ request.user.first_name }}
+                    </h2>
+            
+                    <p class="dashboard-welcome">
+                        Welcome back to {{ staff_profile.school.name }}.
+                    </p>
+                    
+                    <!-- =====================================================
+                        PRINCIPAL DASHBOARD STATISTICS
+                        ===================================================== -->
+                    
+                    <div class="dashboard-cards">
+                    
+                        <!-- Total students -->
+                        <div class="dashboard-card">
+                            <h3>Students</h3>
+                    
+                            <p>
+                                {{ student_count }}
+                            </p>
+                    
+                            <small>
+                                Total registered students
+                            </small>
+                        </div>
+                    
+                    
+                        <!-- Total teachers -->
+                        <div class="dashboard-card">
+                            <h3>Teachers</h3>
+                    
+                            <p>
+                                {{ teacher_count }}
+                            </p>
+                    
+                            <small>
+                                Active teaching staff
+                            </small>
+                        </div>
+                    
+                    
+                        <!-- Total guardians -->
+                        <div class="dashboard-card">
+                            <h3>Guardians</h3>
+                    
+                            <p>
+                                {{ guardian_count }}
+                            </p>
+                    
+                            <small>
+                                Registered guardians
+                            </small>
+                        </div>
+                    
+                    
+                        <!-- Outstanding fees -->
+                        <div class="dashboard-card">
+                            <h3>Outstanding Fees</h3>
+                    
+                            <p>
+                                R0.00
+                            </p>
+                    
+                            <small>
+                                Total school fees outstanding
+                            </small>
+                        </div>
+                    
+                    </div>
+                    
+                    <!-- =====================================================
+                        DAILY ATTENDANCE BY GRADE
+                        ===================================================== -->
+                    
+                    <section
+                        class="dashboard-section"
+                        id="daily-attendance"
+                    >
+                    
+                        <!-- Attendance section heading -->
+                        <div class="attendance-header">
+                        
+                            <div>
+                                <h2>Daily Attendance</h2>
+                        
+                                <p class="attendance-date">
+                                    {{ attendance_date|date:"l, d F Y" }}
+                                </p>
+                            </div>
+                        
+                            <!-- Date navigation buttons -->
+                        <div class="attendance-date-navigation">
+                        
+                            <!-- Previous day -->
+                            <a
+                                href="?attendance_date={{ previous_attendance_date|date:'Y-m-d' }}#daily-attendance"
+                                class="attendance-date-button"
+                                aria-label="Previous day"
+                            >
+                                ◀
+                            </a>
+                        
+                            <!-- Currently selected date -->
+                            <div class="attendance-selected-date">
+                                📅
+                                <span>
+                                    {{ attendance_date|date:"d M Y" }}
+                                </span>
+                            </div>
+                        
+                            <!-- Next day -->
+                            {% if not is_attendance_today %}
+
+                                <a
+                                    href="?attendance_date={{ next_attendance_date|date:'Y-m-d' }}#daily-attendance"
+                                    class="attendance-date-button"
+                                    aria-label="Next day"
+                                >
+                                    ▶
+                                </a>
+                            
+                            {% endif %}
+                        
+                            <!-- Return to today -->
+                            <a
+                                href="?attendance_date={{ today|date:'Y-m-d' }}#daily-attendance"
+                                class="attendance-today-button"
+                            >
+                                Today
+                            </a>
+                        
+                        </div>
+                        
+                        </div>
+                    
+                        <div class="attendance-grade-list">
+                    
+                            {% for grade in attendance_by_grade %}
+                    
+                               <div class="attendance-grade-row">
+
+                                    <!-- Academic level -->
+                                    <div class="attendance-grade-name">
+                                        <strong>
+                                            {{ grade.grade_name }}
+                                        </strong>
+                                    </div>
+                                
+                                    <!-- Attendance information -->
+                                    <div class="attendance-grade-count">
+                                
+                                        <strong>
+                                            {{ grade.attended_count }}
+                                        </strong>
+                                
+                                        <span>
+                                            attended
+                                        </span>
+                                
+                                        <small>
+                                            out of {{ grade.expected_count }} learners
+                                        </small>
+                                
+                                    </div>
+                                
+                                    <!-- Attendance percentage -->
+                                    <div class="attendance-grade-percentage">
+                                
+                                        {{ grade.attendance_percentage }}%
+                                
+                                    </div>
+                                
+                                    <!-- Visual attendance progress bar -->
+                                    <div class="attendance-progress">
+                                
+                                        <div class="attendance-progress-track">
+                                
+                                            <div
+                                                class="attendance-progress-fill"
+                                                style="width: {{ grade.attendance_percentage }}%;"
+                                            >
+                                            </div>
+                                
+                                        </div>
+                                
+                                    </div>
+                                
+                               </div>
+                    
+                            {% empty %}
+                    
+                                <p class="attendance-empty">
+                                    No active student enrolments were found
+                                    for the current academic year.
+                                </p>
+                    
+                            {% endfor %}
+                    
+                        </div>
+                    
+                    </section>
+            
+                </main>
+            
+            </div>
+    <!------    
+        What is its purpose?
+        Your SchoolEvent information lives in the Django/Python side of ARWA.
+        But your calendar is controlled by JavaScript.
+        JavaScript cannot directly access this Python variable:
+        school_events
+        So we need a safe way to send the data from Django to the browser.
+        That's what json_script does.  
+    ------->     
+    {{ school_events|json_script:"principal-school-events-data" }}
+        
+    <script src="{% static 'schools/principal_dashboard.js' %}"></script>
+    </body>
+</html>

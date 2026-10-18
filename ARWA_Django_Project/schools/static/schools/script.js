@@ -531,3 +531,53 @@ if (academicLevelSelect && classroomSelect) {
     });
 }
    
+   
+// Find the container holding the student subject checkboxes.
+const studentSubjectsContainer = document.getElementById(
+    "student-subjects"
+);
+
+// Run this only if the grade dropdown and subject container exist.
+if (academicLevelSelect && studentSubjectsContainer) {
+
+    // Listen for changes to the selected grade.
+    academicLevelSelect.addEventListener("change", function () {
+
+        // Get the ID of the selected academic level.
+        const selectedLevel = this.value;
+
+        // Find every subject option in the container.
+        const subjectOptions = studentSubjectsContainer.querySelectorAll(
+            ".student-subject-option"
+        );
+
+        // Check each subject against the selected grade.
+        subjectOptions.forEach(function (subjectOption) {
+
+            // Read the grade ID assigned to this subject offering.
+            const subjectLevel = subjectOption.dataset.academicLevel;
+
+            // Show the subject only when its grade matches.
+            const matchesGrade = (
+                selectedLevel !== "" &&
+                subjectLevel === selectedLevel
+            );
+
+            subjectOption.hidden = !matchesGrade;
+
+            // Clear the checkbox if it doesn't match the new grade.
+            if (!matchesGrade) {
+                const checkbox = subjectOption.querySelector(
+                    'input[type="checkbox"]'
+                );
+
+                if (checkbox) {
+                    checkbox.checked = false;
+                }
+            }
+        });
+    });
+
+    // Filter subjects immediately when the page loads.
+    academicLevelSelect.dispatchEvent(new Event("change"));
+}   

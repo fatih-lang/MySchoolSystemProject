@@ -24,7 +24,13 @@ from django.contrib.auth.models import User
 # Import the Student model.
 # This will allow the registration service
 # to create and connect the student's record.
-from .models import Student
+# Import the models needed for student registration.
+from .models import (
+    Student,
+    StudentNumberSequence,
+    StudentEnrollment,
+    AcademicYear,
+)
 
 @transaction.atomic
 def register_student(
@@ -64,6 +70,23 @@ def register_student(
             "to the selected academic level."
         )
         
+    # Find the active academic years for this school.
+    active_academic_years = AcademicYear.objects.filter(
+        school=school,
+        status="ACTIVE",
+    )
+
+    # A student must be registered into exactly one
+    # active academic year.
+    if active_academic_years.count() != 1:
+        raise ValueError(
+            "This school must have exactly one active "
+            "academic year before students can be registered."
+        )
+
+    # Get the school's active academic year.
+    academic_year = active_academic_years.first()    
+        
     
     # Make sure the student has been given a password.
     if not password:
@@ -71,7 +94,12 @@ def register_student(
             "A student password is required."
         )     
         
-    
+    # Make sure this school has a student-number sequence.
+    # If one already exists, keep using the existing sequence.
+    # Otherwise, create one starting at the default number.
+    StudentNumberSequence.objects.get_or_create(
+        school=school
+    )
     
     # Create the Student record first.
     # Student.save() will automatically generate
@@ -107,6 +135,25 @@ def register_student(
 
     # Save the connection between the Student and User.
     student.save(update_fields=["user"])
+    
+    # Create the student's annual enrolment record.
+    # This preserves the student's academic placement
+    # for the selected academic year.
+    enrollment = StudentEnrollment(
+        student=student,
+        school=school,
+        academic_year=academic_year,
+        academic_level=academic_level,
+        classroom=classroom,
+    )
+
+    # Validate the enrolment before saving it.
+    # This checks that the school, year, level and
+    # classroom belong together.
+    enrollment.full_clean()
+
+    # Save the validated annual enrolment.
+    enrollment.save()
 
     # Return both objects created during registration.
     return student, user

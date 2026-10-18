@@ -1,62 +1,106 @@
+{% load static %}
+
 <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><!-- Make the page responsive on phones. -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
         <title>Student Registered Successfully</title>
+        
+        <!-- Load the Students who have been regist stylesheet. -->
+    <link rel="stylesheet" href="{% static 'schools/student_registered.css' %}">
     
     </head>
         <body><!-- Main registration-success heading. -->
-            <h1>Student Registered Successfully</h1>
+            <!-- Main container for the successful registration information. -->
+            <div class="registration-success-container">
             
-            <!-- Display the student's generated ARWA number. -->
-            <p>
-                <strong>Student Number:</strong>
-                {{ student.student_number }}
-            </p>
+                <!-- Page heading. -->
+                <h1>Student Registered Successfully</h1>
             
-            <!-- Display the student's first name. -->
-            <p>
-                <strong>Name:</strong>
-                {{ student.first_name }}
-            </p>
+                <!-- Short message below the heading. -->
+                <p class="registration-success-message">
+                    The student has been successfully registered at ARWA.
+                </p>
             
-            <!-- Display the student's surname. -->
-            <p>
-                <strong>Surname:</strong>
-                {{ student.last_name }}
-            </p>
             
-            <!-- Display the student's identification/passport number. -->
-            <p>
-                <strong>ID/Passport:</strong>
-                {{ student.id_or_passport }}
-            </p>
+                <!-- Student information table. -->
+                <table class="student-information-table">
             
-            <!-- Display the student's academic level. -->
-            <p>
-                <strong>Academic Level:</strong>
-                {{ student.academic_level }}
-            </p>
+                    <tr>
+                        <th>Student Number</th>
+                        <td class="student-number">
+                            {{ student.student_number }}
+                        </td>
+                    </tr>
             
-            <!-- Display the student's classroom. -->
-            <p>
-                <strong>Classroom:</strong>
-                {{ student.classroom.name }}
-            </p>
+                    <tr>
+                        <th>Name</th>
+                        <td>
+                            {{ student.first_name }}
+                        </td>
+                    </tr>
             
-            <!-- The phase will be connected through the academic level. -->
-            <p>
-                <strong>Phase:</strong>
-                {{ student.academic_level.academic_level.phase }}
-            </p>
+                    <tr>
+                        <th>Surname</th>
+                        <td>
+                            {{ student.last_name }}
+                        </td>
+                    </tr>
             
-            <!-- Subjects will be added after we build
-                the student-subject enrollment system. -->
-            <p>
-                <strong>Subject:</strong>
-                To be assigned
-            </p>
+                    <tr>
+                        <th>ID / Passport</th>
+                        <td>
+                            {{ student.id_or_passport }}
+                        </td>
+                    </tr>
+            
+                    <tr>
+                        <th>Academic Level</th>
+                        <td>
+                            {{ enrollment.academic_level }}
+                        </td>
+                    </tr>
+            
+                    <tr>
+                        <th>Classroom</th>
+                        <td>
+                            {{ enrollment.classroom }}
+                        </td>
+                    </tr>
+            
+                    <tr>
+                        <th>Phase</th>
+                        <td>
+                            {{ enrollment.academic_level.academic_level.phase }}
+                        </td>
+                    </tr>
+            
+                </table>
+            
+            
+                <!-- Subjects section. -->
+                <h2 class="subjects-heading">
+                    Subjects
+                </h2>
+            
+                <ul class="subject-list">
+            
+                    {% for enrollment_subject in enrollment.enrollment_subjects.all %}
+            
+                        <li>
+                            {{ enrollment_subject.school_subject.subject.name }}
+                        </li>
+            
+                    {% empty %}
+            
+                        <li>No subjects assigned.</li>
+            
+                    {% endfor %}
+            
+                </ul>
+            
+            </div>
         
         </body>
 </html>

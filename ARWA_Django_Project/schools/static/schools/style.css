@@ -612,3 +612,67 @@ body {
     font-size: 14px;
 }
 
+
+ /* =================================
+    LOGOUT BUTTON
+    Styles the logout button in the
+    ARWA dashboard header
+    ================================= */
+
+.logout-button {
+
+    /* Remove the browser's default button border */
+    border: none;
+
+    /* Give the button a clean background */
+    background-color: #ffffff;
+
+    /* Make the logout text easy to read */
+    color: #1f4e79;
+
+    /* Add space inside the button */
+    padding: 10px 18px;
+
+    /* Give the button rounded corners */
+    border-radius: 6px;
+
+    /* Make the button look clickable */
+    cursor: pointer;
+
+    /* Make the text slightly stronger */
+    font-weight: bold;
+
+    /* Keep the button at a comfortable size */
+    font-size: 14px;
+}
+
+
+/* Change the appearance when the user
+   places their finger/mouse over it. */
+.logout-button:hover {
+
+    /* Slightly darker background */
+    background-color: #e8eef7;
+}
+
+
+/* =================================
+   MOBILE LOGOUT BUTTON
+   Makes the button comfortable to
+   use on smaller phone screens
+   ================================= */
+
+@media (max-width: 600px) {
+
+    .logout-button {
+
+        /* Make the button slightly smaller
+           on narrow screens */
+        padding: 8px 14px;
+
+        font-size: 13px;
+    }
+}
+
+
+

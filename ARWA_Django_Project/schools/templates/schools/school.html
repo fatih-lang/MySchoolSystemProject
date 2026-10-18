@@ -14,6 +14,7 @@
         <!-- Find the style.css file registered under the schools static files." -->
         <link rel="stylesheet" href="{% static 'schools/style.css' %}">
         
+        
     </head>
     
     <body>
@@ -24,11 +25,32 @@
         ============================== -->
         
         <header class="main-header">
+
+        <!-- Main school platform name -->
+        <h1>ARWA SCHOOL MANAGEMENT PLATFORM</h1>
     
-            <!-- Main school platform name -->
-            <h1>ARWA SCHOOL MANAGEMENT PLATFORM</h1>
+        <!--
+            Logout form.
     
-        </header>
+            We use POST instead of GET because logging out
+            changes the user's authenticated session.
+    
+            Django will later process this form and
+            properly destroy the user's session.
+        -->
+        <form method="post" action="{% url 'logout' %}">
+    
+            <!-- Protect the logout request against CSRF attacks. -->
+            {% csrf_token %}
+    
+            <!-- Button the user taps to log out. -->
+            <button type="submit" class="logout-button">
+                Logout
+            </button>
+    
+        </form>
+    
+    </header>
     
     
         <!-- ==============================
@@ -427,7 +449,7 @@
                         <h3>School Information</h3>
                     
                         <!-- Student academic level -->
-                        <label for="student-grade">Grade</label>
+                        <label for="academic level">Grade</label>
 
                         
                         <select id="student-grade" name="academic_level" required>
@@ -474,6 +496,57 @@
                             {% endfor %}
                         
                         </select>
+                        
+                        <!-- ==========================================================
+                            STUDENT SUBJECT SELECTION
+                            ========================================================== -->
+                        
+                        <h3>Student Subjects</h3>
+                        
+                        <!-- Explain what the administrator must do. -->
+                        <p>
+                            Select the subjects this student will take in the
+                            selected grade.
+                        </p>
+                        
+                        <!-- Keep all available subject checkboxes in one container. -->
+                        <div id="student-subjects">
+                        
+                            <!-- Display a message when no subjects are available. -->
+                            {% if not subject_offerings %}
+                                <p id="no-subjects-message">
+                                    No subjects are currently configured for this school.
+                                </p>
+                            {% endif %}
+                        
+                            <!-- Loop through the subject offerings supplied by Django. -->
+                            {% for offering in subject_offerings %}
+                        
+                                <!-- Each offering belongs to a particular school grade. -->
+                                <div
+                                    class="student-subject-option"
+                                    data-academic-level="{{ offering.school_academic_level_id }}"
+                                >
+                        
+                                    <!-- Submit the selected offering's database ID. -->
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            name="school_academic_level_subjects"
+                                            value="{{ offering.id }}"
+                                        >
+                        
+                                        <!-- Show the subject name to the administrator. -->
+                                        {{ offering.school_subject.subject.name }}
+                                    </label>
+                        
+                                </div>
+                        
+                            {% endfor %}
+                        
+                        </div>
+                        
+                        <br><br>
                     
                     
                         <!-- ==========================================================

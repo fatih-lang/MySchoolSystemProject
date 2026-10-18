@@ -1,0 +1,125 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Make the page responsive on phones and tablets. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% trans "Language Preference" %} | ARWA</title>
+
+    <style>
+        /* Make width and height calculations easier to control. */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Give the page a clean ARWA background. */
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fb;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Keep the language form centered and easy to read. */
+        .language-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Style the page heading. */
+        .language-container h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #1f2937;
+            font-size: 28px;
+        }
+
+        /* Style the explanation below the heading. */
+        .language-description {
+            margin-bottom: 25px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Make the language selector easy to use on a phone. */
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        /* Style the save button. */
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Give the button a small visual response when pressed. */
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Keep the form comfortable on smaller phone screens. */
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .language-container {
+                margin: 30px auto;
+                padding: 22px;
+            }
+
+            .language-container h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="language-container">
+
+        <h1>{% trans "Language Preference" %}</h1>
+
+        <p class="language-description">
+            {% trans "Choose the language you want ARWA to use for your interface." %}
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                {% trans "Save Language" %}
+            </button>
+
+        </form>
+
+    </main>
+
+</body>
+</html>

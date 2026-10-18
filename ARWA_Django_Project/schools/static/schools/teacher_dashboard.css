@@ -1,0 +1,9124 @@
+/* =========================================================
+   ARWA TEACHER DASHBOARD
+   STEP 1 - DASHBOARD FOUNDATION
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BASIC PAGE SETUP
+   --------------------------------------------------------- */
+
+/*
+   box-sizing makes width calculations easier.
+
+   For example, if an element has:
+       width: 100%
+       padding: 20px
+
+   the padding will be included inside the 100%.
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/*
+   Remove the browser's default page spacing.
+*/
+body {
+    margin: 0;
+
+    /*
+       Clean modern dashboard font.
+    */
+    font-family: Arial, sans-serif;
+
+    /*
+       Soft background inspired by modern
+       school management dashboards.
+    */
+    background-color: #f5f7fb;
+
+    color: #1f2937;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN DASHBOARD
+   --------------------------------------------------------- */
+
+.teacher-dashboard {
+
+    /*
+       The dashboard should occupy the full
+       height of the screen.
+    */
+    min-height: 100vh;
+
+    /*
+       Put the sidebar and main area beside
+       each other.
+    */
+    display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.teacher-sidebar {
+
+    /*
+       Fixed sidebar width on larger screens.
+    */
+    width: 250px;
+
+    /*
+       Make the sidebar fill the screen height.
+    */
+    min-height: 100vh;
+
+    /*
+       White sidebar similar to modern
+       SaaS dashboard designs.
+    */
+    background-color: #ffffff;
+
+    /*
+       Keep the sidebar visible while scrolling.
+    */
+    position: sticky;
+    top: 0;
+
+    /*
+       Use flexbox so we can position:
+       branding
+       navigation
+       logout
+    */
+    display: flex;
+    flex-direction: column;
+
+    /*
+       Small border separates the sidebar
+       from the dashboard.
+    */
+    border-right: 1px solid #e5e7eb;
+}
+
+
+/* ---------------------------------------------------------
+   ARWA BRAND
+   --------------------------------------------------------- */
+
+.sidebar-brand {
+
+    /*
+       Space around the ARWA name.
+    */
+    padding: 24px 22px;
+
+    /*
+       Separate the brand from navigation.
+    */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.sidebar-brand h1 {
+
+    margin: 0;
+
+    /*
+       ARWA becomes the main visual identity.
+    */
+    font-size: 25px;
+
+    font-weight: 700;
+
+    /*
+       ARWA blue.
+    */
+    color: #2563eb;
+}
+
+
+.sidebar-brand p {
+
+    margin: 5px 0 0 0;
+
+    font-size: 12px;
+
+    color: #7b8494;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.teacher-navigation {
+
+    /*
+       Give the navigation some breathing room.
+    */
+    padding: 18px 12px;
+
+    /*
+       Allow the navigation to scroll if
+       the screen is short.
+    */
+    overflow-y: auto;
+
+    /*
+       Navigation takes available sidebar space.
+    */
+    flex: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Navigation section titles
+   --------------------------------------------------------- */
+
+.navigation-title {
+
+    margin: 12px 10px 8px 10px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    color: #9aa3b2;
+}
+
+
+/* ---------------------------------------------------------
+   Navigation links
+   --------------------------------------------------------- */
+
+.navigation-link {
+
+    /*
+       Make the entire link clickable.
+    */
+    display: block;
+
+    padding: 11px 13px;
+
+    margin-bottom: 4px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    /*
+       Smooth hover effect.
+    */
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/*
+   When the mouse moves over a navigation
+   item.
+*/
+.navigation-link:hover {
+
+    background-color: #f1f5ff;
+
+    color: #2563eb;
+}
+
+
+/*
+   The current page.
+
+   Dashboard is currently active.
+*/
+.navigation-link.active {
+
+    background-color: #eaf1ff;
+
+    color: #2563eb;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.sidebar-logout {
+
+    padding: 15px 12px 20px 12px;
+
+    border-top: 1px solid #f0f0f0;
+}
+
+
+.logout-button {
+
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #fff1f2;
+
+    color: #dc2626;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+.logout-button:hover {
+
+    background-color: #ffe4e6;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.teacher-main {
+
+    /*
+       Take all remaining screen width
+       after the sidebar.
+    */
+    flex: 1;
+
+    /*
+       Prevent extremely wide content.
+    */
+    min-width: 0;
+
+    padding: 0 30px 40px 30px;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.teacher-topbar {
+
+    /*
+       Give the top bar enough height to feel
+       like a proper application header.
+    */
+    min-height: 86px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    /*
+       Keep the header separated from
+       the dashboard content.
+    */
+    border-bottom: 1px solid #e7eaf0;
+}
+
+
+/* ---------------------------------------------------------
+   School information
+   --------------------------------------------------------- */
+
+.topbar-school {
+
+    margin: 0 0 5px 0;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: #8b95a7;
+}
+
+
+/* ---------------------------------------------------------
+   Dashboard title
+   --------------------------------------------------------- */
+
+.teacher-topbar h2 {
+
+    margin: 0;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   TEACHER PROFILE
+   ========================================================= */
+
+.teacher-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    /*
+       Keep the profile together when
+       the screen becomes smaller.
+    */
+    flex-shrink: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Teacher avatar
+   --------------------------------------------------------- */
+
+.teacher-profile-avatar {
+
+    width: 46px;
+    
+    height: 46px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    /*
+       Soft blue background.
+    */
+    background-color: #e8f0ff;
+
+    color: #2563eb;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    /*
+       Very subtle border.
+    */
+    border: 1px solid #dbe6ff;
+}
+
+
+/* ---------------------------------------------------------
+   Teacher name
+   --------------------------------------------------------- */
+
+.teacher-profile-name {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* ---------------------------------------------------------
+   Teacher role
+   --------------------------------------------------------- */
+
+.teacher-profile-role {
+
+    margin: 3px 0 0 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+
+/* =========================================================
+   RESPONSIVE FOUNDATION
+   ========================================================= */
+
+/*
+   Phone layout.
+
+   We are adding this now because ARWA is being
+   tested mainly on a phone.
+
+   Later we will improve this further with a
+   proper mobile menu.
+*/
+
+@media (max-width: 768px) {
+
+    /*
+       Stack the sidebar above the main content
+       temporarily on smaller screens.
+    */
+    .teacher-dashboard {
+
+        flex-direction: column;
+    }
+
+
+    /*
+       Sidebar becomes full width on phones.
+    */
+    .teacher-sidebar {
+
+        width: 100%;
+
+        min-height: auto;
+
+        position: relative;
+    }
+
+
+    /*
+       Keep the navigation usable on a phone.
+    */
+    .teacher-navigation {
+
+        max-height: 300px;
+    }
+
+
+    /*
+       Main content uses smaller spacing.
+    */
+    .teacher-main {
+
+        padding: 0 15px 30px 15px;
+    }
+
+
+    /*
+       Top bar can wrap on smaller screens.
+    */
+    .teacher-topbar {
+
+        padding: 15px 0;
+
+        flex-wrap: wrap;
+    }
+
+
+    .teacher-topbar h2 {
+
+        font-size: 18px;
+    }
+
+}
+
+/* =========================================================
+   SIDEBAR VISUAL POLISH
+   ========================================================= */
+
+
+/*
+   Give navigation links a little more breathing room.
+*/
+.navigation-link {
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/*
+   Make the active page easier to recognise.
+*/
+.navigation-link.active {
+    border-left: 3px solid #2563eb;
+
+    padding-left: 10px;
+}
+
+
+/*
+   Give the sidebar a very subtle shadow.
+
+   This helps separate it from the main
+   dashboard without making it heavy.
+*/
+.teacher-sidebar {
+    box-shadow:
+        2px 0 8px rgba(0, 0, 0, 0.03);
+}
+
+/* =========================================================
+   WELCOME PANEL
+   ========================================================= */
+
+.teacher-welcome-panel {
+
+    /*
+       Create the large welcome card.
+    */
+    margin-top: 30px;
+
+    /* Give the welcome panel a soft 
+       modern blue gradient 
+    */
+    margin-top: 30px;
+    
+    background: linear-gradient(
+        135deg,
+        #eaf2ff,
+        #f5f8ff
+    );
+
+    /*
+       Rounded corners give the dashboard
+       its modern SaaS appearance.
+    */
+    border-radius: 18px;
+
+    /*
+       Space inside the card.
+    */
+    padding: 32px 38px;
+
+    /*
+       Put the text and illustration
+       beside each other.
+    */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    /*
+       Prevent content from touching
+       the edges.
+    */
+    gap: 30px;
+
+    /*
+       Hide anything that extends beyond
+       the rounded card.
+    */
+    overflow: hidden;
+
+    /*
+       Give the card a subtle depth.
+    */
+    box-shadow:
+        0 4px 15px rgba(37, 99, 235, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   Welcome text
+   --------------------------------------------------------- */
+
+.welcome-content {
+
+    /*
+       Allow the text area to grow.
+    */
+    flex: 1;
+
+    /*
+       Keep text above the illustration.
+    */
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* Small "Welcome back" text */
+.welcome-small-text {
+
+    margin: 0 0 8px 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #4f6fae;
+}
+
+
+/* Make the teacher's name the main focus 
+   of the welcome panel 
+*/
+.welcome-content h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Welcome description */
+.welcome-content p:last-child {
+
+    margin: 0;
+
+    max-width: 500px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #667085;
+}
+
+/* School name shown inside the welcome panel */
+.welcome-school-name {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4f6fae;
+}
+
+
+/* =========================================================
+   ILLUSTRATION AREA
+   ========================================================= */
+
+.welcome-illustration {
+
+    /*
+       Reserve space for our future
+       male/female teacher illustration.
+    */
+    width: 250px;
+
+    min-height: 170px;
+
+    /*
+       Keep the placeholder centred.
+    */
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+/* Temporary placeholder */
+.illustration-placeholder {
+
+    width: 150px;
+
+    height: 150px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0.65);
+
+    color: #7b8fb5;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   WELCOME PANEL - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       Stack the welcome text and illustration
+       vertically on small screens.
+    */
+    .teacher-welcome-panel {
+
+        padding: 25px 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .welcome-content h1 {
+
+        font-size: 24px;
+    }
+
+
+    .welcome-content p:last-child {
+
+        font-size: 13px;
+    }
+
+
+    .welcome-illustration {
+
+        width: 100%;
+
+        min-height: 140px;
+    }
+
+
+    .illustration-placeholder {
+
+        width: 120px;
+
+        height: 120px;
+    }
+
+}
+
+/* =========================================================
+   MY CLASSES SECTION
+   ========================================================= */
+
+.teacher-section {
+
+    /*
+       Give the section space below the
+       welcome panel.
+    */
+    margin-top: 35px;
+}
+
+
+/* ---------------------------------------------------------
+   Section heading
+   --------------------------------------------------------- */
+
+.section-heading {
+
+    margin-bottom: 18px;
+}
+
+
+.section-heading h2 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 21px;
+
+    color: #172033;
+}
+
+
+.section-heading p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #8b95a7;
+}
+
+
+/* =========================================================
+   ASSIGNMENT GRID
+   ========================================================= */
+
+.assignment-grid {
+
+    /*
+       Automatically create columns depending
+       on the available screen width.
+    */
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   ASSIGNMENT CARD
+   ========================================================= */
+
+.assignment-card {
+
+    /*
+       Make the entire card clickable.
+    */
+    display: block;
+
+    padding: 22px;
+
+    /*
+       White card against the soft dashboard
+       background.
+    */
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    /*
+       Remove the default link underline.
+    */
+    text-decoration: none;
+
+    /*
+       Normal text colour.
+    */
+    color: #172033;
+
+    /*
+       Subtle border.
+    */
+    border: 1px solid #edf0f5;
+
+    /*
+       Small shadow.
+    */
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+
+    /*
+       Smooth animation when the teacher
+       touches/points at the card.
+    */
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------
+   Card hover
+   --------------------------------------------------------- */
+
+.assignment-card:hover {
+
+    /*
+       Lift the card slightly.
+    */
+    transform: translateY(-3px);
+
+    /*
+       Increase the shadow slightly.
+    */
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    border-color: #d9e5ff;
+}
+
+
+/* ---------------------------------------------------------
+   Classroom name
+   --------------------------------------------------------- */
+
+.assignment-card h3 {
+
+    margin: 0 0 10px 0;
+
+    font-size: 22px;
+
+    color: #2563eb;
+}
+
+
+/* ---------------------------------------------------------
+   Grade
+   --------------------------------------------------------- */
+
+.assignment-grade {
+
+    margin: 0 0 8px 0;
+
+    font-size: 13px;
+
+    color: #8b95a7;
+}
+
+
+/* ---------------------------------------------------------
+   Subject
+   --------------------------------------------------------- */
+
+.assignment-subject {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* ---------------------------------------------------------
+   View class link
+   --------------------------------------------------------- */
+
+.assignment-link {
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   EMPTY ASSIGNMENT MESSAGE
+   ========================================================= */
+
+.empty-message {
+
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    color: #8b95a7;
+}
+
+
+/* =========================================================
+   MY CLASSES - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-section {
+
+        margin-top: 28px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 19px;
+    }
+
+
+    .assignment-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .assignment-card {
+
+        padding: 19px;
+    }
+
+}
+
+/* =========================================================
+   TEACHER OVERVIEW
+   ========================================================= */
+
+
+/*
+   Arrange the overview cards in a responsive grid.
+*/
+.teacher-overview {
+
+    display: grid;
+
+    /*
+       Automatically create as many columns
+       as the available space allows.
+    */
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+
+    gap: 18px;
+
+    /*
+       Give the cards some space below
+       the welcome panel.
+    */
+    margin-top: 30px;
+}
+
+
+/* ---------------------------------------------------------
+   Overview card
+   --------------------------------------------------------- */
+
+.overview-card {
+
+    /*
+       White card against the soft dashboard
+       background.
+    */
+    background-color: #ffffff;
+
+    /*
+       Rounded corners for a modern
+       dashboard appearance.
+    */
+    border-radius: 14px;
+
+    /*
+       Subtle border around the card.
+    */
+    border: 1px solid #edf0f5;
+
+    /*
+       Internal spacing.
+    */
+    padding: 20px;
+
+    /*
+       Small shadow gives the card
+       some depth.
+    */
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+
+    /*
+       Smooth movement when the card
+       is hovered or touched.
+    */
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+   Slightly lift the card when the
+   pointer moves over it.
+*/
+.overview-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* ---------------------------------------------------------
+   Overview card label
+   --------------------------------------------------------- */
+
+.overview-label {
+
+    margin: 0 0 10px 0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #667085;
+}
+
+
+/* ---------------------------------------------------------
+   Main overview number
+   --------------------------------------------------------- */
+
+.overview-card h3 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* ---------------------------------------------------------
+   Overview description
+   --------------------------------------------------------- */
+
+.overview-description {
+
+    margin: 7px 0 0 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+/* =========================================================
+   TEACHER OVERVIEW - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       Stack the overview cards into
+       a single column on smaller phones.
+    */
+    .teacher-overview {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-top: 24px;
+    }
+
+
+    /*
+       Slightly reduce card padding
+       on smaller screens.
+    */
+    .overview-card {
+
+        padding: 18px;
+    }
+
+
+    /*
+       Keep the main number prominent
+       without taking too much space.
+    */
+    .overview-card h3 {
+
+        font-size: 25px;
+    }
+
+}
+
+/* =========================================================
+   RECENT HOMEWORK
+   ========================================================= */
+
+
+/*
+   Keep the homework section visually
+   separate from the overview cards.
+*/
+.recent-homework-section {
+
+    margin-top: 30px;
+}
+
+
+/* ---------------------------------------------------------
+   Homework list
+   --------------------------------------------------------- */
+
+.homework-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   Individual homework item
+   --------------------------------------------------------- */
+
+.homework-item {
+
+    /*
+       White card against the dashboard
+       background.
+    */
+    background-color: #ffffff;
+
+    /*
+       Arrange homework information,
+       status and action horizontally.
+    */
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    /*
+       Space inside the card.
+    */
+    padding: 18px 20px;
+
+    /*
+       Rounded modern appearance.
+    */
+    border-radius: 12px;
+
+    /*
+       Subtle border.
+    */
+    border: 1px solid #edf0f5;
+
+    /*
+       Small shadow.
+    */
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.03);
+
+    /*
+       Smooth hover animation.
+    */
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+   Slightly lift the homework item
+   when the pointer moves over it.
+*/
+.homework-item:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   Homework information
+   --------------------------------------------------------- */
+
+.homework-info {
+
+    /*
+       Allow this area to use the
+       available space.
+    */
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.homework-info h3 {
+
+    margin: 0 0 6px 0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Subject and class */
+.homework-subject {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #667085;
+}
+
+
+/* Due date */
+.homework-due {
+
+    margin: 6px 0 0 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+
+/* ---------------------------------------------------------
+   Homework status
+   --------------------------------------------------------- */
+
+.homework-status {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+}
+
+
+.homework-count {
+
+    font-size: 12px;
+
+    color: #667085;
+}
+
+
+/* ---------------------------------------------------------
+   Status badge
+   --------------------------------------------------------- */
+
+.homework-badge {
+
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/*
+   Homework waiting for marking.
+*/
+.homework-badge.pending {
+
+    background-color: #fff7ed;
+
+    color: #c2410c;
+}
+
+
+/* ---------------------------------------------------------
+   Homework action
+   --------------------------------------------------------- */
+
+.homework-action {
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #2563eb;
+
+    white-space: nowrap;
+}
+
+
+.homework-action:hover {
+
+    text-decoration: underline;
+}
+
+/* =========================================================
+   RECENT HOMEWORK - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       Stack the homework information
+       vertically on smaller screens.
+    */
+    .homework-item {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding: 17px;
+    }
+
+
+    /*
+       Keep the status aligned to
+       the left on mobile.
+    */
+    .homework-status {
+
+        align-items: flex-start;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    /*
+       Allow the action button to
+       use the full width if needed.
+    */
+    .homework-action {
+
+        margin-top: 2px;
+    }
+
+}
+
+
+/* =========================================================
+   TODAY'S SCHEDULE
+   ========================================================= */
+
+
+/*
+   Give the timetable some space from
+   the section above it.
+*/
+.todays-schedule-section {
+
+    margin-top: 30px;
+}
+
+
+/* ---------------------------------------------------------
+   Schedule list
+   --------------------------------------------------------- */
+
+.schedule-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* ---------------------------------------------------------
+   Schedule item
+   --------------------------------------------------------- */
+
+.schedule-item {
+
+    /*
+       Arrange the time, lesson details
+       and status beside each other.
+    */
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    /*
+       White background keeps the
+       timetable clean and readable.
+    */
+    background-color: #ffffff;
+
+    padding: 16px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/*
+   Slight movement when hovering.
+*/
+.schedule-item:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   Time
+   --------------------------------------------------------- */
+
+.schedule-time {
+
+    /*
+       Give the time its own fixed area.
+    */
+    width: 55px;
+
+    flex-shrink: 0;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* ---------------------------------------------------------
+   Schedule details
+   --------------------------------------------------------- */
+
+.schedule-details {
+
+    /*
+       Allow the lesson information
+       to use the available space.
+    */
+    flex: 1;
+}
+
+
+.schedule-details h3 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.schedule-details p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+
+/* ---------------------------------------------------------
+   Schedule status
+   --------------------------------------------------------- */
+
+.schedule-status {
+
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background-color: #f1f5f9;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/*
+   Highlight the class currently
+   taking place.
+*/
+.schedule-status.current {
+
+    background-color: #eaf1ff;
+
+    color: #2563eb;
+}
+
+/* =========================================================
+   TODAY'S SCHEDULE - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /*
+       Give each timetable item a little
+       less horizontal spacing on phones.
+    */
+    .schedule-item {
+
+        gap: 12px;
+
+        padding: 15px;
+    }
+
+
+    /*
+       Make the time slightly smaller
+       on narrow screens.
+    */
+    .schedule-time {
+
+        width: 45px;
+
+        font-size: 13px;
+    }
+
+
+    .schedule-details h3 {
+
+        font-size: 14px;
+    }
+
+
+    .schedule-details p {
+
+        font-size: 11px;
+    }
+
+
+    /*
+       Keep the status compact on phones.
+    */
+    .schedule-status {
+
+        padding: 4px 7px;
+
+        font-size: 10px;
+    }
+
+}
+
+/* =========================================================
+   CLASS PERFORMANCE
+   ========================================================= */
+
+
+/*
+   Give the performance section some
+   separation from the timetable.
+*/
+.class-performance-section {
+
+    margin-top: 30px;
+}
+
+
+/* ---------------------------------------------------------
+   Performance list
+   --------------------------------------------------------- */
+
+.performance-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    background-color: #ffffff;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ---------------------------------------------------------
+   Performance item
+   --------------------------------------------------------- */
+
+.performance-item {
+
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Performance information
+   --------------------------------------------------------- */
+
+.performance-info {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 8px;
+}
+
+
+.performance-info h3 {
+
+    margin: 0 0 3px 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.performance-info p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+
+/*
+   Percentage displayed on the
+   right side of each class.
+*/
+.performance-info strong {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* ---------------------------------------------------------
+   Progress bar background
+   --------------------------------------------------------- */
+
+.performance-bar {
+
+    width: 100%;
+
+    height: 8px;
+
+    background-color: #edf2f7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Progress amount
+   --------------------------------------------------------- */
+
+.performance-progress {
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background-color: #2563eb;
+
+    /*
+       Smooth animation when the
+       percentage changes.
+    */
+    transition: width 0.5s ease;
+}
+
+/* =========================================================
+   CLASS PERFORMANCE - PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .class-performance-section {
+
+        margin-top: 24px;
+    }
+
+
+    .performance-list {
+
+        padding: 17px;
+    }
+
+
+    .performance-info h3 {
+
+        font-size: 13px;
+    }
+
+
+    .performance-info p {
+
+        font-size: 11px;
+    }
+
+
+    .performance-info strong {
+
+        font-size: 13px;
+    }
+
+
+    .performance-bar {
+
+        height: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   SCHOOL NEWS / ANNOUNCEMENTS
+   ========================================================= */
+
+/* Create space above the school news section */
+.school-news-section {
+    margin-top: 30px;
+}
+
+
+/* Keep the heading and View All link on the same line */
+.school-news-section .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+
+/* Style the View All link */
+.view-all-news {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Add an underline when the teacher points at the link */
+.view-all-news:hover {
+    text-decoration: underline;
+}
+
+
+/* Stack the news items vertically */
+.school-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Style each individual news item */
+.school-news-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background-color: #ffffff;
+
+    padding: 16px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Small movement when hovering over a news item */
+.school-news-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Create the small date box */
+.news-date {
+    width: 52px;
+    min-width: 52px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 5px;
+
+    background-color: #eaf1ff;
+
+    border-radius: 10px;
+}
+
+
+/* Large day number */
+.news-date strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+
+/* Small month name */
+.news-date span {
+    margin-top: 2px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #667085;
+}
+
+
+/* Allow the news text to use the remaining space */
+.news-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* News title */
+.news-content h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* News description */
+.news-content p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    color: #8b95a7;
+}
+
+
+/* =========================================================
+   MOBILE SCHOOL NEWS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce the spacing on smaller screens */
+    .school-news-section {
+        margin-top: 24px;
+    }
+
+
+    /* Make the news heading easier to fit on a phone */
+    .school-news-section .section-heading {
+        align-items: flex-start;
+    }
+
+
+    /* Slightly reduce the news item padding */
+    .school-news-item {
+        gap: 12px;
+        padding: 15px;
+    }
+
+
+    /* Make the date box slightly smaller */
+    .news-date {
+        width: 48px;
+        min-width: 48px;
+        padding: 7px 4px;
+    }
+
+
+    /* Reduce the day number */
+    .news-date strong {
+        font-size: 16px;
+    }
+
+
+    /* Reduce the month text */
+    .news-date span {
+        font-size: 9px;
+    }
+
+
+    /* Reduce the news title */
+    .news-content h3 {
+        font-size: 14px;
+    }
+
+
+    /* Reduce the description */
+    .news-content p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+
+    /* Reduce the View All text slightly */
+    .view-all-news {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   UPCOMING EVENTS
+   ========================================================= */
+
+/* Create space above the upcoming events section */
+.upcoming-events-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-events {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-events:hover {
+    text-decoration: underline;
+}
+
+
+/* Stack events vertically */
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Style each event */
+.event-item {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    background-color: #ffffff;
+
+    padding: 16px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Small movement when hovering over an event */
+.event-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Event date box */
+.event-date {
+    width: 52px;
+    min-width: 52px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 5px;
+
+    background-color: #f1f5f9;
+
+    border-radius: 10px;
+}
+
+
+/* Event day */
+.event-date strong {
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Event month */
+.event-date span {
+    margin-top: 2px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #667085;
+}
+
+
+/* Allow event details to use available space */
+.event-details {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Event title */
+.event-details h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Event time and location */
+.event-details p {
+    margin: 0;
+
+    font-size: 12px;
+
+    color: #8b95a7;
+}
+
+
+/* Event category badge */
+.event-category {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Academic event */
+.event-category.academic {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* Meeting event */
+.event-category.meeting {
+    background-color: #f3e8ff;
+    color: #7e22ce;
+}
+
+
+/* Staff event */
+.event-category.staff {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* School activity */
+.event-category.activity {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* =========================================================
+   MOBILE UPCOMING EVENTS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing on smaller screens */
+    .upcoming-events-section {
+        margin-top: 24px;
+    }
+
+
+    /* Reduce spacing inside event cards */
+    .event-item {
+        gap: 12px;
+        padding: 15px;
+    }
+
+
+    /* Make the date box smaller */
+    .event-date {
+        width: 48px;
+        min-width: 48px;
+
+        padding: 7px 4px;
+    }
+
+
+    /* Smaller event day */
+    .event-date strong {
+        font-size: 16px;
+    }
+
+
+    /* Smaller month */
+    .event-date span {
+        font-size: 9px;
+    }
+
+
+    /* Smaller event title */
+    .event-details h3 {
+        font-size: 14px;
+    }
+
+
+    /* Smaller event details */
+    .event-details p {
+        font-size: 11px;
+    }
+
+
+    /* Smaller category badge */
+    .event-category {
+        padding: 4px 7px;
+        font-size: 9px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-events {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+/* Create space above the Quick Actions section */
+.quick-actions-section {
+    margin-top: 30px;
+}
+
+
+/* Arrange the action cards in a responsive grid */
+.quick-actions-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+
+    gap: 12px;
+}
+
+
+/* Style each action card */
+.quick-action-card {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Slightly lift the card when hovered */
+.quick-action-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Action icon */
+.quick-action-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f1f5f9;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+}
+
+
+/* Action title */
+.quick-action-card h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Action description */
+.quick-action-card p {
+    margin: 0;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #8b95a7;
+}
+
+/* =========================================================
+   QUICK ACTION CLICK EFFECT
+   ========================================================= */
+
+/*
+    This class is temporarily added by JavaScript
+    when a Quick Action card is clicked.
+*/
+.quick-action-clicked {
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   TEACHER TOAST NOTIFICATION
+   ========================================================= */
+
+/*
+    This notification appears near the bottom-right
+    of the teacher dashboard.
+*/
+.teacher-notification {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+
+    padding: 13px 18px;
+
+    background-color: #172033;
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+
+/*
+    Make the notification fit nicely on a phone.
+*/
+@media (max-width: 600px) {
+
+    .teacher-notification {
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+
+        text-align: center;
+
+        font-size: 10px;
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE QUICK ACTIONS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing on smaller screens */
+    .quick-actions-section {
+        margin-top: 24px;
+    }
+
+
+    /* Put two actions across when the phone has enough width */
+    .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+
+    /* Reduce card padding */
+    .quick-action-card {
+        padding: 14px;
+
+        gap: 10px;
+
+        align-items: flex-start;
+    }
+
+
+    /* Smaller icon */
+    .quick-action-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 17px;
+    }
+
+
+    /* Smaller title */
+    .quick-action-card h3 {
+        font-size: 12px;
+    }
+
+
+    /* Smaller description */
+    .quick-action-card p {
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   RECENT TEACHER ACTIVITY
+   ========================================================= */
+
+/* Create space above the activity section */
+.teacher-activity-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-activity {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-activity:hover {
+    text-decoration: underline;
+}
+
+
+/* Stack activity items vertically */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Individual activity item */
+.activity-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Slight movement when hovering */
+.activity-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Activity icon container */
+.activity-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #eaf1ff;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* Allow activity content to use available space */
+.activity-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Activity title */
+.activity-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Activity description */
+.activity-content p {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* Activity time */
+.activity-time {
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE TEACHER ACTIVITY
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing on phones */
+    .teacher-activity-section {
+        margin-top: 24px;
+    }
+
+
+    /* Reduce activity item spacing */
+    .activity-item {
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+
+    /* Smaller activity icon */
+    .activity-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+    }
+
+
+    /* Smaller activity title */
+    .activity-content h3 {
+        font-size: 12px;
+    }
+
+
+    /* Smaller description */
+    .activity-content p {
+        font-size: 10px;
+    }
+
+
+    /* Smaller timestamp */
+    .activity-time {
+        font-size: 9px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-activity {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   ATTENDANCE OVERVIEW
+   ========================================================= */
+
+/* Create space above the attendance section */
+.attendance-overview-section {
+    margin-top: 30px;
+}
+
+
+/* Style the attendance link */
+.view-attendance-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-attendance-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Create the attendance card grid */
+.attendance-overview-grid {
+    display: grid;
+
+    grid-template-columns: 2fr repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+
+/* Overall attendance card */
+.attendance-summary-card {
+    background-color: #ffffff;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Top row of the overall card */
+.attendance-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+/* Overall attendance label */
+.attendance-summary-header p {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #667085;
+}
+
+
+/* Today label */
+.attendance-summary-header span {
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* Large attendance percentage */
+.attendance-summary-card h3 {
+    margin: 12px 0 4px 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Attendance description */
+.attendance-summary-description {
+    margin: 0 0 14px 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* Background of attendance progress bar */
+.attendance-progress {
+    width: 100%;
+    height: 8px;
+
+    background-color: #edf2f7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+/* Filled part of attendance progress */
+.attendance-progress-bar {
+    height: 100%;
+
+    background-color: #2563eb;
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* Small attendance statistic card */
+.attendance-stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Attendance statistic icon */
+.attendance-stat-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* Present icon */
+.attendance-stat-icon.present {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Absent icon */
+.attendance-stat-icon.absent {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* Late icon */
+.attendance-stat-icon.late {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Statistic label */
+.attendance-stat-card p {
+    margin: 0 0 4px 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* Statistic number */
+.attendance-stat-card h3 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   MOBILE ATTENDANCE OVERVIEW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .attendance-overview-section {
+        margin-top: 24px;
+    }
+
+
+    /* Stack the cards on smaller screens */
+    .attendance-overview-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    /* Make overall attendance span the full phone width */
+    .attendance-summary-card {
+        grid-column: 1 / -1;
+
+        padding: 17px;
+    }
+
+
+    /* Slightly reduce percentage size */
+    .attendance-summary-card h3 {
+        font-size: 27px;
+    }
+
+
+    /* Smaller statistic cards */
+    .attendance-stat-card {
+        padding: 15px;
+
+        gap: 10px;
+    }
+
+
+    /* Smaller icons */
+    .attendance-stat-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+    }
+
+
+    /* Smaller statistic number */
+    .attendance-stat-card h3 {
+        font-size: 20px;
+    }
+
+
+    /* Smaller statistic label */
+    .attendance-stat-card p {
+        font-size: 10px;
+    }
+
+
+    /* Smaller attendance link */
+    .view-attendance-link {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   PENDING TASKS
+   ========================================================= */
+
+/* Create space above the pending tasks section */
+.pending-tasks-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-tasks {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-tasks:hover {
+    text-decoration: underline;
+}
+
+
+/* Stack tasks vertically */
+.pending-tasks-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* Individual pending task */
+.pending-task-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Slight movement when hovering */
+.pending-task-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Priority badge */
+.task-priority {
+    width: 52px;
+
+    flex-shrink: 0;
+
+    padding: 5px 6px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* High priority */
+.task-priority.high {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* Medium priority */
+.task-priority.medium {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Low priority */
+.task-priority.low {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Allow task information to use remaining space */
+.task-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Task title */
+.task-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Task description */
+.task-content p {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* Task deadline */
+.task-due {
+    flex-shrink: 0;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #667085;
+}
+
+
+/* =========================================================
+   MOBILE PENDING TASKS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .pending-tasks-section {
+        margin-top: 24px;
+    }
+
+
+    /* Reduce task spacing */
+    .pending-task-item {
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+
+    /* Smaller priority badge */
+    .task-priority {
+        width: 46px;
+
+        padding: 4px 5px;
+
+        font-size: 9px;
+    }
+
+
+    /* Smaller task title */
+    .task-content h3 {
+        font-size: 12px;
+    }
+
+
+    /* Smaller description */
+    .task-content p {
+        font-size: 10px;
+    }
+
+
+    /* Smaller deadline */
+    .task-due {
+        font-size: 9px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-tasks {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   STUDENT ALERTS
+   ========================================================= */
+
+/* Create space above the student alerts section */
+.student-alerts-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-alerts {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-alerts:hover {
+    text-decoration: underline;
+}
+
+
+/* Stack alerts vertically */
+.student-alerts-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* Individual student alert */
+.student-alert-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Slight movement when hovering */
+.student-alert-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Alert icon */
+.alert-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* Attendance alert */
+.alert-icon.attendance {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Academic performance alert */
+.alert-icon.academic {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* Homework alert */
+.alert-icon.homework {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* Allow alert information to use remaining space */
+.alert-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Student name */
+.alert-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Alert description */
+.alert-content p {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* Alert category label */
+.alert-label {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Attendance label */
+.alert-label.warning {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Performance label */
+.alert-label.danger {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* Homework label */
+.alert-label.info {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   MOBILE STUDENT ALERTS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .student-alerts-section {
+        margin-top: 24px;
+    }
+
+
+    /* Reduce spacing inside alert */
+    .student-alert-item {
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+
+    /* Smaller alert icon */
+    .alert-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+    }
+
+
+    /* Smaller student name */
+    .alert-content h3 {
+        font-size: 12px;
+    }
+
+
+    /* Smaller description */
+    .alert-content p {
+        font-size: 10px;
+    }
+
+
+    /* Smaller alert label */
+    .alert-label {
+        padding: 4px 7px;
+
+        font-size: 9px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-alerts {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY SUBJECTS
+   ========================================================= */
+
+/* Create space above the subjects section */
+.my-subjects-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-subjects {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-subjects:hover {
+    text-decoration: underline;
+}
+
+
+/* Create a responsive subject grid */
+.subjects-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(210px, 1fr)
+    );
+
+    gap: 12px;
+}
+
+
+/* Subject card */
+.subject-card {
+    display: block;
+
+    padding: 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Lift the subject card on hover */
+.subject-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Top part of subject card */
+.subject-card-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+
+/* Subject initial icon */
+.subject-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background-color: #eaf1ff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* Subject average */
+.subject-average {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    background-color: #ecfdf5;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #047857;
+}
+
+
+/* Subject name */
+.subject-card h3 {
+    margin: 0 0 6px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Subject statistics */
+.subject-card p {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #8b95a7;
+}
+
+
+/* View Subject link */
+.subject-card-link {
+    display: inline-block;
+
+    margin-top: 14px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   MOBILE MY SUBJECTS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .my-subjects-section {
+        margin-top: 24px;
+    }
+
+
+    /* Two subject cards per row on phones */
+    .subjects-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+
+    /* Reduce card padding */
+    .subject-card {
+        padding: 15px;
+    }
+
+
+    /* Smaller icon */
+    .subject-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 13px;
+    }
+
+
+    /* Smaller average */
+    .subject-average {
+        padding: 4px 6px;
+
+        font-size: 9px;
+    }
+
+
+    /* Smaller subject name */
+    .subject-card h3 {
+        font-size: 13px;
+    }
+
+
+    /* Smaller statistics */
+    .subject-card p {
+        font-size: 10px;
+    }
+
+
+    /* Smaller link */
+    .subject-card-link {
+        margin-top: 11px;
+
+        font-size: 10px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-subjects {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY STUDENTS
+   ========================================================= */
+
+/* Create space above the students section */
+.my-students-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-students {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-students:hover {
+    text-decoration: underline;
+}
+
+
+/* Allow the table to scroll horizontally if necessary */
+.students-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Student table */
+.students-table {
+    width: 100%;
+
+    min-width: 700px;
+
+    border-collapse: collapse;
+}
+
+
+/* Table heading */
+.students-table th {
+    padding: 13px 16px;
+
+    text-align: left;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+
+    color: #8b95a7;
+
+    background-color: #f8fafc;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Table cells */
+.students-table td {
+    padding: 14px 16px;
+
+    font-size: 12px;
+
+    color: #667085;
+
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+/* Remove border from last row */
+.students-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Highlight a row slightly when hovered */
+.students-table tbody tr:hover {
+    background-color: #fafcff;
+}
+
+
+/* Student name area */
+.student-name-cell {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* Student avatar */
+.student-avatar {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #eaf1ff;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* Student name */
+.student-name-cell strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Student number */
+.student-name-cell span:not(.student-avatar) {
+    display: block;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* Student status badge */
+.student-status {
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+/* Good student status */
+.student-status.good {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Attention status */
+.student-status.warning {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* At risk status */
+.student-status.danger {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* View student link */
+.student-view-link {
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #2563eb;
+
+    white-space: nowrap;
+}
+
+
+/* Underline View link */
+.student-view-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE MY STUDENTS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .my-students-section {
+        margin-top: 24px;
+    }
+
+
+    /* Make the table slightly smaller */
+    .students-table {
+        min-width: 650px;
+    }
+
+
+    /* Reduce table cell padding */
+    .students-table th,
+    .students-table td {
+        padding: 12px;
+    }
+
+
+    /* Smaller student avatar */
+    .student-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+
+    /* Smaller View All link */
+    .view-all-students {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY TIMETABLE
+   ========================================================= */
+
+/* Create space above the timetable section */
+.teacher-timetable-section {
+    margin-top: 30px;
+}
+
+
+/* Style the full timetable link */
+.view-full-timetable {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-full-timetable:hover {
+    text-decoration: underline;
+}
+
+
+/* Timetable container */
+.timetable-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* List of timetable days */
+.timetable-list {
+    display: flex;
+
+    min-width: 850px;
+}
+
+
+/* Individual day */
+.timetable-day {
+    flex: 1;
+
+    min-width: 170px;
+
+    border-right: 1px solid #edf0f5;
+}
+
+
+/* Remove border from final day */
+.timetable-day:last-child {
+    border-right: none;
+}
+
+
+/* Day heading */
+.timetable-day-header {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    padding: 15px;
+
+    background-color: #f8fafc;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Day name */
+.timetable-day-header strong {
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Date */
+.timetable-day-header span {
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* Individual timetable class */
+.timetable-class {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+/* Remove border from final class */
+.timetable-class:last-child {
+    border-bottom: none;
+}
+
+
+/* Class time */
+.timetable-time {
+    width: 38px;
+
+    flex-shrink: 0;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* Class information */
+.timetable-class-info {
+    min-width: 0;
+}
+
+
+/* Subject name */
+.timetable-class-info h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Class and room */
+.timetable-class-info p {
+    margin: 0;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: #8b95a7;
+}
+
+
+/* =========================================================
+   MOBILE MY TIMETABLE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .teacher-timetable-section {
+        margin-top: 24px;
+    }
+
+
+    /* Make timetable slightly smaller */
+    .timetable-list {
+        min-width: 780px;
+    }
+
+
+    /* Smaller day columns */
+    .timetable-day {
+        min-width: 156px;
+    }
+
+
+    /* Reduce day header padding */
+    .timetable-day-header {
+        padding: 13px;
+    }
+
+
+    /* Smaller day name */
+    .timetable-day-header strong {
+        font-size: 12px;
+    }
+
+
+    /* Smaller class padding */
+    .timetable-class {
+        padding: 13px;
+    }
+
+
+    /* Smaller subject */
+    .timetable-class-info h3 {
+        font-size: 11px;
+    }
+
+
+    /* Smaller class details */
+    .timetable-class-info p {
+        font-size: 9px;
+    }
+
+
+    /* Smaller timetable link */
+    .view-full-timetable {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY GUARDIANS
+   ========================================================= */
+
+/* Add spacing above the guardians section */
+.my-guardians-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-guardians {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when the mouse is over it */
+.view-all-guardians:hover {
+    text-decoration: underline;
+}
+
+
+/* Allow the table to scroll horizontally when needed */
+.guardians-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Keep the table readable on smaller screens */
+.guardians-table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+
+/* Style the table headings */
+.guardians-table th {
+    padding: 13px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #8b95a7;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Style the table cells */
+.guardians-table td {
+    padding: 14px 16px;
+    font-size: 12px;
+    color: #667085;
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+/* Remove the bottom border from the final row */
+.guardians-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Give a row a subtle highlight when hovered */
+.guardians-table tbody tr:hover {
+    background-color: #fafcff;
+}
+
+
+/* Arrange the guardian avatar and name */
+.guardian-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Guardian initials */
+.guardian-avatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: #eaf1ff;
+
+    font-size: 10px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+
+/* Guardian's name */
+.guardian-name-cell strong {
+    display: block;
+    margin-bottom: 3px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Small text underneath the guardian name */
+.guardian-name-cell span:not(.guardian-avatar) {
+    display: block;
+
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* View guardian link */
+.guardian-view-link {
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: #2563eb;
+    white-space: nowrap;
+}
+
+
+/* Underline the link when hovered */
+.guardian-view-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE GUARDIAN TABLE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing on phones */
+    .my-guardians-section {
+        margin-top: 24px;
+    }
+
+    /* Keep enough width for the table */
+    .guardians-table {
+        min-width: 620px;
+    }
+
+    /* Make table cells slightly smaller */
+    .guardians-table th,
+    .guardians-table td {
+        padding: 12px;
+    }
+
+    /* Slightly reduce the avatar */
+    .guardian-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Make the View All link smaller */
+    .view-all-guardians {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MARKS & RESULTS OVERVIEW
+   ========================================================= */
+
+/* Add spacing above the marks and results section */
+.marks-results-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All Results link */
+.view-all-results {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-results:hover {
+    text-decoration: underline;
+}
+
+
+/* Allow the results table to scroll horizontally */
+.results-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Keep the table readable */
+.results-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+
+/* Style the table headings */
+.results-table th {
+    padding: 13px 16px;
+    text-align: left;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    color: #8b95a7;
+    background-color: #f8fafc;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Style the table cells */
+.results-table td {
+    padding: 14px 16px;
+
+    font-size: 12px;
+    color: #667085;
+
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+/* Remove the border from the last row */
+.results-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Give rows a subtle hover effect */
+.results-table tbody tr:hover {
+    background-color: #fafcff;
+}
+
+
+/* Assessment name container */
+.assessment-name {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+/* Assessment title */
+.assessment-name strong {
+    font-size: 12px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Subject underneath assessment */
+.assessment-name span {
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* Highlight the average mark */
+.result-average {
+    font-weight: 700;
+    color: #2563eb !important;
+}
+
+
+/* Result status badge */
+.result-status {
+    display: inline-block;
+
+    padding: 5px 8px;
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+/* Completed assessment */
+.result-status.completed {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Assessment still being worked on */
+.result-status.pending {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* =========================================================
+   MOBILE MARKS & RESULTS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing on phones */
+    .marks-results-section {
+        margin-top: 24px;
+    }
+
+    /* Keep the table readable */
+    .results-table {
+        min-width: 800px;
+    }
+
+    /* Reduce cell padding */
+    .results-table th,
+    .results-table td {
+        padding: 12px;
+    }
+
+    /* Make the View All link smaller */
+    .view-all-results {
+        font-size: 11px;
+    }
+
+    /* Slightly reduce assessment text */
+    .assessment-name strong {
+        font-size: 11px;
+    }
+
+    .assessment-name span {
+        font-size: 8px;
+    }
+}
+
+/* =========================================================
+   HOMEWORK SUBMISSION OVERVIEW
+   ========================================================= */
+
+/* Add spacing above the homework overview */
+.homework-overview-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All Homework link */
+.view-all-homework {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-homework:hover {
+    text-decoration: underline;
+}
+
+
+/* Arrange the homework items vertically */
+.homework-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Individual homework row */
+.homework-overview-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Slight movement when hovering */
+.homework-overview-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Homework title and subject */
+.homework-overview-info {
+    flex: 1;
+    min-width: 170px;
+}
+
+
+/* Homework title */
+.homework-overview-info h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Subject and class */
+.homework-overview-info p {
+    margin: 0;
+
+    font-size: 11px;
+    color: #8b95a7;
+}
+
+
+/* Submission statistics */
+.homework-overview-stats {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    flex-shrink: 0;
+}
+
+
+/* Each statistic */
+.homework-overview-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+/* Statistic label */
+.homework-overview-stats span {
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* Statistic number */
+.homework-overview-stats strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Marked submissions */
+.homework-overview-stats strong.marked {
+    color: #047857;
+}
+
+
+/* Pending submissions */
+.homework-overview-stats strong.pending {
+    color: #c2410c;
+}
+
+
+/* Overall homework status */
+.homework-overview-status {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Homework still waiting for marking */
+.homework-overview-status.pending {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* All submissions have been marked */
+.homework-overview-status.completed {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* =========================================================
+   MOBILE HOMEWORK OVERVIEW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .homework-overview-section {
+        margin-top: 24px;
+    }
+
+    /* Stack the information on smaller screens */
+    .homework-overview-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        padding: 15px;
+    }
+
+    /* Let the homework information use the full row */
+    .homework-overview-info {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Put the statistics below the homework name */
+    .homework-overview-stats {
+        gap: 18px;
+    }
+
+    /* Slightly reduce text sizes */
+    .homework-overview-info h3 {
+        font-size: 13px;
+    }
+
+    .homework-overview-info p {
+        font-size: 10px;
+    }
+
+    .homework-overview-stats strong {
+        font-size: 14px;
+    }
+
+    .homework-overview-status {
+        font-size: 9px;
+    }
+
+    /* Smaller View All link */
+    .view-all-homework {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER NOTES & STUDENT FOLLOW-UPS
+   ========================================================= */
+
+/* Add spacing above the notes section */
+.teacher-notes-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All Notes link */
+.view-all-notes {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-notes:hover {
+    text-decoration: underline;
+}
+
+
+/* Arrange notes vertically */
+.teacher-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Individual teacher note */
+.teacher-note-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Subtle hover effect */
+.teacher-note-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Note icon */
+.teacher-note-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background-color: #eaf1ff;
+
+    font-size: 17px;
+}
+
+
+/* Note information */
+.teacher-note-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Student name */
+.teacher-note-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Note description */
+.teacher-note-content p {
+    margin: 0 0 5px 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+    color: #667085;
+}
+
+
+/* Class and subject */
+.teacher-note-content span {
+    font-size: 10px;
+    color: #98a2b3;
+}
+
+
+/* Note date */
+.teacher-note-date {
+    flex-shrink: 0;
+
+    font-size: 10px;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE TEACHER NOTES
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .teacher-notes-section {
+        margin-top: 24px;
+    }
+
+    /* Allow notes to wrap naturally */
+    .teacher-note-item {
+        align-items: flex-start;
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+    /* Smaller note icon */
+    .teacher-note-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    /* Smaller text */
+    .teacher-note-content h3 {
+        font-size: 12px;
+    }
+
+    .teacher-note-content p {
+        font-size: 10px;
+    }
+
+    .teacher-note-content span {
+        font-size: 9px;
+    }
+
+    .teacher-note-date {
+        font-size: 9px;
+    }
+
+    /* Smaller View All link */
+    .view-all-notes {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   STAFF MEETINGS & COMMUNICATION
+   ========================================================= */
+
+/* Add spacing above this section */
+.staff-communication-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-meetings {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-all-meetings:hover {
+    text-decoration: underline;
+}
+
+
+/* Arrange meetings and messages vertically */
+.staff-communication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Meeting row */
+.staff-meeting-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.staff-meeting-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Meeting date box */
+.meeting-date {
+    width: 52px;
+    min-width: 52px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 5px;
+
+    background-color: #eaf1ff;
+    border-radius: 10px;
+}
+
+
+/* Meeting day */
+.meeting-date strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+
+/* Meeting month */
+.meeting-date span {
+    margin-top: 2px;
+
+    font-size: 10px;
+    font-weight: 700;
+    color: #667085;
+}
+
+
+/* Meeting information */
+.meeting-info {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Meeting title */
+.meeting-info h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Meeting time and location */
+.meeting-info p {
+    margin: 0;
+
+    font-size: 11px;
+    color: #8b95a7;
+}
+
+
+/* Meeting status */
+.meeting-status {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Normal upcoming meeting */
+.meeting-status.upcoming {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* Important meeting */
+.meeting-status.important {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* =========================================================
+   STAFF MESSAGE
+   ========================================================= */
+
+/* Staff communication message */
+.staff-message-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+}
+
+
+/* Message icon */
+.message-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f3e8ff;
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+
+/* Message information */
+.message-info {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Message title */
+.message-info h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Message text */
+.message-info p {
+    margin: 0;
+
+    font-size: 11px;
+    line-height: 1.6;
+    color: #8b95a7;
+}
+
+
+/* Message date */
+.message-date {
+    flex-shrink: 0;
+
+    font-size: 10px;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE STAFF COMMUNICATION
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .staff-communication-section {
+        margin-top: 24px;
+    }
+
+    /* Reduce meeting spacing */
+    .staff-meeting-item {
+        gap: 12px;
+        padding: 15px;
+    }
+
+    /* Smaller date box */
+    .meeting-date {
+        width: 48px;
+        min-width: 48px;
+        padding: 7px 4px;
+    }
+
+    .meeting-date strong {
+        font-size: 16px;
+    }
+
+    .meeting-date span {
+        font-size: 9px;
+    }
+
+    /* Smaller meeting text */
+    .meeting-info h3 {
+        font-size: 13px;
+    }
+
+    .meeting-info p {
+        font-size: 10px;
+    }
+
+    /* Smaller status badge */
+    .meeting-status {
+        padding: 4px 7px;
+        font-size: 9px;
+    }
+
+    /* Staff message */
+    .staff-message-item {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .message-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    .message-info h3 {
+        font-size: 12px;
+    }
+
+    .message-info p {
+        font-size: 10px;
+    }
+
+    .message-date {
+        font-size: 9px;
+    }
+
+    /* Smaller View All link */
+    .view-all-meetings {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER PROFILE SUMMARY
+   ========================================================= */
+
+/* Add spacing above the profile section */
+.teacher-profile-summary-section {
+    margin-top: 30px;
+}
+
+
+/* Style the Edit Profile link */
+.edit-teacher-profile {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.edit-teacher-profile:hover {
+    text-decoration: underline;
+}
+
+
+/* Main profile card */
+.teacher-profile-summary {
+    background-color: #ffffff;
+    padding: 22px;
+
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Profile header */
+.profile-summary-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Large teacher avatar */
+.large-teacher-avatar {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: #eaf1ff;
+
+    font-size: 17px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+
+/* Teacher name information */
+.profile-summary-name {
+    min-width: 0;
+}
+
+
+/* Teacher name */
+.profile-summary-name h3 {
+    margin: 0 0 5px 0;
+
+    font-size: 18px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Teacher role and subjects */
+.profile-summary-name p {
+    margin: 0 0 4px 0;
+
+    font-size: 12px;
+    color: #667085;
+}
+
+
+/* Employee number */
+.profile-summary-name span {
+    font-size: 10px;
+    color: #98a2b3;
+}
+
+
+/* Profile details grid */
+.profile-summary-details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+
+    padding-top: 20px;
+}
+
+
+/* Individual profile detail */
+.profile-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+/* Detail label */
+.profile-detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #98a2b3;
+}
+
+
+/* Detail value */
+.profile-detail strong {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #172033;
+}
+
+
+/* =========================================================
+   MOBILE TEACHER PROFILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .teacher-profile-summary-section {
+        margin-top: 24px;
+    }
+
+    /* Reduce card padding */
+    .teacher-profile-summary {
+        padding: 17px;
+    }
+
+    /* Smaller avatar */
+    .large-teacher-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 15px;
+    }
+
+    /* Smaller teacher name */
+    .profile-summary-name h3 {
+        font-size: 16px;
+    }
+
+    .profile-summary-name p {
+        font-size: 11px;
+    }
+
+    .profile-summary-name span {
+        font-size: 9px;
+    }
+
+    /* Two columns on phones */
+    .profile-summary-details {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px 12px;
+    }
+
+    .profile-detail-label {
+        font-size: 9px;
+    }
+
+    .profile-detail strong {
+        font-size: 11px;
+    }
+
+    /* Smaller edit link */
+    .edit-teacher-profile {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER NOTIFICATIONS
+   ========================================================= */
+
+/* Add spacing above notifications */
+.teacher-notifications-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All link */
+.view-all-notifications {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.view-all-notifications:hover {
+    text-decoration: underline;
+}
+
+
+/* Notification list */
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Individual notification */
+.notification-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.notification-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Highlight unread notifications */
+.notification-item.unread {
+    background-color: #fafcff;
+}
+
+
+/* Notification icon */
+.notification-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+
+/* Homework notification */
+.notification-icon.homework {
+    background-color: #eaf1ff;
+}
+
+
+/* Announcement notification */
+.notification-icon.announcement {
+    background-color: #f3e8ff;
+}
+
+
+/* Attendance notification */
+.notification-icon.attendance {
+    background-color: #fff7ed;
+}
+
+
+/* Meeting notification */
+.notification-icon.meeting {
+    background-color: #ecfdf5;
+}
+
+
+/* Results notification */
+.notification-icon.results {
+    background-color: #f1f5f9;
+}
+
+
+/* Notification information */
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Notification title */
+.notification-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Notification description */
+.notification-content p {
+    margin: 0 0 5px 0;
+
+    font-size: 11px;
+    line-height: 1.5;
+    color: #667085;
+}
+
+
+/* Notification time */
+.notification-content span {
+    font-size: 10px;
+    color: #98a2b3;
+}
+
+
+/* Small dot showing unread status */
+.notification-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background-color: #2563eb;
+}
+
+
+/* =========================================================
+   MOBILE TEACHER NOTIFICATIONS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .teacher-notifications-section {
+        margin-top: 24px;
+    }
+
+    /* Smaller notification rows */
+    .notification-item {
+        gap: 10px;
+        padding: 14px;
+    }
+
+    /* Smaller icon */
+    .notification-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    /* Smaller text */
+    .notification-content h3 {
+        font-size: 12px;
+    }
+
+    .notification-content p {
+        font-size: 10px;
+    }
+
+    .notification-content span {
+        font-size: 9px;
+    }
+
+    /* Smaller unread dot */
+    .notification-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    /* Smaller View All link */
+    .view-all-notifications {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER CLASS ATTENDANCE
+   ========================================================= */
+
+/* Add spacing above class attendance */
+.class-attendance-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View Attendance link */
+.view-all-class-attendance {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.view-all-class-attendance:hover {
+    text-decoration: underline;
+}
+
+
+/* Arrange attendance cards */
+.class-attendance-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(230px, 1fr)
+    );
+    gap: 12px;
+}
+
+
+/* Individual attendance card */
+.class-attendance-card {
+    padding: 18px;
+
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.class-attendance-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Card header */
+.class-attendance-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+/* Class name */
+.class-attendance-header h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Subject */
+.class-attendance-header p {
+    margin: 0;
+
+    font-size: 11px;
+    color: #8b95a7;
+}
+
+
+/* Attendance percentage */
+.attendance-percentage {
+    padding: 5px 8px;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* Good attendance */
+.attendance-percentage.good {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+/* Attendance needing attention */
+.attendance-percentage.warning {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Attendance statistics */
+.class-attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+
+/* Individual statistic */
+.class-attendance-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 9px;
+
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+
+/* Statistic label */
+.class-attendance-stats span {
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* Statistic number */
+.class-attendance-stats strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Absent number */
+.class-attendance-stats strong.absent {
+    color: #dc2626;
+}
+
+
+/* Late number */
+.class-attendance-stats strong.late {
+    color: #c2410c;
+}
+
+
+/* Attendance progress background */
+.class-attendance-progress {
+    width: 100%;
+    height: 7px;
+
+    margin-top: 16px;
+
+    background-color: #edf2f7;
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+/* Attendance progress */
+.class-attendance-progress-bar {
+    height: 100%;
+
+    background-color: #2563eb;
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* Warning progress */
+.class-attendance-progress-bar.warning {
+    background-color: #f59e0b;
+}
+
+
+/* Record attendance link */
+.record-attendance-link {
+    display: inline-block;
+
+    margin-top: 14px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.record-attendance-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE CLASS ATTENDANCE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing */
+    .class-attendance-section {
+        margin-top: 24px;
+    }
+
+    /* Two cards per row on phones */
+    .class-attendance-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    /* Reduce card padding */
+    .class-attendance-card {
+        padding: 14px;
+    }
+
+    /* Smaller class name */
+    .class-attendance-header h3 {
+        font-size: 13px;
+    }
+
+    .class-attendance-header p {
+        font-size: 10px;
+    }
+
+    /* Smaller percentage */
+    .attendance-percentage {
+        padding: 4px 6px;
+        font-size: 9px;
+    }
+
+    /* Stack statistics naturally */
+    .class-attendance-stats {
+        gap: 5px;
+        margin-top: 14px;
+    }
+
+    .class-attendance-stats div {
+        padding: 7px;
+    }
+
+    .class-attendance-stats span {
+        font-size: 8px;
+    }
+
+    .class-attendance-stats strong {
+        font-size: 14px;
+    }
+
+    /* Smaller link */
+    .record-attendance-link {
+        font-size: 10px;
+    }
+
+    .view-all-class-attendance {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY CLASSES SUMMARY
+   ========================================================= */
+
+/* Add spacing above the classes summary */
+.my-classes-summary-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View All Classes link */
+.view-all-classes {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.view-all-classes:hover {
+    text-decoration: underline;
+}
+
+
+/* Arrange class cards */
+.classes-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(260px, 1fr)
+    );
+    gap: 12px;
+}
+
+
+/* Individual class card */
+.class-summary-card {
+    padding: 18px;
+
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.class-summary-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Card header */
+.class-summary-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+/* Class name */
+.class-summary-header h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* Subject */
+.class-summary-header p {
+    margin: 0;
+
+    font-size: 11px;
+    color: #8b95a7;
+}
+
+
+/* Student count badge */
+.class-summary-badge {
+    flex-shrink: 0;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    background-color: #f1f5f9;
+
+    font-size: 9px;
+    font-weight: 600;
+    color: #667085;
+}
+
+
+/* Statistics row */
+.class-summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+
+/* Individual statistic */
+.class-summary-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 9px;
+
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+
+/* Statistic label */
+.class-summary-stats span {
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* Statistic number */
+.class-summary-stats strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Warning value */
+.class-summary-stats strong.class-warning {
+    color: #c2410c;
+}
+
+
+/* Good value */
+.class-summary-stats strong.class-good {
+    color: #047857;
+}
+
+
+/* Bottom part of card */
+.class-summary-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-top: 16px;
+    padding-top: 13px;
+
+    border-top: 1px solid #edf0f5;
+}
+
+
+/* Footer message */
+.class-summary-footer span {
+    font-size: 9px;
+    line-height: 1.4;
+    color: #98a2b3;
+}
+
+
+/* View class link */
+.class-summary-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.class-summary-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE MY CLASSES SUMMARY
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce section spacing */
+    .my-classes-summary-section {
+        margin-top: 24px;
+    }
+
+    /* Two cards per row */
+    .classes-summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    /* Smaller card padding */
+    .class-summary-card {
+        padding: 14px;
+    }
+
+    /* Smaller header */
+    .class-summary-header h3 {
+        font-size: 13px;
+    }
+
+    .class-summary-header p {
+        font-size: 10px;
+    }
+
+    /* Smaller badge */
+    .class-summary-badge {
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    /* Smaller statistics */
+    .class-summary-stats {
+        gap: 5px;
+        margin-top: 14px;
+    }
+
+    .class-summary-stats div {
+        padding: 7px;
+    }
+
+    .class-summary-stats span {
+        font-size: 8px;
+    }
+
+    .class-summary-stats strong {
+        font-size: 14px;
+    }
+
+    /* Footer */
+    .class-summary-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .class-summary-footer span {
+        font-size: 8px;
+    }
+
+    .class-summary-link {
+        font-size: 9px;
+    }
+
+    /* Smaller View All link */
+    .view-all-classes {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHING WORKLOAD OVERVIEW
+   ========================================================= */
+
+/* Add spacing above the workload section */
+.teaching-workload-section {
+    margin-top: 30px;
+}
+
+
+/* Style the View Details link */
+.view-workload-link {
+    flex-shrink: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+
+/* Underline when hovered */
+.view-workload-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Workload cards grid */
+.workload-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(190px, 1fr));
+
+    gap: 12px;
+}
+
+
+/* Individual workload card */
+.workload-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 17px;
+
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #edf0f5;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.workload-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Workload icon */
+.workload-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+
+/* Classes */
+.workload-icon.classes {
+    background-color: #eaf1ff;
+}
+
+
+/* Subjects */
+.workload-icon.subjects {
+    background-color: #f3e8ff;
+}
+
+
+/* Students */
+.workload-icon.students {
+    background-color: #ecfdf5;
+}
+
+
+/* Marking */
+.workload-icon.marking {
+    background-color: #fff7ed;
+}
+
+
+/* Assessments */
+.workload-icon.assessments {
+    background-color: #f1f5f9;
+}
+
+
+/* Teaching hours */
+.workload-icon.hours {
+    background-color: #fef2f2;
+}
+
+
+/* Workload information */
+.workload-content {
+    min-width: 0;
+}
+
+
+/* Small label */
+.workload-content span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 10px;
+    color: #8b95a7;
+}
+
+
+/* Main number */
+.workload-content strong {
+    display: block;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Description */
+.workload-content p {
+    margin: 3px 0 0 0;
+
+    font-size: 9px;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE TEACHING WORKLOAD
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Reduce spacing */
+    .teaching-workload-section {
+        margin-top: 24px;
+    }
+
+    /* Two cards per row */
+    .workload-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    /* Smaller cards */
+    .workload-card {
+        gap: 9px;
+        padding: 14px;
+    }
+
+    /* Smaller icons */
+    .workload-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    /* Smaller text */
+    .workload-content span {
+        font-size: 9px;
+    }
+
+    .workload-content strong {
+        font-size: 20px;
+    }
+
+    .workload-content p {
+        font-size: 8px;
+    }
+
+    /* Smaller link */
+    .view-workload-link {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   MY HOD & TEACHER SUPPORT
+   ========================================================= */
+
+/* Add spacing above the HOD section */
+.teacher-hod-section {
+    margin-top: 30px;
+}
+
+
+/* View HOD link */
+.view-hod-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+/* Underline the link when hovered */
+.view-hod-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Main HOD layout */
+.hod-support-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+/* HOD profile card */
+.hod-profile-card {
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* HOD profile header */
+.hod-profile-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* HOD avatar */
+.hod-avatar {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #eaf1ff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+/* HOD information */
+.hod-profile-info {
+    min-width: 0;
+}
+
+
+.hod-profile-info h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.hod-profile-info p {
+    margin: 0 0 4px 0;
+
+    font-size: 11px;
+
+    color: #667085;
+}
+
+
+.hod-profile-info span {
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* Contact information */
+.hod-contact-details {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    padding: 18px 0;
+}
+
+
+.hod-contact-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.hod-contact-label {
+    font-size: 9px;
+    font-weight: 600;
+
+    color: #98a2b3;
+}
+
+
+.hod-contact-item strong {
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Contact HOD button */
+.contact-hod-button {
+    display: block;
+
+    width: 100%;
+
+    padding: 10px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    background-color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    transition: background-color 0.2s ease;
+}
+
+
+.contact-hod-button:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* =========================================================
+   HOD MESSAGE
+   ========================================================= */
+
+.hod-message-card {
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.hod-message-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.hod-message-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+
+    color: #2563eb;
+}
+
+
+.hod-message-header h3 {
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.hod-message-date {
+    flex-shrink: 0;
+
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+.hod-message-text {
+    margin: 16px 0;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    color: #667085;
+}
+
+
+.hod-message-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-top: 13px;
+
+    border-top: 1px solid #edf0f5;
+}
+
+
+.hod-message-footer span {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+.hod-message-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.hod-message-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   HOD FEEDBACK
+   ========================================================= */
+
+.hod-feedback-card {
+    grid-column: 1 / -1;
+
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.hod-feedback-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.hod-feedback-header h3 {
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.feedback-status {
+    flex-shrink: 0;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    background-color: #ecfdf5;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    color: #047857;
+}
+
+
+.hod-feedback-text {
+    margin: 15px 0 8px 0;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    color: #667085;
+}
+
+
+.hod-feedback-date {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE HOD SECTION
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-hod-section {
+        margin-top: 24px;
+    }
+
+
+    .hod-support-grid {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .hod-profile-card,
+    .hod-message-card,
+    .hod-feedback-card {
+        padding: 16px;
+    }
+
+
+    .hod-avatar {
+        width: 48px;
+        height: 48px;
+
+        font-size: 13px;
+    }
+
+
+    .hod-profile-info h3 {
+        font-size: 14px;
+    }
+
+
+    .hod-profile-info p {
+        font-size: 10px;
+    }
+
+
+    .hod-profile-info span {
+        font-size: 9px;
+    }
+
+
+    .hod-contact-details {
+        gap: 10px;
+    }
+
+
+    .hod-contact-item strong {
+        font-size: 10px;
+    }
+
+
+    .hod-message-header h3,
+    .hod-feedback-header h3 {
+        font-size: 13px;
+    }
+
+
+    .hod-message-text,
+    .hod-feedback-text {
+        font-size: 10px;
+    }
+
+
+    .hod-message-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .view-hod-link {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER RESOURCES & DOCUMENTS
+   ========================================================= */
+
+/* Add spacing above the resources section */
+.teacher-resources-section {
+    margin-top: 30px;
+}
+
+
+/* View all documents link */
+.view-all-resources {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.view-all-resources:hover {
+    text-decoration: underline;
+}
+
+
+/* Resources grid */
+.resources-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 12px;
+}
+
+
+/* Individual resource card */
+.resource-card {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.resource-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Resource icon */
+.resource-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+
+/* Different icon backgrounds */
+.resource-icon.policy {
+    background-color: #eaf1ff;
+}
+
+.resource-icon.teaching {
+    background-color: #ecfdf5;
+}
+
+.resource-icon.assessment {
+    background-color: #fff7ed;
+}
+
+.resource-icon.curriculum {
+    background-color: #f3e8ff;
+}
+
+.resource-icon.department {
+    background-color: #f1f5f9;
+}
+
+.resource-icon.staff {
+    background-color: #fef2f2;
+}
+
+
+/* Resource information */
+.resource-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.resource-content h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.resource-content p {
+    margin: 0 0 5px 0;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: #8b95a7;
+}
+
+
+.resource-content span {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* Arrow */
+.resource-arrow {
+    flex-shrink: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #2563eb;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.resource-card:hover .resource-arrow {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MOBILE RESOURCES
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-resources-section {
+        margin-top: 24px;
+    }
+
+
+    .resources-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .resource-card {
+        align-items: flex-start;
+
+        gap: 9px;
+
+        padding: 14px;
+    }
+
+
+    .resource-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 16px;
+    }
+
+
+    .resource-content h3 {
+        font-size: 12px;
+    }
+
+
+    .resource-content p {
+        font-size: 9px;
+    }
+
+
+    .resource-content span {
+        font-size: 8px;
+    }
+
+
+    .resource-arrow {
+        font-size: 14px;
+    }
+
+
+    .view-all-resources {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER LEAVE & AVAILABILITY
+   ========================================================= */
+
+/* Add spacing above the leave section */
+.teacher-leave-section {
+    margin-top: 30px;
+}
+
+
+/* View leave history link */
+.view-leave-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.view-leave-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Main leave cards */
+.leave-overview-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+
+/* Shared card styling */
+.leave-balance-card,
+.availability-card,
+.next-leave-card {
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Card header */
+.leave-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.leave-card-header > span:first-child {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #667085;
+}
+
+
+/* Leave status */
+.leave-status {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+.leave-status.available {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+.leave-status.approved {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* Leave balance */
+.leave-balance {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+
+.leave-balance strong {
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.leave-balance span {
+    font-size: 10px;
+
+    color: #8b95a7;
+}
+
+
+/* Leave progress */
+.leave-progress {
+    width: 100%;
+
+    height: 7px;
+
+    margin-top: 14px;
+
+    background-color: #edf2f7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.leave-progress-bar {
+    height: 100%;
+
+    background-color: #2563eb;
+
+    border-radius: 20px;
+}
+
+
+.leave-card-description {
+    margin: 9px 0 0 0;
+
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   AVAILABILITY CARD
+   ========================================================= */
+
+.availability-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.availability-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background-color: #ecfdf5;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #047857;
+}
+
+
+.availability-content {
+    min-width: 0;
+}
+
+
+.availability-content > span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+
+    color: #8b95a7;
+}
+
+
+.availability-content strong {
+    display: block;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.availability-content p {
+    margin: 4px 0 0 0;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   NEXT LEAVE
+   ========================================================= */
+
+.next-leave-card h3 {
+    margin: 18px 0 5px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.next-leave-date {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #667085;
+}
+
+
+.next-leave-duration {
+    display: inline-block;
+
+    margin-top: 8px;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   LEAVE REQUESTS
+   ========================================================= */
+
+.leave-requests {
+    margin-top: 12px;
+
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.leave-requests-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.leave-requests-header h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.leave-requests-header p {
+    margin: 0;
+
+    font-size: 10px;
+
+    color: #8b95a7;
+}
+
+
+.request-leave-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.request-leave-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Leave request list */
+.leave-request-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.leave-request-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+.leave-request-item:last-child {
+    border-bottom: none;
+}
+
+
+.leave-request-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.leave-request-info strong {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.leave-request-info span {
+    font-size: 10px;
+
+    color: #98a2b3;
+}
+
+
+/* Request status */
+.leave-request-status {
+    flex-shrink: 0;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+.leave-request-status.approved {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+.leave-request-status.pending {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* =========================================================
+   MOBILE LEAVE SECTION
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-leave-section {
+        margin-top: 24px;
+    }
+
+
+    .leave-overview-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .leave-balance-card {
+        grid-column: 1 / -1;
+    }
+
+
+    .leave-balance-card,
+    .availability-card,
+    .next-leave-card,
+    .leave-requests {
+        padding: 16px;
+    }
+
+
+    .leave-balance strong {
+        font-size: 28px;
+    }
+
+
+    .availability-content strong {
+        font-size: 18px;
+    }
+
+
+    .next-leave-card h3 {
+        font-size: 13px;
+    }
+
+
+    .next-leave-date {
+        font-size: 10px;
+    }
+
+
+    .leave-requests-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .leave-request-item {
+        align-items: flex-start;
+    }
+
+
+    .view-leave-link {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER PAYROLL & PAYSLIP SUMMARY
+   ========================================================= */
+
+/* Add spacing above payroll section */
+.teacher-payroll-section {
+    margin-top: 30px;
+}
+
+
+/* View all payslips link */
+.view-all-payslips {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.view-all-payslips:hover {
+    text-decoration: underline;
+}
+
+
+/* Payroll overview */
+.payroll-overview-grid {
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 12px;
+}
+
+
+/* Payment status card */
+.payroll-status-card {
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.payroll-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.payroll-card-header > span:first-child {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #667085;
+}
+
+
+/* Payment status badge */
+.payroll-status {
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+.payroll-status.paid {
+    background-color: #ecfdf5;
+
+    color: #047857;
+}
+
+
+/* Salary amount */
+.payroll-amount {
+    display: block;
+
+    margin-top: 17px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.payroll-status-card p {
+    margin: 5px 0 0 0;
+
+    font-size: 10px;
+
+    color: #667085;
+}
+
+
+.payroll-payment-date {
+    display: block;
+
+    margin-top: 9px;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   PAYROLL INFORMATION CARDS
+   ========================================================= */
+
+.payroll-info-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.payroll-info-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+
+.payroll-info-icon.payday {
+    background-color: #ecfdf5;
+}
+
+
+.payroll-info-icon.payslip {
+    background-color: #eaf1ff;
+}
+
+
+.payroll-info-content {
+    min-width: 0;
+}
+
+
+.payroll-info-content span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 9px;
+
+    color: #8b95a7;
+}
+
+
+.payroll-info-content strong {
+    display: block;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.payroll-info-content p {
+    margin: 4px 0 0 0;
+
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   RECENT PAYSLIPS
+   ========================================================= */
+
+.payslip-list-card {
+    margin-top: 12px;
+
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border-radius: 14px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+.payslip-list-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.payslip-list-header h3 {
+    margin: 0 0 4px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.payslip-list-header p {
+    margin: 0;
+
+    font-size: 10px;
+
+    color: #8b95a7;
+}
+
+
+.download-payslip-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.download-payslip-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Payslip rows */
+.payslip-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.payslip-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f1f3f6;
+}
+
+
+.payslip-item:last-child {
+    border-bottom: none;
+}
+
+
+.payslip-icon {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background-color: #f1f5f9;
+
+    font-size: 15px;
+}
+
+
+.payslip-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.payslip-info strong {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+.payslip-info span {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+.payslip-view-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.payslip-view-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE PAYROLL
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-payroll-section {
+        margin-top: 24px;
+    }
+
+
+    .payroll-overview-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .payroll-status-card {
+        grid-column: 1 / -1;
+
+        padding: 17px;
+    }
+
+
+    .payroll-info-card {
+        padding: 14px;
+
+        gap: 9px;
+    }
+
+
+    .payroll-info-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 16px;
+    }
+
+
+    .payroll-amount {
+        font-size: 27px;
+    }
+
+
+    .payroll-info-content strong {
+        font-size: 15px;
+    }
+
+
+    .payslip-list-card {
+        padding: 16px;
+    }
+
+
+    .payslip-list-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 9px;
+    }
+
+
+    .payslip-list-header h3 {
+        font-size: 13px;
+    }
+
+
+    .download-payslip-link {
+        font-size: 10px;
+    }
+
+
+    .view-all-payslips {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER SUBSTITUTIONS
+   ========================================================= */
+
+/* Add spacing above substitutions */
+.teacher-substitution-section {
+    margin-top: 30px;
+}
+
+
+/* View substitutions link */
+.view-substitutions-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.view-substitutions-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Substitution list */
+.substitution-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* Individual substitution */
+.substitution-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 18px;
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #edf0f5;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover effect */
+.substitution-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Date */
+.substitution-date {
+    width: 52px;
+    min-width: 52px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 5px;
+
+    border-radius: 10px;
+
+    background-color: #eaf1ff;
+}
+
+
+.substitution-date strong {
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+.substitution-date span {
+    margin-top: 2px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #667085;
+}
+
+
+/* Substitution information */
+.substitution-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* Title row */
+.substitution-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 5px;
+}
+
+
+.substitution-title h3 {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Badge */
+.substitution-badge {
+    flex-shrink: 0;
+
+    padding: 4px 7px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+.substitution-badge.covering {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+.substitution-badge.covered {
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+
+.substitution-badge.pending {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+
+/* Class details */
+.substitution-info > p {
+    margin: 0 0 4px 0;
+
+    font-size: 11px;
+
+    color: #667085;
+}
+
+
+/* Teacher information */
+.substitution-teacher {
+    font-size: 9px;
+
+    color: #98a2b3;
+}
+
+
+/* View link */
+.substitution-view-link {
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #2563eb;
+}
+
+
+.substitution-view-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MOBILE SUBSTITUTIONS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-substitution-section {
+        margin-top: 24px;
+    }
+
+
+    .substitution-item {
+        align-items: flex-start;
+
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+
+    .substitution-date {
+        width: 48px;
+        min-width: 48px;
+
+        padding: 7px 4px;
+    }
+
+
+    .substitution-date strong {
+        font-size: 16px;
+    }
+
+
+    .substitution-date span {
+        font-size: 9px;
+    }
+
+
+    .substitution-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .substitution-title h3 {
+        font-size: 12px;
+    }
+
+
+    .substitution-info > p {
+        font-size: 10px;
+    }
+
+
+    .substitution-teacher {
+        font-size: 8px;
+    }
+
+
+    .substitution-badge {
+        font-size: 8px;
+    }
+
+
+    .substitution-view-link {
+        font-size: 9px;
+    }
+
+
+    .view-substitutions-link {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TEACHER CALENDAR & LIVE CLOCK
+   ========================================================= */
+
+/* Give the calendar and clock section some space */
+.teacher-date-time-section {
+    display: grid;
+    grid-template-columns: 0.9fr 1.6fr;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+
+/* =========================================================
+   LIVE CLOCK CARD
+   ========================================================= */
+
+/* Main clock card */
+.teacher-clock-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px;
+    background: linear-gradient(
+        135deg,
+        #eaf2ff,
+        #f5f8ff
+    );
+    border: 1px solid #dce8fb;
+    border-radius: 16px;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Small label above the clock */
+.clock-label {
+    margin-bottom: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #2563eb;
+}
+
+
+/* Large digital clock */
+#teacher-clock {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #172033;
+}
+
+
+/* Today's date underneath the clock */
+#teacher-current-date {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #667085;
+}
+
+
+/* =========================================================
+   CALENDAR CARD
+   ========================================================= */
+
+/* Main calendar container */
+.teacher-calendar-card {
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Calendar top section */
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+
+/* Month and year */
+#calendar-month {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+/* Previous and next buttons */
+.calendar-navigation-button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f5f9;
+    font-size: 21px;
+    color: #667085;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Button hover effect */
+.calendar-navigation-button:hover {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   DAYS OF THE WEEK
+   ========================================================= */
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 7px;
+}
+
+
+/* Each weekday name */
+.calendar-weekdays span {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   CALENDAR DATES
+   ========================================================= */
+
+/* Grid where JavaScript will create the dates */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+
+/* Individual calendar date */
+.calendar-day {
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 10px;
+    color: #667085;
+}
+
+
+/* Empty spaces before/after the month's dates */
+.calendar-day.empty {
+    pointer-events: none;
+}
+
+
+/* Highlight today's date */
+.calendar-day.today {
+    background-color: #2563eb;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+
+/* Date hover effect */
+.calendar-day:not(.empty):not(.today):hover {
+    background-color: #eaf1ff;
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Stack the clock and calendar on smaller screens */
+    .teacher-date-time-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+
+    /* Make the clock slightly smaller on phones */
+    .teacher-clock-card {
+        padding: 22px;
+    }
+
+
+    #teacher-clock {
+        font-size: 32px;
+    }
+
+
+    #teacher-current-date {
+        font-size: 11px;
+    }
+
+
+    /* Calendar card spacing */
+    .teacher-calendar-card {
+        padding: 17px;
+    }
+
+
+    #calendar-month {
+        font-size: 15px;
+    }
+
+
+    .calendar-navigation-button {
+        width: 30px;
+        height: 30px;
+        font-size: 19px;
+    }
+
+
+    .calendar-weekdays {
+        gap: 3px;
+    }
+
+
+    .calendar-weekdays span {
+        font-size: 8px;
+    }
+
+
+    .calendar-days {
+        gap: 3px;
+    }
+
+
+    .calendar-day {
+        min-height: 32px;
+        font-size: 9px;
+        border-radius: 7px;
+    }
+
+}
+
+/* =========================================================
+   TEACHER DASHBOARD FOOTER
+   ========================================================= */
+
+/* Main footer container */
+.teacher-dashboard-footer {
+    margin-top: 40px;
+    padding: 30px 0 0;
+    border-top: 1px solid #e3e8f0;
+}
+
+
+/* =========================================================
+   FOOTER MAIN CONTENT
+   ========================================================= */
+
+.footer-main-content {
+    display: grid;
+    grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+    gap: 30px;
+    padding-bottom: 28px;
+}
+
+
+/* =========================================================
+   FOOTER BRAND
+   ========================================================= */
+
+.footer-brand h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #2563eb;
+}
+
+
+.footer-brand p {
+    margin: 0 0 9px 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #667085;
+}
+
+
+.footer-brand span {
+    display: block;
+    max-width: 220px;
+    font-size: 9px;
+    line-height: 1.6;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   FOOTER COLUMNS
+   ========================================================= */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.footer-column h3 {
+    margin: 0 0 5px 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #172033;
+}
+
+
+.footer-column p {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.5;
+    color: #8b95a7;
+}
+
+
+.footer-column a {
+    width: fit-content;
+    text-decoration: none;
+    font-size: 9px;
+    color: #8b95a7;
+    transition: color 0.2s ease;
+}
+
+
+.footer-column a:hover {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+   ========================================================= */
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px 0;
+    border-top: 1px solid #edf0f5;
+}
+
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 8px;
+    color: #98a2b3;
+}
+
+
+.footer-bottom span {
+    flex-shrink: 0;
+    font-size: 8px;
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* Give the footer a little less space on phones */
+    .teacher-dashboard-footer {
+        margin-top: 30px;
+        padding-top: 24px;
+    }
+
+
+    /* Stack footer columns on mobile */
+    .footer-main-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 18px;
+        padding-bottom: 24px;
+    }
+
+
+    /* Let the ARWA branding use the full row */
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+
+    .footer-brand h2 {
+        font-size: 18px;
+    }
+
+
+    .footer-brand p {
+        font-size: 10px;
+    }
+
+
+    .footer-brand span {
+        font-size: 8px;
+    }
+
+
+    .footer-column h3 {
+        font-size: 10px;
+    }
+
+
+    .footer-column p,
+    .footer-column a {
+        font-size: 8px;
+    }
+
+
+    /* Stack the copyright information */
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+
+    .footer-bottom p,
+    .footer-bottom span {
+        font-size: 8px;
+    }
+
+}
+
+/* =========================================================
+   TEACHER NOTIFICATIONS
+   ========================================================= */
+
+/* Container for the notification button */
+.teacher-notification-wrapper {
+    position: relative;
+}
+
+
+/* Notification bell button */
+.teacher-notification-button {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #f1f5f9;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* Small effect when the teacher points at the bell */
+.teacher-notification-button:hover {
+    background-color: #e5eaf1;
+    transform: translateY(-2px);
+}
+
+
+/* Number showing unread notifications */
+.teacher-notification-count {
+    position: absolute;
+
+    top: -4px;
+    right: -4px;
+
+    min-width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 4px;
+
+    border-radius: 50%;
+
+    background-color: #dc2626;
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+/* =========================================================
+   TEACHER NOTIFICATION PANEL
+   ========================================================= */
+
+/* Notification dropdown panel */
+.teacher-notification-panel {
+    position: absolute;
+
+    top: 52px;
+    right: 0;
+
+    width: 340px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #edf0f5;
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+
+    /* Hidden until JavaScript opens it */
+    display: none;
+
+    z-index: 1000;
+}
+
+
+/* Panel heading */
+.teacher-notification-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.teacher-notification-panel-header h3 {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+.teacher-notification-panel-header span {
+    min-width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #dc2626;
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* Individual notification */
+.teacher-notification-item {
+    display: flex;
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid #f0f2f5;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+/* Remove the border from the final notification */
+.teacher-notification-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Highlight notification when touched or hovered */
+.teacher-notification-item:hover {
+    background-color: #f8fafc;
+}
+
+
+/* Notification icon */
+.teacher-notification-item-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f1f5f9;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+
+/* Notification title */
+.teacher-notification-item h4 {
+    margin: 0 0 4px 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #172033;
+}
+
+
+/* Notification description */
+.teacher-notification-item p {
+    margin: 0;
+
+    font-size: 10px;
+    line-height: 1.5;
+
+    color: #8b95a7;
+}
+
+/* Show the notification panel when JavaScript
+   adds the "show" class */
+.teacher-notification-panel.show {
+    display: block;
+}
+
+/* Highlight notifications that are still unread */
+.teacher-notification-item.unread {
+    background-color: #f8fbff;
+}
+
+
+/* =========================================================
+   MOBILE NOTIFICATION PANEL
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-notification-panel {
+        position: fixed;
+
+        top: 70px;
+        right: 15px;
+        left: 15px;
+
+        width: auto;
+
+        max-height: 70vh;
+
+        overflow-y: auto;
+    }
+
+}
+
+/* =========================================================
+   TEACHER PROFILE BUTTON
+   ========================================================= */
+
+/* Make the profile button look like a normal
+   dashboard profile area. */
+.teacher-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0;
+
+    border: none;
+
+    background-color: transparent;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+/* Small effect when the teacher points at
+   or touches the profile button. */
+.teacher-profile:hover {
+    opacity: 0.85;
+}
+
+/* =========================================================
+   TEACHER PROFILE MENU
+   ========================================================= */
+
+/* Profile dropdown menu */
+.teacher-profile-menu {
+    position: absolute;
+
+    top: 55px;
+    right: 0;
+
+    width: 230px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #edf0f5;
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+
+    /* Hidden until JavaScript opens it */
+    display: none;
+
+    z-index: 1000;
+}
+
+/* =========================================================
+   PROFILE MENU HEADER
+   ========================================================= */
+
+/* Header area of the profile menu */
+.teacher-profile-menu-header {
+    padding: 15px 16px;
+
+    border-bottom: 1px solid #edf0f5;
+
+    background-color: #f8fafc;
+}
+
+
+/* Teacher name inside the menu */
+.teacher-profile-menu-header p {
+    margin: 0 0 4px 0;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Teacher role inside the menu */
+.teacher-profile-menu-header span {
+    font-size: 10px;
+
+    color: #8b95a7;
+}
+
+/* =========================================================
+   PROFILE MENU ITEMS
+   ========================================================= */
+
+/* Individual profile menu option */
+.teacher-profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 12px 16px;
+
+    text-decoration: none;
+
+    background-color: #ffffff;
+
+    color: #172033;
+
+    font-size: 11px;
+    font-weight: 600;
+    
+    /* Remove the browser's default button styling */
+    border: none;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+/* Icon inside the menu option */
+.teacher-profile-menu-item span:first-child {
+    width: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+
+/* Hover effect */
+.teacher-profile-menu-item:hover {
+    background-color: #f8fafc;
+}
+
+/* =========================================================
+   MOBILE TEACHER PROFILE MENU
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .teacher-profile-menu {
+        position: fixed;
+
+        top: 70px;
+        right: 15px;
+        left: 15px;
+
+        width: auto;
+
+        max-width: 400px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+/* =========================================================
+   PROFILE MENU LOGOUT
+   ========================================================= */
+
+/* Give the logout option a warning color */
+.teacher-profile-menu-item.logout {
+    color: #dc2626;
+}
+
+
+/* Slightly darker red when the teacher
+   points at or touches Logout */
+.teacher-profile-menu-item.logout:hover {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+/* Show the profile menu when JavaScript
+   adds the "show" class */
+.teacher-profile-menu.show {
+    display: block;
+}

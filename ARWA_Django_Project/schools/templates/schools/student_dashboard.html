@@ -1,0 +1,197 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Use UTF-8 so names and symbols display correctly. -->
+    <meta charset="UTF-8">
+
+    <!-- Make the dashboard fit mobile phone screens. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Set the browser tab title. -->
+    <title>Student Dashboard | ARWA</title>
+
+    <!-- Load the Student Dashboard stylesheet. -->
+    <link rel="stylesheet" href="{% static 'schools/student_dashboard.css' %}">
+</head>
+    <body>
+    
+        <!-- Main container for the entire student dashboard. -->
+        <div class="student-dashboard">
+    
+            <!-- Top header containing ARWA branding and student tools. -->
+            <header class="student-header">
+                <div class="student-brand">
+                    <h1>ARWA</h1>
+                    <p>Student Portal</p>
+                </div>
+                    
+                <!-- Display the student's profile picture and name. -->
+                <div class="student-header-profile">
+                
+                    <!-- Show the uploaded picture when one is available. -->
+                    {% if student.profile_picture %}
+                        <img
+                            src="{{ student.profile_picture.url }}"
+                            alt="Profile picture of {{ student.first_name }}"
+                            class="student-profile-picture"
+                        >
+                    {% else %}
+                        <!-- Show initials when no picture has been uploaded. -->
+                        <div class="student-profile-placeholder" aria-hidden="true">
+                            {{ student.first_name|first|upper }}{{ student.last_name|first|upper }}
+                        </div>
+                    {% endif %}
+                
+                    <!-- Display the student's name beside the picture. -->
+                    <span>{{ student.first_name }} {{ student.last_name }}</span>
+                
+                </div>
+                
+            </header>
+    
+            <!-- Layout containing the navigation and main content. -->
+            <div class="student-layout">
+    
+                <!-- Student navigation menu. -->
+                <aside class="student-sidebar">
+                    <nav class="student-navigation" aria-label="Student menu">
+    
+                        <a href="#overview" class="student-nav-link active">
+                            <span class="nav-icon" aria-hidden="true">⌂</span>
+                            <span>Overview</span>
+                        </a>
+    
+                        <a href="#attendance" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">✓</span>
+                            <span>View Attendance</span>
+                        </a>
+    
+                        <a href="#homework" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▤</span>
+                            <span>View Homework</span>
+                        </a>
+    
+                        <a href="#school-documents" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▧</span>
+                            <span>School Documents</span>
+                        </a>
+    
+                        <a href="#timetable" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▦</span>
+                            <span>Timetable</span>
+                        </a>
+    
+                        <a href="#school-news" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▣</span>
+                            <span>School News</span>
+                        </a>
+    
+                        <a href="#fees-statement" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">R</span>
+                            <span>Fees Statement</span>
+                        </a>
+    
+                        <a href="#make-payment" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">＋</span>
+                            <span>Make Fee Payment</span>
+                        </a>
+    
+                        <a href="#payment-history" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">↺</span>
+                            <span>Payment History</span>
+                        </a>
+    
+                        <a href="#grades-results" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">★</span>
+                            <span>Grades and Results</span>
+                        </a>
+    
+                        <a href="#change-password" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">⚿</span>
+                            <span>Change Password</span>
+                        </a>
+    
+                        <a href="#submit-homework" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">↑</span>
+                            <span>Submit Homework</span>
+                        </a>
+    
+                        <a href="#my-classes" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▤</span>
+                            <span>My Classes</span>
+                        </a>
+    
+                        <a href="#resources" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">▥</span>
+                            <span>Learning Resources</span>
+                        </a>
+    
+                        <a href="#notifications" class="student-nav-link">
+                            <span class="nav-icon" aria-hidden="true">●</span>
+                            <span>Notifications</span>
+                        </a>
+    
+                        <!-- Use the existing Django logout route. -->
+                        <a href="{% url 'logout' %}" class="student-nav-link logout-link">
+                            <span class="nav-icon" aria-hidden="true">↪</span>
+                            <span>Logout</span>
+                        </a>
+    
+                    </nav>
+                </aside>
+    
+                <!-- Main dashboard content. -->
+                <main class="student-main" id="overview">
+    
+                    <!-- Personalised welcome section. -->
+                    <section class="student-welcome">
+                        <h2>Welcome, {{ student.first_name }}!</h2>
+                        <p>{{ school.name }}</p>
+                        <p>Here's your school overview.</p>
+                    </section>
+    
+                    
+                    <!-- Show the current date and time to the student. -->
+                    <section class="student-tools-panel">
+                        <div>
+                            <h3>Current Date and Time</h3>
+                    
+                            <!-- JavaScript will update these values automatically. -->
+                            <p id="student-current-date">Loading date...</p>
+                            <p id="student-current-time">Loading time...</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Interactive school calendar. -->
+                    <section class="student-calendar-panel">
+                        <h3>School Calendar</h3>
+                    
+                        <!-- JavaScript will build the calendar inside this container. -->
+                        <div id="student-calendar" class="mini-calendar"></div>
+                    
+                        <!-- Selected date's school events will appear here. -->
+                        <div
+                            id="student-event-details"
+                            class="calendar-event-details"
+                            aria-live="polite"
+                        >
+                            <p>Tap a date to view school events.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Pass school events safely from Django to JavaScript as JSON. -->
+                    {{ school_events|json_script:"student-school-events" }}
+
+    
+                </main>
+    
+            </div>
+        </div>
+    
+        <!-- Load the Student Dashboard JavaScript after the page content. -->
+    <script src="{% static 'schools/student_dashboard.js' %}"></script>
+    
+    </body>
+</html>

@@ -22,6 +22,10 @@ from django.contrib import admin
 # Import path and include so we can connect application URLs.
 from django.urls import path, include
 
+# Tools for serving uploaded media files during development.
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 # Main URL configuration for the ARWA Django project.
 urlpatterns = [
@@ -30,5 +34,20 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # Send the website's root URL to the schools application.
+    # Connect the schools app URLs
+    # to the main ARWA project.
     path("", include("schools.urls")),
 ]
+
+# Serve uploaded media files during development.
+#
+# This allows Django to display files stored in
+# MEDIA_ROOT, such as Guardian profile pictures.
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT,
+    )
+    
+
+
