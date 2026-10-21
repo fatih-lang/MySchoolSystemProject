@@ -250,10 +250,17 @@
                         
                             <div class="director-avatar">
                         
-                                <img
-                                    src="{{ request.user.staffprofile.profile_picture.url }}"
-                                    alt="Director profile picture"
-                                >
+                                {% if request.user.staffprofile.profile_picture %}
+                                    <img
+                                        src="{{ request.user.staffprofile.profile_picture.url }}"
+                                        alt="Director profile picture"
+                                    >
+                                {% else %}
+                                    <img
+                                        src="{% static 'schools/images/default-profile-picture.png' %}"
+                                        alt="Director profile picture"
+                                    >
+                                {% endif %}
                         
                             </div>
                         
@@ -287,29 +294,574 @@
                 -->
                 <section class="director-content">
     
-                    <p>
-                        Welcome to the ARWA Executive Portal.
-                    </p>
+                    <!--
+                        Executive welcome panel.
                     
-                    <div class="director-tool clock-tool">
-                
-                            <span class="director-tool-icon">
-                                ◷
+                        This is the Director's first point of focus
+                        when entering the ARWA Executive Command Centre.
+                    -->
+                    <div class="director-welcome-panel">
+                    
+                        <!--
+                            Left side of the welcome panel.
+                    
+                            Contains the Director's personalised
+                            executive greeting and description.
+                        -->
+                        <div class="director-welcome-content">
+                    
+                            <!-- Small executive section label -->
+                            <span class="director-welcome-label">
+                                EXECUTIVE OVERVIEW
                             </span>
-                
-                            <div class="director-tool-content">
-                
-                                <span class="director-tool-label">
-                                    TIME
-                                </span>
-                
-                                <strong id="director-clock">
-                                    --:--:--
-                                </strong>
-                
-                            </div>
-                
+                    
+                    
+                            <!-- Personalised Director greeting -->
+                            <h3>
+                                Welcome,
+                                {{ request.user.first_name }}
+                                {{ request.user.last_name }}
+                            </h3>
+                    
+                    
+                            <!-- Executive overview description -->
+                            <p>
+                                Your executive command centre for strategic
+                                oversight, institutional performance, financial
+                                intelligence, and school management.
+                            </p>
+                    
                         </div>
+                    
+                    
+                        <!--
+                            Right side of the welcome panel.
+                    
+                            The live executive clock is kept separate
+                            so it becomes a visual information element.
+                        -->
+                        <div class="director-welcome-clock">
+                    
+                            <!-- Clock label -->
+                            <span class="director-welcome-clock-label">
+                                CURRENT TIME
+                            </span>
+                    
+                    
+                            <!-- Live clock -->
+                            <strong id="director-clock">
+                                --:--:--
+                            </strong>
+                    
+                    
+                            <!-- Supporting timezone text -->
+                            <span class="director-welcome-timezone">
+                                Local Executive Time
+                            </span>
+                    
+                        </div>
+                    
+                    </div>
+                    
+                    <!--
+                        Executive KPI intelligence row.
+                    
+                        These cards provide the Director with an
+                        immediate strategic snapshot of the institution.
+                    -->
+                    <div class="director-kpi-grid">
+                    
+                    
+                        <!-- ==========================================
+                            STUDENT KPI
+                            ========================================== -->
+                    
+                        <article class="director-kpi-card">
+                    
+                            <div class="director-kpi-header">
+                    
+                                <span class="director-kpi-label">
+                                    STUDENTS
+                                </span>
+                    
+                                <span class="director-kpi-icon">
+                                    ◉
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <strong class="director-kpi-value">
+                                250
+                            </strong>
+                    
+                    
+                            <span class="director-kpi-description">
+                                Active students
+                            </span>
+                    
+                        </article>
+                    
+                    
+                        <!-- ==========================================
+                            STAFF KPI
+                            ========================================== -->
+                    
+                        <article class="director-kpi-card">
+                    
+                            <div class="director-kpi-header">
+                    
+                                <span class="director-kpi-label">
+                                    STAFF
+                                </span>
+                    
+                                <span class="director-kpi-icon">
+                                    ♙
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <strong class="director-kpi-value">
+                                25
+                            </strong>
+                    
+                    
+                            <span class="director-kpi-description">
+                                Active staff members
+                            </span>
+                    
+                        </article>
+                    
+                    
+                        <!-- ==========================================
+                            GUARDIAN KPI
+                            ========================================== -->
+                    
+                        <article class="director-kpi-card">
+                    
+                            <div class="director-kpi-header">
+                    
+                                <span class="director-kpi-label">
+                                    GUARDIANS
+                                </span>
+                    
+                                <span class="director-kpi-icon">
+                                    ◎
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <strong class="director-kpi-value">
+                                210
+                            </strong>
+                    
+                    
+                            <span class="director-kpi-description">
+                                Registered guardians
+                            </span>
+                    
+                        </article>
+                    
+                    
+                        <!-- ==========================================
+                            FINANCIAL KPI
+                            ========================================== -->
+                    
+                        <article class="director-kpi-card director-kpi-financial">
+                    
+                            <div class="director-kpi-header">
+                    
+                                <span class="director-kpi-label">
+                                    OUTSTANDING FEES
+                                </span>
+                    
+                                <span class="director-kpi-icon">
+                                    ◆
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <strong class="director-kpi-value">
+                                R125,000
+                            </strong>
+                    
+                    
+                            <span class="director-kpi-description">
+                                Current outstanding balance
+                            </span>
+                    
+                        </article>
+                    
+                    
+                    </div>
+                    
+                    <!--
+                        Institutional intelligence section.
+                    
+                        This area gives the Director a broader view
+                        of institutional performance and matters
+                        requiring executive attention.
+                    -->
+                    <div class="director-intelligence-grid">
+                    
+                    
+                        <!-- ==========================================
+                            INSTITUTIONAL PERFORMANCE
+                            ========================================== -->
+                    
+                        <section class="director-intelligence-card">
+                    
+                            <div class="director-section-heading">
+                    
+                                <div>
+                                    <span class="director-section-label">
+                                        INSTITUTIONAL INTELLIGENCE
+                                    </span>
+                    
+                                    <h3>
+                                        Performance Overview
+                                    </h3>
+                                </div>
+                    
+                    
+                                <span class="director-section-status">
+                                    LIVE
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <!-- Performance metrics -->
+                    
+                            <div class="director-performance-list">
+                    
+                    
+                                <!-- Academic performance -->
+                    
+                                <div class="director-performance-item">
+                    
+                                    <div class="director-performance-info">
+                    
+                                        <span>
+                                            Academic Performance
+                                        </span>
+                    
+                                        <strong>
+                                            78%
+                                        </strong>
+                    
+                                    </div>
+                    
+                    
+                                    <div class="director-performance-track">
+                    
+                                        <div
+                                            class="director-performance-progress"
+                                            style="width: 78%;"
+                                        ></div>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                                <!-- Attendance -->
+                    
+                                <div class="director-performance-item">
+                    
+                                    <div class="director-performance-info">
+                    
+                                        <span>
+                                            Student Attendance
+                                        </span>
+                    
+                                        <strong>
+                                            91%
+                                        </strong>
+                    
+                                    </div>
+                    
+                    
+                                    <div class="director-performance-track">
+                    
+                                        <div
+                                            class="director-performance-progress"
+                                            style="width: 91%;"
+                                        ></div>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                                <!-- Homework completion -->
+                    
+                                <div class="director-performance-item">
+                    
+                                    <div class="director-performance-info">
+                    
+                                        <span>
+                                            Homework Completion
+                                        </span>
+                    
+                                        <strong>
+                                            84%
+                                        </strong>
+                    
+                                    </div>
+                    
+                    
+                                    <div class="director-performance-track">
+                    
+                                        <div
+                                            class="director-performance-progress"
+                                            style="width: 84%;"
+                                        ></div>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                            </div>
+                    
+                        </section>
+                    
+                    
+                        <!-- ==========================================
+                            EXECUTIVE ALERTS
+                            ========================================== -->
+                    
+                        <section class="director-intelligence-card">
+                    
+                    
+                            <div class="director-section-heading">
+                    
+                                <div>
+                    
+                                    <span class="director-section-label">
+                                        EXECUTIVE ATTENTION
+                                    </span>
+                    
+                                    <h3>
+                                        Priority Alerts
+                                    </h3>
+                    
+                                </div>
+                    
+                    
+                                <span class="director-alert-count">
+                                    03
+                                </span>
+                    
+                            </div>
+                    
+                            <!-- Alert list -->
+                    
+                            <div class="director-alert-list">
+                    
+                    
+                                <!-- Financial alert -->
+                    
+                                <div class="director-alert-item">
+                    
+                                    <span class="director-alert-indicator financial">
+                                    </span>
+                    
+                    
+                                    <div class="director-alert-content">
+                    
+                                        <strong>
+                                            Outstanding fees require attention
+                                        </strong>
+                    
+                                        <span>
+                                            Financial oversight review recommended.
+                                        </span>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                                <!-- Academic alert -->
+                    
+                                <div class="director-alert-item">
+                    
+                                    <span class="director-alert-indicator academic">
+                                    </span>
+                    
+                    
+                                    <div class="director-alert-content">
+                    
+                                        <strong>
+                                            Examination verification pending
+                                        </strong>
+                    
+                                        <span>
+                                            Academic results require executive monitoring.
+                                        </span>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                                <!-- Staff alert -->
+                    
+                                <div class="director-alert-item">
+                    
+                                    <span class="director-alert-indicator staff">
+                                    </span>
+                    
+                    
+                                    <div class="director-alert-content">
+                    
+                                        <strong>
+                                            Staff account review available
+                                        </strong>
+                    
+                                        <span>
+                                            Review recent staff administration activity.
+                                        </span>
+                    
+                                    </div>
+                    
+                                </div>
+                    
+                    
+                            </div>
+                    
+                        </section>
+                    
+                    </div>
+                    
+                    <!-- Financial intelligence section -->
+                    <div class="director-financial-grid">
+                            
+                        <!-- Financial summary -->
+                        <section class="director-financial-card">
+                            
+                            <div class="director-section-heading">
+                                <div>
+                                    <span class="director-section-label">
+                                        FINANCIAL INTELLIGENCE
+                                    </span>
+                            
+                                    <h3>
+                                        Financial Overview
+                                    </h3>
+                                </div>
+                            
+                                <span class="director-section-status">
+                                    CURRENT
+                                </span>
+                            </div>
+                            
+                            <div class="director-financial-metrics">
+                            
+                                <div class="director-financial-metric">
+                                    <span>
+                                        Fees Collected
+                                    </span>
+                            
+                                    <strong>
+                                        R875,000
+                                    </strong>
+                            
+                                    <small>
+                                        Current academic year
+                                    </small>
+                                </div>
+                            
+                                <div class="director-financial-metric">
+                                    <span>
+                                        Outstanding Fees
+                                    </span>
+                            
+                                    <strong>
+                                        R125,000
+                                    </strong>
+                            
+                                    <small>
+                                        Requires collection attention
+                                    </small>
+                                </div>
+                            
+                                <div class="director-financial-metric">
+                                    <span>
+                                        Collection Rate
+                                    </span>
+                            
+                                    <strong>
+                                        87.5%
+                                    </strong>
+                            
+                                    <small>
+                                        Current collection performance
+                                    </small>
+                                </div>
+                            
+                                <div class="director-financial-metric">
+                                    <span>
+                                        Overdue Accounts
+                                    </span>
+                            
+                                    <strong>
+                                        18
+                                    </strong>
+                            
+                                    <small>
+                                        Accounts requiring follow-up
+                                    </small>
+                                </div>
+                            
+                            </div>
+                            
+                        </section>
+                            
+                            
+                        <!-- Financial attention -->
+                        <section class="director-financial-card director-financial-attention">
+                            
+                            <div class="director-section-heading">
+                                <div>
+                                    <span class="director-section-label">
+                                        EXECUTIVE ATTENTION
+                                    </span>
+                            
+                                    <h3>
+                                        Financial Attention
+                                    </h3>
+                                </div>
+                            </div>
+                            
+                            <div class="director-financial-attention-content">
+                            
+                                <div class="director-financial-attention-icon">
+                                    ◆
+                                </div>
+                            
+                                <div>
+                                    <strong>
+                                        Outstanding fees require monitoring
+                                    </strong>
+                            
+                                    <p>
+                                        R125,000 remains outstanding across
+                                        18 accounts. Executive review is recommended
+                                        for collection follow-up.
+                                    </p>
+                                </div>
+                            
+                            </div>
+                            
+                        </section>
+                            
+                    </div>     
     
                 </section>
     

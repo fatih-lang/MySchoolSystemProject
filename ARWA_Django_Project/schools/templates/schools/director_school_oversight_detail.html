@@ -1,0 +1,496 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+    
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+    
+        <title>
+            {{ school.name }} | School Oversight | ARWA
+        </title>
+    
+        <link
+            rel="stylesheet"
+            href="{% static 'schools/director_school_oversight.css' %}"
+        >
+    </head>
+    
+    <body>
+    
+        <main class="director-school-oversight">
+    
+            <header class="school-oversight-header">
+    
+                <span class="school-oversight-label">
+                    SCHOOL OVERSIGHT
+                </span>
+    
+                <h1>
+                    {{ school.name }}
+                </h1>
+    
+                <p>
+                    Institutional information and strategic
+                    management for this school.
+                </p>
+    
+            </header>
+            
+            <!--
+            School Profile
+        
+            This section presents the core identity and
+            contact information of the selected school.
+        
+            All information comes directly from the School model.
+            Nothing is hard-coded, so the same page works
+            for schools in different countries.
+            -->
+            <section class="school-oversight-profile">
+            
+                <div class="school-oversight-section-heading">
+            
+                    <div>
+                        <span class="school-oversight-section-label">
+                            SCHOOL PROFILE
+                        </span>
+            
+                        <h2>
+                            Institutional Identity
+                        </h2>
+                    </div>
+            
+                    <span class="school-oversight-section-status">
+                        {{ school.status }}
+                    </span>
+            
+                </div>
+            
+            
+                <!-- School identity information -->
+                <div class="school-oversight-profile-grid">
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>School Name</span>
+            
+                        <strong>
+                            {{ school.name }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>School Code</span>
+            
+                        <strong>
+                            {{ school.school_code }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Registration Number</span>
+            
+                        <strong>
+                            {% if school.registration_number %}
+                                {{ school.registration_number }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Country</span>
+            
+                        <strong>
+                            {{ school.country }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Education System</span>
+            
+                        <strong>
+                            {{ school.education_system }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Academic Structure</span>
+            
+                        <strong>
+                            {% if school.academic_structure %}
+                                {{ school.academic_structure }}
+                            {% else %}
+                                Not configured
+                            {% endif %}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Timezone</span>
+            
+                        <strong>
+                            {{ school.timezone }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-item">
+            
+                        <span>Institution Type</span>
+            
+                        <strong>
+            
+                            {% for school_type in school.school_types.all %}
+            
+                                {{ school_type.name }}{% if not forloop.last %}, {% endif %}
+            
+                            {% empty %}
+            
+                                Not configured
+            
+                            {% endfor %}
+            
+                        </strong>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!-- Contact information -->
+                <div class="school-oversight-contact">
+            
+                    <div class="school-oversight-contact-heading">
+            
+                        <span class="school-oversight-section-label">
+                            CONTACT INFORMATION
+                        </span>
+            
+                        <h3>
+                            School Contact Details
+                        </h3>
+            
+                    </div>
+            
+            
+                    <div class="school-oversight-profile-grid">
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Address</span>
+            
+                            <strong>
+                                {{ school.address }}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>City / Town</span>
+            
+                            <strong>
+                                {{ school.city }}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>State / Province / Region</span>
+            
+                            <strong>
+                                {% if school.state_province %}
+                                    {{ school.state_province }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Postal / ZIP Code</span>
+            
+                            <strong>
+                                {% if school.postal_code %}
+                                    {{ school.postal_code }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Email</span>
+            
+                            <strong>
+                                {{ school.email }}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Website</span>
+            
+                            <strong>
+                                {% if school.website %}
+                                    {{ school.website }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Hotline</span>
+            
+                            <strong>
+                                {% if school.hotline %}
+                                    {{ school.hotline }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+            
+                        </div>
+            
+            
+                        <div class="school-oversight-profile-item">
+            
+                            <span>Mobile</span>
+            
+                            <strong>
+                                {% if school.mobile %}
+                                    {{ school.mobile }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </strong>
+            
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+            </section>
+            
+            <!--
+                Academic Structure
+            
+                This section will present how the selected school
+                is academically organised.
+            
+                ARWA is designed for different countries and
+                education systems, so the information displayed
+                here will come from the school's actual academic
+                configuration rather than assuming a fixed
+                Grade 1-12 structure.
+            -->
+            
+            <section class="school-oversight-academic">
+            
+                <!--
+                    Academic Structure section heading.
+            
+                    This contains ONLY the section label and title.
+                    Keeping the heading separate prevents the
+                    information cards from appearing beside it.
+                -->
+                <div class="school-oversight-section-heading">
+            
+                    <div>
+            
+                        <span class="school-oversight-section-label">
+                            ACADEMIC STRUCTURE
+                        </span>
+            
+                        <h2>
+                            Academic Organisation
+                        </h2>
+            
+                    </div>
+            
+                </div>
+            
+            
+                <!--
+                    Academic Structure information.
+            
+                    This is now outside the heading, so the
+                    information cards have their own layout area.
+                -->
+            
+                <!-- Academic structure configured for this school -->
+                <div class="school-oversight-academic-summary">
+            
+                    <span>
+                        Academic Structure
+                    </span>
+            
+                    <strong>
+                        {% if school.academic_structure %}
+                            {{ school.academic_structure }}
+                        {% else %}
+                            Not configured
+                        {% endif %}
+                    </strong>
+            
+                </div>
+            
+            
+                <!-- Current academic year -->
+                <div class="school-oversight-academic-summary">
+            
+                    <span>
+                        Current Academic Year
+                    </span>
+            
+                    <strong>
+                        {% if current_academic_year %}
+                            {{ current_academic_year }}
+                        {% else %}
+                            Not configured
+                        {% endif %}
+                    </strong>
+            
+                </div>
+            
+            
+                <!--
+                    Academic levels currently offered by the school.
+            
+                    Each record contains the school type and
+                    academic level.
+                -->
+                <div class="school-oversight-academic-levels">
+            
+                    <div class="school-oversight-academic-levels-heading">
+            
+                        <span>
+                            Academic Levels Offered
+                        </span>
+            
+                        <strong>
+                            {{ school_academic_levels|length }}
+                        </strong>
+            
+                    </div>
+            
+            
+                    <!--
+                        Academic levels grouped by school type.
+                    
+                        The view has already grouped the school's active
+                        academic levels by school type.
+                    
+                        This prevents the school type name from being
+                        repeated for every individual academic level.
+                    -->
+                    <div class="school-oversight-academic-level-list">
+                    
+                        {% for group in academic_levels_by_school_type %}
+                    
+                            <!-- One group for each school type -->
+                            <div class="school-oversight-academic-level-group">
+                    
+                                <!-- School type heading -->
+                                <div class="school-oversight-academic-level-group-heading">
+                    
+                                    <span>
+                                        {{ group.school_type.name }}
+                                    </span>
+                    
+                                </div>
+                    
+                    
+                                <!-- Academic levels belonging to this school type -->
+                                <div class="school-oversight-academic-level-group-list">
+                    
+                                    {% for school_level in group.levels %}
+                    
+                                        <div class="school-oversight-academic-level-item">
+                    
+                                            <strong>
+                                                {% if school_level.display_name %}
+                                                    {{ school_level.display_name }}
+                                                {% else %}
+                                                    {{ school_level.academic_level.name }}
+                                                {% endif %}
+                                            </strong>
+                    
+                                        </div>
+                    
+                                    {% endfor %}
+                    
+                                </div>
+                    
+                            </div>
+                    
+                        {% empty %}
+                    
+                            <div class="school-oversight-academic-level-empty">
+                    
+                                <strong>
+                                    No academic levels configured
+                                </strong>
+                    
+                                <span>
+                                    No active academic levels have been
+                                    configured for this school.
+                                </span>
+                    
+                            </div>
+                    
+                        {% endfor %}
+                    
+                    </div>
+            
+                </div>
+            
+            </section>
+        
+        </main>
+    
+    </body>
+
+</html>

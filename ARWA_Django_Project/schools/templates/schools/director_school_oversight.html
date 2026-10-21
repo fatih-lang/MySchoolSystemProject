@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Oversight | ARWA</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'schools/director_school_oversight.css' %}"
+    >
+</head>
+
+    <body>
+    
+        <main class="director-school-oversight">
+
+            <header class="school-oversight-header">
+        
+                <span class="school-oversight-label">
+                    SCHOOL OVERSIGHT
+                </span>
+        
+                <h1>
+                    School Oversight
+                </h1>
+        
+                <p>
+                    Institutional information and strategic
+                    school management.
+                </p>
+        
+            </header>
+        
+        
+            <!--
+                School selection area.
+        
+                This section clearly separates the Director's
+                assigned schools from the main page introduction.
+            -->
+            <section class="school-oversight-schools">
+        
+                <div class="school-oversight-selection-heading">
+                    <span>
+                        ASSIGNED SCHOOLS
+                    </span>
+        
+                    <h2>
+                        Your Schools
+                    </h2>
+        
+                    <p>
+                        Select a school to view its institutional oversight.
+                    </p>
+                </div>
+        
+                <div class="school-oversight-school-list">
+        
+                    {% for assignment in director_schools %}
+        
+                        <a
+                            href="{% url 'director_school_oversight_detail' assignment.school.id %}"
+                            class="school-oversight-school-card"
+                        >
+                            <!--
+                                This identifies the card as a school selection.
+                                The Director can only reach the detail page for
+                                schools assigned through DirectorSchool.
+                            -->
+                            <span class="school-oversight-card-label">
+                                SCHOOL
+                            </span>
+        
+                            <h2>
+                                {{ assignment.school.name }}
+                            </h2>
+        
+                            <span class="school-oversight-card-action">
+                                View institutional oversight →
+                            </span>
+                        </a>
+        
+                    {% empty %}
+        
+                        <p>
+                            No schools have been assigned to your
+                            Director profile.
+                        </p>
+        
+                    {% endfor %}
+        
+                </div>
+        
+            </section>
+        
+        </main>
+    
+    </body>
+</html>

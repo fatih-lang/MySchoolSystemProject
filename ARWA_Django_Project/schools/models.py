@@ -2432,6 +2432,50 @@ class StaffProfile(models.Model):
     def __str__(self):
         # Show the staff member's name from the Django User account.
         return f"{self.user.first_name} {self.user.last_name}"
+        
+
+
+class DirectorSchool(models.Model):
+    """
+    Connects a Director to a school they are authorised
+    to oversee.
+
+    This allows one Director to manage multiple schools
+    while keeping each school's data properly separated.
+    """
+
+    # The Director's staff profile.
+    director = models.ForeignKey(
+        StaffProfile,
+        on_delete=models.CASCADE,
+        related_name="director_schools",
+    )
+
+    # The school this Director is authorised to oversee.
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="director_assignments",
+    )
+
+    # Prevent the same Director from being assigned
+    # to the same school more than once.
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["director", "school"],
+                name="unique_director_school",
+            ),
+        ]
+
+    def __str__(self):
+        """
+        Display the Director and school clearly
+        in Django Admin.
+        """
+        return f"{self.director.user.get_full_name()} - {self.school.name}"
+                
+        
 
 class StaffSchoolTypeResponsibility(models.Model):
 

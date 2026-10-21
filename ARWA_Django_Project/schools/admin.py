@@ -21,6 +21,7 @@ from .models import (
     School,
     SchoolType,
     StaffProfile,
+    DirectorSchool,
     StaffRole,
     AcademicLevel,
     SchoolAcademicLevel,
@@ -1408,4 +1409,28 @@ class SchoolCurrencyAdmin(admin.ModelAdmin):
     )    
     
        
-                      
+@admin.register(DirectorSchool)
+class DirectorSchoolAdmin(admin.ModelAdmin):
+    """
+    Manage which schools each Director is authorised
+    to oversee.
+    """
+
+    # Show the Director and school in the admin list.
+    list_display = (
+        "director",
+        "school",
+    )
+
+    # Allow the administrator to quickly find
+    # a Director or school.
+    search_fields = (
+        "director__user__first_name",
+        "director__user__last_name",
+        "school__name",
+    )
+
+    # Make it easy to filter assignments by school.
+    list_filter = (
+        "school",
+    )                      

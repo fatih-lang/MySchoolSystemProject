@@ -91,6 +91,24 @@ urlpatterns = [
         name="director_dashboard",
     ),
     
+    # Director School Oversight
+    # Opens the institutional oversight page
+    # for the authenticated Director's school.
+    path(
+        "director/school-oversight/",
+        views.director_school_oversight,
+        name="director_school_oversight",
+    ),
+    
+    # Director School Oversight Detail
+    # Opens the oversight workspace for one
+    # school assigned to the authenticated Director.
+    path(
+        "director/school-oversight/<int:school_id>/",
+        views.director_school_oversight_detail,
+        name="director_school_oversight_detail",
+    ),
+    
     path(
         "director/select-school-type/<int:school_type_id>/",
         views.director_select_school_type,

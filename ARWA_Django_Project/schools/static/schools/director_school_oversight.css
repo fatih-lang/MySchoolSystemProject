@@ -1,0 +1,999 @@
+/* =========================================
+   SCHOOL OVERSIGHT
+   ========================================= */
+
+/*
+    Make width and height calculations predictable
+    throughout the page.
+*/
+* {
+    box-sizing: border-box;
+}
+
+
+/*
+    Remove the browser's default page spacing
+    and establish ARWA's base typography.
+*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f6fa;
+    color: #172033;
+}
+
+
+/*
+    Main School Oversight page container.
+
+    The maximum width keeps the page comfortable
+    on large executive displays while allowing it
+    to remain responsive.
+*/
+.director-school-oversight {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 42px;
+}
+
+
+/*
+    Page introduction spacing.
+
+    Creates a comfortable visual separation between
+    the School Oversight introduction and the
+    assigned-school selection area.
+*/
+.school-oversight-header {
+    margin-bottom: 42px;
+}
+
+
+/*
+    Small executive section label.
+*/
+.school-oversight-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #9a7a25;
+}
+
+
+/*
+    Main school name.
+*/
+.school-oversight-header h1 {
+    margin: 0;
+
+    font-size: 32px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #101a2f;
+}
+
+
+/*
+    Short description beneath the school name.
+*/
+.school-oversight-header p {
+    margin: 10px 0 0;
+
+    max-width: 650px;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: #697386;
+    
+    padding-bottom: 28px;
+}
+
+/* =========================================
+   SCHOOL PROFILE
+   ========================================= */
+
+/*
+    Main School Profile panel.
+
+    This creates the executive-style white surface
+    used throughout the Director experience.
+*/
+.school-oversight-profile {
+    margin-top: 30px;
+
+    padding: 30px 34px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9f1;
+    border-radius: 18px;
+
+    box-shadow:
+        0 9px 28px rgba(15, 29, 55, 0.055);
+}
+
+/*
+    Main School Profile heading.
+
+    Deep navy gives the larger heading authority
+    while allowing the smaller gold labels to stand out.
+*/
+.school-oversight-profile h2 {
+    color: #0f1d37;
+    font-weight: 700;
+}
+
+
+/*
+    Section heading.
+
+    The status is placed on the right while the
+    section title remains on the left.
+*/
+.school-oversight-section-heading {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/*
+    Small gold executive label.
+*/
+.school-oversight-section-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.7px;
+
+    color: #9a7a25;
+}
+
+
+/*
+    Main section title.
+*/
+.school-oversight-section-heading h2 {
+    margin: 0;
+
+    font-size: 20px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    color: #0f1d37;
+}
+
+
+/*
+    School status badge.
+
+    The actual status comes from the School model,
+    for example ACTIVE or SUSPENDED.
+*/
+.school-oversight-section-status {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    background: #f2f7f3;
+
+    color: #52745d;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/*
+    Profile information grid.
+
+    Two columns give the information enough breathing
+    room on desktop screens.
+*/
+.school-oversight-profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    padding-top: 24px;
+
+    width: 100%;
+}
+
+
+/*
+    Individual profile information block.
+*/
+.school-oversight-profile-item {
+    min-width: 0;
+
+    padding: 18px 20px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f5;
+
+    border-radius: 12px;
+}
+
+
+/*
+    Field label.
+*/
+.school-oversight-profile-item > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: #8b94a5;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    Field value.
+*/
+.school-oversight-profile-item strong {
+    display: block;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    color: #202a3d;
+
+    overflow-wrap: anywhere;
+}
+
+
+/*
+    Contact information area.
+
+    A little separation visually distinguishes
+    school identity from contact details.
+*/
+.school-oversight-contact {
+    margin-top: 30px;
+
+    padding-top: 26px;
+
+    border-top: 1px solid #edf0f5;
+}
+
+
+/*
+    Contact section title.
+*/
+.school-oversight-contact-heading h3 {
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    color: #0f1d37;
+}
+
+/* =========================================
+   SCHOOL PROFILE - MOBILE
+   ========================================= */
+
+/*
+    Adjust the School Profile for smaller screens.
+
+    The Director may use ARWA from a phone, so the
+    information must remain comfortable to read
+    without forcing the page to scroll sideways.
+*/
+@media (max-width: 700px) {
+
+    /*
+        Reduce the outer page spacing on smaller screens.
+    */
+    .director-school-oversight {
+        padding: 24px 16px;
+    }
+
+
+    /*
+        Give the School Profile panel slightly less
+        internal spacing so more information fits
+        comfortably on a phone screen.
+    */
+    .school-oversight-profile {
+        padding: 22px 18px;
+    }
+
+
+    /*
+        Stack the section heading vertically.
+
+        This prevents the school status badge from
+        becoming cramped beside the heading.
+    */
+    .school-oversight-section-heading {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+
+    /*
+        Change the profile information from two columns
+        to one column on smaller screens.
+    */
+    .school-oversight-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /*
+        Reduce the size of each information block slightly
+        while keeping enough spacing for comfortable reading.
+    */
+    .school-oversight-profile-item {
+        padding: 16px 18px;
+    }
+    
+    /*
+    Stack school selection cards on smaller screens.
+
+    Each school receives the full available width,
+    making the cards comfortable to read and tap.
+    */
+    .school-oversight-school-list {
+        grid-template-columns: 1fr;
+    }
+    
+    
+    /*
+        Reduce school card spacing slightly on phones
+        while keeping the card comfortable to tap.
+    */
+    .school-oversight-school-card {
+        padding: 20px;
+    }
+}
+
+/* =========================================
+   ACADEMIC STRUCTURE
+   ========================================= */
+
+/*
+    Academic structure summary.
+
+    This gives the configured academic structure
+    its own clean information surface beneath
+    the section heading.
+*/
+.school-oversight-academic-summary {
+    margin-top: 22px;
+
+    padding: 18px 20px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f5;
+    border-radius: 12px;
+}
+
+
+/*
+    Academic structure field label.
+*/
+.school-oversight-academic-summary span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: #8b94a5;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    Actual academic structure value.
+*/
+.school-oversight-academic-summary strong {
+    display: block;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    color: #202a3d;
+}
+
+/*
+    Separate the Academic Structure section
+    from the School Profile card.
+
+    This creates a clear visual break between
+    the two major oversight areas.
+*/
+.school-oversight-academic {
+    margin-top: 30px;
+}
+
+/* =========================================
+   ACADEMIC LEVELS OFFERED
+   ========================================= */
+
+/*
+    Main Academic Levels panel.
+
+    This keeps the academic-level information
+    visually connected to the Academic Structure
+    section while giving it its own clean surface.
+*/
+.school-oversight-academic-levels {
+    margin-top: 22px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9f1;
+    border-radius: 14px;
+}
+
+
+/*
+    Academic Levels heading.
+
+    The title stays on the left while the number
+    of active levels stays on the right.
+*/
+.school-oversight-academic-levels-heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/*
+    Academic Levels heading label.
+*/
+.school-oversight-academic-levels-heading span {
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: #8b94a5;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    Number of active academic levels.
+*/
+.school-oversight-academic-levels-heading strong {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 26px;
+
+    padding: 0 8px;
+
+    border-radius: 7px;
+
+    background: #f5f1e6;
+
+    color: #8a6b20;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/*
+    Container for the academic-level rows.
+*/
+.school-oversight-academic-level-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding-top: 16px;
+}
+
+
+/* =========================================
+   GROUPED ACADEMIC LEVELS
+   ========================================= */
+
+/*
+    Each school type becomes its own academic
+    level group.
+
+    This creates a clear visual separation
+    between different institution types.
+*/
+.school-oversight-academic-level-group {
+    padding: 18px 0;
+}
+
+
+/*
+    Keep the school type name visually distinct
+    from the individual academic levels.
+*/
+.school-oversight-academic-level-group-heading {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.school-oversight-academic-level-group-heading span {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    color: #8b94a5;
+    text-transform: uppercase;
+}
+
+
+/*
+    Arrange the academic levels into a compact
+    responsive grid.
+
+    The browser automatically creates additional
+    columns when there is enough space.
+*/
+.school-oversight-academic-level-group-list {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding-top: 12px;
+}
+
+
+/*
+    Individual academic level.
+
+    These are intentionally smaller than the
+    larger information cards above because the
+    Director mainly needs to scan the available
+    academic levels.
+*/
+.school-oversight-academic-level-item {
+    min-width: 0;
+    padding: 12px 14px;
+    background: #fafbfc;
+    border: 1px solid #edf0f5;
+    border-radius: 9px;
+}
+
+
+.school-oversight-academic-level-item strong {
+    display: block;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #202a3d;
+}
+
+/* =========================================
+   EXECUTIVE ACADEMIC HEADINGS
+   ========================================= */
+
+/*
+    Use the same champagne/gold accent as the
+    Director Dashboard.
+
+    This gives the School Oversight page a
+    consistent executive visual identity.
+*/
+.school-oversight-academic-summary > span,
+.school-oversight-academic-levels-heading > span,
+.school-oversight-academic-level-group-heading span {
+    color: #9a7a25;
+}
+
+/* =========================================
+   SCHOOL PROFILE FIELD LABELS
+   ========================================= */
+
+/*
+    Use the Director Dashboard's champagne/gold
+    accent for all School Profile field labels.
+
+    This keeps the institutional information
+    visually consistent with the executive design.
+*/
+.school-oversight-profile-item > span {
+    color: #9a7a25;
+}
+
+.school-oversight-header > p {
+    color: #9a7a25;
+}
+
+
+/*
+    School type.
+
+    This is secondary information, so it remains
+    visually quieter than the academic level itself.
+*/
+.school-oversight-academic-level-item span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #9aa2b1;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    Academic level name.
+
+    This is the primary information in each row.
+*/
+.school-oversight-academic-level-item strong {
+    display: block;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    color: #202a3d;
+}
+
+
+/*
+    Empty-state message.
+
+    This is displayed only when the school has
+    no active academic levels configured.
+*/
+.school-oversight-academic-level-empty {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 18px 16px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f5;
+    border-radius: 10px;
+}
+
+
+/*
+    Empty-state heading.
+*/
+.school-oversight-academic-level-empty strong {
+    font-size: 13px;
+
+    color: #202a3d;
+}
+
+
+/*
+    Empty-state explanation.
+*/
+.school-oversight-academic-level-empty span {
+    font-size: 11px;
+    line-height: 1.5;
+
+    color: #8b94a5;
+}
+
+/* =========================================
+   SCHOOL SELECTION
+   ========================================= */
+
+/*
+    School selection area.
+
+    This creates a clear separation between
+    the page introduction and the Director's
+    assigned schools.
+*/
+.school-oversight-schools {
+    margin-top: 10px;
+}
+
+/* =========================================
+   ASSIGNED SCHOOLS HEADING
+   ========================================= */
+
+/*
+    Main heading area for the Director's
+    assigned schools.
+
+    This uses a simple vertical hierarchy
+    so the section remains easy to scan.
+*/
+.school-oversight-selection-heading {
+    margin-bottom: 20px;
+}
+
+
+/*
+    Small executive label.
+*/
+.school-oversight-selection-heading > span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.7px;
+
+    color: #9a7a25;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    Main Assigned Schools title.
+*/
+.school-oversight-selection-heading h2 {
+    margin: 0;
+
+    font-size: 22px;
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    color: #0f1d37;
+}
+
+
+/*
+    Supporting description.
+*/
+.school-oversight-selection-heading p {
+    margin: 7px 0 0;
+
+    max-width: 600px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #697386;
+}
+
+/*
+    School selection list.
+
+    A responsive grid allows multiple schools
+    to appear neatly across the Director dashboard.
+*/
+.school-oversight-school-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/*
+    Individual school selection card.
+
+    The entire card is clickable, making it easy
+    for the Director to open the school's oversight.
+*/
+.school-oversight-school-card {
+    display: block;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e9f1;
+    border-radius: 16px;
+
+    box-shadow:
+        0 7px 22px rgba(15, 29, 55, 0.045);
+
+    text-decoration: none;
+}
+
+
+/*
+    School card label.
+*/
+.school-oversight-card-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+
+    text-transform: uppercase;
+}
+
+
+/*
+    School name.
+*/
+.school-oversight-school-card h2 {
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+
+/*
+    Card action.
+*/
+.school-oversight-card-action {
+    display: block;
+
+    margin-top: 18px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/*
+    School card label.
+
+    Gold identifies this as a small executive
+    metadata label, matching the detail page.
+*/
+.school-oversight-card-label {
+    color: #9a7a25;
+}
+
+
+/*
+    School name.
+
+    Deep navy gives the institution name
+    the strongest visual authority.
+*/
+.school-oversight-school-card h2 {
+    color: #0f1d37;
+}
+
+
+/*
+    School card action.
+
+    Muted text keeps the action visible without
+    competing with the school's name.
+*/
+.school-oversight-card-action {
+    color: #697386;
+}
+
+/*
+    School card hover state.
+
+    Gives the Director clear visual feedback
+    that the entire card is clickable.
+*/
+.school-oversight-school-card {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/*
+    Slightly lift the card when the pointer
+    moves over it.
+*/
+.school-oversight-school-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d8dee9;
+
+    box-shadow:
+        0 12px 28px rgba(15, 29, 55, 0.08);
+}
+
+/* =========================================
+   ASSIGNED SCHOOL CARD DETAILS
+   ========================================= */
+
+/*
+    Add a subtle internal divider before the
+    action link.
+
+    This separates the school's identity from
+    the action the Director can take.
+*/
+.school-oversight-card-action {
+    padding-top: 14px;
+
+    border-top: 1px solid #edf0f5;
+}

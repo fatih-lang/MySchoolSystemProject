@@ -57,6 +57,7 @@ from .models import (
     Classroom,
     Student,
     StaffProfile,
+    DirectorSchool,
     TeacherSubjectClass,
     AcademicYear,
     Guardian,
@@ -1448,6 +1449,139 @@ def director_dashboard(request):
         request,
         "schools/director_dashboard.html",
     )
+    
+@login_required
+def director_school_oversight(request):
+    """
+    Display all schools that the authenticated Director
+    is authorised to oversee.
+    """
+
+    # Get the authenticated user's StaffProfile.
+    staff_profile = request.user.staffprofile
+
+    # Get every school assigned to this Director through
+    # the DirectorSchool relationship.
+    director_schools = DirectorSchool.objects.filter(
+        director=staff_profile
+    ).select_related("school")
+
+    # Send all assigned schools to the template.
+    context = {
+        "director_schools": director_schools,
+    }
+
+    return render(
+        request,
+        "schools/director_school_oversight.html",
+        context,
+    )
+    
+
+
+@login_required
+def director_school_oversight_detail(request, school_id):
+    """
+    Display detailed oversight information for one school.
+
+    The Director can only access a school that has been
+    explicitly assigned to them through DirectorSchool.
+    """
+
+    # Get the authenticated user's StaffProfile.
+    staff_profile = request.user.staffprofile
+
+    # Find the DirectorSchool assignment.
+
+    # This is the security check.
+    # If this Director is not assigned to the requested
+    # school, Django will return a 404 instead of exposing
+    # another school's information.
+    assignment = get_object_or_404(
+        DirectorSchool.objects.select_related("school"),
+        director=staff_profile,
+        school_id=school_id,
+    )
+
+    # Get the authorised school from the assignment.
+    school = assignment.school
+    
+    """
+    Get all active academic levels offered by this school.
+
+    A school may have multiple school types, so each
+    academic-level record also carries its school type.
+
+    select_related() loads the related records efficiently
+    because we will need their information in the template.
+    """
+    school_academic_levels = (
+        SchoolAcademicLevel.objects
+        .filter(
+            school=school,
+            status="ACTIVE",
+        )
+        .select_related(
+            "school_type",
+            "academic_level",
+        )
+        .order_by(
+            "school_type__name",
+            "academic_level__phase__order",
+            "academic_level__order",
+        )
+    )
+    
+    # Group the school's academic levels by school type.
+    #
+    # This allows the template to display each school type
+    # once, with its academic levels grouped underneath it.
+    #
+    # The queryset above already provides the correct ordering,
+    # so we simply preserve that order while creating the groups.
+    academic_levels_by_school_type = {}
+    
+    for school_level in school_academic_levels:
+    
+        school_type_id = school_level.school_type_id
+    
+        if school_type_id not in academic_levels_by_school_type:
+    
+            academic_levels_by_school_type[school_type_id] = {
+                "school_type": school_level.school_type,
+                "levels": [],
+            }
+    
+        academic_levels_by_school_type[school_type_id]["levels"].append(
+            school_level
+        )
+    
+    # Find the school's currently active academic year.
+    #
+    # This ensures the Director sees the academic year
+    # that the school is actually operating in, rather
+    # than simply displaying the most recently created year.
+    current_academic_year = AcademicYear.objects.filter(
+        school=school,
+        status="ACTIVE",
+    ).first()
+    
+    # Send the authorised school to the template.
+    context = {
+        "school": school,
+        "current_academic_year": current_academic_year,
+        "school_academic_levels": school_academic_levels,
+        "academic_levels_by_school_type": (
+            academic_levels_by_school_type.values()
+        ),
+    }
+        
+    return render(
+        request,
+        "schools/director_school_oversight_detail.html",
+        context,
+    )
+    
     
     
 @login_required(login_url="/login/")
