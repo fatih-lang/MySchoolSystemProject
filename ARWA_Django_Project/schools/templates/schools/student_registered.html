@@ -1,6 +1,9 @@
 {% load static %}
 
-<!DOCTYPE html><html lang="en">
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8"><!-- Make the page responsive on phones. -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,11 +19,11 @@
             <div class="registration-success-container">
             
                 <!-- Page heading. -->
-                <h1>Student Registered Successfully</h1>
+                <h1>{% trans "Student Registered Successfully" %}</h1>
             
                 <!-- Short message below the heading. -->
                 <p class="registration-success-message">
-                    The student has been successfully registered at ARWA.
+                    {% trans "The student has been successfully registered at" %} ARWA.
                 </p>
             
             
@@ -28,51 +31,66 @@
                 <table class="student-information-table">
             
                     <tr>
-                        <th>Student Number</th>
+                        <th>{% trans "Student Number" %}</th>
                         <td class="student-number">
-                            {{ student.student_number }}
+                            {% blocktrans %}
+                                {{ student.student_number }}.
+                            {% endblocktrans %}
+
                         </td>
                     </tr>
             
                     <tr>
-                        <th>Name</th>
+                        <th>{% trans "Name" %}</th>
                         <td>
                             {{ student.first_name }}
                         </td>
                     </tr>
             
                     <tr>
-                        <th>Surname</th>
+                        <th>{% trans "Surname" %}</th>
                         <td>
                             {{ student.last_name }}
                         </td>
                     </tr>
             
                     <tr>
-                        <th>ID / Passport</th>
+                        <th>{% trans "ID / Passport" %}</th>
                         <td>
-                            {{ student.id_or_passport }}
+                            {% blocktrans %}
+                                {{  student.id_or_passport }}.
+                            {% endblocktrans %}
+                            
                         </td>
                     </tr>
             
                     <tr>
-                        <th>Academic Level</th>
+                        <th>{% trans "Academic Level" %}</th>
                         <td>
-                            {{ enrollment.academic_level }}
+                            {% blocktrans %}
+                                {{  enrollment.academic_level }}.
+                            {% endblocktrans %}
+                            
                         </td>
                     </tr>
             
                     <tr>
-                        <th>Classroom</th>
+                        <th>{% trans "Classroom" %}</th>
                         <td>
-                            {{ enrollment.classroom }}
+                            {% blocktrans %}
+                                {{  enrollment.classroom }}.
+                            {% endblocktrans %}
+                            
                         </td>
                     </tr>
             
                     <tr>
                         <th>Phase</th>
                         <td>
-                            {{ enrollment.academic_level.academic_level.phase }}
+                            {% blocktrans %}
+                                {{  enrollment.academic_level.academic_level.phase }}.
+                            {% endblocktrans %}
+                            
                         </td>
                     </tr>
             
@@ -89,12 +107,15 @@
                     {% for enrollment_subject in enrollment.enrollment_subjects.all %}
             
                         <li>
-                            {{ enrollment_subject.school_subject.subject.name }}
+                            {% blocktrans %}
+                                {{  enrollment_subject.school_subject.subject.name }}.
+                            {% endblocktrans %}
+                            
                         </li>
             
                     {% empty %}
             
-                        <li>No subjects assigned.</li>
+                        <li>{% trans "No subjects assigned." %}</li>
             
                     {% endfor %}
             

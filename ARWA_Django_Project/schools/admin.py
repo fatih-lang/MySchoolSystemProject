@@ -56,6 +56,9 @@ from .models import (
     EducationSystemSchoolTypeLevel,
     SchoolPhase,
     EducationSystemSchoolTypePhase, 
+    AssessmentConfiguration,
+    AssessmentConfigurationComponent,
+    AssessmentConfigurationLevel,
 )
 
 
@@ -1433,4 +1436,92 @@ class DirectorSchoolAdmin(admin.ModelAdmin):
     # Make it easy to filter assignments by school.
     list_filter = (
         "school",
-    )                      
+    )    
+    
+    
+    
+@admin.register(AssessmentConfiguration)
+class AssessmentConfigurationAdmin(admin.ModelAdmin):
+    """
+    Django Admin configuration for assessment configurations.
+
+    This allows school administrators to create and manage
+    the assessment calculation setups used by ARWA.
+    """
+
+    list_display = (
+        "name",
+        "school",
+        "is_active",
+        "created_at",
+        "updated_at",
+    )
+
+    list_filter = (
+        "is_active",
+        "school",
+    )
+
+    search_fields = (
+        "name",
+        "school__name",
+    )  
+    
+    
+@admin.register(AssessmentConfigurationComponent)
+class AssessmentConfigurationComponentAdmin(admin.ModelAdmin):
+    """
+    Django Admin configuration for assessment components.
+
+    This allows administrators to define which types of
+    academic work contribute to an assessment configuration
+    and the percentage assigned to each component.
+    """
+
+    list_display = (
+        "assessment_configuration",
+        "component_type",
+        "name",
+        "weight",
+        "created_at",
+        "updated_at",
+    )
+
+    list_filter = (
+        "component_type",
+        "assessment_configuration",
+    )
+
+    search_fields = (
+        "name",
+        "assessment_configuration__name",
+    )
+    
+
+
+@admin.register(AssessmentConfigurationLevel)
+class AssessmentConfigurationLevelAdmin(admin.ModelAdmin):
+    """
+    Django Admin configuration for assessment configuration levels.
+
+    This allows administrators to assign an assessment
+    configuration to the school's specific academic levels.
+    """
+
+    list_display = (
+        "assessment_configuration",
+        "school_academic_level",
+        "created_at",
+        "updated_at",
+    )
+
+    list_filter = (
+        "assessment_configuration",
+    )
+
+    search_fields = (
+        "assessment_configuration__name",
+        "school_academic_level__academic_level__name",
+        "school_academic_level__school__name",
+    )    
+                            

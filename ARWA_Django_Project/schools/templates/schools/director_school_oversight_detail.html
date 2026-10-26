@@ -1,6 +1,10 @@
 {% load static %}
+
+{% load i18n %}
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 
     <head>
         <meta charset="UTF-8">
@@ -11,7 +15,7 @@
         >
     
         <title>
-            {{ school.name }} | School Oversight | ARWA
+            {{ school.name }} | {% trans "School Oversight" %} | ARWA
         </title>
     
         <link
@@ -27,7 +31,7 @@
             <header class="school-oversight-header">
     
                 <span class="school-oversight-label">
-                    SCHOOL OVERSIGHT
+                    {% trans "SCHOOL OVERSIGHT" %}
                 </span>
     
                 <h1>
@@ -35,8 +39,7 @@
                 </h1>
     
                 <p>
-                    Institutional information and strategic
-                    management for this school.
+                    {% trans "Institutional information and strategic management for this school." %}
                 </p>
     
             </header>
@@ -57,16 +60,16 @@
             
                     <div>
                         <span class="school-oversight-section-label">
-                            SCHOOL PROFILE
+                            {% trans "SCHOOL PROFILE" %}
                         </span>
             
                         <h2>
-                            Institutional Identity
+                            {% trans "Institutional Identity" %}
                         </h2>
                     </div>
             
                     <span class="school-oversight-section-status">
-                        {{ school.status }}
+                        {{ school.get_status_display }}
                     </span>
             
                 </div>
@@ -77,7 +80,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>School Name</span>
+                        <span>{% trans "School Name" %}</span>
             
                         <strong>
                             {{ school.name }}
@@ -88,7 +91,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>School Code</span>
+                        <span>{% trans "School Code" %}</span>
             
                         <strong>
                             {{ school.school_code }}
@@ -99,13 +102,13 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Registration Number</span>
+                        <span>{% trans "Registration Number" %}</span>
             
                         <strong>
                             {% if school.registration_number %}
                                 {{ school.registration_number }}
                             {% else %}
-                                Not provided
+                                {% trans "Not provided" %}
                             {% endif %}
                         </strong>
             
@@ -114,7 +117,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Country</span>
+                        <span>{% trans "Country" %}</span>
             
                         <strong>
                             {{ school.country }}
@@ -125,7 +128,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Education System</span>
+                        <span>{% trans "Education System" %}</span>
             
                         <strong>
                             {{ school.education_system }}
@@ -136,13 +139,13 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Academic Structure</span>
+                        <span>{% trans "Academic Structure" %}</span>
             
                         <strong>
                             {% if school.academic_structure %}
                                 {{ school.academic_structure }}
                             {% else %}
-                                Not configured
+                                {% trans "Not configured" %}
                             {% endif %}
                         </strong>
             
@@ -151,7 +154,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Timezone</span>
+                        <span>{% trans "Timezone" %}</span>
             
                         <strong>
                             {{ school.timezone }}
@@ -162,7 +165,7 @@
             
                     <div class="school-oversight-profile-item">
             
-                        <span>Institution Type</span>
+                        <span>{% trans "Institution Type" %}</span>
             
                         <strong>
             
@@ -172,7 +175,7 @@
             
                             {% empty %}
             
-                                Not configured
+                                {% trans "Not configured" %}
             
                             {% endfor %}
             
@@ -189,11 +192,11 @@
                     <div class="school-oversight-contact-heading">
             
                         <span class="school-oversight-section-label">
-                            CONTACT INFORMATION
+                            {% trans "CONTACT INFORMATION" %}
                         </span>
             
                         <h3>
-                            School Contact Details
+                            {% trans "School Contact Details" %}
                         </h3>
             
                     </div>
@@ -203,7 +206,7 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Address</span>
+                            <span>{% trans "Address" %}</span>
             
                             <strong>
                                 {{ school.address }}
@@ -214,7 +217,7 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>City / Town</span>
+                            <span>{% trans "City / Town" %}</span>
             
                             <strong>
                                 {{ school.city }}
@@ -225,13 +228,13 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>State / Province / Region</span>
+                            <span>{% trans "State / Province / Region" %}</span>
             
                             <strong>
                                 {% if school.state_province %}
                                     {{ school.state_province }}
                                 {% else %}
-                                    Not provided
+                                    {% trans "Not provided" %}
                                 {% endif %}
                             </strong>
             
@@ -240,13 +243,13 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Postal / ZIP Code</span>
+                            <span>{% trans "Postal / ZIP Code" %}</span>
             
                             <strong>
                                 {% if school.postal_code %}
                                     {{ school.postal_code }}
                                 {% else %}
-                                    Not provided
+                                    {% trans "Not provided" %}
                                 {% endif %}
                             </strong>
             
@@ -255,7 +258,7 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Email</span>
+                            <span>{% trans "Email" %}</span>
             
                             <strong>
                                 {{ school.email }}
@@ -266,13 +269,13 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Website</span>
+                            <span>{% trans "Website" %}</span>
             
                             <strong>
                                 {% if school.website %}
                                     {{ school.website }}
                                 {% else %}
-                                    Not provided
+                                    {% trans "Not provided" %}
                                 {% endif %}
                             </strong>
             
@@ -281,13 +284,13 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Hotline</span>
+                            <span>{% trans "Hotline" %}</span>
             
                             <strong>
                                 {% if school.hotline %}
                                     {{ school.hotline }}
                                 {% else %}
-                                    Not provided
+                                    {% trans "Not provided" %}
                                 {% endif %}
                             </strong>
             
@@ -296,13 +299,13 @@
             
                         <div class="school-oversight-profile-item">
             
-                            <span>Mobile</span>
+                            <span>{% trans "Mobile" %}</span>
             
                             <strong>
                                 {% if school.mobile %}
                                     {{ school.mobile }}
                                 {% else %}
-                                    Not provided
+                                    {% trans "Not provided" %}
                                 {% endif %}
                             </strong>
             
@@ -341,11 +344,11 @@
                     <div>
             
                         <span class="school-oversight-section-label">
-                            ACADEMIC STRUCTURE
+                            {% trans "ACADEMIC STRUCTURE" %}
                         </span>
             
                         <h2>
-                            Academic Organisation
+                            {% trans "Academic Organisation" %}
                         </h2>
             
                     </div>
@@ -364,14 +367,14 @@
                 <div class="school-oversight-academic-summary">
             
                     <span>
-                        Academic Structure
+                        {% trans "Academic Structure" %}
                     </span>
             
                     <strong>
                         {% if school.academic_structure %}
                             {{ school.academic_structure }}
                         {% else %}
-                            Not configured
+                            {% trans "Not configured" %}
                         {% endif %}
                     </strong>
             
@@ -382,14 +385,14 @@
                 <div class="school-oversight-academic-summary">
             
                     <span>
-                        Current Academic Year
+                        {% trans "Current Academic Year" %}
                     </span>
             
                     <strong>
                         {% if current_academic_year %}
                             {{ current_academic_year }}
                         {% else %}
-                            Not configured
+                            {% trans "Not configured" %}
                         {% endif %}
                     </strong>
             
@@ -407,7 +410,7 @@
                     <div class="school-oversight-academic-levels-heading">
             
                         <span>
-                            Academic Levels Offered
+                            {% trans "Academic Levels Offered" %}
                         </span>
             
                         <strong>
@@ -471,12 +474,11 @@
                             <div class="school-oversight-academic-level-empty">
                     
                                 <strong>
-                                    No academic levels configured
+                                    {% trans "No academic levels configured" %}
                                 </strong>
                     
                                 <span>
-                                    No active academic levels have been
-                                    configured for this school.
+                                    {% trans "No active academic levels have been configured for this school." %}
                                 </span>
                     
                             </div>

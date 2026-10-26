@@ -34,7 +34,7 @@ from .models import UserLanguagePreference
 from datetime import datetime, timedelta
 
 # Import the secure student registration service.
-from .services import register_student
+from .services import (register_student, calculate_academic_performance,)
 
 from .authorization import (
     can_manage_currency,
@@ -1438,17 +1438,244 @@ def director_dashboard(request):
     """
     Director dashboard entry point.
 
-    This view is protected by backend authorization.
-    Only an authorized Director can access it.
+    A Director may oversee one or multiple schools.
 
-    The dashboard template will contain the Director's
-    executive interface.
+    If the Director has only one authorised school,
+    they are taken directly to that school's dashboard.
+
+    If the Director has multiple authorised schools,
+    they will first be asked which school they want
+    to manage.
     """
+
+    # Get the authenticated Director's StaffProfile.
+    staff_profile = request.user.staffprofile
+
+    # Get every school this Director is authorised
+    # to oversee.
+    #
+    # DirectorSchool is the security boundary.
+    # Only schools explicitly assigned to this Director
+    # can appear here.
+    director_schools = list(
+        DirectorSchool.objects
+        .filter(
+            director=staff_profile,
+        )
+        .select_related("school")
+        .order_by("school__name")
+    )
+
+    # If the Director has exactly one authorised school,
+    # there is no reason to show a school-selection page.
+    #
+    # Send the Director directly to that school's
+    # Director Dashboard.
+    if len(director_schools) == 1:
+
+        school = director_schools[0].school
+    
+        # Get the school types available for this school.
+        school_types = school.school_types.all()
+    
+        # If the school has exactly one school type,
+        # send the Director directly to that dashboard.
+        if school_types.count() == 1:
+    
+            return redirect(
+                "director_school_dashboard",
+                school_id=school.id,
+                school_type_id=school_types.first().id,
+            )
+            
+            
+        # If this school has multiple school types,
+        # let the Director choose the part of the school
+        # they want to manage.
+        if school_types.count() > 1:
+    
+            context = {
+                "school": school,
+                "school_types": school_types,
+            }
+    
+            return render(
+                request,
+                "schools/director_school_type_selection.html",
+                context,
+            )     
+
+    # If the Director has multiple schools, show the
+    # school-selection interface.
+    context = {
+        "director_schools": director_schools,
+    }
+
+    # If the Director has multiple authorised schools,
+    # show the dedicated school-selection page.
+    #
+    # The actual Director Dashboard will only open after
+    # the Director chooses one of these schools.
+    return render(
+        request,
+        "schools/director_school_selection.html",
+        context,
+    )
+    
+
+@login_required(login_url="/login/")
+@require_authorization(can_manage_currency)
+def director_school_dashboard(request, school_id, school_type_id):
+    """
+    Display the existing Director Dashboard for one
+    school that the authenticated Director is authorised
+    to oversee.
+    """
+
+    # Get the authenticated Director's StaffProfile.
+    staff_profile = request.user.staffprofile
+
+    # Find the requested school through DirectorSchool.
+    #
+    # This is the first security check.
+    #
+    # The Director can only open a dashboard for a
+    # school that has been explicitly assigned to them.
+    assignment = get_object_or_404(
+        DirectorSchool.objects.select_related("school"),
+        director=staff_profile,
+        school_id=school_id,
+    )
+    
+    # Get the authorised school selected by the Director.
+    school = assignment.school
+    
+    # Find the requested school type.
+    #
+    # The school type must belong to the selected school.
+    #
+    # This prevents a Director from selecting a school type
+    # that does not exist for that school.
+    school_type = get_object_or_404(
+        school.school_types,
+        id=school_type_id,
+    )
+    
+    # Count active staff members responsible for the
+    # selected school type within the selected school.
+    #
+    # This ensures the Director sees only staff connected
+    # to the school and institution type currently being viewed.
+    staff_count = StaffSchoolTypeResponsibility.objects.filter(
+        staff_profile__school=school,
+        school_type=school_type,
+        status="ACTIVE",
+    ).count()
+    
+    
+    # Count unique guardians connected to students who are
+    # currently active in the selected school and school type.
+    #
+    # DISTINCT is important because one guardian may be connected
+    # to more than one student.
+    guardian_count = (
+        StudentGuardian.objects
+        .filter(
+            guardian__school=school,
+            student__school=school,
+            student__enrollments__school=school,
+            student__enrollments__academic_level__school_type=school_type,
+            student__enrollments__status="ACTIVE",
+        )
+        .values("guardian")
+        .distinct()
+        .count()
+    ) 
+    
+    # Find all active students currently enrolled in the
+    # selected school type.
+    #
+    # DISTINCT prevents the same student from being counted
+    # more than once if they have multiple enrollment records.
+    students = (
+        Student.objects
+        .filter(
+            school=school,
+            enrollments__school=school,
+            enrollments__academic_level__school_type=school_type,
+            enrollments__status="ACTIVE",
+        )
+        .distinct()
+    )
+    
+    # Store the overall percentages for students whose
+    # academic performance is complete.
+    #
+    # Students with missing assessment components are
+    # deliberately excluded instead of being treated as 0%.
+    completed_percentages = []
+
+    for current_student in students:
+        performance = calculate_academic_performance(current_student)
+
+        if performance["is_complete"]:
+            completed_percentages.append(
+                performance["overall_percentage"]
+            )
+            
+    # Calculate the school's academic performance from
+    # students with complete assessment results only.
+    #
+    # If no student has complete results yet, keep the
+    # value as None rather than displaying an incorrect 0%.
+    if completed_percentages:
+        academic_performance = (
+            sum(completed_percentages)
+            / len(completed_percentages)
+        )
+    else:
+        academic_performance = None   
+        
+             
+    # Get the school's institution types.
+    #
+    # This is prepared in Django so the template receives
+    # the exact school types belonging to the selected school.
+    school_types = school.school_types.all()
+    
+    # Get all schools this Director is authorised
+    # to oversee.
+    #
+    # These assignments are the security boundary
+    # for the school switcher.
+    director_schools = (
+        DirectorSchool.objects
+        .filter(
+            director=staff_profile,
+        )
+        .select_related("school")
+        .prefetch_related("school__school_types")
+        .order_by("school__name")
+    )
+
+    # Send the selected school and the Director's
+    # authorised schools to the existing dashboard.
+    context = {
+        "school": school,
+        "school_type": school_type,
+        "school_types": school_types,
+        "director_schools": director_schools,
+        "staff_count": staff_count,
+        "guardian_count": guardian_count,
+        "academic_performance": academic_performance,
+    }
 
     return render(
         request,
         "schools/director_dashboard.html",
-    )
+        context,
+    )    
+    
     
 @login_required
 def director_school_oversight(request):
@@ -1568,14 +1795,14 @@ def director_school_oversight_detail(request, school_id):
     
     # Send the authorised school to the template.
     context = {
-        "school": school,
-        "current_academic_year": current_academic_year,
-        "school_academic_levels": school_academic_levels,
-        "academic_levels_by_school_type": (
-            academic_levels_by_school_type.values()
-        ),
-    }
-        
+    "school": school,
+    "current_academic_year": current_academic_year,
+    "school_academic_levels": school_academic_levels,
+    "academic_levels_by_school_type": (
+        academic_levels_by_school_type.values()
+    ),
+}
+    
     return render(
         request,
         "schools/director_school_oversight_detail.html",

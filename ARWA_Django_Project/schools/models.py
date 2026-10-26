@@ -1,5 +1,16 @@
 from django.db import models
 
+"""
+Why gettext_lazy?
+We use gettext_lazy in Django models because the translation may need to happen later, when Django actually displays the choice label.
+So:
+models → stores PENDING
+_() → makes "Pending" translatable
+get_status_display → gives the translated human-readable label
+"""
+from django.utils.translation import gettext_lazy as _
+
+
 from django.contrib.auth.models import User
 
 # Import transaction tools so student-number generation
@@ -4278,6 +4289,350 @@ class ExaminationResult(models.Model):
             f"{self.mark}/"
             f"{self.assessment.total_possible}"
         )
+        
+
+
+class AssessmentConfiguration(models.Model):
+    """
+    Defines how a school calculates overall academic performance.
+
+    This model acts as a reusable assessment configuration
+    for one school. It does not store individual student marks.
+    Instead, it identifies the assessment setup that will
+    later contain components such as homework, assignments,
+    tests, projects, practicals, and examinations, together
+    with the percentage each component contributes to the
+    overall academic result.
+
+    This allows different schools, academic levels, or groups
+    of academic levels to use different assessment calculations
+    without hard-coding percentages into ARWA.
+
+    Example:
+
+        Homework       10%
+        Assignment     15%
+        Project        10%
+        Test           25%
+        Examination    40%
+
+    The actual assessment components and their percentages
+    will be stored separately.
+    """
+
+    # The name of this assessment configuration.
+    #
+    # Example:
+    # "Junior Secondary Assessment Configuration"
+    name = models.CharField(
+        max_length=200
+    )
+
+    # The school that owns this assessment configuration.
+    #
+    # This keeps each school's assessment configuration
+    # separate from other schools in ARWA.
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="assessment_configurations"
+    )
+
+    # Determines whether this configuration is currently
+    # available for use.
+    #
+    # New configurations start inactive and must pass
+    # validation before they can be activated.
+    is_active = models.BooleanField(
+        default=False
+    )
+
+    # Automatically record when this configuration is created.
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    # Automatically update whenever this configuration changes.
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    
+    def validate_weights(self):
+        """
+        Validate the assessment component weights.
+
+        A configuration can only be considered complete when
+        its assessment components add up to exactly 100%.
+
+        This validation is performed when ARWA needs to
+        activate or use the configuration, rather than while
+        individual components are being created.
+        """
+
+        from django.core.exceptions import ValidationError
+
+        # Get all components belonging to this configuration.
+        components = self.components.all()
+
+        # A configuration must contain at least one component.
+        if not components.exists():
+            raise ValidationError(
+                "This assessment configuration must contain "
+                "at least one assessment component."
+            )
+
+        # Add all component weights together.
+        total_weight = sum(
+            component.weight
+            for component in components
+        )
+
+        # The complete assessment configuration must equal 100%.
+        if total_weight != 100:
+            raise ValidationError(
+                f"The assessment component weights must "
+                f"total 100%. Current total: {total_weight}%."
+            )
+
+        return True
+        
+    
+    def activate(self):
+        """
+        Activate this assessment configuration.
+
+        Before activation, ARWA validates that the configuration
+        contains assessment components whose total weight is
+        exactly 100%.
+
+        This prevents an incomplete assessment configuration
+        from being used to calculate academic performance.
+        """
+
+        # Validate the complete assessment configuration first.
+        self.validate_weights()
+
+        # Only activate the configuration after validation succeeds.
+        self.is_active = True
+
+        # Save only the field that changed.
+        self.save(update_fields=["is_active"])
+
+        return True     
+        
+
+    def __str__(self):
+        # Show the school and configuration name in Django Admin.
+        return f"{self.school.name} - {self.name}"        
+        
+
+
+class AssessmentConfigurationLevel(models.Model):
+    """
+    Connects an assessment configuration to a school's
+    academic level.
+
+    This tells ARWA which academic levels use a particular
+    assessment configuration.
+
+    Example:
+
+        Junior Secondary Assessment Configuration
+                    │
+                    ├── Grade 7
+                    ├── Grade 8
+                    └── Grade 9
+
+    The relationship uses SchoolAcademicLevel rather than
+    AcademicLevel directly so that ARWA preserves the
+    school, school type, and academic-level relationship.
+    """
+
+    # The assessment configuration being used.
+    assessment_configuration = models.ForeignKey(
+        AssessmentConfiguration,
+        on_delete=models.CASCADE,
+        related_name="academic_levels"
+    )
+
+    # The school's specific academic level that uses
+    # this assessment configuration.
+    school_academic_level = models.ForeignKey(
+        SchoolAcademicLevel,
+        on_delete=models.PROTECT,
+        related_name="assessment_configurations"
+    )
+
+    # Automatically record when this relationship is created.
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    # Automatically update whenever this relationship changes.
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+    
+        # Make sure the academic level belongs to the
+        # same school as the assessment configuration.
+        if (
+            self.assessment_configuration_id
+            and self.school_academic_level_id
+            and self.school_academic_level.school_id
+            != self.assessment_configuration.school_id
+        ):
+            raise ValidationError({
+                "school_academic_level": (
+                    "This academic level does not belong "
+                    "to the school that owns this assessment "
+                    "configuration."
+                )
+            })
+
+    class Meta:
+        # Prevent the same assessment configuration from
+        # being assigned to the same academic level twice.
+        unique_together = (
+            "assessment_configuration",
+            "school_academic_level",
+        )
+
+    def __str__(self):
+        return (
+            f"{self.assessment_configuration.name} - "
+            f"{self.school_academic_level}"
+        )
+
+
+
+class AssessmentConfigurationComponent(models.Model):
+    """
+    Defines one assessment component and its percentage
+    contribution within an AssessmentConfiguration.
+
+    This model allows a school to decide which types of
+    academic work contribute to the overall academic result
+    and how much each type contributes.
+
+    Example:
+
+        Homework       10%
+        Assignment     15%
+        Project        10%
+        Test           25%
+        Examination    40%
+
+    The percentages are stored here rather than being
+    hard-coded into ARWA, allowing different schools and
+    academic levels to use different assessment calculations.
+    """
+
+    # The assessment configuration that this component
+    # belongs to.
+    assessment_configuration = models.ForeignKey(
+        AssessmentConfiguration,
+        on_delete=models.CASCADE,
+        related_name="components"
+    )
+    
+    # Identifies what kind of academic result this component
+    # represents in ARWA.
+    #
+    # This allows ARWA to connect the configuration to the
+    # correct result system instead of relying on the
+    # component's display name.
+    COMPONENT_TYPE_CHOICES = [
+        ("HOMEWORK", "Homework"),
+        ("ASSIGNMENT", "Assignment"),
+        ("PROJECT", "Project"),
+        ("TEST", "Test"),
+        ("EXAMINATION", "Examination"),
+        ("PRACTICAL", "Practical"),
+        ("ORAL", "Oral"),
+        ("QUIZ", "Quiz"),
+        ("OTHER", "Other"),
+    ]
+
+    component_type = models.CharField(
+        max_length=20,
+        choices=COMPONENT_TYPE_CHOICES
+    )
+
+    # The name of the academic component.
+    #
+    # Examples:
+    # Homework
+    # Assignment
+    # Test
+    # Examination
+    name = models.CharField(
+        max_length=100
+    )
+
+    # The percentage that this component contributes
+    # to the overall academic result.
+    #
+    # Example:
+    # 25.00 means this component contributes 25%.
+    weight = models.DecimalField(
+        max_digits=5,
+        decimal_places=2
+    )
+
+    # Automatically record when the component is created.
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    # Automatically update whenever the component changes.
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        # A component must have a positive percentage.
+        if self.weight is not None and self.weight <= 0:
+            raise ValidationError({
+                "weight": (
+                    "The assessment component weight "
+                    "must be greater than 0."
+                )
+            })
+
+        # A component cannot contribute more than 100%.
+        if self.weight is not None and self.weight > 100:
+            raise ValidationError({
+                "weight": (
+                    "The assessment component weight "
+                    "cannot be greater than 100%."
+                )
+            })
+
+    class Meta:
+        # Prevent the same component type from being
+        # added more than once to one configuration.
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "assessment_configuration",
+                    "component_type",
+                ],
+                name="unique_assessment_component_type",
+            ),
+        ]
+
+    def __str__(self):
+        return (
+            f"{self.assessment_configuration.name} - "
+            f"{self.name} ({self.weight}%)"
+        )
+
+        
         
         
 class Guardian(models.Model):

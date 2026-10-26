@@ -1,0 +1,102 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+    <head>
+    
+        <meta charset="UTF-8">
+    
+        <!--
+            Keep the Director school-selection page
+            responsive on phones, tablets, and desktops.
+        -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+    
+        <title>
+            {% trans "Select School" %} | ARWA
+        </title>
+    
+    </head>
+    
+    <body>
+    
+        <!--
+            Director school selection.
+    
+            This page appears only when the Director
+            is authorised to oversee multiple schools.
+        -->
+        <main>
+    
+            <header>
+    
+                <span>
+                    {% trans "ARWA EXECUTIVE PORTAL" %}
+                </span>
+    
+                <h1>
+                    {% trans "Select a School" %}
+                </h1>
+    
+                <p>
+                    {% trans "Choose the school you want to manage." %}
+                </p>
+    
+            </header>
+    
+    
+            <!--
+                Display only schools assigned to this Director.
+            -->
+            <section>
+    
+                {% for assignment in director_schools %}
+
+                    <section>
+                
+                        <strong>
+                            {{ assignment.school.name }}
+                        </strong>
+                
+                        <div>
+                
+                            {% for school_type in assignment.school.school_types.all %}
+                
+                                <a
+                                    href="{% url 'director_school_dashboard' assignment.school.id school_type.id %}"
+                                >
+                                    {{ school_type.name }}
+                                </a>
+                
+                            {% empty %}
+                
+                                <span>
+                                    {% trans "No school types configured." %}
+                                </span>
+                
+                            {% endfor %}
+                
+                        </div>
+                
+                    </section>
+                
+                {% empty %}
+                
+                    <p>
+                        {% trans "No schools have been assigned to your Director profile." %}
+                    </p>
+                
+                {% endfor %}
+    
+            </section>
+    
+        </main>
+    
+    </body>
+
+</html>

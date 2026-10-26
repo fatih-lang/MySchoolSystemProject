@@ -1,7 +1,9 @@
 {% load static %}
 
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
     
@@ -25,7 +27,7 @@
             <!-- ARWA platform name -->
             <div class="header-brand">
                 <h1>ARWA</h1>
-                <span>School Management Platform</span>
+                <span>{% trans "School Management Platform" %}</span>
             </div>
         
         
@@ -301,7 +303,7 @@
                             </strong>
                 
                             <small>
-                                Principal
+                                {% trans "Principal" %}
                             </small>
                 
                         </div>
@@ -323,17 +325,17 @@
                 
                         <a href="#">
                             👤
-                            My Profile
+                            {% trans "My Profile" %}
                         </a>
                 
                         <a href="#">
                             ⚙
-                            Account Settings
+                            {% trans "Account Settings" %}
                         </a>
                 
                         <a href="{% url 'logout' %}">
                             ⇥
-                            Logout
+                            {% trans "Logout" %}
                         </a>
                 
                     </div>
@@ -366,7 +368,7 @@
                     <!-- ARWA sidebar branding -->
                     <div class="sidebar-brand">
                         <h2>ARWA</h2>
-                        <span>Principal Panel</span>
+                        <span>{% trans "Principal Panel" %}</span>
                     </div>
             
             
@@ -376,7 +378,7 @@
                         <!-- Dashboard -->
                         <a href="#" class="sidebar-link active">
                             <span class="sidebar-icon">▣</span>
-                            <span>Dashboard</span>
+                            <span>{% trans "Dashboard" %}</span>
                         </a>
             
             
@@ -392,7 +394,7 @@
                             >
                                 <span>
                                     👨‍🎓
-                                    Students
+                                    {% trans "Students" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -404,37 +406,37 @@
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">👨‍🎓</span>
-                                    <span>All Students</span>
+                                    <span>{% trans "All Students" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">▤</span>
-                                    <span>Students by Grade</span>
+                                    <span>{% trans "Students by Grade" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">💰</span>
-                                    <span>Students Owing Fees</span>
+                                    <span>{% trans "Students Owing Fees" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">👤</span>
-                                    <span>Student Profile</span>
+                                    <span>{% trans "Student Profile" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">＋</span>
-                                    <span>Register Student</span>
+                                    <span>{% trans "Register Student" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📄</span>
-                                    <span>Student Documents</span>
+                                    <span>{% trans "Student Documents" %}</span>
                                 </a>
                                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🔒</span>
-                                    <span>Block / Unblock</span>
+                                    <span>{% trans "Block / Unblock" %}</span>
                                 </a>
                         
                             </div>
@@ -454,7 +456,7 @@
                             >
                                 <span>
                                     👨‍🏫
-                                    Teachers
+                                    {% trans "Teachers" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -467,22 +469,22 @@
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">👨‍🏫</span>
-                                    <span>All Teachers</span>
+                                    <span>{% trans "All Teachers" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">＋</span>
-                                    <span>Register Teacher</span>
+                                    <span>{% trans "Register Teacher" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📚</span>
-                                    <span>Assign Subject</span>
+                                    <span>{% trans "Assign Subject" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🔒</span>
-                                    <span>Block / Unblock</span>
+                                    <span>{% trans "Block / Unblock" %}</span>
                                 </a>
                         
                             </div>
@@ -502,7 +504,7 @@
                             >
                                 <span>
                                     👪
-                                    Guardians
+                                    {% trans "Guardians" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -515,17 +517,17 @@
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">👪</span>
-                                    <span>All Guardians</span>
+                                    <span>{% trans "All Guardians" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">＋</span>
-                                    <span>Register Guardian</span>
+                                    <span>{% trans "Register Guardian" %}</span>
                                 </a>
                         
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🔗</span>
-                                    <span>Link Guardian</span>
+                                    <span>{% trans "Link Guardian" %}</span>
                                 </a>
                         
                             </div>
@@ -545,7 +547,7 @@
                             >
                                 <span>
                                     📚
-                                    Academics
+                                    {% trans "Academics" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -557,32 +559,32 @@
             
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📚</span>
-                                    <span>Manage Subjects</span>
+                                    <span>{% trans "Manage Subjects" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">✓</span>
-                                    <span>Attendance</span>
+                                    <span>{% trans "Attendance" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📝</span>
-                                    <span>Homework</span>
+                                    <span>{% trans "Homework" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📊</span>
-                                    <span>Results</span>
+                                    <span>{% trans "Results" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🗓</span>
-                                    <span>Timetable</span>
+                                    <span>{% trans "Timetable" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📅</span>
-                                    <span>School Terms</span>
+                                    <span>{% trans "School Terms" %}</span>
                                 </a>
                                 
                             </div>    
@@ -602,7 +604,7 @@
                             >
                                 <span>
                                     💵
-                                    Finance
+                                    {% trans "Finance" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -614,12 +616,12 @@
             
                                 <a href="{% url 'principal_fee_structure' %}" class="sidebar-link">
                                     <span class="sidebar-icon">💵</span>
-                                    <span>Fee Structure</span>
+                                    <span>{% trans "Fee Structure" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">💳</span>
-                                    <span>Record Fee Payment</span>
+                                    <span>{% trans "Record Fee Payment" %}</span>
                                 </a>
                                 
                             </div>    
@@ -639,7 +641,7 @@
                             >
                                 <span>
                                     📄
-                                    School Documents
+                                    {% trans "School Documents" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -651,27 +653,27 @@
             
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">⬆</span>
-                                    <span>Upload Document</span>
+                                    <span>{% trans "Upload Document" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📄</span>
-                                    <span>School Circulars</span>
+                                    <span>{% trans "School Circulars" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📋</span>
-                                    <span>School Requirements</span>
+                                    <span>{% trans "School Requirements" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📜</span>
-                                    <span>Policies & Rules</span>
+                                    <span>{% trans "Policies & Rules" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🗓</span>
-                                    <span>School Calendar</span>
+                                    <span>{% trans "School Calendar" %}</span>
                                 </a>
                                 
                             </div>    
@@ -691,7 +693,7 @@
                             >
                                 <span>
                                     📢
-                                    Communication
+                                    {% trans "Communication" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -703,12 +705,12 @@
             
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📢</span>
-                                    <span>School News</span>
+                                    <span>{% trans "School News" %}</span>
                                 </a>
                                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📢</span>
-                                    <span>Post School News</span>
+                                    <span>{% trans "Post School News" %}</span>
                                 </a>
                             
                             </div>
@@ -728,7 +730,7 @@
                             >
                                 <span>
                                     📊
-                                    Reports 
+                                    {% trans "Reports" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -740,12 +742,12 @@
             
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📈</span>
-                                    <span>School Statistics</span>
+                                    <span>{% trans "School Statistics" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">📋</span>
-                                    <span>Audit Log</span>
+                                    <span>{% trans "Audit Log" %}</span>
                                 </a>
                             
                             </div>
@@ -765,7 +767,7 @@
                             >
                                 <span>
                                     👤
-                                    Administration
+                                    {% trans "Administration" %}
                                 </span>
                         
                                 <!-- Arrow shows whether the menu is open or closed -->
@@ -777,12 +779,12 @@
             
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">👤</span>
-                                    <span>Register Admin</span>
+                                    <span>{% trans "Register Admin" %}</span>
                                 </a>
                 
                                 <a href="#" class="sidebar-link">
                                     <span class="sidebar-icon">🔒</span>
-                                    <span>Block / Unblock Admin</span>
+                                    <span>{% trans "Block / Unblock Admin" %}</span>
                                 </a>
                                 
                             </div>
@@ -795,17 +797,17 @@
                         <div class="sidebar-section">
             
                             <div class="sidebar-section-title">
-                                ACCOUNT
+                                {% trans "ACCOUNT" %}
                             </div>
             
                             <a href="#" class="sidebar-link">
                                 <span class="sidebar-icon">⚙</span>
-                                <span>Account Settings</span>
+                                <span>{% trans "Account Settings" %}</span>
                             </a>
             
                             <a href="{% url 'logout' %}" class="sidebar-link">
                                 <span class="sidebar-icon">⇥</span>
-                                <span>Logout</span>
+                                <span>{% trans "Logout" %}</span>
                             </a>
             
                         </div>
@@ -822,11 +824,15 @@
                 <main class="main-content">
             
                     <h2>
-                        Good morning, {{ request.user.first_name }}
+                        {% blocktrans with name=request.user.first_name %}
+                            Good morning, {{ name }}
+                        {% endblocktrans %}
                     </h2>
             
                     <p class="dashboard-welcome">
-                        Welcome back to {{ staff_profile.school.name }}.
+                        {% blocktrans with name=staff_profile.schoo.name %}
+                            Welcome back to {{ name }}.
+                        {% endblocktrans %}     
                     </p>
                     
                     <!-- =====================================================
@@ -837,56 +843,56 @@
                     
                         <!-- Total students -->
                         <div class="dashboard-card">
-                            <h3>Students</h3>
+                            <h3>{% trans "Students" %}</h3>
                     
                             <p>
-                                {{ student_count }}
+                                {{ student_count | trans }}
                             </p>
                     
                             <small>
-                                Total registered students
+                                {% trans "Total registered students" %}
                             </small>
                         </div>
                     
                     
                         <!-- Total teachers -->
                         <div class="dashboard-card">
-                            <h3>Teachers</h3>
+                            <h3>{% trans "Teachers" %}</h3>
                     
                             <p>
-                                {{ teacher_count }}
+                                {{ teacher_count | trans }}
                             </p>
                     
                             <small>
-                                Active teaching staff
+                                {% trans "Active teaching staff" %}
                             </small>
                         </div>
                     
                     
                         <!-- Total guardians -->
                         <div class="dashboard-card">
-                            <h3>Guardians</h3>
+                            <h3>{% trans "Guardians" %}</h3>
                     
                             <p>
-                                {{ guardian_count }}
+                                {{ guardian_count | trans }}
                             </p>
                     
                             <small>
-                                Registered guardians
+                                {% trans "Registered guardians" %}
                             </small>
                         </div>
                     
                     
                         <!-- Outstanding fees -->
                         <div class="dashboard-card">
-                            <h3>Outstanding Fees</h3>
+                            <h3>{% trans "Outstanding Fees" %}</h3>
                     
                             <p>
                                 R0.00
                             </p>
                     
                             <small>
-                                Total school fees outstanding
+                                {% trans "Total school fees outstanding" %}
                             </small>
                         </div>
                     
@@ -905,7 +911,7 @@
                         <div class="attendance-header">
                         
                             <div>
-                                <h2>Daily Attendance</h2>
+                                <h2>{% trans "Daily Attendance" %}</h2>
                         
                                 <p class="attendance-date">
                                     {{ attendance_date|date:"l, d F Y" }}
@@ -950,7 +956,7 @@
                                 href="?attendance_date={{ today|date:'Y-m-d' }}#daily-attendance"
                                 class="attendance-today-button"
                             >
-                                Today
+                                {% trans "Today" %}
                             </a>
                         
                         </div>
@@ -966,7 +972,7 @@
                                     <!-- Academic level -->
                                     <div class="attendance-grade-name">
                                         <strong>
-                                            {{ grade.grade_name }}
+                                            {{ grade.grade_name | trans }}
                                         </strong>
                                     </div>
                                 
@@ -974,15 +980,18 @@
                                     <div class="attendance-grade-count">
                                 
                                         <strong>
-                                            {{ grade.attended_count }}
+                                            {{ grade.attended_count | trans }}
                                         </strong>
                                 
                                         <span>
-                                            attended
+                                            {% trans "attended" %}
                                         </span>
                                 
                                         <small>
-                                            out of {{ grade.expected_count }} learners
+                                            {% blocktrans with count=grade.expected_count %}
+                                                out of {{ count }} learners
+                                            {% endblocktrans %}
+                                            
                                         </small>
                                 
                                     </div>
@@ -990,7 +999,7 @@
                                     <!-- Attendance percentage -->
                                     <div class="attendance-grade-percentage">
                                 
-                                        {{ grade.attendance_percentage }}%
+                                        {{ grade.attendance_percentage | trans}}%
                                 
                                     </div>
                                 
@@ -1014,8 +1023,8 @@
                             {% empty %}
                     
                                 <p class="attendance-empty">
-                                    No active student enrolments were found
-                                    for the current academic year.
+                                    {% trans "No active student enrolments were found
+                                    for the current academic year." %}
                                 </p>
                     
                             {% endfor %}

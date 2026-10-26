@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 12:08+0000\n"
+"POT-Creation-Date: 2026-10-21 08:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: schools/templates/schools/language_preference.html:11
+#: schools/templates/schools/language_preference.html:104
+msgid "Language Preference"
+msgstr ""
+
+#: schools/templates/schools/language_preference.html:107
+msgid "Choose the language you want ARWA to use for your interface."
+msgstr ""
+
+#: schools/templates/schools/language_preference.html:117
+msgid "Save Language"
+msgstr ""
 
 #: schools/templates/schools/teacher_dashboard.html:75
 msgid "Dashboard"
@@ -80,3 +93,4 @@ msgstr "Iphrofayela Yami"
 #: schools/templates/schools/teacher_dashboard.html:225
 msgid "Logout"
 msgstr "Phuma"
+

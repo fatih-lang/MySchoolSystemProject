@@ -1,7 +1,9 @@
 {% load i18n %}
 
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
 
@@ -19,7 +21,7 @@
             Later this page will contain the actual
             Fee Structure management interface.
         -->
-        <h1>Fee Structure</h1>
+        <h1>{% trans "Fee Structure" %}</h1>
 
         {% if no_access %}
         
@@ -40,17 +42,20 @@
                 this Principal is responsible for.
             -->
             <p>
-                School Type:
-                {{ school_type.name }}
+                {% blocktrans with name=school_type.name %}
+                    School Type: {{ name }}
+                {% endblocktrans %}
             </p>
+
         
             <!--
                 Show the education system selected for
                 this school.
             -->
             <p>
-                Education System:
-                {{ education_system.name }}
+                {% blocktrans with name=education_system.name %}
+                    Education System: {{ name }}
+                {% endblocktrans %}
             </p>
         
             <!--
@@ -58,8 +63,9 @@
                 phases according to the global configuration.
             -->
             <p>
-                Uses Phases:
-                {{ uses_phases }}
+                {% blocktrans with name=uses_phase %}
+                    Uses Phases: {{ name }}
+                {% endblocktrans}
             </p>
             
             {% if uses_phases %}
@@ -79,7 +85,7 @@
                             Show the available phases so the Principal
                             can choose one.
                         -->
-                        <h2>Available Phases</h2>
+                        <h2>{% trans "Available Phases" %}</h2>
                     
                         <form method="get">
                     
@@ -90,7 +96,9 @@
                                     name="phase"
                                     value="{{ phase.id }}"
                                 >
-                                    {{ phase.name }}
+                                    
+                                    {{ phase.name | trans }}.
+                                        
                                 </button>
                     
                             {% endfor %}
@@ -106,7 +114,7 @@
                         <h2>Selected Phase</h2>
                     
                         <p>
-                            {{ selected_phase.name }}
+                            {{ selected_phase.name | trans }}
                         </p>
                     
                     
@@ -121,7 +129,7 @@
                             configuration for this education system,
                             school type, and phase.
                         -->
-                        <h2>Available Academic Levels</h2>
+                        <h2>{% trans "Available Academic Levels" %}</h2>
                     
                         {% if academic_levels %}
                     
@@ -148,7 +156,7 @@
                                         name="academic_level"
                                         value="{{ academic_level.id }}"
                                     >
-                                        {{ academic_level.name }}
+                                        {{ academic_level.name | trans }}
                                     </button>
                                     
                                     
@@ -164,10 +172,10 @@
                                     Display it so we can verify that the backend
                                     correctly received and validated the selection.
                                 -->
-                                <h2>Selected Academic Level</h2>
+                                <h2>{% trans "Selected Academic Level" %}</h2>
                             
                                 <p>
-                                    {{ selected_academic_level.name }}
+                                    {{ selected_academic_level.name | trans }}
                                 </p>
                             
                             {% endif %}
@@ -178,10 +186,10 @@
                                     Show the academic year that ARWA is using
                                     for the fee structure lookup.
                                 -->
-                                <h2>Academic Year</h2>
+                                <h2>{% trans "Academic Year" %}</h2>
                             
                                 <p>
-                                    {{ current_academic_year.year }}
+                                    {{ current_academic_year.year | trans }}
                                 </p>
                             
                             
@@ -191,31 +199,31 @@
                                 -->
                                 {% if fee_structure %}
                             
-                                    <h2>Fee Structure</h2>
+                                    <h2>{% trans "Fee Structure" %}</h2>
                             
                                     <p>
-                                        Fee structure found.
+                                        {% trans "Fee structure found." %}
                                     </p>
                             
                                 {% else %}
                             
-                                    <h2>Fee Structure</h2>
+                                    <h2>{% trans "Fee Structure" %}</h2>
                             
                                     <p>
-                                        No active fee structure has been configured
-                                        for this academic level.
+                                        {% trans "No active fee structure has been configured
+                                        for this academic level." %}
                                     </p>
                             
                                 {% endif %}
                                 
-                                <h2>Available Fee Items</h2>
+                                <h2>{% trans "Available Fee Items" %}</h2>
 
                                 {% if available_fee_items %}
                                 
                                     <ul>
                                         {% for fee_item in available_fee_items %}
                                             <li>
-                                                {{ fee_item.name }}
+                                                {{ fee_item.name | trans }}
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -223,7 +231,7 @@
                                 {% else %}
                                 
                                     <p>
-                                        No fee items are currently available.
+                                        {% trans "No fee items are currently available." %}
                                     </p>
                                 
                                 {% endif %}
@@ -233,8 +241,8 @@
                         {% else %}
                     
                             <p>
-                                No academic levels are currently configured
-                                for this phase.
+                                {% trans "No academic levels are currently configured
+                                for this phase." %}
                             </p>
                     
                         {% endif %}
@@ -249,8 +257,8 @@
                         school type yet.
                     -->
                     <p>
-                        No phases are currently configured
-                        for this school type.
+                        {% trans "No phases are currently configured
+                        for this school type." %}
                     </p>
             
                 {% endif %}

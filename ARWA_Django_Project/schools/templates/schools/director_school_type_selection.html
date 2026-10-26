@@ -1,0 +1,88 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!--
+        Keep the Director school-type selection page
+        responsive on phones, tablets, and desktops.
+    -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% trans "Select School Type" %} | ARWA
+    </title>
+
+</head>
+
+<body>
+
+    <!--
+        Director school-type selection.
+
+        This page appears when the Director has
+        one school with multiple institution types.
+    -->
+    <main>
+
+        <header>
+
+            <span>
+                {% trans "ARWA EXECUTIVE PORTAL" %}
+            </span>
+
+            <h1>
+                {{ school.name }}
+            </h1>
+
+            <p>
+                {% trans "Choose the school type you want to manage." %}
+            </p>
+
+        </header>
+
+        <!--
+            Display only the school types belonging
+            to the Director's authorised school.
+        -->
+        <section>
+
+            {% for school_type in school_types %}
+
+                <a
+                    href="{% url 'director_school_dashboard' school.id school_type.id %}"
+                >
+
+                    <strong>
+                        {{ school_type.name }}
+                    </strong>
+
+                    <span>
+                        {% trans "Open Dashboard →" %}
+                    </span>
+
+                </a>
+
+            {% empty %}
+
+                <p>
+                    {% trans "No school types have been configured for this school." %}
+                </p>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

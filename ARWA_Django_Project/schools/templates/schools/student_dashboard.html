@@ -1,7 +1,11 @@
 
 {% load static %}
+
+{% load i18n %}
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <!-- Use UTF-8 so names and symbols display correctly. -->
     <meta charset="UTF-8">
@@ -24,7 +28,7 @@
             <header class="student-header">
                 <div class="student-brand">
                     <h1>ARWA</h1>
-                    <p>Student Portal</p>
+                    <p>{% trans "Student Portal" %}</p>
                 </div>
                     
                 <!-- Display the student's profile picture and name. -->
@@ -60,32 +64,32 @@
     
                         <a href="#overview" class="student-nav-link active">
                             <span class="nav-icon" aria-hidden="true">⌂</span>
-                            <span>Overview</span>
+                            <span>{% trans "Overview" %}</span>
                         </a>
     
                         <a href="#attendance" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">✓</span>
-                            <span>View Attendance</span>
+                            <span>{% trans "View Attendance" %}</span>
                         </a>
     
                         <a href="#homework" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▤</span>
-                            <span>View Homework</span>
+                            <span>{% trans "View Homework" %}</span>
                         </a>
     
                         <a href="#school-documents" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▧</span>
-                            <span>School Documents</span>
+                            <span>{% trans "School Documents" %}</span>
                         </a>
     
                         <a href="#timetable" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▦</span>
-                            <span>Timetable</span>
+                            <span>{% trans "Timetable" %}</span>
                         </a>
     
                         <a href="#school-news" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▣</span>
-                            <span>School News</span>
+                            <span>{% trans "School News" %}</span>
                         </a>
     
                         <a href="#fees-statement" class="student-nav-link">
@@ -95,48 +99,48 @@
     
                         <a href="#make-payment" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">＋</span>
-                            <span>Make Fee Payment</span>
+                            <span>{% trans "Make Fee Payment" %}</span>
                         </a>
     
                         <a href="#payment-history" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">↺</span>
-                            <span>Payment History</span>
+                            <span>{% trans "Payment History" %}</span>
                         </a>
     
                         <a href="#grades-results" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">★</span>
-                            <span>Grades and Results</span>
+                            <span>{% trans "Grades and Results" %}</span>
                         </a>
     
                         <a href="#change-password" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">⚿</span>
-                            <span>Change Password</span>
+                            <span>{% trans "Change Password" %}</span>
                         </a>
     
                         <a href="#submit-homework" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">↑</span>
-                            <span>Submit Homework</span>
+                            <span>{% trans "Submit Homework" %}</span>
                         </a>
     
                         <a href="#my-classes" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▤</span>
-                            <span>My Classes</span>
+                            <span>{% trans "My Classes" %}</span>
                         </a>
     
                         <a href="#resources" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">▥</span>
-                            <span>Learning Resources</span>
+                            <span>{% trans "Learning Resources" %}</span>
                         </a>
     
                         <a href="#notifications" class="student-nav-link">
                             <span class="nav-icon" aria-hidden="true">●</span>
-                            <span>Notifications</span>
+                            <span>{% trans "Notifications" %}</span>
                         </a>
     
                         <!-- Use the existing Django logout route. -->
                         <a href="{% url 'logout' %}" class="student-nav-link logout-link">
                             <span class="nav-icon" aria-hidden="true">↪</span>
-                            <span>Logout</span>
+                            <span>{% trans "Logout" %}</span>
                         </a>
     
                     </nav>
@@ -147,16 +151,16 @@
     
                     <!-- Personalised welcome section. -->
                     <section class="student-welcome">
-                        <h2>Welcome, {{ student.first_name }}!</h2>
+                        <h2>{% trans "Welcome,"%} {{ student.first_name }}!</h2>
                         <p>{{ school.name }}</p>
-                        <p>Here's your school overview.</p>
+                        <p>{% trans "Here's your school overview." %}</p>
                     </section>
     
                     
                     <!-- Show the current date and time to the student. -->
                     <section class="student-tools-panel">
                         <div>
-                            <h3>Current Date and Time</h3>
+                            <h3>{% trans "Current Date and Time" %}</h3>
                     
                             <!-- JavaScript will update these values automatically. -->
                             <p id="student-current-date">Loading date...</p>
@@ -166,7 +170,7 @@
                     
                     <!-- Interactive school calendar. -->
                     <section class="student-calendar-panel">
-                        <h3>School Calendar</h3>
+                        <h3>{% trans "School Calendar" %}</h3>
                     
                         <!-- JavaScript will build the calendar inside this container. -->
                         <div id="student-calendar" class="mini-calendar"></div>
@@ -177,7 +181,7 @@
                             class="calendar-event-details"
                             aria-live="polite"
                         >
-                            <p>Tap a date to view school events.</p>
+                            <p>{% trans "Tap a date to view school events." %}</p>
                         </div>
                     </section>
                     

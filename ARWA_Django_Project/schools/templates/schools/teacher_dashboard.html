@@ -3,7 +3,7 @@
 {% load i18n %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
 
@@ -19,7 +19,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Teacher Dashboard | ARWA</title>
+    <title>{% trans "Teacher Dashboard" %} | ARWA</title>
 
     <!--
         Connect the teacher dashboard stylesheet.
@@ -53,7 +53,7 @@
                 <h1>ARWA</h1>
 
                 <p>
-                    School Management
+                    {% trans "School Management" %}
                 </p>
 
             </div>
@@ -63,7 +63,7 @@
             <nav class="teacher-navigation">
 
                 <p class="navigation-title">
-                    MAIN
+                    {% trans "MAIN" %}
                 </p>
 
 
@@ -253,7 +253,7 @@
                     </p>
             
                     <h2>
-                        Teacher Dashboard
+                        {% trans "Teacher Dashboard" %}
                     </h2>
             
                 </div>
@@ -293,7 +293,7 @@
                             <div>
                         
                                 <h3>
-                                    Notifications
+                                    {% trans "Notifications" %}
                                 </h3>
                         
                             </div>
@@ -321,7 +321,7 @@
                             <div>
                 
                                 <h4>
-                                    New homework submission
+                                    {% trans "New homework submission" %}
                                 </h4>
                 
                                 <p>
@@ -345,7 +345,7 @@
                             <div>
                 
                                 <h4>
-                                    School announcement
+                                    {% trans "School announcement" %} 
                                 </h4>
                 
                                 <p>
@@ -369,7 +369,7 @@
                             <div>
                 
                                 <h4>
-                                    Attendance reminder
+                                    {% trans "Attendance reminder" %}
                                 </h4>
                 
                                 <p>
@@ -412,7 +412,7 @@
                         </p>
                 
                         <p class="teacher-profile-role">
-                            Teacher
+                            {% trans "Teacher" %}
                         </p>
                 
                     </div>
@@ -435,7 +435,7 @@
                         </p>
                 
                         <span>
-                            Teacher
+                            {% trans "Teacher" %}
                         </span>
                 
                     </div>
@@ -447,7 +447,9 @@
                     >
                 
                         <span>👤</span>
-                        <span>My Profile</span>
+                        <span>
+                            {% trans "My Profile" %}
+                        </span>
                 
                     </a>
                 
@@ -458,7 +460,9 @@
                     >
                 
                         <span>⚙️</span>
-                        <span>Account Settings</span>
+                        <span>
+                            {% trans "Account Settings" %}
+                        </span>
                 
                     </a>
                 
@@ -469,7 +473,9 @@
                     >
                 
                         <span>🔐</span>
-                        <span>Change Password</span>
+                        <span>
+                            {% trans "Change Password" %}
+                        </span>
                 
                     </a>
                 
@@ -485,7 +491,9 @@
                         >
                     
                             <span>🚪</span>
-                            <span>Logout</span>
+                            <span>
+                                {% trans "Logout" %}
+                            </span>
                     
                         </button>
                     
@@ -507,7 +515,7 @@
 
                     <!-- Small greeting -->
                     <p class="welcome-small-text">
-                        Good morning,
+                        {% trans "Good morning," %}
                     </p>
                     
                     
@@ -524,7 +532,7 @@
                     
                     <!-- Welcome message -->
                     <p>
-                        Welcome to your teacher dashboard.
+                        {% trans "Welcome to your teacher dashboard." %}
                     </p>
                     
                     
@@ -537,12 +545,12 @@
                     <div class="teacher-academic-period">
                     
                         <span>
-                            Academic Year:
+                            {% trans "Academic Year:" %}
                             {{ current_academic_year.year }}
                         </span>
                     
                         <span>
-                            Current Term:
+                            {% trans "Current Term:" %}
                             {{ current_term.name }}
                         </span>
                     
@@ -563,7 +571,7 @@
 
                     <div class="illustration-placeholder">
 
-                        Teacher
+                        {% trans "Teacher" %}
 
                     </div>
 
@@ -581,7 +589,7 @@
                 <div class="teacher-clock-card">
             
                     <div class="clock-label">
-                        Local Time
+                        {% trans "Local Time" %}
                     </div>
             
                     <div id="teacher-clock">
@@ -626,13 +634,13 @@
                     <!-- DAYS OF THE WEEK -->
                     <div class="calendar-weekdays">
             
-                        <span>Sun</span>
-                        <span>Mon</span>
-                        <span>Tue</span>
-                        <span>Wed</span>
-                        <span>Thu</span>
-                        <span>Fri</span>
-                        <span>Sat</span>
+                        <span>{% trans "Sun" %}</span>
+                        <span>{% trans "Mon" %}</span>
+                        <span>{% trans "Tue" %}</span>
+                        <span>{% trans "Wed" %}</span>
+                        <span>{% trans "Thu" %}</span>
+                        <span>{% trans "Fri" %}</span>
+                        <span>{% trans "Sat" %}</span>
             
                     </div>
             
@@ -663,7 +671,7 @@
                     <div class="overview-card-content">
     
                         <p class="overview-label">
-                            My Students
+                            {% trans "My Students" %}
                         </p>
     
                         <h3>
@@ -671,7 +679,7 @@
                         </h3>
     
                         <p class="overview-description">
-                            Students assigned to you
+                            {% trans "Students assigned to you" %}
                         </p>
     
                     </div>
@@ -685,7 +693,7 @@
                     <div class="overview-card-content">
     
                         <p class="overview-label">
-                            My Classes
+                            {% trans "My Classes" %}
                         </p>
     
                         <h3>
@@ -693,7 +701,7 @@
                         </h3>
     
                         <p class="overview-description">
-                            Active classes
+                            {% trans "Active classes" %}
                         </p>
     
                     </div>
@@ -707,7 +715,7 @@
                     <div class="overview-card-content">
     
                         <p class="overview-label">
-                            Pending Homework
+                            {% trans "Pending Homework" %}
                         </p>
     
                         <h3>
@@ -715,7 +723,7 @@
                         </h3>
     
                         <p class="overview-description">
-                            Waiting for marking
+                            {% trans "Waiting for marking" %}
                         </p>
     
                     </div>
@@ -729,7 +737,7 @@
                     <div class="overview-card-content">
     
                         <p class="overview-label">
-                            Average Performance
+                            {% trans "Average Performance" %}
                         </p>
     
                         <h3>
@@ -737,7 +745,7 @@
                         </h3>
     
                         <p class="overview-description">
-                            Across your classes
+                            {% trans "Across your classes" %}
                         </p>
     
                     </div>
@@ -759,11 +767,11 @@
                     <div>
     
                         <h2>
-                            Recent Homework
+                            {% trans "Recent Homework" %}
                         </h2>
     
                         <p>
-                            Homework that may need your attention.
+                            {% trans "Homework that may need your attention." %}
                         </p>
     
                     </div>
@@ -802,7 +810,7 @@
                             </span>
     
                             <span class="homework-badge pending">
-                                Pending marking
+                                {% trans "Pending marking" %}
                             </span>
     
                         </div>
@@ -812,7 +820,7 @@
                             href="#"
                             class="homework-action"
                         >
-                            View Homework →
+                            {% trans "View Homework ->" %}
                         </a>
     
                     </div>
@@ -846,7 +854,7 @@
                             </span>
     
                             <span class="homework-badge pending">
-                                Pending marking
+                                {% trans "Pending marking" %}
                             </span>
     
                         </div>
@@ -856,7 +864,7 @@
                             href="#"
                             class="homework-action"
                         >
-                            View Homework →
+                            {% trans "View Homework ->" %}
                         </a>
     
                     </div>
@@ -890,7 +898,7 @@
                             </span>
     
                             <span class="homework-badge pending">
-                                Pending marking
+                                {% trans "Pending marking" %}
                             </span>
     
                         </div>
@@ -900,7 +908,7 @@
                             href="#"
                             class="homework-action"
                         >
-                            View Homework →
+                            {% trans "View Homework ->" %}  
                         </a>
     
                     </div>
@@ -923,11 +931,11 @@
                     <div>
     
                         <h2>
-                            Today's Schedule
+                            {% trans "Today's Schedule" %}
                         </h2>
     
                         <p>
-                            Your classes and activities for today.
+                            {% trans "Your class and activities for today." %} 
                         </p>
     
                     </div>
@@ -961,7 +969,7 @@
     
     
                         <span class="schedule-status current">
-                            Current
+                            {% trans "Current" %}
                         </span>
     
                     </div>
@@ -990,7 +998,7 @@
     
     
                         <span class="schedule-status">
-                            Upcoming
+                            {% trans "Upcoming" %}
                         </span>
     
                     </div>
@@ -1019,7 +1027,7 @@
     
     
                         <span class="schedule-status">
-                            Upcoming
+                            {% trans "Upcoming" %}
                         </span>
     
                     </div>
@@ -1048,7 +1056,7 @@
     
     
                         <span class="schedule-status">
-                            Upcoming
+                            {% trans "Upcoming" %} 
                         </span>
     
                     </div>
@@ -1071,11 +1079,11 @@
                     <div>
     
                         <h2>
-                            Class Performance
+                            {% trans "Class Performance" %}
                         </h2>
     
                         <p>
-                            Average performance across your classes.
+                            {% trans "Average performance across your classes." %}
                         </p>
     
                     </div>
@@ -1215,11 +1223,15 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>School News</h2>
-                        <p>Important announcements from the school.</p>
+                        <h2>
+                            {% trans "School News" %}
+                        </h2>
+                        <p>
+                            {% trans "Important announcement from the school." %}
+                        </p>
                     </div>
             
-                    <a href="#" class="view-all-news">View All →</a>
+                    <a href="#" class="view-all-news">{% trans "View All →" %}</a>
                 </div>
             
                 <div class="school-news-list">
@@ -1233,7 +1245,9 @@
                         </div>
             
                         <div class="news-content">
-                            <h3>Staff Meeting</h3>
+                            <h3>
+                                {% trans "Staff Metting" %}
+                            </h3>
                             <p>
                                 All teaching staff are reminded to attend the
                                 staff meeting at 14:00 in the staff room.
@@ -1252,7 +1266,9 @@
                         </div>
             
                         <div class="news-content">
-                            <h3>Term Assessment</h3>
+                            <h3>
+                                {% trans "Term Assessment" %}
+                            </h3>
                             <p>
                                 Teachers are reminded to submit all term assessment
                                 marks before the closing date.
@@ -1271,7 +1287,9 @@
                         </div>
             
                         <div class="news-content">
-                            <h3>Parent Meeting</h3>
+                            <h3>
+                                {% trans "Parents Meeting" %}
+                            </h3>
                             <p>
                                 Parent meetings will take place in the school hall
                                 from 09:00 to 13:00.
@@ -1292,8 +1310,13 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Upcoming Events</h2>
-                        <p>Important school events coming up.</p>
+                        <h2>
+                            {% trans "Upcoming Events" %}
+                        </h2>
+                        <p>
+                            {% trans "Important school events coming up." %}
+                        
+                        </p>
                     </div>
             
                     <a href="#" class="view-all-events">View All →</a>
@@ -1315,7 +1338,7 @@
                         </div>
             
                         <span class="event-category academic">
-                            Academic
+                            {% trans "Academics" %}
                         </span>
             
                     </div>
@@ -1335,7 +1358,7 @@
                         </div>
             
                         <span class="event-category meeting">
-                            Meeting
+                            {% trans "Meeting" %}
                         </span>
             
                     </div>
@@ -1355,7 +1378,7 @@
                         </div>
             
                         <span class="event-category staff">
-                            Staff
+                            {% trans "Staff" %}
                         </span>
             
                     </div>
@@ -1375,7 +1398,7 @@
                         </div>
             
                         <span class="event-category activity">
-                            Activity
+                            {% trans "Activity" %}
                         </span>
             
                     </div>
@@ -1392,8 +1415,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Quick Actions</h2>
-                        <p>Quick access to your most common tasks.</p>
+                        <h2>
+                            {% trans "Quick Actions" %}
+                        </h2>
+                        <p>
+                            {% trans "Quick access to your most common tasks." %}
+                        </p>
                     </div>
                 </div>
             
@@ -1405,8 +1432,12 @@
                     >
                         <span class="quick-action-icon">📝</span>
                         <div>
-                            <h3>Create Homework</h3>
-                            <p>Give students new homework</p>
+                            <h3>
+                                {% trans "Create Homework" %}
+                            </h3>
+                            <p>
+                                {% trans "Give students new homework" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1417,8 +1448,12 @@
                     >
                         <span class="quick-action-icon">✅</span>
                         <div>
-                            <h3>Mark Attendance</h3>
-                            <p>Record today's attendance</p>
+                            <h3>
+                                {% trans "Mark Attendance" %}
+                            </h3>
+                            <p>
+                                {% trans "Record today's attendance" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1429,8 +1464,12 @@
                     >
                         <span class="quick-action-icon">📊</span>
                         <div>
-                            <h3>Enter Marks</h3>
-                            <p>Record student results</p>
+                            <h3>
+                                {% trans "Enter Marks" %}
+                            </h3>
+                            <p>
+                                {% trans "Record student results" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1441,8 +1480,12 @@
                     >
                         <span class="quick-action-icon">👨‍🎓</span>
                         <div>
-                            <h3>View Students</h3>
-                            <p>See students in your classes</p>
+                            <h3>
+                                {% trans "View Students" %}
+                            </h3>
+                            <p>
+                                {% trans "See students in your classes" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1453,8 +1496,12 @@
                     >
                         <span class="quick-action-icon">📅</span>
                         <div>
-                            <h3>My Timetable</h3>
-                            <p>View your teaching schedule</p>
+                            <h3>
+                                {% trans "My Timetable" %}
+                            </h3>
+                            <p>
+                                {% trans "View your teaching schedule" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1465,8 +1512,12 @@
                     >
                         <span class="quick-action-icon">📢</span>
                         <div>
-                            <h3>School News</h3>
-                            <p>Read the latest announcements</p>
+                            <h3>
+                                {% trans "School News" %}
+                            </h3>
+                            <p>
+                                {% trans "Read the latest announcement" %}
+                            </p>
                         </div>
                     </a>
             
@@ -1482,11 +1533,15 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Recent Activity</h2>
-                        <p>Your latest activity on the platform.</p>
+                        <h2>
+                            {% trans "Recent Activity" %}
+                        </h2>
+                        <p>
+                            {% trans "Your latest activity on the platform." %}
+                        </p>
                     </div>
             
-                    <a href="#" class="view-all-activity">View All →</a>
+                    <a href="#" class="view-all-activity">{% trans "View All →" %}</a>
                 </div>
             
                 <div class="activity-list">
@@ -1499,7 +1554,9 @@
                         </div>
             
                         <div class="activity-content">
-                            <h3>Attendance recorded</h3>
+                            <h3>
+                                {% trans "Attendance recorded" %}
+                            </h3>
                             <p>Grade 12A · Mathematics</p>
                         </div>
             
@@ -1518,7 +1575,9 @@
                         </div>
             
                         <div class="activity-content">
-                            <h3>Homework created</h3>
+                            <h3>
+                                {% trans "Homework created" %}
+                            </h3>
                             <p>Algebra · Grade 12A</p>
                         </div>
             
@@ -1537,7 +1596,9 @@
                         </div>
             
                         <div class="activity-content">
-                            <h3>Marks entered</h3>
+                            <h3>
+                                {% trans "Marks entered" %}
+                            </h3>
                             <p>Economics · Grade 12B</p>
                         </div>
             
@@ -1556,12 +1617,14 @@
                         </div>
             
                         <div class="activity-content">
-                            <h3>Homework marked</h3>
+                            <h3>
+                                {% trans "Homework marked" %}
+                            </h3>
                             <p>Cold War · Grade 12B</p>
                         </div>
             
                         <span class="activity-time">
-                            Yesterday
+                            {% trans "Yesterday" %}
                         </span>
             
                     </div>
@@ -1578,12 +1641,16 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Attendance Overview</h2>
-                        <p>Attendance across your classes.</p>
+                        <h2>
+                            {% trans "Attendance Overview" %}
+                        </h2>
+                        <p>
+                            {% trans "Attendance across your classes." %}
+                        </p>
                     </div>
             
                     <a href="#" class="view-attendance-link">
-                        View Attendance →
+                        {% trans "View Attendance ->" %}
                     </a>
                 </div>
             
@@ -1594,14 +1661,18 @@
                     <div class="attendance-summary-card">
             
                         <div class="attendance-summary-header">
-                            <p>Overall Attendance</p>
-                            <span>Today</span>
+                            <p>
+                                {% trans "Overall Attendance" %}
+                            </p>
+                            <span>
+                                {% trans "Today" %}
+                            </span>
                         </div>
             
                         <h3>94%</h3>
             
                         <p class="attendance-summary-description">
-                            Attendance across your classes
+                            {% trans "Attendance across your classes" %}
                         </p>
             
                         <div class="attendance-progress">
@@ -1622,7 +1693,9 @@
                         </span>
             
                         <div>
-                            <p>Present</p>
+                            <p>
+                                {% trans "Present" %}
+                            </p>
                             <h3>118</h3>
                         </div>
             
@@ -1637,7 +1710,9 @@
                         </span>
             
                         <div>
-                            <p>Absent</p>
+                            <p>
+                                {% trans "Absent" %}
+                            </p>
                             <h3>5</h3>
                         </div>
             
@@ -1652,7 +1727,9 @@
                         </span>
             
                         <div>
-                            <p>Late</p>
+                            <p>
+                                {% trans "Late" %}
+                            </p>
                             <h3>2</h3>
                         </div>
             
@@ -1670,12 +1747,16 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Pending Tasks</h2>
-                        <p>Tasks that may need your attention.</p>
+                        <h2>
+                            {% trans "Pending Tasks" %}
+                        </h2>
+                        <p>
+                            {% trans "Tasks that may need your attention." %}
+                        </p>
                     </div>
             
                     <a href="#" class="view-all-tasks">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -1686,7 +1767,7 @@
                     <div class="pending-task-item">
             
                         <span class="task-priority high">
-                            High
+                            {% trans "High" %}
                         </span>
             
                         <div class="task-content">
@@ -1695,7 +1776,7 @@
                         </div>
             
                         <span class="task-due">
-                            Due today
+                            {% trans "Due today" %}
                         </span>
             
                     </div>
@@ -1705,7 +1786,7 @@
                     <div class="pending-task-item">
             
                         <span class="task-priority high">
-                            High
+                            {% trans "High" %}
                         </span>
             
                         <div class="task-content">
@@ -1715,6 +1796,7 @@
             
                         <span class="task-due">
                             Due tomorrow
+                            {% trans "Due tomorrow" %}
                         </span>
             
                     </div>
@@ -1724,16 +1806,18 @@
                     <div class="pending-task-item">
             
                         <span class="task-priority medium">
-                            Medium
+                            {% trans "Medium" %}
                         </span>
             
                         <div class="task-content">
-                            <h3>Review Student Submissions</h3>
+                            <h3>
+                                {% trans "Review Students Submissions" %}
+                            </h3>
                             <p>5 submissions · Cold War</p>
                         </div>
             
                         <span class="task-due">
-                            3 days
+                            {% trans "Three days" %}
                         </span>
             
                     </div>
@@ -1743,16 +1827,18 @@
                     <div class="pending-task-item">
             
                         <span class="task-priority low">
-                            Low
+                            {% trans "Low" %}
                         </span>
             
                         <div class="task-content">
-                            <h3>Review Class Attendance</h3>
+                            <h3>
+                                {% trans "Review Class Attendance" %}
+                            </h3>
                             <p>Grade 11A · Weekly attendance</p>
                         </div>
             
                         <span class="task-due">
-                            This week
+                            {% trans "This week" %}
                         </span>
             
                     </div>
@@ -1769,12 +1855,16 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Student Alerts</h2>
-                        <p>Students who may need your attention.</p>
+                        <h2>
+                            {% trans "Student Alerts" %}
+                        </h2>
+                        <p>
+                            {% trans "Students who may need your attention." %}
+                        </p>
                     </div>
             
                     <a href="#" class="view-all-alerts">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -1791,12 +1881,13 @@
                         <div class="alert-content">
                             <h3>Nifah Mokoena</h3>
                             <p>
-                                Attendance has dropped below 80% · Grade 12A
+                                {% trans "Attendance has dropped below 80%" %} Grade 12A
                             </p>
                         </div>
             
                         <span class="alert-label warning">
                             Attendance
+                            {% trans "Attendance" %}
                         </span>
             
                     </div>
@@ -1817,7 +1908,7 @@
                         </div>
             
                         <span class="alert-label danger">
-                            Performance
+                            {% trans "Performance" %}
                         </span>
             
                     </div>
@@ -1838,7 +1929,7 @@
                         </div>
             
                         <span class="alert-label info">
-                            Homework
+                            {% trans "Homework" %}
                         </span>
             
                     </div>
@@ -1859,7 +1950,7 @@
                         </div>
             
                         <span class="alert-label warning">
-                            Attendance
+                            {% trans "Attendance" %}
                         </span>
             
                     </div>
@@ -1879,12 +1970,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Subjects</h2>
-                        <p>Subjects you are currently teaching.</p>
+                        <h2>{% trans "My Subjects" %}</h2>
+                        <p>{% trans "Subjects you are currently teaching." %}</p>
                     </div>
             
                     <a href="#" class="view-all-subjects">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -1911,7 +2002,7 @@
                         </p>
             
                         <span class="subject-card-link">
-                            View Subject →
+                            {% trans "View Subject ->" %}
                         </span>
             
                     </a>
@@ -1937,7 +2028,7 @@
                         </p>
             
                         <span class="subject-card-link">
-                            View Subject →
+                            {% trans "View Subject ->" %}
                         </span>
             
                     </a>
@@ -1963,7 +2054,7 @@
                         </p>
             
                         <span class="subject-card-link">
-                            View Subject →
+                            {% trans "View Subject ->" %}
                         </span>
             
                     </a>
@@ -1989,7 +2080,7 @@
                         </p>
             
                         <span class="subject-card-link">
-                            View Subject →
+                            {% trans "View Subject ->" %}
                         </span>
             
                     </a>
@@ -2008,12 +2099,16 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Students</h2>
-                        <p>Students in your assigned classes.</p>
+                        <h2>
+                            {% trans "My Students" %}
+                        </h2>
+                        <p>
+                            {% trans "Students in your assigned classes." %}
+                        </p>
                     </div>
             
                     <a href="#" class="view-all-students">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -2024,11 +2119,11 @@
             
                         <thead>
                             <tr>
-                                <th>Student</th>
-                                <th>Class</th>
-                                <th>Attendance</th>
-                                <th>Average</th>
-                                <th>Status</th>
+                                <th>{% trans "Students" %}</th>
+                                <th>{% trans "Class" %}</th>
+                                <th>{% trans "Attendance" %}</th>
+                                <th>{% trans "Average" %}</th>
+                                <th>{% trans "Status" %}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -2047,13 +2142,13 @@
             
                                         <div>
                                             <strong>Nifah Mokoena</strong>
-                                            <span>Student No. 1000050</span>
+                                            <span>{% trans "Student No." %} 1000050</span>
                                         </div>
             
                                     </div>
                                 </td>
             
-                                <td>Grade 12A</td>
+                                <td>{% trans "Grade" %} 12A</td>
             
                                 <td>96%</td>
             
@@ -2061,13 +2156,13 @@
             
                                 <td>
                                     <span class="student-status good">
-                                        Good
+                                        {% trans "Good" %}
                                     </span>
                                 </td>
             
                                 <td>
                                     <a href="#" class="student-view-link">
-                                        View →
+                                        {% trans "view ->" %}
                                     </a>
                                 </td>
             
@@ -2086,13 +2181,13 @@
             
                                         <div>
                                             <strong>Muhammad Khan</strong>
-                                            <span>Student No. 1000053</span>
+                                            <span>{% trans "Student No." %} 1000053</span>
                                         </div>
             
                                     </div>
                                 </td>
             
-                                <td>Grade 12B</td>
+                                <td>{% trans "Grade" %} 12B</td>
             
                                 <td>88%</td>
             
@@ -2100,13 +2195,13 @@
             
                                 <td>
                                     <span class="student-status warning">
-                                        Attention
+                                        {% trans "Attention" %}
                                     </span>
                                 </td>
             
                                 <td>
                                     <a href="#" class="student-view-link">
-                                        View →
+                                        {% trans "View ->" %}
                                     </a>
                                 </td>
             
@@ -2125,13 +2220,13 @@
             
                                         <div>
                                             <strong>Lisego Molefe</strong>
-                                            <span>Student No. 1000064</span>
+                                            <span>{% trans "Student No." %} 1000064</span>
                                         </div>
             
                                     </div>
                                 </td>
             
-                                <td>Grade 12A</td>
+                                <td>{% trans "Grade" %} 12A</td>
             
                                 <td>91%</td>
             
@@ -2139,13 +2234,13 @@
             
                                 <td>
                                     <span class="student-status good">
-                                        Good
+                                        {% trans "Good" %}
                                     </span>
                                 </td>
             
                                 <td>
                                     <a href="#" class="student-view-link">
-                                        View →
+                                        {% trans "View ->" %}
                                     </a>
                                 </td>
             
@@ -2164,13 +2259,13 @@
             
                                         <div>
                                             <strong>Thabo Dlamini</strong>
-                                            <span>Student No. 1000071</span>
+                                            <span>{% trans "Student No." %} 1000071</span>
                                         </div>
             
                                     </div>
                                 </td>
             
-                                <td>Grade 11A</td>
+                                <td>{% trans "Grade" %} 11A</td>
             
                                 <td>79%</td>
             
@@ -2178,13 +2273,13 @@
             
                                 <td>
                                     <span class="student-status danger">
-                                        At Risk
+                                        {% trans "At Risk" %}
                                     </span>
                                 </td>
             
                                 <td>
                                     <a href="#" class="student-view-link">
-                                        View →
+                                       {% trans "View ->" %}
                                     </a>
                                 </td>
             
@@ -2208,12 +2303,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Timetable</h2>
-                        <p>Your teaching schedule for this week.</p>
+                        <h2>{% trans "My Timetable" %}</h2>
+                        <p>{% trans "Your teaching schedule for this week" %}.</p>
                     </div>
             
                     <a href="#" class="view-full-timetable">
-                        View Full Timetable →
+                        {% trans "View Full Timetable ->" %}
                     </a>
                 </div>
             
@@ -2350,7 +2445,7 @@
                                 <span class="timetable-time">12:00</span>
             
                                 <div class="timetable-class-info">
-                                    <h3>Staff Meeting</h3>
+                                    <h3>{% trans "Staff Meeting" %}</h3>
                                     <p>Staff Room</p>
                                 </div>
                             </div>
@@ -2373,12 +2468,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Guardians</h2>
-                        <p>Parents and guardians connected to your students.</p>
+                        <h2>{% trans "My Guardians" %}</h2>
+                        <p>{% trans "Parents and guardians connected to your students." %}</p>
                     </div>
             
                     <a href="#" class="view-all-guardians">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -2388,10 +2483,10 @@
             
                         <thead>
                             <tr>
-                                <th>Guardian</th>
-                                <th>Student</th>
-                                <th>Relationship</th>
-                                <th>Contact</th>
+                                <th>{% trans "Guardian" %}</th>
+                                <th>{% trans "Student" %}</th>
+                                <th>{% trans "Relationship" %}</th>
+                                <th>{% trans "Contact" %}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -2405,20 +2500,20 @@
             
                                         <div>
                                             <strong>Nomsa Mokoena</strong>
-                                            <span>Guardian</span>
+                                            <span>{% trans "Guardian" %}</span>
                                         </div>
                                     </div>
                                 </td>
             
                                 <td>Nifah Mokoena</td>
             
-                                <td>Mother</td>
+                                <td>{% trans "Mother" %}</td>
             
                                 <td>072 456 7890</td>
             
                                 <td>
                                     <a href="#" class="guardian-view-link">
-                                        View →
+                                        {% trans "View ->" %}
                                     </a>
                                 </td>
                             </tr>
@@ -2430,20 +2525,20 @@
             
                                         <div>
                                             <strong>Khalid Khan</strong>
-                                            <span>Guardian</span>
+                                            <span>{% trans "Guardian" %}</span>
                                         </div>
                                     </div>
                                 </td>
             
                                 <td>Muhammad Khan</td>
             
-                                <td>Father</td>
+                                <td>{% trans "Father" %}</td>
             
                                 <td>073 321 6548</td>
             
                                 <td>
                                     <a href="#" class="guardian-view-link">
-                                        View →
+                                        {% trans "View ->" %}
                                     </a>
                                 </td>
                             </tr>
@@ -2516,12 +2611,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Marks & Results</h2>
-                        <p>Recent assessments and student performance.</p>
+                        <h2>{% trans "Marks & Results" %}</h2>
+                        <p>{% trans "Recent assessment and student performance." %}</p>
                     </div>
             
                     <a href="#" class="view-all-results">
-                        View All Results →
+                        {% trans "View All Results ->" %}
                     </a>
                 </div>
             
@@ -2531,13 +2626,13 @@
             
                         <thead>
                             <tr>
-                                <th>Assessment</th>
-                                <th>Class</th>
-                                <th>Students</th>
-                                <th>Average</th>
-                                <th>Highest</th>
-                                <th>Lowest</th>
-                                <th>Status</th>
+                                <th>{% trans "Assessment" %}</th>
+                                <th>{% trans "Class" %}</th>
+                                <th>{% trans "Students" %}</th>
+                                <th>{% trans "Average" %}</th>
+                                <th>{% trans "Highest" %}</th>
+                                <th>{% trans "Lowest" %}</th>
+                                <th>{% trans "Status" %}</th>
                             </tr>
                         </thead>
             
@@ -2551,11 +2646,11 @@
                                     </div>
                                 </td>
             
-                                <td>Grade 12A</td>
+                                <td>{% trans "Grade" %} 12A</td>
             
                                 <td>30</td>
             
-                                <td class="result-average">78%</td>
+                                <td {% trans "Class" %}="result-average">78%</td>
             
                                 <td>96%</td>
             
@@ -2563,7 +2658,7 @@
             
                                 <td>
                                     <span class="result-status completed">
-                                        Completed
+                                        {% trans "Completed" %}
                                     </span>
                                 </td>
                             </tr>
@@ -2576,11 +2671,11 @@
                                     </div>
                                 </td>
             
-                                <td>Grade 12B</td>
+                                <td>{% trans "Grade" %} 12B</td>
             
                                 <td>32</td>
             
-                                <td class="result-average">71%</td>
+                                <td {% trans "Class" %}="result-average">71%</td>
             
                                 <td>91%</td>
             
@@ -2588,7 +2683,7 @@
             
                                 <td>
                                     <span class="result-status completed">
-                                        Completed
+                                        {% trans "Completed" %}
                                     </span>
                                 </td>
                             </tr>
@@ -2601,7 +2696,7 @@
                                     </div>
                                 </td>
             
-                                <td>Grade 11A</td>
+                                <td>{% trans "Grade" %} 11A</td>
             
                                 <td>28</td>
             
@@ -2613,7 +2708,7 @@
             
                                 <td>
                                     <span class="result-status pending">
-                                        Pending
+                                        {% trans "Pending" %}
                                     </span>
                                 </td>
                             </tr>
@@ -2626,11 +2721,11 @@
                                     </div>
                                 </td>
             
-                                <td>Grade 12B</td>
+                                <td>{% trans "Grade" %} 12B</td>
             
                                 <td>35</td>
             
-                                <td class="result-average">76%</td>
+                                <td {% trans "Class" %}="result-average">76%</td>
             
                                 <td>94%</td>
             
@@ -2638,7 +2733,7 @@
             
                                 <td>
                                     <span class="result-status completed">
-                                        Completed
+                                        {% trans "Completed" %}
                                     </span>
                                 </td>
                             </tr>
@@ -2661,12 +2756,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Homework Submissions</h2>
-                        <p>Track student homework submissions and marking.</p>
+                        <h2>{% trans "Homework Submissions" %}</h2>
+                        <p>{% trans "Track student homework submissions and marking." %}</p>
                     </div>
             
                     <a href="#" class="view-all-homework">
-                        View All Homework →
+                        {% trans "View All Homework ->" %}
                     </a>
                 </div>
             
@@ -2676,22 +2771,22 @@
             
                         <div class="homework-overview-info">
                             <h3>Algebra</h3>
-                            <p>Mathematics · Grade 12A</p>
+                            <p>Mathematics · {% trans "Grade" %} 12A</p>
                         </div>
             
                         <div class="homework-overview-stats">
                             <div>
-                                <span>Total</span>
+                                <span>{% trans "Total" %}</span>
                                 <strong>30</strong>
                             </div>
             
                             <div>
-                                <span>Marked</span>
+                                <span>{% trans "Marked" %}</span>
                                 <strong class="marked">18</strong>
                             </div>
             
                             <div>
-                                <span>Pending</span>
+                                <span>{% trans "Pending" %}</span>
                                 <strong class="pending">12</strong>
                             </div>
                         </div>
@@ -2712,23 +2807,23 @@
             
                         <div class="homework-overview-stats">
                             <div>
-                                <span>Total</span>
+                                <span>{% trans "Total" %}</span>
                                 <strong>32</strong>
                             </div>
             
                             <div>
-                                <span>Marked</span>
+                                <span>{% trans "Marked" %}</span>
                                 <strong class="marked">32</strong>
                             </div>
             
                             <div>
-                                <span>Pending</span>
+                                <span>{% trans "Pending" %}</span>
                                 <strong class="pending">0</strong>
                             </div>
                         </div>
             
                         <span class="homework-overview-status completed">
-                            Completed
+                            {% trans "Completed" %}
                         </span>
             
                     </div>
@@ -2743,17 +2838,17 @@
             
                         <div class="homework-overview-stats">
                             <div>
-                                <span>Total</span>
+                                <span>{% trans "Total" %}</span>
                                 <strong>35</strong>
                             </div>
             
                             <div>
-                                <span>Marked</span>
+                                <span>{% trans "Marked" %}</span>
                                 <strong class="marked">27</strong>
                             </div>
             
                             <div>
-                                <span>Pending</span>
+                                <span>{% trans "Pending" %}</span>
                                 <strong class="pending">8</strong>
                             </div>
                         </div>
@@ -2774,23 +2869,23 @@
             
                         <div class="homework-overview-stats">
                             <div>
-                                <span>Total</span>
+                                <span>{% trans "Total" %}</span>
                                 <strong>28</strong>
                             </div>
             
                             <div>
-                                <span>Marked</span>
+                                <span>{% trans "Marked" %}</span>
                                 <strong class="marked">28</strong>
                             </div>
             
                             <div>
-                                <span>Pending</span>
+                                <span>{% trans "Pending" %}</span>
                                 <strong class="pending">0</strong>
                             </div>
                         </div>
             
                         <span class="homework-overview-status completed">
-                            Completed
+                            {% trans "Completed" %}
                         </span>
             
                     </div>
@@ -2807,12 +2902,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Teacher Notes & Follow-ups</h2>
-                        <p>Keep track of important student notes and follow-ups.</p>
+                        <h2>{% trans "Teacher Notes & Follow-ups" %}</h2>
+                        <p>{% trans "Keep track of important student notes and follow-ups." %}</p>
                     </div>
             
                     <a href="#" class="view-all-notes">
-                        View All Notes →
+                        {% trans "View All Notes ->" %}
                     </a>
                 </div>
             
@@ -2919,12 +3014,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Staff Meetings & Communication</h2>
-                        <p>Important staff meetings and internal communication.</p>
+                        <h2>{% trans "Staff Meetings & Communication" %}</h2>
+                        <p>{% trans "Important Staff Meetings & Communication." %}</p>
                     </div>
             
                     <a href="#" class="view-all-meetings">
-                        View All →
+                        {% trans "View All ->" %}
                     </a>
                 </div>
             
@@ -2943,7 +3038,7 @@
                         </div>
             
                         <span class="meeting-status upcoming">
-                            Upcoming
+                            {% trans "Upcoming" %}
                         </span>
             
                     </div>
@@ -2962,7 +3057,7 @@
                         </div>
             
                         <span class="meeting-status upcoming">
-                            Upcoming
+                            {% trans "Upcoming" %}
                         </span>
             
                     </div>
@@ -2981,7 +3076,7 @@
                         </div>
             
                         <span class="meeting-status important">
-                            Important
+                            {% trans "Important" %}
                         </span>
             
                     </div>
@@ -2994,15 +3089,15 @@
                         </div>
             
                         <div class="message-info">
-                            <h3>Principal's Announcement</h3>
+                            <h3>{% trans "Principal's Announcement" %}</h3>
                             <p>
-                                All teachers are reminded to submit their
-                                term assessment marks before the deadline.
+                                {% trans "All teachers are reminded to submit their
+                                term assessment marks before the deadline."%}
                             </p>
                         </div>
             
                         <span class="message-date">
-                            Today
+                            {% trans "Today" %}
                         </span>
             
                     </div>
@@ -3021,12 +3116,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Profile</h2>
-                        <p>Your teacher information and account details.</p>
+                        <h2>{% trans "My Profile" %}</h2>
+                        <p>{% trans "Your teacher information and account details." %}</p>
                     </div>
             
                     <a href="#" class="edit-teacher-profile">
-                        Edit Profile →
+                        {% trans "Edit Profile →" %}
                     </a>
                 </div>
             
@@ -3040,7 +3135,7 @@
             
                         <div class="profile-summary-name">
                             <h3>Thabo Mokoena</h3>
-                            <p>Teacher · Mathematics & Economics</p>
+                            <p>{% trans "Teacher" %} · Mathematics & Economics</p>
                             <span>Employee No. TCH-0025</span>
                         </div>
             
@@ -3073,7 +3168,7 @@
             
                         <div class="profile-detail">
                             <span class="profile-detail-label">
-                                Subjects
+                                {% trans "Subjects" %}
                             </span>
             
                             <strong>
@@ -3084,7 +3179,7 @@
             
                         <div class="profile-detail">
                             <span class="profile-detail-label">
-                                Classes
+                                {% trans "Classes" %}
                             </span>
             
                             <strong>
@@ -3106,12 +3201,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Notifications</h2>
-                        <p>Important updates and actions that need your attention.</p>
+                        <h2>{% trans "Notifications" %}</h2>
+                        <p>{% trans "Important updates and actions that need your attention." %}</p>
                     </div>
             
                     <a href="#" class="view-all-notifications">
-                        View All →
+                        {% trans "View All →" %}
                     </a>
                 </div>
             
@@ -3124,7 +3219,7 @@
                         </div>
             
                         <div class="notification-content">
-                            <h3>New homework submissions</h3>
+                            <h3>{% trans "New homework submissions" %}</h3>
                             <p>
                                 12 students submitted the Algebra homework
                                 for Grade 12A.
@@ -3220,12 +3315,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Class Attendance</h2>
-                        <p>Today's attendance for your assigned classes.</p>
+                        <h2>{% trans "Class Attendance" %}</h2>
+                        <p>{% trans "Today's attendance for your assigned classes." %}</p>
                     </div>
             
                     <a href="#" class="view-all-class-attendance">
-                        View Attendance →
+                        {% trans "View Attendance →" %}
                     </a>
                 </div>
             
@@ -3271,7 +3366,7 @@
                         </div>
             
                         <a href="#" class="record-attendance-link">
-                            Record Attendance →
+                            {% trans "Record Attendance →" %}
                         </a>
             
                     </div>
@@ -3293,17 +3388,17 @@
                         <div class="class-attendance-stats">
             
                             <div>
-                                <span>Present</span>
+                                <span>{% trans "Present" %}</span>
                                 <strong>29</strong>
                             </div>
             
                             <div>
-                                <span>Absent</span>
+                                <span>{% trans "Absent" %}</span>
                                 <strong class="absent">2</strong>
                             </div>
             
                             <div>
-                                <span>Late</span>
+                                <span>{% trans "Late" %}</span>
                                 <strong class="late">1</strong>
                             </div>
             
@@ -3317,7 +3412,7 @@
                         </div>
             
                         <a href="#" class="record-attendance-link">
-                            Record Attendance →
+                            {% trans "Record Attendance →" %}
                         </a>
             
                     </div>
@@ -3339,17 +3434,17 @@
                         <div class="class-attendance-stats">
             
                             <div>
-                                <span>Present</span>
+                                <span>{% trans "Present" %}</span>
                                 <strong>22</strong>
                             </div>
             
                             <div>
-                                <span>Absent</span>
+                                <span>{% trans "Absent" %}</span>
                                 <strong class="absent">5</strong>
                             </div>
             
                             <div>
-                                <span>Late</span>
+                                <span>{% trans "Late" %}</span>
                                 <strong class="late">1</strong>
                             </div>
             
@@ -3363,7 +3458,7 @@
                         </div>
             
                         <a href="#" class="record-attendance-link">
-                            Record Attendance →
+                            {% trans "Record Attendance →" %}
                         </a>
             
                     </div>
@@ -3380,12 +3475,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My Classes</h2>
-                        <p>A quick overview of your assigned classes.</p>
+                        <h2>{% trans "My Classes" %}</h2>
+                        <p>{% trans "A quick overview of your assigned classes." %}</p>
                     </div>
             
                     <a href="#my-classes" class="view-all-classes">
-                        View All Classes →
+                        {% trans "View All Classes →" %}
                     </a>
                 </div>
             
@@ -3407,17 +3502,17 @@
                         <div class="class-summary-stats">
             
                             <div>
-                                <span>Average</span>
+                                <span>{% trans "Average" %}</span>
                                 <strong>78%</strong>
                             </div>
             
                             <div>
-                                <span>Attendance</span>
+                                <span>{% trans "Attendance" %}</span>
                                 <strong>96%</strong>
                             </div>
             
                             <div>
-                                <span>Homework</span>
+                                <span>{% trans "Homework" %}</span>
                                 <strong class="class-warning">12</strong>
                             </div>
             
@@ -3427,7 +3522,7 @@
                             <span>12 homework submissions pending</span>
             
                             <a href="#" class="class-summary-link">
-                                View Class →
+                                {% trans "View Class →" %}
                             </a>
                         </div>
             
@@ -3467,10 +3562,10 @@
                         </div>
             
                         <div class="class-summary-footer">
-                            <span>All homework submissions marked</span>
+                            <span>{% trans "All homework submissions marked" %}</span>
             
                             <a href="#" class="class-summary-link">
-                                View Class →
+                                {% trans "View Class →" %}
                             </a>
                         </div>
             
@@ -3510,10 +3605,10 @@
                         </div>
             
                         <div class="class-summary-footer">
-                            <span>Attendance needs attention</span>
+                            <span>{% trans "Attendance needs attention" %}</span>
             
                             <a href="#" class="class-summary-link">
-                                View Class →
+                                {% trans "View Class →" %}
                             </a>
                         </div>
             
@@ -3531,12 +3626,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Teaching Workload</h2>
-                        <p>An overview of your current teaching responsibilities.</p>
+                        <h2>{% trans "Teaching Workload" %}</h2>
+                        <p>{% trans "An overview of your current teaching responsibilities." %}</p>
                     </div>
             
                     <a href="#" class="view-workload-link">
-                        View Details →
+                        {% trans "View Details →" %}
                     </a>
                 </div>
             
@@ -3549,9 +3644,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>Classes</span>
+                            <span>{% trans "Classes" %}</span>
                             <strong>4</strong>
-                            <p>Active classes</p>
+                            <p>{% trans "Active classes" %}</p>
                         </div>
             
                     </div>
@@ -3564,9 +3659,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>Subjects</span>
+                            <span>{% trans "Subjects" %}</span>
                             <strong>3</strong>
-                            <p>Subjects taught</p>
+                            <p>{% trans "Subjects taught" %}</p>
                         </div>
             
                     </div>
@@ -3579,9 +3674,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>Students</span>
+                            <span>{% trans "Students" %}</span>
                             <strong>125</strong>
-                            <p>Students assigned</p>
+                            <p>{% trans "Students assigned" %}</p>
                         </div>
             
                     </div>
@@ -3594,9 +3689,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>To Mark</span>
+                            <span>{% trans "To Mark" %}</span>
                             <strong>20</strong>
-                            <p>Submissions waiting</p>
+                            <p>{% trans "Submissions waiting" %}</p>
                         </div>
             
                     </div>
@@ -3609,9 +3704,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>Assessments</span>
+                            <span>{% trans "Assessments" %}</span>
                             <strong>6</strong>
-                            <p>This term</p>
+                            <p>{% trans "This term" %}</p>
                         </div>
             
                     </div>
@@ -3624,9 +3719,9 @@
                         </div>
             
                         <div class="workload-content">
-                            <span>Teaching Hours</span>
+                            <span>{% trans "Teaching Hours" %}</span>
                             <strong>22</strong>
-                            <p>Per week</p>
+                            <p>{% trans "Per week" %}</p>
                         </div>
             
                     </div>
@@ -3645,12 +3740,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>My HOD & Teacher Support</h2>
-                        <p>Your department head and important support information.</p>
+                        <h2>{% trans "My HOD & Teacher Support" %}</h2>
+                        <p>{% trans "Your department head and important support information." %}</p>
                     </div>
             
                     <a href="#" class="view-hod-link">
-                        View HOD Profile →
+                        {% trans "View HOD Profile →" %}
                     </a>
                 </div>
             
@@ -3668,7 +3763,7 @@
             
                             <div class="hod-profile-info">
                                 <h3>Nomsa Mokoena</h3>
-                                <p>Head of Department</p>
+                                <p>{% trans "Head of Department" %}</p>
                                 <span>Mathematics & Sciences</span>
                             </div>
             
@@ -3691,7 +3786,7 @@
             
             
                         <a href="#" class="contact-hod-button">
-                            Contact HOD
+                            {% trans "Contact HOD" %}
                         </a>
             
                     </div>
@@ -3727,7 +3822,7 @@
                             </span>
             
                             <a href="#" class="hod-message-link">
-                                View Message →
+                                {% trans "View Message →" %}
                             </a>
             
                         </div>
@@ -3742,14 +3837,14 @@
             
                             <div>
                                 <span class="hod-message-label">
-                                    Recent Feedback
+                                    {% trans "Recent Feedback" %}
                                 </span>
             
-                                <h3>Class Performance Review</h3>
+                                <h3>{% trans "Class Performance Review" %}</h3>
                             </div>
             
                             <span class="feedback-status">
-                                Reviewed
+                                {% trans "Reviewed" %}
                             </span>
             
                         </div>
@@ -3778,12 +3873,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Resources & Documents</h2>
-                        <p>Important teaching resources and school documents.</p>
+                        <h2>{% trans "Resources & Documents" %}</h2>
+                        <p>{% trans "Important teaching resources and school documents." %}</p>
                     </div>
             
                     <a href="#" class="view-all-resources">
-                        View All Documents →
+                        {% trans "View All Documents →" %}
                     </a>
                 </div>
             
@@ -3798,8 +3893,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>School Policies</h3>
-                            <p>Important school rules and policies.</p>
+                            <h3>{% trans "School Policies" %}</h3>
+                            <p>{% trans "Important school rules and policies." %}</p>
                             <span>12 documents</span>
                         </div>
             
@@ -3816,8 +3911,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>Teaching Resources</h3>
-                            <p>Resources for your subjects and classes.</p>
+                            <h3>{% trans "Teaching Resources" %}</h3>
+                            <p>{% trans "Resources for your subjects and classes." %}</p>
                             <span>28 documents</span>
                         </div>
             
@@ -3834,8 +3929,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>Assessment Guidelines</h3>
-                            <p>Assessment and marking guidelines.</p>
+                            <h3>{% trans "Assessment Guidelines" %}</h3>
+                            <p>{% trans "Assessment and marking guidelines." %}</p>
                             <span>9 documents</span>
                         </div>
             
@@ -3852,8 +3947,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>Curriculum Documents</h3>
-                            <p>Curriculum and subject information.</p>
+                            <h3>{% trans "Curriculum Documents" %}</h3>
+                            <p>{% trans "Curriculum and subject information." %}</p>
                             <span>16 documents</span>
                         </div>
             
@@ -3870,8 +3965,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>Department Documents</h3>
-                            <p>Documents shared by your department.</p>
+                            <h3>{% trans "Department Documents" %}</h3>
+                            <p>{% trans "Documents shared by your department." %}</p>
                             <span>7 documents</span>
                         </div>
             
@@ -3888,8 +3983,8 @@
                         </div>
             
                         <div class="resource-content">
-                            <h3>Staff Documents</h3>
-                            <p>Documents shared with teaching staff.</p>
+                            <h3>{% trans "Staff Documents" %}</h3>
+                            <p>{% trans "Documents shared with teaching staff." %}</p>
                             <span>14 documents</span>
                         </div>
             
@@ -3909,12 +4004,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Leave & Availability</h2>
-                        <p>View your availability and leave information.</p>
+                        <h2>{% trans "Leave & Availability" %}</h2>
+                        <p>{% trans "View your availability and leave information." %}</p>
                     </div>
             
                     <a href="#" class="view-leave-link">
-                        View Leave History →
+                        {% trans "View Leave History →" %}
                     </a>
                 </div>
             
@@ -3925,16 +4020,16 @@
                     <div class="leave-balance-card">
             
                         <div class="leave-card-header">
-                            <span>Annual Leave</span>
+                            <span>{% trans "Annual Leave" %}</span>
             
                             <span class="leave-status available">
-                                Available
+                                {% trans "Available" %}
                             </span>
                         </div>
             
                         <div class="leave-balance">
                             <strong>18</strong>
-                            <span>days remaining</span>
+                            <span>{% trans "days remaining" %}</span>
                         </div>
             
                         <div class="leave-progress">
@@ -3959,12 +4054,12 @@
                         </div>
             
                         <div class="availability-content">
-                            <span>Current Status</span>
+                            <span>{% trans "Current Status" %}</span>
             
-                            <strong>Available</strong>
+                            <strong>{% trans "Available" %}</strong>
             
                             <p>
-                                Available for teaching today
+                                {% trans "Available for teaching today" %}
                             </p>
                         </div>
             
@@ -3975,14 +4070,14 @@
                     <div class="next-leave-card">
             
                         <div class="leave-card-header">
-                            <span>Upcoming Leave</span>
+                            <span>{% trans "Upcoming Leave" %}</span>
             
                             <span class="leave-status approved">
-                                Approved
+                                {% trans "Approved" %}
                             </span>
                         </div>
             
-                        <h3>Annual Leave</h3>
+                        <h3>{% trans "Annual Leave" %}</h3>
             
                         <p class="next-leave-date">
                             20 October – 24 October 2026
@@ -4002,12 +4097,12 @@
             
                     <div class="leave-requests-header">
                         <div>
-                            <h3>Recent Leave Requests</h3>
-                            <p>Your latest leave applications.</p>
+                            <h3>{% trans "Recent Leave Requests" %}</h3>
+                            <p>{% trans "Your latest leave applications." %}</p>
                         </div>
             
                         <a href="#" class="request-leave-link">
-                            Request Leave →
+                            {% trans "Request Leave →" %}
                         </a>
                     </div>
             
@@ -4017,14 +4112,14 @@
                         <div class="leave-request-item">
             
                             <div class="leave-request-info">
-                                <strong>Annual Leave</strong>
+                                <strong>{% trans "Annual Leave" %}</strong>
                                 <span>
                                     20 Oct – 24 Oct 2026
                                 </span>
                             </div>
             
                             <span class="leave-request-status approved">
-                                Approved
+                                {% trans "Approved" %}
                             </span>
             
                         </div>
@@ -4033,14 +4128,14 @@
                         <div class="leave-request-item">
             
                             <div class="leave-request-info">
-                                <strong>Personal Leave</strong>
+                                <strong>{% trans "Personal Leave" %}</strong>
                                 <span>
                                     02 Sep 2026
                                 </span>
                             </div>
             
                             <span class="leave-request-status approved">
-                                Approved
+                                {% trans "Approved" %}
                             </span>
             
                         </div>
@@ -4075,12 +4170,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Payroll & Payslips</h2>
-                        <p>Your personal salary and payslip information.</p>
+                        <h2>{% trans "Payroll & Payslips" %}</h2>
+                        <p>{% trans "Your personal salary and payslip information." %}</p>
                     </div>
             
                     <a href="#" class="view-all-payslips">
-                        View All Payslips →
+                        {% trans "View All Payslips →" %}
                     </a>
                 </div>
             
@@ -4091,10 +4186,10 @@
                     <div class="payroll-status-card">
             
                         <div class="payroll-card-header">
-                            <span>Payment Status</span>
+                            <span>{% trans "Payment Status" %}</span>
             
                             <span class="payroll-status paid">
-                                Paid
+                                {% trans "Paid" %}
                             </span>
                         </div>
             
@@ -4149,7 +4244,7 @@
                             <strong>September</strong>
             
                             <p>
-                                Available to download
+                                {% trans "Available to download" %}
                             </p>
             
                         </div>
@@ -4165,15 +4260,15 @@
                     <div class="payslip-list-header">
             
                         <div>
-                            <h3>Recent Payslips</h3>
+                            <h3>{% trans "Recent Payslips" %}</h3>
             
                             <p>
-                                Your latest salary documents.
+                                {% trans "Your latest salary documents." %}
                             </p>
                         </div>
             
                         <a href="#" class="download-payslip-link">
-                            Download Latest
+                            {% trans "Download Latest" %}
                         </a>
             
                     </div>
@@ -4193,7 +4288,7 @@
                             </div>
             
                             <a href="#" class="payslip-view-link">
-                                View →
+                                {% trans "View →" %}
                             </a>
             
                         </div>
@@ -4211,7 +4306,7 @@
                             </div>
             
                             <a href="#" class="payslip-view-link">
-                                View →
+                                {% trans "View →" %}
                             </a>
             
                         </div>
@@ -4229,7 +4324,7 @@
                             </div>
             
                             <a href="#" class="payslip-view-link">
-                                View →
+                                {% trans "View →" %}
                             </a>
             
                         </div>
@@ -4248,12 +4343,12 @@
             
                 <div class="section-heading">
                     <div>
-                        <h2>Substitutions</h2>
-                        <p>Classes you are covering or that require cover.</p>
+                        <h2>{% trans "Substitutions" %}</h2>
+                        <p>{% trans "Classes you are covering or that require cover." %}</p>
                     </div>
             
                     <a href="#" class="view-substitutions-link">
-                        View All →
+                        {% trans "View All →" %}
                     </a>
                 </div>
             
@@ -4275,7 +4370,7 @@
                                 <h3>Covering Mathematics</h3>
             
                                 <span class="substitution-badge covering">
-                                    Covering
+                                    {% trans "Covering" %}
                                 </span>
                             </div>
             
@@ -4284,14 +4379,14 @@
                             </p>
             
                             <span class="substitution-teacher">
-                                Regular teacher: Sarah Nkosi
+                                {% trans "Regular teacher:" %} Sarah Nkosi
                             </span>
             
                         </div>
             
             
                         <a href="#" class="substitution-view-link">
-                            View →
+                            {% trans "View →" %}
                         </a>
             
                     </div>
@@ -4312,7 +4407,7 @@
                                 <h3>Covering Economics</h3>
             
                                 <span class="substitution-badge covering">
-                                    Covering
+                                    {% trans "Covering" %}
                                 </span>
                             </div>
             
@@ -4321,14 +4416,14 @@
                             </p>
             
                             <span class="substitution-teacher">
-                                Regular teacher: David Maseko
+                                {% trans "Regular teacher:" %} David Maseko
                             </span>
             
                         </div>
             
             
                         <a href="#" class="substitution-view-link">
-                            View →
+                            {% trans "View →" %}
                         </a>
             
                     </div>
@@ -4349,7 +4444,7 @@
                                 <h3>Mathematics Class Covered</h3>
             
                                 <span class="substitution-badge covered">
-                                    Covered
+                                    {% trans "Covered" %}
                                 </span>
                             </div>
             
@@ -4358,14 +4453,14 @@
                             </p>
             
                             <span class="substitution-teacher">
-                                Covering teacher: Peter Dlamini
+                                {% trans "Covering teacher:" %} Peter Dlamini
                             </span>
             
                         </div>
             
             
                         <a href="#" class="substitution-view-link">
-                            View →
+                            {% trans "View →" %}
                         </a>
             
                     </div>
@@ -4386,7 +4481,7 @@
                                 <h3>Economics Class</h3>
             
                                 <span class="substitution-badge pending">
-                                    Pending
+                                    {% trans "Pending" %}
                                 </span>
             
                             </div>
@@ -4396,14 +4491,14 @@
                             </p>
             
                             <span class="substitution-teacher">
-                                Substitute teacher not assigned yet
+                                {% trans "Substitute teacher not assigned yet" %}
                             </span>
             
                         </div>
             
             
                         <a href="#" class="substitution-view-link">
-                            View →
+                            {% trans "View →" %}
                         </a>
             
                     </div>
@@ -4427,11 +4522,11 @@
                     <div>
 
                         <h2>
-                            My Classes
+                            {% trans "My Classes" %}
                         </h2>
 
                         <p>
-                            Classes and subjects assigned to you.
+                            {% trans "Classes and subjects assigned to you." %}
                         </p>
 
                     </div>
@@ -4466,7 +4561,7 @@
                             </p>
 
                             <span class="assignment-link">
-                                View Class →
+                                {% trans "View Class →" %}
                             </span>
 
                         </a>
@@ -4475,8 +4570,8 @@
 
                         <p class="empty-message">
 
-                            No teaching assignments have been
-                            assigned to you yet.
+                            {% trans "No teaching assignments have been
+                            assigned to you yet." %}
 
                         </p>
 
@@ -4500,11 +4595,11 @@
                         <h2>ARWA</h2>
             
                         <p>
-                            School Management Platform
+                            {% trans "School Management Platform" %}
                         </p>
             
                         <span>
-                            Empowering schools, teachers and learners.
+                            {% trans "Empowering schools, teachers and learners." %}
                         </span>
             
                     </div>
@@ -4520,7 +4615,7 @@
                         </p>
             
                         <p>
-                            Academic Year: 2026
+                            {% trans "Academic Year:" %} 2026
                         </p>
             
                     </div>
@@ -4529,18 +4624,18 @@
                     <!-- SUPPORT -->
                     <div class="footer-column">
             
-                        <h3>Support</h3>
+                        <h3>{% trans "Support" %}</h3>
             
                         <a href="#">
-                            Help Centre
+                            {% trans "Help Centre" %}
                         </a>
             
                         <a href="#">
-                            Contact Support
+                            {% trans "Contact Support" %}
                         </a>
             
                         <a href="#">
-                            Report a Problem
+                            {% trans "Report a Problem" %}
                         </a>
             
                     </div>
@@ -4549,18 +4644,18 @@
                     <!-- SYSTEM -->
                     <div class="footer-column">
             
-                        <h3>System</h3>
+                        <h3>{% trans "System" %}</h3>
             
                         <a href="#">
-                            Privacy
+                            {% trans "Privacy" %}
                         </a>
             
                         <a href="#">
-                            Terms & Conditions
+                            {% trans "Terms & Conditions" %}
                         </a>
             
                         <a href="#">
-                            System Status
+                            {% trans "System Status" %}
                         </a>
             
                     </div>

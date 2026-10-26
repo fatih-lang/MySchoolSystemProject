@@ -981,6 +981,19 @@ body {
         0 12px 28px rgba(15, 29, 55, 0.08);
 }
 
+/*
+    Give the school card a clear focus state.
+
+    This helps keyboard users and also provides
+    a subtle visual response when interacting
+    with the card on smaller devices.
+*/
+.school-oversight-school-card:focus-visible {
+    outline: 2px solid #9a7a25;
+
+    outline-offset: 3px;
+}
+
 /* =========================================
    ASSIGNED SCHOOL CARD DETAILS
    ========================================= */

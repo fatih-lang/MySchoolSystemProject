@@ -91,6 +91,19 @@ urlpatterns = [
         name="director_dashboard",
     ),
     
+    # School-specific Director Dashboard.
+    #
+    # The school_id identifies which authorised school
+    # the Director wants to view.
+    #
+    # The view will perform the security check to make
+    # sure the Director is actually assigned to that school.
+    path(
+        "director-dashboard/<int:school_id>/<int:school_type_id>/",
+        views.director_school_dashboard,
+        name="director_school_dashboard",
+    ),
+    
     # Director School Oversight
     # Opens the institutional oversight page
     # for the authenticated Director's school.

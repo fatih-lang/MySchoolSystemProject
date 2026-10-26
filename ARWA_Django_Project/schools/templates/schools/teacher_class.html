@@ -1,8 +1,10 @@
 {% load static %}
 
+{% load i18n %}
+
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
 
@@ -39,7 +41,7 @@
             <h1>ARWA</h1>
 
             <p>
-                School Management
+                {% trans "School Management" %}
             </p>
 
         </div>
@@ -48,7 +50,7 @@
         <nav class="teacher-navigation">
 
             <p class="navigation-title">
-                MAIN
+                {% trans "MAIN" %}
             </p>
 
 
@@ -56,7 +58,7 @@
                 href="{% url 'teacher_dashboard' %}"
                 class="navigation-link">
 
-                Dashboard
+                {% trans "Dashboard" %}
 
             </a>
 
@@ -65,7 +67,7 @@
                 href="#"
                 class="navigation-link active">
 
-                My Classes
+                {% trans "My Classes" %}
 
             </a>
 
@@ -74,7 +76,7 @@
                 href="#"
                 class="navigation-link">
 
-                My Subjects
+                {% trans "My Subjects" %}
 
             </a>
 
@@ -83,7 +85,7 @@
                 href="#"
                 class="navigation-link">
 
-                My Students
+                {% trans "My Students" %}
 
             </a>
 
@@ -92,7 +94,7 @@
                 href="#"
                 class="navigation-link">
 
-                Attendance
+                {% trans "Attendance" %}
 
             </a>
 
@@ -101,7 +103,7 @@
                 href="#"
                 class="navigation-link">
 
-                Homework
+                {% trans "Homework" %}
 
             </a>
 
@@ -110,7 +112,7 @@
                 href="#"
                 class="navigation-link">
 
-                Marks & Results
+                {% trans "Marks & Results" %}
 
             </a>
 
@@ -119,13 +121,13 @@
                 href="#"
                 class="navigation-link">
 
-                My Timetable
+                {% trans "My Timetable" %}
 
             </a>
 
 
             <p class="navigation-title">
-                SCHOOL
+                {% trans "SCHOOL" %}
             </p>
 
 
@@ -133,7 +135,7 @@
                 href="#"
                 class="navigation-link">
 
-                School News
+                {% trans "School News" %}
 
             </a>
 
@@ -142,7 +144,7 @@
                 href="#"
                 class="navigation-link">
 
-                My Guardians
+                {% trans "My Guardians" %}
 
             </a>
 
@@ -151,7 +153,7 @@
                 href="#"
                 class="navigation-link">
 
-                My HOD
+                {% trans "My HOD" %}
 
             </a>
 
@@ -160,13 +162,13 @@
                 href="#"
                 class="navigation-link">
 
-                Staff Meetings
+                {% trans "Staff Meetings" %}
 
             </a>
 
 
             <p class="navigation-title">
-                ACCOUNT
+                {% trans "ACCOUNT" %}
             </p>
 
 
@@ -174,7 +176,7 @@
                 href="#"
                 class="navigation-link">
 
-                My Profile
+                {% trans "My Profile" %}
 
             </a>
 
@@ -195,7 +197,7 @@
                     type="submit"
                     class="logout-button">
 
-                    Logout
+                    {% trans "Logout" %}
 
                 </button>
 
@@ -227,7 +229,7 @@
                 </p>
 
                 <h2>
-                    My Classes
+                    {% trans "My Classes" %}
                 </h2>
 
             </div>
@@ -253,7 +255,7 @@
 
 
                     <p class="teacher-profile-role">
-                        Teacher
+                        {% trans "Teacher" %}
                     </p>
 
                 </div>
@@ -273,16 +275,16 @@
             <div>
 
                 <p class="page-intro-label">
-                    TEACHING
+                    {% trans "TEACHING" %}
                 </p>
 
                 <h1>
-                    My Classes
+                    {% trans "My Classes" %}
                 </h1>
 
                 <p>
-                    View and manage the classes and subjects
-                    assigned to you.
+                    {% trans "View and manage the classes and subjects
+                    assigned to you." %}
                 </p>
 
             </div>
@@ -291,7 +293,7 @@
             <div class="academic-year-badge">
 
                 <span>
-                    Academic Year
+                    {% trans "Academic Year" %}
                 </span>
 
                 <strong>
@@ -313,7 +315,7 @@
             <div class="class-overview-card">
 
                 <span>
-                    Active Classes
+                    {% trans "Active Classes" %}
                 </span>
 
                 <strong>
@@ -321,7 +323,7 @@
                 </strong>
 
                 <p>
-                    Classes assigned
+                    {% trans "Classes assigned" %}
                 </p>
 
             </div>
@@ -330,7 +332,7 @@
             <div class="class-overview-card">
 
                 <span>
-                    Subjects
+                    {% trans "Subjects" %}
                 </span>
 
                 <strong>
@@ -338,7 +340,7 @@
                 </strong>
 
                 <p>
-                    Subjects taught
+                    {% trans "Subjects taught" %}
                 </p>
 
             </div>
@@ -347,7 +349,7 @@
             <div class="class-overview-card">
 
                 <span>
-                    Students
+                    {% trans "Students" %}
                 </span>
 
                 <strong>
@@ -355,7 +357,7 @@
                 </strong>
 
                 <p>
-                    Students across classes
+                    {% trans "Students across classes" %}
                 </p>
 
             </div>
@@ -364,7 +366,7 @@
             <div class="class-overview-card">
 
                 <span>
-                    Pending Work
+                    {% trans "Pending Work" %}
                 </span>
 
                 <strong class="overview-warning">
@@ -372,7 +374,7 @@
                 </strong>
 
                 <p>
-                    Items requiring attention
+                    {% trans "Items requiring attention" %}
                 </p>
 
             </div>
@@ -392,11 +394,11 @@
                 <div>
 
                     <h2>
-                        Assigned Classes
+                        {% trans "Assigned Classes" %}
                     </h2>
 
                     <p>
-                        Your current teaching assignments.
+                        {% trans "Your current teaching assignments." %}
                     </p>
 
                 </div>
@@ -406,7 +408,7 @@
                     type="button"
                     class="class-filter-button">
 
-                    All Classes ▾
+                    {% trans "All Classes ▾" %}
 
                 </button>
 
@@ -445,7 +447,7 @@
 
 
                         <span class="class-status active">
-                            Active
+                            {% trans "Active" %}
                         </span>
 
                     </div>
@@ -456,7 +458,7 @@
                         <div>
 
                             <span>
-                                Students
+                                {% trans "Students" %}
                             </span>
 
                             <strong>
@@ -469,7 +471,7 @@
                         <div>
 
                             <span>
-                                Average
+                                {% trans "Average" %}
                             </span>
 
                             <strong>
@@ -482,7 +484,7 @@
                         <div>
 
                             <span>
-                                Attendance
+                                {% trans "Attendance" %}
                             </span>
 
                             <strong>
@@ -501,7 +503,7 @@
                         </span>
 
                         <a href="#">
-                            View Class →
+                            {% trans "View Class →" %}
                         </a>
 
                     </div>
@@ -539,7 +541,7 @@
 
 
                         <span class="class-status active">
-                            Active
+                            {% trans "Active" %}
                         </span>
 
                     </div>
@@ -551,7 +553,7 @@
                         <div>
 
                             <span>
-                                Students
+                                {% trans "Students" %}
                             </span>
 
                             <strong>
@@ -564,7 +566,7 @@
                         <div>
 
                             <span>
-                                Average
+                                {% trans "Average" %}
                             </span>
 
                             <strong>
@@ -577,7 +579,7 @@
                         <div>
 
                             <span>
-                                Attendance
+                                {% trans "Attendance" %}
                             </span>
 
                             <strong>
@@ -592,11 +594,11 @@
                     <div class="teacher-class-footer">
 
                         <span class="class-success-text">
-                            All homework marked
+                            {% trans "All homework marked" %}
                         </span>
 
                         <a href="#">
-                            View Class →
+                            {% trans "View Class →" %}
                         </a>
 
                     </div>
@@ -629,7 +631,7 @@
 
 
                         <span class="class-status active">
-                            Active
+                            {% trans "Active" %}
                         </span>
 
                     </div>
@@ -640,7 +642,7 @@
                         <div>
 
                             <span>
-                                Students
+                                {% trans "Students" %}
                             </span>
 
                             <strong>
@@ -653,7 +655,7 @@
                         <div>
 
                             <span>
-                                Average
+                                {% trans "Average" %}
                             </span>
 
                             <strong>
@@ -666,7 +668,7 @@
                         <div>
 
                             <span>
-                                Attendance
+                                {% trans "Attendance" %}
                             </span>
 
                             <strong class="class-attention">
@@ -681,11 +683,11 @@
                     <div class="teacher-class-footer">
 
                         <span class="class-attention-text">
-                            Attendance needs attention
+                            {% trans "Attendance needs attention" %}
                         </span>
 
                         <a href="#">
-                            View Class →
+                            {% trans "View Class →" %}
                         </a>
 
                     </div>
@@ -718,7 +720,7 @@
 
 
                         <span class="class-status active">
-                            Active
+                            {% trans "Active" %}
                         </span>
 
                     </div>
@@ -729,7 +731,7 @@
                         <div>
 
                             <span>
-                                Students
+                                {% trans "Students" %}
                             </span>
 
                             <strong>
@@ -742,7 +744,7 @@
                         <div>
 
                             <span>
-                                Average
+                                {% trans "Average" %}
                             </span>
 
                             <strong>
@@ -755,7 +757,7 @@
                         <div>
 
                             <span>
-                                Attendance
+                                {% trans "Attendance" %}
                             </span>
 
                             <strong>
@@ -770,11 +772,11 @@
                     <div class="teacher-class-footer">
 
                         <span class="class-success-text">
-                            All classes up to date
+                            {% trans "All classes up to date" %}
                         </span>
 
                         <a href="#">
-                            View Class →
+                            {% trans "View Class →" %}
                         </a>
 
                     </div>

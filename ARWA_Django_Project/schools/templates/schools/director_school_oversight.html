@@ -1,6 +1,10 @@
 {% load static %}
+
+{% load i18n %}
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
 
@@ -9,7 +13,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>School Oversight | ARWA</title>
+    <title>{% trans "School Oversight" %} | ARWA</title>
 
     <link
         rel="stylesheet"
@@ -24,16 +28,15 @@
             <header class="school-oversight-header">
         
                 <span class="school-oversight-label">
-                    SCHOOL OVERSIGHT
+                    {% trans "SCHOOL OVERSIGHT" %}
                 </span>
         
                 <h1>
-                    School Oversight
+                    {% trans "School Oversight" %}
                 </h1>
         
                 <p>
-                    Institutional information and strategic
-                    school management.
+                    {% trans "Institutional information and strategic school management." %}
                 </p>
         
             </header>
@@ -49,15 +52,15 @@
         
                 <div class="school-oversight-selection-heading">
                     <span>
-                        ASSIGNED SCHOOLS
+                        {% trans "ASSIGNED SCHOOLS" %}
                     </span>
         
                     <h2>
-                        Your Schools
+                        {% trans "Your Schools" %}
                     </h2>
         
                     <p>
-                        Select a school to view its institutional oversight.
+                        {% trans "Select a school to view its institutional oversight." %}
                     </p>
                 </div>
         
@@ -75,7 +78,7 @@
                                 schools assigned through DirectorSchool.
                             -->
                             <span class="school-oversight-card-label">
-                                SCHOOL
+                                {% trans "SCHOOL" %}
                             </span>
         
                             <h2>
@@ -83,15 +86,14 @@
                             </h2>
         
                             <span class="school-oversight-card-action">
-                                View institutional oversight →
+                                {% trans "View institutional oversight →" %}
                             </span>
                         </a>
         
                     {% empty %}
         
                         <p>
-                            No schools have been assigned to your
-                            Director profile.
+                            {% trans "No schools have been assigned to your Director profile." %}
                         </p>
         
                     {% endfor %}

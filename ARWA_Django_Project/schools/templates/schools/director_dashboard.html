@@ -1,7 +1,9 @@
 {% load static %}
 
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
     
@@ -14,7 +16,7 @@
             content="width=device-width, initial-scale=1.0"
         >
     
-        <title>Director Dashboard | ARWA</title>
+        <title>{% trans "Director Dashboard" %} | ARWA</title>
     
         <!--
             Director dashboard styling will be connected here.
@@ -51,9 +53,9 @@
                 <!-- ARWA executive branding -->
                 <div class="director-brand">
             
-                    <h1>ARWA</h1>
+                    <h1>{% trans "ARWA" %}</h1>
             
-                    <p>Executive Portal</p>
+                    <p>{% trans "Executive Portal" %}</p>
             
                 </div>
             
@@ -64,56 +66,56 @@
                     <!-- Executive overview -->
                     <a href="#" class="director-nav-item active">
                         <span class="director-nav-icon">⌂</span>
-                        <span>Executive Overview</span>
+                        <span>{% trans "Executive Overview" %}</span>
                     </a>
             
             
                     <!-- School oversight -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">▣</span>
-                        <span>School Oversight</span>
+                        <span>{% trans "School Oversight" %}</span>
                     </a>
             
             
                     <!-- Staff oversight -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">♙</span>
-                        <span>Staff Oversight</span>
+                        <span>{% trans "Staff Oversight" %}</span>
                     </a>
             
             
                     <!-- Account control -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">◉</span>
-                        <span>Account Control</span>
+                        <span>{% trans "Account Control" %}</span>
                     </a>
             
             
                     <!-- Financial oversight -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">◆</span>
-                        <span>Financial Oversight</span>
+                        <span>{% trans "Financial Oversight" %}</span>
                     </a>
             
             
                     <!-- Academic oversight -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">◇</span>
-                        <span>Academic Oversight</span>
+                        <span>{% trans "Academic Oversight" %}</span>
                     </a>
             
             
                     <!-- Communication hub -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">✦</span>
-                        <span>Communication Hub</span>
+                        <span>{% trans "Communication Hub" %}</span>
                     </a>
             
             
                     <!-- Executive audit -->
                     <a href="#" class="director-nav-item">
                         <span class="director-nav-icon">◎</span>
-                        <span>Executive Audit</span>
+                        <span>{% trans "Executive Audit" %}</span>
                     </a>
             
                 </nav>
@@ -164,13 +166,68 @@
                 
                             <div class="director-school-details">
                 
+                                <!--
+                                    Display the school currently selected by the Director.
+                                
+                                    The school is supplied by the Django
+                                    director_school_dashboard view.
+                                
+                                    This keeps the dashboard architecture reusable
+                                    for Primary, Secondary, or other school types.
+                                -->
                                 <strong>
-                                    ARWA Demonstration School
+                                    {{ school.name }}
                                 </strong>
-                
+                                
                                 <span>
-                                    Executive Management
+                                    
+                                    {{ school_type.name }}
+
                                 </span>
+                                
+                                <!--
+                                    Director school and institution switcher.
+                                
+                                    Only schools assigned to the logged-in Director
+                                    are available here.
+                                
+                                    Each institution type opens the same Director
+                                    Dashboard architecture using the selected
+                                    school and school type.
+                                -->
+                                <div class="director-school-switcher">
+                                
+                                    <span>
+                                        {% trans "Switch School / Institution" %}
+                                    </span>
+                                
+                                    {% for assignment in director_schools %}
+                                
+                                        <div class="director-switcher-school">
+                                
+                                            <strong>
+                                                {{ assignment.school.name }}
+                                            </strong>
+                                
+                                                {% for available_school_type in assignment.school.school_types.all %}
+
+                                                    {% if assignment.school.id != school.id or available_school_type.id != school_type.id %}
+                                                
+                                                        <a
+                                                            href="{% url 'director_school_dashboard' assignment.school.id available_school_type.id %}"
+                                                        >
+                                                            {{ available_school_type.name }}
+                                                        </a>
+                                                
+                                                    {% endif %}
+                                                
+                                                {% endfor %}
+                                
+                                        </div>
+                                
+                                    {% endfor %}
+                                
+                                </div>
                 
                             </div>
                 
@@ -178,18 +235,17 @@
                 
                 
                         <p class="director-label">
-                            EXECUTIVE COMMAND CENTRE
+                            {% trans "EXECUTIVE COMMAND CENTRE" %}
                         </p>
                 
                 
                         <h2>
-                            Director Dashboard
+                            {% trans "Director Dashboard" %}
                         </h2>
                 
                 
                         <p class="director-header-description">
-                            Strategic oversight and institutional management
-                            for your ARWA school.
+                            {% trans "Strategic oversight and institutional management for your ARWA school." %}
                         </p>
                 
                     </div>
@@ -212,7 +268,7 @@
                             <div class="director-calendar-details">
                         
                                 <span>
-                                    TODAY
+                                    {% trans "TODAY" %}
                                 </span>
                         
                                 <strong id="director-date">
@@ -276,7 +332,7 @@
                                 </strong>
                         
                                 <span>
-                                    Executive Management
+                                    {% trans "Executive Management" %}
                                 </span>
                         
                             </div>
@@ -312,13 +368,13 @@
                     
                             <!-- Small executive section label -->
                             <span class="director-welcome-label">
-                                EXECUTIVE OVERVIEW
+                                {% trans "EXECUTIVE OVERVIEW" %}
                             </span>
                     
                     
                             <!-- Personalised Director greeting -->
                             <h3>
-                                Welcome,
+                                {% trans "Welcome," %}
                                 {{ request.user.first_name }}
                                 {{ request.user.last_name }}
                             </h3>
@@ -326,9 +382,7 @@
                     
                             <!-- Executive overview description -->
                             <p>
-                                Your executive command centre for strategic
-                                oversight, institutional performance, financial
-                                intelligence, and school management.
+                                {% trans "Your executive command centre for strategic oversight, institutional performance, financial intelligence, and school management." %}
                             </p>
                     
                         </div>
@@ -344,7 +398,7 @@
                     
                             <!-- Clock label -->
                             <span class="director-welcome-clock-label">
-                                CURRENT TIME
+                                {% trans "CURRENT TIME" %}
                             </span>
                     
                     
@@ -356,7 +410,7 @@
                     
                             <!-- Supporting timezone text -->
                             <span class="director-welcome-timezone">
-                                Local Executive Time
+                                {% trans "Local Executive Time" %}
                             </span>
                     
                         </div>
@@ -381,7 +435,7 @@
                             <div class="director-kpi-header">
                     
                                 <span class="director-kpi-label">
-                                    STUDENTS
+                                    {% trans "STUDENTS" %}
                                 </span>
                     
                                 <span class="director-kpi-icon">
@@ -392,12 +446,12 @@
                     
                     
                             <strong class="director-kpi-value">
-                                250
+                                {{ active_student_count }}
                             </strong>
                     
                     
                             <span class="director-kpi-description">
-                                Active students
+                                {% trans "Active students" %}
                             </span>
                     
                         </article>
@@ -412,7 +466,7 @@
                             <div class="director-kpi-header">
                     
                                 <span class="director-kpi-label">
-                                    STAFF
+                                    {% trans "STAFF" %}
                                 </span>
                     
                                 <span class="director-kpi-icon">
@@ -423,12 +477,12 @@
                     
                     
                             <strong class="director-kpi-value">
-                                25
+                                {{ staff_count }}
                             </strong>
                     
                     
                             <span class="director-kpi-description">
-                                Active staff members
+                                {% trans "Active staff members" %}
                             </span>
                     
                         </article>
@@ -443,7 +497,7 @@
                             <div class="director-kpi-header">
                     
                                 <span class="director-kpi-label">
-                                    GUARDIANS
+                                    {% trans "GUARDIANS" %}
                                 </span>
                     
                                 <span class="director-kpi-icon">
@@ -454,12 +508,12 @@
                     
                     
                             <strong class="director-kpi-value">
-                                210
+                                {{ guardian_count }}
                             </strong>
                     
                     
                             <span class="director-kpi-description">
-                                Registered guardians
+                                {% trans "Registered guardians" %}
                             </span>
                     
                         </article>
@@ -474,7 +528,7 @@
                             <div class="director-kpi-header">
                     
                                 <span class="director-kpi-label">
-                                    OUTSTANDING FEES
+                                    {% trans "OUTSTANDING FEES" %}
                                 </span>
                     
                                 <span class="director-kpi-icon">
@@ -490,7 +544,7 @@
                     
                     
                             <span class="director-kpi-description">
-                                Current outstanding balance
+                                {% trans "Current outstanding balance" %}
                             </span>
                     
                         </article>
@@ -518,17 +572,17 @@
                     
                                 <div>
                                     <span class="director-section-label">
-                                        INSTITUTIONAL INTELLIGENCE
+                                        {% trans "INSTITUTIONAL INTELLIGENCE" %}
                                     </span>
                     
                                     <h3>
-                                        Performance Overview
+                                        {% trans "Performance Overview" %}
                                     </h3>
                                 </div>
                     
                     
                                 <span class="director-section-status">
-                                    LIVE
+                                    {% trans "LIVE" %}
                                 </span>
                     
                             </div>
@@ -546,11 +600,15 @@
                                     <div class="director-performance-info">
                     
                                         <span>
-                                            Academic Performance
+                                            {% trans "Academic Performance" %}
                                         </span>
                     
                                         <strong>
-                                            78%
+                                            {% if academic_performance is not None %}
+                                                {{ academic_performance|floatformat:0 }}%
+                                            {% else %}
+                                                —
+                                            {% endif %}
                                         </strong>
                     
                                     </div>
@@ -560,7 +618,14 @@
                     
                                         <div
                                             class="director-performance-progress"
-                                            style="width: 78%;"
+                                            style="
+                                                width:
+                                                {% if academic_performance is not None %}
+                                                    {{ academic_performance }}%
+                                                {% else %}
+                                                    0%
+                                                {% endif %}
+                                            ;"
                                         ></div>
                     
                                     </div>
@@ -575,7 +640,7 @@
                                     <div class="director-performance-info">
                     
                                         <span>
-                                            Student Attendance
+                                            {% trans "Student Attendance" %}
                                         </span>
                     
                                         <strong>
@@ -604,7 +669,7 @@
                                     <div class="director-performance-info">
                     
                                         <span>
-                                            Homework Completion
+                                            {% trans "Homework Completion" %}
                                         </span>
                     
                                         <strong>
@@ -643,11 +708,11 @@
                                 <div>
                     
                                     <span class="director-section-label">
-                                        EXECUTIVE ATTENTION
+                                        {% trans "EXECUTIVE ATTENTION" %}
                                     </span>
                     
                                     <h3>
-                                        Priority Alerts
+                                        {% trans "Priority Alerts" %}
                                     </h3>
                     
                                 </div>
@@ -675,11 +740,11 @@
                                     <div class="director-alert-content">
                     
                                         <strong>
-                                            Outstanding fees require attention
+                                            {% trans "Outstanding fees require attention" %}
                                         </strong>
                     
                                         <span>
-                                            Financial oversight review recommended.
+                                            {% trans "Financial oversight review recommended." %}
                                         </span>
                     
                                     </div>
@@ -698,11 +763,11 @@
                                     <div class="director-alert-content">
                     
                                         <strong>
-                                            Examination verification pending
+                                            {% trans "Examination verification pending" %}
                                         </strong>
                     
                                         <span>
-                                            Academic results require executive monitoring.
+                                            {% trans "Academic results require executive monitoring." %}
                                         </span>
                     
                                     </div>
@@ -721,11 +786,11 @@
                                     <div class="director-alert-content">
                     
                                         <strong>
-                                            Staff account review available
+                                            {% trans "Staff account review available" %} 
                                         </strong>
                     
                                         <span>
-                                            Review recent staff administration activity.
+                                            {% trans "Review recent staff administration activity." %}
                                         </span>
                     
                                     </div>
@@ -748,16 +813,16 @@
                             <div class="director-section-heading">
                                 <div>
                                     <span class="director-section-label">
-                                        FINANCIAL INTELLIGENCE
+                                        {% trans "FINANCIAL INTELLIGENCE" %}
                                     </span>
                             
                                     <h3>
-                                        Financial Overview
+                                        {% trans "Financial Overview" %}
                                     </h3>
                                 </div>
                             
                                 <span class="director-section-status">
-                                    CURRENT
+                                    {% trans "CURRENT" %}
                                 </span>
                             </div>
                             
@@ -765,7 +830,7 @@
                             
                                 <div class="director-financial-metric">
                                     <span>
-                                        Fees Collected
+                                        {% trans "Fees Collected" %}
                                     </span>
                             
                                     <strong>
@@ -773,13 +838,13 @@
                                     </strong>
                             
                                     <small>
-                                        Current academic year
+                                        {% trans "Current academic year" %}
                                     </small>
                                 </div>
                             
                                 <div class="director-financial-metric">
                                     <span>
-                                        Outstanding Fees
+                                        {% trans "Outstanding Fees" %}
                                     </span>
                             
                                     <strong>
@@ -787,13 +852,13 @@
                                     </strong>
                             
                                     <small>
-                                        Requires collection attention
+                                        {% trans "Requires collection attention" %}
                                     </small>
                                 </div>
                             
                                 <div class="director-financial-metric">
                                     <span>
-                                        Collection Rate
+                                        {% trans "Collection Rate" %}
                                     </span>
                             
                                     <strong>
@@ -801,13 +866,13 @@
                                     </strong>
                             
                                     <small>
-                                        Current collection performance
+                                        {% trans "Current collection performance" %}
                                     </small>
                                 </div>
                             
                                 <div class="director-financial-metric">
                                     <span>
-                                        Overdue Accounts
+                                        {% trans "Overdue Accounts" %}
                                     </span>
                             
                                     <strong>
@@ -815,7 +880,7 @@
                                     </strong>
                             
                                     <small>
-                                        Accounts requiring follow-up
+                                        {% trans "Accounts requiring follow-up" %}
                                     </small>
                                 </div>
                             
@@ -830,11 +895,11 @@
                             <div class="director-section-heading">
                                 <div>
                                     <span class="director-section-label">
-                                        EXECUTIVE ATTENTION
+                                        {% trans "EXECUTIVE ATTENTION" %}
                                     </span>
                             
                                     <h3>
-                                        Financial Attention
+                                        {% trans "Financial Attention" %}
                                     </h3>
                                 </div>
                             </div>
@@ -847,7 +912,7 @@
                             
                                 <div>
                                     <strong>
-                                        Outstanding fees require monitoring
+                                        {% trans "Outstanding fees require monitoring" %}
                                     </strong>
                             
                                     <p>
@@ -861,7 +926,105 @@
                             
                         </section>
                             
-                    </div>     
+                    </div>  
+                    
+                    <!-- ==================================================
+                        ACADEMIC INTELLIGENCE
+                        Executive-level academic performance overview.
+                        ================================================== -->
+                    <section class="director-intelligence-card director-academic-intelligence">
+                    
+                        <div class="director-section-heading">
+                    
+                            <div>
+                                <span class="director-section-label">
+                                    {% trans "ACADEMIC INTELLIGENCE" %}
+                                </span>
+                    
+                                <h3>
+                                    {% trans "Academic Overview" %}
+                                </h3>
+                            </div>
+                    
+                            <span class="director-section-status">
+                                {% trans "CURRENT" %}
+                            </span>
+                    
+                        </div>
+                    
+                    
+                        <div class="director-academic-summary">
+                    
+                            <div class="director-academic-metric">
+                    
+                                <span class="director-academic-metric-label">
+                                    {% trans "Overall Performance" %}
+                                </span>
+                    
+                                <strong>
+                                    78%
+                                </strong>
+                    
+                                <span class="director-academic-metric-description">
+                                    {% trans "Current academic performance" %}
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <div class="director-academic-metric">
+                    
+                                <span class="director-academic-metric-label">
+                                    {% trans "Examinations" %}
+                                </span>
+                    
+                                <strong>
+                                    92%
+                                </strong>
+                    
+                                <span class="director-academic-metric-description">
+                                    {% trans "Verification progress" %}
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <div class="director-academic-metric">
+                    
+                                <span class="director-academic-metric-label">
+                                    {% trans "Assessments" %}
+                                </span>
+                    
+                                <strong>
+                                    86%
+                                </strong>
+                    
+                                <span class="director-academic-metric-description">
+                                    {% trans "Assessment completion" %}
+                                </span>
+                    
+                            </div>
+                    
+                    
+                            <div class="director-academic-metric">
+                    
+                                <span class="director-academic-metric-label">
+                                    {% trans "Attention Required" %}
+                                </span>
+                    
+                                <strong>
+                                    14
+                                </strong>
+                    
+                                <span class="director-academic-metric-description">
+                                    {% trans "Students requiring review" %}
+                                </span>
+                    
+                            </div>
+                    
+                        </div>
+                    
+                    </section>   
     
                 </section>
     
